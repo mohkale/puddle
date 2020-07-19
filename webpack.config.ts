@@ -4,6 +4,7 @@ import webpack, { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import TerserWebpackPlugin from 'terser-webpack-plugin';
 import CompressionWebpackPlugin from 'compression-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 /**
  * resolve a path relative to the root directory of this project.
@@ -55,9 +56,7 @@ let mainConfig: ConfigurationFunction = env => Object.assign({}, sharedConfig, {
       {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        },
+        loader: 'babel-loader',
       },
       {
         test: /\.s[ca]ss/,
@@ -71,12 +70,13 @@ let mainConfig: ConfigurationFunction = env => Object.assign({}, sharedConfig, {
     ]
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       minify: {
         collapseWhitespace: env === "production",
       }
-    })
+    }),
   ],
   devServer: {
     port: 8000,
