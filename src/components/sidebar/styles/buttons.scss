@@ -1,0 +1,21 @@
+$icon-width: 12px;
+
+#sidebar .buttons {
+    margin: 4px;
+
+    .icon {
+        width: 12px;
+        padding: 10px;
+    }
+
+    .tooltip {
+        &:last-child {
+            float: right;
+        }
+
+        path { transition: fill 0.5s; }
+        &:hover path {
+            fill: var(--action-color);
+        }
+    }
+}

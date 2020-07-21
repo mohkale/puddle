@@ -35,7 +35,11 @@ let mainConfig: ConfigurationFunction = env => Object.assign({}, sharedConfig, {
   },
   devtool: (env === "production") ? false : "inline-source-map",
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx']
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss'],
+    alias: {
+      // use this to access from root of src hirearchy.
+      '@puddle': pathResolve('src')
+    }
   },
   optimization: {
     minimize: env === "production",
@@ -59,13 +63,17 @@ let mainConfig: ConfigurationFunction = env => Object.assign({}, sharedConfig, {
         loader: 'babel-loader',
       },
       {
-        test: /\.s[ca]ss/,
+        test: /\.(s[ca]ss|css)/,
         use: [
           'style-loader',
           'css-loader',
-          'sass-loader',
           'postcss-loader',
+          'sass-loader',
         ]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        loader: 'file-loader',
       }
     ]
   },
@@ -95,7 +103,7 @@ let mainConfig: ConfigurationFunction = env => Object.assign({}, sharedConfig, {
 });
 
 
-export default (env: EnvironmentType) => { 
+export default (env: EnvironmentType) => {
   let environment: string = ""
   if (env && env.production) {
     environment = "production"
@@ -107,5 +115,5 @@ export default (env: EnvironmentType) => {
     }
 
     return c
-  }) 
+  })
 }

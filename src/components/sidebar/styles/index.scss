@@ -1,0 +1,13 @@
+#sidebar {
+    height: 100%;
+    width: 240px;
+    background-color: var(--side-bar-bg);
+    color: var(--side-bar-fg);
+
+    flex-grow:   0;
+    flex-shrink: 0;
+    // min-width: 200px;
+    // max-width: 240px;
+}
+
+@import "./buttons";

@@ -1,0 +1,21 @@
+@import "./config";
+
+@keyframes anim-fade-in-down {
+    0% {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@mixin fade-in-down($duration: $animation-duration,
+                    $delay: 0s,
+                    $fill-mode: both) {
+    animation: anim-fade-in-down;
+    animation-duration: $animation-duration;
+    animation-delay: $delay;
+    animation-fill-mode: both;
+}

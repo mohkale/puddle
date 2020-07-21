@@ -1,0 +1,69 @@
+@import "@puddle/styles/config";
+
+$search-spacing: 12px;
+$cross-icon-size: 8px;
+$cross-icon-indent: 8px;
+
+#searchbar {
+    position: relative;
+    margin-bottom: 3 * $search-spacing;
+
+    color: var(--search-fg);
+    background-color: var(--search-bg);
+    border-top: solid 1px var(--search-border-color);
+    border-bottom: solid 1px var(--search-border-color);
+
+    transition: all $animation-duration;
+    transition-property: color, background-color, border;
+
+    .icon {
+        transition: fill $animation-duration;
+        position: absolute;
+        margin: $search-spacing;
+
+        &.search {
+            width: 12px;
+        }
+
+        &.cancel {
+            width: $cross-icon-size;
+            top: 0;
+            right: 0;
+            padding: 0px $cross-icon-indent;
+            cursor: pointer;
+        }
+    }
+
+    input {
+        width: 100%;
+        box-sizing: border-box;
+        border: 0px;
+        background: transparent;
+        color: var(--search-fg);
+        caret-color: var(--search-fg);
+        padding: $search-spacing 0px $search-spacing 45px;
+
+        &::placeholder {
+            color: var(--search-fg);
+            font-style: italic;
+        }
+
+        &:focus { outline: none; }
+    }
+}
+
+#searchbar.active {
+    color: var(--search-active-fg);
+    background-color: var(--search-active-bg);
+    border-color: var(--search-active-border-color);
+
+    .icon {
+        fill: var(--search-active-fg);
+    }
+
+    input {
+        padding-right: $cross-icon-size + $search-spacing + 2 * $cross-icon-indent;
+        color: var(--search-active-fg);
+        caret-color: var(--search-active-fg);
+    }
+}

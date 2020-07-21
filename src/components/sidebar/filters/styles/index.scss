@@ -1,0 +1,69 @@
+@import "@puddle/styles/no-select";
+
+#sidebar .filters {
+    $filter-spacing: 4px;
+    $filter-indent:  6px;
+    list-style-type: none;
+    padding: 0px;
+    margin: 36px 18px;
+    font-size: 0.85rem;
+
+    .icon {
+        width:  12px;
+        height: 12px;
+        margin-right: 4px;
+    }
+
+    .filter.active .badge {
+        font-weight: normal;
+        background: var(--action-color);
+    }
+
+    .badge {
+        color: black;
+        background: var(--side-bar-fg);
+
+        // TODO remove hardcoded fg
+        color: #1f2731;
+
+        border-radius: 100px;
+        padding: 2px 5px;
+        margin-left: 8px;
+        font-size: 0.75rem;
+        line-height: 1;
+        display: inline-block;
+        padding: 2px 5px;
+        transition: background 0.25s;
+        vertical-align: middle;
+        font-weight: 700;
+    }
+
+    li {
+        padding: 0px $filter-indent;
+        transition: color 0.25s, fill 0.25s;
+
+        &:not(.filter) {
+            font-size: 0.8em;
+            margin-bottom: 2px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: var(--side-bar-title-color);
+            cursor: default;
+        }
+
+        &.active {
+            color: var(--action-color);
+            font-weight: bold;
+        }
+
+        &.filter {
+            padding: $filter-spacing $filter-indent;
+            cursor: pointer;
+            @include no-select();
+            &:not(.active):hover {
+                color: var(--side-bar-hover-fg);
+                fill:  var(--side-bar-hover-fg);
+            }
+        }
+    }
+}

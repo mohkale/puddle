@@ -1,0 +1,45 @@
+@import "@puddle/styles/config";
+@import "@puddle/styles/no-select";
+
+.tooltip {
+    $arrow-height: 5px;
+
+    position: relative;
+    display: inline-block;
+    --pointer-offset: calc(50% - #{$arrow-height});
+
+    .label {
+        @include no-select;
+        font-size: 12px;
+        background-color: var(--tooltip-bg);
+        color: var(--tooltip-fg);
+
+        margin-top: $arrow-height;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity $animation-duration;
+        text-align: center;
+        padding: 8px 12px;
+        border-radius: 6px;
+        position: absolute;
+        z-index: 100;
+        white-space: nowrap;
+        top: 100%;
+
+        &::before {
+            // Add a pointed arrow leading to the tooltip, source [[https://www.w3schools.com/css/css_tooltip.asp][w3]].
+            content: " ";
+            position: absolute;
+            bottom: 100%;
+            left: var(--pointer-offset);
+
+            border-width: $arrow-height;
+            border-style: solid;
+            border-color: transparent transparent black transparent;
+        }
+    }
+    &:hover .label {
+        visibility: visible;
+        opacity: 1;
+    }
+}

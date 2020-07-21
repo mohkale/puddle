@@ -1,0 +1,143 @@
+@import "@puddle/styles/config";
+@import "@puddle/styles/no-select";
+
+#dashboard {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#content {
+    height: 100%;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        // width: 13px;
+        height: 14px;
+        displace: none;
+    }
+
+    // &:hover {
+    //     opacity: 1;
+    // }
+
+    &::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        min-height: 16px;
+        background-color: var(--scrollbar-color);
+        background-clip: padding-box;
+        border: 3px solid transparent;
+        border-radius: 5px;
+
+        // WARN transition on scrollbar background doesn't seem to work.
+        transition: background-color 2s;
+
+        &:hover {
+            background-color: var(--scrollbar-hover-color);
+        }
+    }
+
+    // show some message to the user in the center of the screen.
+    .message {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        flex-direction: column;
+    }
+}
+
+#torrents {
+    table-layout: fixed;
+    width: max-content;
+    border-collapse: collapse;
+
+    td {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 0px 6px;
+        @include no-select;
+    }
+
+    th {
+        text-align: left;
+        height: 24px;
+        font-size: 12px;
+        cursor: pointer;
+        border-bottom: solid 1px var(--torrents-border-color);
+        border-right:  solid 1px var(--torrents-border-color);
+        font-weight: normal;
+
+        color: var(--torrents-column-color);
+        transition: color $animation-duration;
+        &:hover {
+            color: var(--torrents-column-hover-color);
+        }
+
+        &::after {
+            opacity: 0;
+            transition: opacity $animation-duration;
+        }
+
+        &.active {
+            font-weight: 700;
+            position: relative;
+            color: var(--torrents-active-column-color);
+            &:hover {
+                color: var(--torrents-active-column-hover-color);
+            }
+
+            &::after {
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                border-top: 5px solid black;
+                content: '';
+                margin-top: -3px;
+                position: absolute;
+                right: 3px;
+                top: 50%;
+                transition: transform $animation-duration;
+                opacity: 0.5;
+            }
+
+            &.descending::after {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    tbody {
+        td {
+            border-top:    solid 1px var(--torrents-border-color);
+            border-bottom: solid 1px var(--torrents-border-color);
+            height: 30px;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--torrents-row-fg);
+            background-color: var(--torrents-row-bg);
+            cursor: default;
+            transition: all $animation-duration;
+            transition-property: border-color, color, background-color;
+
+            .unit {
+                font-size: 0.8em;
+            }
+        }
+        tr.active {
+            border-color: var(--torrents-active-row-border-color);
+            color: var(--torrents-active-row-fg);
+            background-color: var(--torrents-active-row-bg);
+        }
+        tr:last-child > td {
+            border-bottom: 0px;
+        }
+    }
+}
