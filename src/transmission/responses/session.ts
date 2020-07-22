@@ -7,7 +7,7 @@ export interface TransmissionSessionUnitsType {
   "memory-bytes": number[]
 }
 
-/**
+/*
  * subset of fields in {@code TransmissionSession} that can be changed
  * at runtime, used for later type assertions.
  */

@@ -10,7 +10,8 @@
     "build:production": "webpack --env.production",
     "check-types": "tsc",
     "lint": "NODE_ENV=development ./node_modules/.bin/eslint --max-warnings 0 --ext .js --ext .jsx --ext .ts --ext .tsx",
-    "test": "echo \"WARN: no Test frameworks setup\" && exit 0"
+    "test": "echo \"WARN: no Test frameworks setup\" && exit 0",
+    "doc": "jsdoc src -c jsdoc.conf.js"
   },
   "dependencies": {},
   "devDependencies": {
@@ -34,12 +35,14 @@
     "@types/terser-webpack-plugin": "^3.0.0",
     "autoprefixer": "^9.8.5",
     "babel-loader": "^8.1.0",
+    "better-docs": "^2.3.0",
     "compression-webpack-plugin": "^4.0.0",
     "css-loader": "^3.6.0",
     "eslint": "^7.4.0",
     "file-loader": "^6.0.0",
     "fork-ts-checker-webpack-plugin": "^5.0.7",
     "html-webpack-plugin": "^4.3.0",
+    "jsdoc": "^3.6.4",
     "normalize.css": "^8.0.1",
     "postcss-loader": "^3.0.0",
     "react": "^16.13.1",
