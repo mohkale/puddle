@@ -98,6 +98,15 @@ let mainConfig: ConfigurationFunction = env => Object.assign({}, sharedConfig, {
       warnings: true,
       logging: "warn",
       colors: true,
+    },
+    proxy: {
+      "/transmission": {
+        changeOrigin: true,
+        cookieDomainRewrite: "localhost",
+        // my hardcoded transmission route, TODO
+        // move into and retrieve from puddle config.
+        target: "http://localhost:7867/transmission/rpc",
+      }
     }
   }
 });

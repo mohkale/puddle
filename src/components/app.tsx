@@ -6,8 +6,12 @@ import { defaultTheme, setTheme } from '../puddle/theme';
 import OverlayMenu from './overlays/menu';
 import AppContext from './app-context';
 
+// TODO fix @puddle not working.
+import Transmission from '../transmission';
+
 interface AppState {
   overlay?: ReactChild,
+  transmission: Transmission
 }
 
 export default class App extends React.PureComponent<any, AppState> {
@@ -16,6 +20,7 @@ export default class App extends React.PureComponent<any, AppState> {
     setTheme(defaultTheme);
     this.state = {
       // overlay: <div className="overlay"></div>,
+      transmission: new Transmission(`${window.location.href}transmission`)
     }
   }
 
