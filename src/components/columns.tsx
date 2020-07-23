@@ -3,63 +3,28 @@ import TorrentResponse, {
   TransmissionTorrentStatus as TorrentStatus
 } from '@puddle/transmission/responses/torrent';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamation } from '@fortawesome/free-solid-svg-icons';
+import {
+  scaleBytes, timeFormat, padString
+} from '@puddle/utils';
+
+import ProgressBar from '@puddle/components/torrents/progress-bar';
 
 /**
  * The default width of a new column in the puddle torrents table.
  */
 export const DEFAULT_WIDTH = 100;
 
+export const MINIMUM_WIDTH = 10;
+
+let root = document.documentElement.style;
+root.setProperty('--minimum-column-width', MINIMUM_WIDTH.toString())
+
+const DEFAULT_FIELDS: (keyof TorrentResponse)[] = [
+  "id", "status"
+];
+
+// used to generate a unique id for each column.
 let columnCounter = 0;
-
-class TorrentStatusIcon extends React.PureComponent<{ status: TorrentStatus }> {
-  render() {
-    let icon;
-    switch (this.props.status) {
-      case TorrentStatus.STOPPED:
-      case TorrentStatus.CHECK_WAIT:
-      case TorrentStatus.SEED_WAIT:
-      case TorrentStatus.DOWNLOAD_WAIT:
-      case TorrentStatus.CHECK:
-      case TorrentStatus.DOWNLOAD:
-      case TorrentStatus.SEED:
-        icon = faExclamation
-        break
-    }
-
-    return <FontAwesomeIcon className="icon" icon={icon}/>
-  }
-}
-
-const BYTE_SCALES: [string, number][] = [
-  ['t', 1099511627776.0],
-  ['g', 1073741824.0],
-  ['m', 1048576.0],
-  ['k', 1024.0]
-]
-
-function scaleBytes(bytes: number): [number, string] {
-  const [scale, mul] = BYTE_SCALES.find((([_, val]) => bytes >= val)) || BYTE_SCALES[BYTE_SCALES.length-1];
-
-  return [bytes/mul, scale]
-}
-
-// https://github.com/tremc/tremc/blob/master/tremc#L3362
-function timeFormat(duration: number): string {
-  return duration.toString()
-}
-
-function padString(str: string, length: number, char: string='0') {
-  if (str.length >= length) {
-    return str
-  }
-  let i = length - str.length;
-  while (i-- > 0) {
-    str = char + str
-  }
-  return str;
-}
 
 /**
  * Interface for a single column in the torrents view.
@@ -79,12 +44,12 @@ export interface TorrentColumn {
   /** identifier used for reacts key management system */
   key: number
 
-  width?: number
+  width: number
 
   // cached: boolean
 
   /** whether this column is currently being shown. */
-  active?: boolean
+  active: boolean
 
   /**
    * The torrent response fields needed to calculate the display
@@ -121,6 +86,13 @@ export default class Columns {
     return this._activeColumns
   }
 
+  // honestly, making a deep clone of modern javascript
+  // object is a huge pain, this shallow clone works fine
+  // I suspect just returning `this` would also be fine :?
+  clone() {
+    return new Columns(...this.columns)
+  }
+
   private _fields: (keyof TorrentResponse)[] = []
   get fields() {
     return this._fields
@@ -137,9 +109,8 @@ export default class Columns {
   setColumns(columns: TorrentColumn[]) {
     this.columns = columns
     this._activeColumns = columns.filter(a => a.active)
-    this._fields = this._activeColumns.flatMap(a => a.fields)
-    // force transmission to always include the torrent id.
-    this._fields.push("id")
+    const fields = this._activeColumns.flatMap(a => a.fields)
+    this._fields = [...new Set([...fields, ...DEFAULT_FIELDS])]
   }
 }
 
@@ -156,22 +127,19 @@ export const defaultTorrentColumns = new Columns(
     title: "Progress",
     key: columnCounter++,
     active: true,
+    width: 164,
     fields: ["status", "sizeWhenDone", "haveValid", "haveUnchecked"],
     action: resp => {
       const downloaded = (resp.haveValid! + resp.haveUnchecked!)
       const complete = 100 * (downloaded / resp.sizeWhenDone!) || 0
-      return (
-        <Fragment>
-          <TorrentStatusIcon status={resp.status!}/>
-          <span className="progress-bar">{complete.toFixed(0)}%</span>
-        </Fragment>
-      )
+      return <ProgressBar progress={complete} status={resp.status!} />;
     }
   },
   {
     title: "Downloaded",
     key: columnCounter++,
     active: true,
+    width: DEFAULT_WIDTH,
     fields: ["downloadedEver"],
     action: resp => {
       const [num, unit] = scaleBytes(resp.downloadedEver!)
@@ -184,6 +152,7 @@ export const defaultTorrentColumns = new Columns(
     title: "Download Speed",
     key: columnCounter++,
     active: true,
+    width: DEFAULT_WIDTH,
     fields: ["rateDownload"],
     action: resp => {
       const [num, unit] = scaleBytes(resp.rateDownload!)
@@ -196,6 +165,7 @@ export const defaultTorrentColumns = new Columns(
     title: "Uploaded",
     key: columnCounter++,
     active: true,
+    width: DEFAULT_WIDTH,
     fields: ["uploadedEver"],
     action: resp => {
       const [num, unit] = scaleBytes(resp.uploadedEver!)
@@ -208,6 +178,7 @@ export const defaultTorrentColumns = new Columns(
     title: "Upload Speed",
     key: columnCounter++,
     active: true,
+    width: DEFAULT_WIDTH,
     fields: ["rateUpload"],
     action: resp => {
       const [num, unit] = scaleBytes(resp.rateUpload!)
@@ -220,6 +191,7 @@ export const defaultTorrentColumns = new Columns(
     title: "ETA",
     key: columnCounter++,
     active: true,
+    width: DEFAULT_WIDTH,
     fields: ["eta", "status"],
     action: resp => {
       if (resp.eta! <= -1 || resp.status! !== TorrentStatus.DOWNLOAD) {
@@ -233,6 +205,7 @@ export const defaultTorrentColumns = new Columns(
     title: "Ratio",
     key: columnCounter++,
     active: true,
+    width: DEFAULT_WIDTH,
     fields: ["uploadRatio"],
     action: resp => (resp.uploadRatio! >= 0) ? resp.uploadRatio!.toFixed(2) : '',
   },
@@ -240,6 +213,7 @@ export const defaultTorrentColumns = new Columns(
     title: "File Size",
     key: columnCounter++,
     active: true,
+    width: DEFAULT_WIDTH,
     fields: ["sizeWhenDone"],
     action: resp => {
       const [num, unit] = scaleBytes(resp.sizeWhenDone!)
@@ -252,6 +226,7 @@ export const defaultTorrentColumns = new Columns(
     title: "Added",
     key: columnCounter++,
     active: true,
+    width: DEFAULT_WIDTH,
     fields: ["addedDate"],
     action: resp => {
       const d = new Date(resp.addedDate! * 1000),

@@ -1,0 +1,220 @@
+@import "@puddle/styles/config";
+@import "@puddle/styles/no-select";
+
+$order-indicator-width: 4px;
+$order-indicator-offset: 3px;
+
+$resizer-width: 9px;
+
+@mixin trimWithEllipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#torrents {
+    width: max-content;
+    border-collapse: collapse;
+
+    .columns {
+        border-bottom: solid 1px var(--torrents-border-color);
+    }
+    .columns > .table-cell {
+        height: 24px;
+        font-size: 12px;
+        cursor: pointer;
+        position: relative;
+        padding: 0px #{$order-indicator-width + 2 * $order-indicator-offset} 0px 6px;
+
+        color: var(--torrents-column-color);
+        transition: color $animation-duration;
+        &:hover {
+            color: var(--torrents-column-hover-color);
+        }
+
+
+        &::after {
+            opacity: 0;
+            transition: opacity $animation-duration;
+        }
+
+        &.active {
+            font-weight: 700;
+            position: relative;
+            color: var(--torrents-active-column-color);
+            &:hover {
+                color: var(--torrents-active-column-hover-color);
+            }
+
+            &::after {
+                border-left:  $order-indicator-width solid transparent;
+                border-right: $order-indicator-width solid transparent;
+                border-top:   5px solid black;
+                content: '';
+                margin-top: -3px;
+                position: absolute;
+                right: $order-indicator-offset + $resizer-width;
+                top: 50%;
+                transition: transform $animation-duration;
+                opacity: 0.5;
+            }
+
+            &.descending::after {
+                transform: rotate(180deg);
+            }
+        }
+
+        .resizer {
+            border-right:  solid 1px var(--torrents-border-color);
+            height: 100%;
+            position: absolute;
+            right: $resizer-width / 2;
+            width: $resizer-width;
+            cursor: col-resize;
+        }
+    }
+
+    .table-cell {
+        @include no-select;
+        font-weight: normal;
+        box-sizing: border-box;
+        min-width: var(--minimum-column-width);
+        padding: 0px 6px;
+
+        .label {
+            @include trimWithEllipsis;
+        }
+
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .resize-overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        cursor: col-resize;
+
+        .resize-indicator {
+            position: absolute;
+            width: 1px;
+            background-color: var(--torrents-border-color);
+            // background-color: black;
+            top: 0;
+            height: 100%;
+        }
+    }
+
+    .rows {
+        list-style-type: none;
+        padding: 0px;
+        margin: 0px;
+
+        li {
+            border-top:    solid 1px var(--torrents-border-color);
+            border-bottom: solid 1px var(--torrents-border-color);
+
+            // transition: all $animation-duration;
+            // transition-property: border-color;
+
+            height: 30px;
+            display: flex;
+            align-items: center;
+
+            &:last-child {
+                border-bottom: 0px;
+            }
+        }
+
+        color: var(--torrents-row-fg);
+        background-color: var(--torrents-row-bg);
+        transition: all $animation-duration;
+        transition-property: color, background-color;
+
+        .table-cell {
+            font-size: 0.9em;
+            font-weight: 400;
+            cursor: default;
+
+            .unit {
+                font-size: 0.8em;
+                font-style: normal;
+            }
+
+            & > div {
+                @include trimWithEllipsis;
+                width: 100%;
+            }
+        }
+
+        .progress-bar {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            grid-gap: 4px;
+
+            svg {
+                height: 12px;
+            }
+            .fill {
+                background-color: var(--torrents-row-progress-bg);
+                margin: auto 0px;
+            }
+            .progress {
+                background-color: var(--torrents-row-progress-fg);
+            }
+            .fill, .progress {
+                height: 3px;
+            }
+        }
+
+        /** variants for rows that're in different states. */
+        @mixin theme-customize($accessors, $fg, $bg, $border, $progress-fg, $progress-bg) {
+            #{$accessors} {
+                color: $fg;
+                background-color: $bg;
+                border-color: $border;
+
+                .progress-bar svg {
+                    color: $progress-fg;
+                }
+                .progress { background-color: $progress-fg; }
+                .fill { background-color: $progress-bg; }
+
+                @content
+            }
+        }
+
+        @include theme-customize(
+            ".downloading",
+            var(--torrents-row-downloading-fg),
+            var(--torrents-row-downloading-bg),
+            var(--torrents-row-downloading-border-color),
+            var(--torrents-row-downloading-progress-fg),
+            var(--torrents-row-downloading-progress-bg)) {
+            .Name {
+                font-weight: 500;
+            }
+        }
+
+        @include theme-customize(
+            ".active",
+            var(--torrents-row-selected-fg),
+            var(--torrents-row-selected-bg),
+            var(--torrents-row-selected-border-color),
+            var(--torrents-row-selected-progress-fg),
+            var(--torrents-row-selected-progress-bg));
+
+        // hardcoded override.
+        .downloading.active {
+            color: white;
+            .progress-bar svg {
+                color: white;
+            }
+            .progress {
+                background-color: white;
+            }
+        }
+    }
+}
+

@@ -8,6 +8,8 @@ header {
     border: solid 1px var(--header-border-color);
     height: 30px;
     padding-right: 8px;
+    flex-grow: 0;
+    flex-shrink: 0;
 
     .vl {
         border-color: var(--header-border-color);

@@ -9,7 +9,7 @@ import AppContext from './app-context';
 import Transmission from '@puddle/transmission';
 import TorrentResponse from '@puddle/transmission/responses/torrent';
 
-import TorrentColumns, { defaultTorrentColumns } from '@puddle/puddle/torrent-columns';
+import TorrentColumns, { defaultTorrentColumns } from '@puddle/components/columns';
 
 interface AppState {
   overlay?: ReactChild,
@@ -48,7 +48,10 @@ export default class App extends React.Component<any, AppState> {
           <OverlayMenu render={this.state.overlay as React.ReactChild}
                        onClick={() => this.setState({overlay: undefined})} />}
         <Sidebar />
-        <Dashboard columns={this.state.columns} torrents={this.state.torrents} />
+        <Dashboard columns={this.state.columns}
+                   torrents={this.state.torrents}
+                   resizeColumn={this.resizeColumn}
+        />
       </AppContext.Provider>
     );
   }
@@ -56,6 +59,12 @@ export default class App extends React.Component<any, AppState> {
   fetchTorrents() {
     this.state.transmission.torrents(undefined, ...this.state.columns.fields)
       .then(torrents => this.setState({torrents: torrents}))
-      .then(() => console.log('fetching'))
+      // .then(() => console.log('fetching'))
+  }
+
+  resizeColumn = (column: number, delta: number) => {
+    const newColumns = this.state.columns.clone()
+    newColumns.activeColumns[column].width += delta
+    this.setState({columns: newColumns})
   }
 }

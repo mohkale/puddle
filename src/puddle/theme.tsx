@@ -1,3 +1,11 @@
+interface TorrentListRow {
+  fg: string,
+  bg: string,
+  borderColor: string,
+  progressBarBg: string,
+  progressBarFg: string,
+}
+
 export interface Theme {
   actionColor: string,
 
@@ -31,11 +39,10 @@ export interface Theme {
   torrentsColumnHoverColor: string,
   torrentsActiveColumnColor: string,
   torrentsActiveColumnHoverColor: string,
-  torrentsRowFg: string,
-  torrentsRowBg: string,
-  torrentsActiveRowFg: string,
-  torrentsActiveRowBg: string,
-  torrentsActiveRowBorderColor: string,
+
+  torrentsIdleRow: TorrentListRow,
+  torrentsDownloadingRow: TorrentListRow,
+  torrentsSelectedRow: TorrentListRow,
 
   overlayContainerBackground: string,
   overlayBorderColor: string,
@@ -79,11 +86,24 @@ export function setTheme(theme: Theme) {
   root.setProperty('--torrents-column-color', theme.torrentsColumnColor)
   root.setProperty('--torrents-column-hover-color', theme.torrentsColumnHoverColor)
   root.setProperty('--torrents-active-column-hover-color', theme.torrentsActiveColumnHoverColor)
-  root.setProperty('--torrents-row-fg', theme.torrentsRowFg)
-  root.setProperty('--torrents-row-bg', theme.torrentsRowBg)
-  root.setProperty('--torrents-active-row-fg', theme.torrentsActiveRowFg)
-  root.setProperty('--torrents-active-row-bg', theme.torrentsActiveRowBg)
-  root.setProperty('--torrents-active-row-border-color', theme.torrentsActiveRowBorderColor)
+
+  root.setProperty('--torrents-row-fg', theme.torrentsIdleRow.fg)
+  root.setProperty('--torrents-row-bg', theme.torrentsIdleRow.bg)
+  root.setProperty('--torrents-row-border-color', theme.torrentsIdleRow.bg)
+  root.setProperty('--torrents-row-progress-fg', theme.torrentsIdleRow.progressBarFg)
+  root.setProperty('--torrents-row-progress-bg', theme.torrentsIdleRow.progressBarBg)
+
+  root.setProperty('--torrents-row-selected-fg', theme.torrentsSelectedRow.fg)
+  root.setProperty('--torrents-row-selected-bg', theme.torrentsSelectedRow.bg)
+  root.setProperty('--torrents-row-selected-border-color', theme.torrentsSelectedRow.bg)
+  root.setProperty('--torrents-row-selected-progress-fg', theme.torrentsSelectedRow.progressBarFg)
+  root.setProperty('--torrents-row-selected-progress-bg', theme.torrentsSelectedRow.progressBarBg)
+
+  root.setProperty('--torrents-row-downloading-fg', theme.torrentsDownloadingRow.fg)
+  root.setProperty('--torrents-row-downloading-bg', theme.torrentsDownloadingRow.bg)
+  root.setProperty('--torrents-row-downloading-border-color', theme.torrentsDownloadingRow.borderColor)
+  root.setProperty('--torrents-row-downloading-progress-fg', theme.torrentsDownloadingRow.progressBarFg)
+  root.setProperty('--torrents-row-downloading-progress-bg', theme.torrentsDownloadingRow.progressBarBg)
 
   root.setProperty('--overlay-container-background', theme.overlayContainerBackground);
   root.setProperty('--overlay-border-color', theme.overlayBorderColor)
@@ -127,12 +147,27 @@ export const defaultTheme: Theme = {
   torrentsColumnHoverColor: '#8ca1b3',
   torrentsActiveColumnColor: '#576e82',
   torrentsActiveColumnHoverColor: '#425464',
-  torrentsRowFg: '#c3ccd3',
-  torrentsRowBg: 'transparent',
-  torrentsActiveRowFg: 'rgba(255,255,255,0.5)',
-  torrentsActiveRowBg: '#258de5',
-  torrentsActiveRowBorderColor: '#1b86e0',
-
+  torrentsIdleRow: {
+    fg: '#c3ccd3',
+    bg: 'transparent',
+    borderColor: 'rgba(29,41,56,0.08)',
+    progressBarFg: 'grey',
+    progressBarBg: '#e7ebee',
+  },
+  torrentsDownloadingRow: {
+    fg: '#4b677f',
+    bg: '',
+    borderColor: 'rgba(29,41,56,0.08)',
+    progressBarFg: '#39ce83',
+    progressBarBg: 'rgba(57,206,131,0.15)',
+  },
+  torrentsSelectedRow: {
+    fg: 'rgba(255,255,255,0.5)',
+    bg: '#258de5',
+    borderColor: '#1b86e0',
+    progressBarFg: 'grey',
+    progressBarBg: 'rgba(255,255,255,0.15)',
+  },
   overlayContainerBackground: 'radial-gradient(circle, rgba(0,0,0,0.5) 35%, rgba(0,0,0,0.75) 100%)',
   overlayBorderColor: 'rgba(9,24,36,0.4)',
   overlayBg: '#3A4553',

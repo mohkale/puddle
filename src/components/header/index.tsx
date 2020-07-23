@@ -1,5 +1,5 @@
 import React from 'react';
-import TooltipButton from '../../tooltip';
+import TooltipButton from '@puddle/components/tooltip';
 
 import {
   faPlus, faMinus, faPlay, faStop
