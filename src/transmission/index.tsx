@@ -120,6 +120,10 @@ export default class Transmission {
       })
       .then(resp => resp.json())
       .then(json => {
+        if (json.tag) {
+          this.requestTag = json.tag;
+        }
+
         if (json.result !== "success") {
           throw json
         } else {

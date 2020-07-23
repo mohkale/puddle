@@ -56,7 +56,7 @@ export interface TransmissionSessionType_Mutable {
   "utp-enabled": boolean
 }
 
-export default interface TransmissionSessionType extends TransmissionSession {
+export default interface TransmissionSessionType extends TransmissionSessionType_Mutable {
   "blocklist-size": number
   "config-dir": string
   "rpc-version": number

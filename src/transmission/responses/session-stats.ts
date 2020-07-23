@@ -12,6 +12,6 @@ export default class TransmissionSessionStatsType {
   "torrentCount": number
   "downloadSpeed": number
   "uploadSpeed": number
-  "cumulative-stats": SessionFineGrainStats
-  "current-stats": SessionFineGrainStats
+  "cumulative-stats": TransmissionSessionFineGrainedStatsType
+  "current-stats": TransmissionSessionFineGrainedStatsType
 }

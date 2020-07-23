@@ -56,15 +56,12 @@
     width: max-content;
     border-collapse: collapse;
 
-    td {
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-    }
-
     th, td {
         padding: 0px 6px;
         @include no-select;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 
     th {
@@ -127,8 +124,13 @@
             transition: all $animation-duration;
             transition-property: border-color, color, background-color;
 
+            .icon {
+                height: 12px;
+            }
+
             .unit {
                 font-size: 0.8em;
+                font-style: normal;
             }
         }
         tr.active {

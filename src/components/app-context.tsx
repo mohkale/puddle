@@ -1,7 +1,13 @@
 import React, { ReactChild } from 'react';
+import Transmission from '../transmission';
 
+/**
+ * Shared context which will be inherited by every
+ * subcomponent of the root application.
+ */
 export interface AppContextType {
-  setOverlay: (el: ReactChild) => void
+  setOverlay: (el: ReactChild) => void,
+  transmission?: Transmission
 }
 
 function fallbackHandler(funcName) {

@@ -1,3 +1,14 @@
+// see [[https://github.com/transmission/transmission/blob/master/libtransmission/transmission.h#L1649][transmission.h]].
+export enum TransmissionTorrentStatus {
+  STOPPED = 0,
+  CHECK_WAIT = 1,
+  CHECK = 2,
+  DOWNLOAD_WAIT = 3,
+  DOWNLOAD = 4,
+  SEED_WAIT = 5,
+  SEED = 6
+}
+
 export interface TransmissionTorrentFilesType {
   bytesCompleted: number
   length: number
@@ -24,7 +35,7 @@ export interface TransmissionTorrentPeersType {
   peerIsChoked: boolean
   peerIsInterested: boolean
   port: number
-  progress: double
+  progress: number
   rateToClient: number
   rateToPerr: number
 }
@@ -76,6 +87,8 @@ export interface TransmissionTrackerStatsType {
   seederCount: number
   tier: number
 }
+
+type TransmissionPriorityType = 1 | 0 | -1;
 
 /**
  * Fields that you can assign using the torrent-set method
@@ -157,7 +170,7 @@ export default interface TransmissionTorrentType extends TransmissionTorrentType
   "pieces": TransmissionPiecesType
   "pieceCount": number
   "pieceSize": number
-  "priorities": (+1 | 0 | -1)[]
+  "priorities": TransmissionPriorityType[]
   "rateDownload": number
   "rateUpload": number
   "recheckProgress": number
@@ -165,14 +178,14 @@ export default interface TransmissionTorrentType extends TransmissionTorrentType
   "secondsSeeding": number
   "sizeWhenDone": number
   "startDate": number
-  "status": number
+  "status": TransmissionTorrentStatus
   "totalSize": number
   "torrentFile": string
   "trackers": TransmissionTrackersType[]
   "trackerStats": TransmissionTrackerStatsType[]
   "uploadedEver": number
   "uploadRatio": number
-  "wanted": (0 | 1)[]
+  "wanted": boolean[] // actually a number, 0 or 1.
   "webseedsSendingToUs": number
   "webseeds": string[]
 }
