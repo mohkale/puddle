@@ -20,7 +20,7 @@ let root = document.documentElement.style;
 root.setProperty('--minimum-column-width', MINIMUM_WIDTH.toString())
 
 const DEFAULT_FIELDS: (keyof TorrentResponse)[] = [
-  "id", "status"
+  "id", "status", "trackers"
 ];
 
 // used to generate a unique id for each column.

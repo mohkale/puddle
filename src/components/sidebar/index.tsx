@@ -6,32 +6,21 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 
-import SideBarFilter, { FilterItemType } from './filters';
+import FilterList from '@puddle/components/filter/filter-list';
+import SideBarFilterList from './filters';
 import TooltipButton from '../tooltip';
 import Search from './search';
 
+import { Scrollbars } from 'react-custom-scrollbars';
+
 import './styles/index';
 
-interface SidebarStateType {
-  statusFilters: FilterItemType[]
+interface SidebarPropsType {
+  filters: FilterList<any>[]
+  updateFilter(list: FilterList<any>, index: any): void
 }
 
-export default class Sidebar extends React.Component<any, SidebarStateType> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      statusFilters: [
-        {icon: faAsterisk, title: 'All'},
-        {icon: faDownload, title: 'Downloading'},
-        {icon: faCheck, title: 'Complete'},
-        {icon: faStop, title: 'Stopped'},
-        {icon: faPlay, title: 'Active'},
-        {icon: faBan, title: 'Inactive'},
-        {icon: faExclamation, title: 'Error'},
-      ]
-    }
-  }
-
+export default class Sidebar extends React.Component<SidebarPropsType> {
   render() {
     return (
       <aside id="sidebar">
@@ -42,9 +31,14 @@ export default class Sidebar extends React.Component<any, SidebarStateType> {
           <TooltipButton icon={faSignOutAlt} tooltip="Logout" />
         </div>
 
-        <Search/>
-        <SideBarFilter title="Filter by Status" items={this.state.statusFilters} />
-        <SideBarFilter title="Filter by Tracker" items={[]} />
+        <Scrollbars>
+          <Search/>
+
+          {this.props.filters.map(filter =>
+            <SideBarFilterList key={filter.title}
+                               updateFilter={this.props.updateFilter}
+                               filter={filter} />)}
+        </Scrollbars>
       </aside>
     );
   }

@@ -6,7 +6,7 @@ import Transmission from '../transmission';
  * subcomponent of the root application.
  */
 export interface AppContextType {
-  setOverlay: (el: ReactChild) => void,
+  setOverlay: (el: ReactChild) => void
   transmission?: Transmission
 }
 

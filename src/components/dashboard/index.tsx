@@ -63,7 +63,10 @@ export default class Dashboard extends React.Component<DashboardProps, Dashboard
                                this.setState({resizing: undefined});
                                this.props.resizeColumn(this.state.resizing!.column, delta)
                              }} />}
-            <TorrentList torrents={this.props.torrents} selectedTorrents={this.state.selectedTorrents} selectTorrent={this.selectTorrent} columns={this.props.columns} />
+            <TorrentList torrents={this.props.torrents}
+                         selectedTorrents={this.state.selectedTorrents}
+                         selectTorrent={this.selectTorrent}
+                         columns={this.props.columns} />
           </div>
         </Scrollbars>
       </main>
