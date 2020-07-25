@@ -13,7 +13,7 @@ import TrackerFilter  from './filter/tracker';
 import FilterList from '@puddle/components/filter/filter-list';
 
 import store from '@puddle/stores';
-import { updateTorrents } from '@puddle/stores/torrent';
+import { updateTorrents, syncTorrents } from '@puddle/stores/torrent';
 
 interface AppState {
   overlay?: ReactChild,
@@ -32,7 +32,7 @@ export default class App extends React.Component<any, AppState> {
       filters: [new StatusFilter(), new TrackerFilter()],
     };
 
-    this.fetchTorrents()
+    store.dispatch(syncTorrents(transmission, () => this.fetchTorrents()))
   }
 
   render() {

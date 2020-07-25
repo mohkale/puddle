@@ -40,6 +40,21 @@ export const removed = createAction<{ ids: TorrentId[] }>('torrents/removed')
 export const selected = createAction<{ ids: TorrentId[], append?: boolean }>('torrents/select')
 
 /**
+ * Remove all elements from the store and then fetch the current
+ * torrent-list from transmission and assign it.
+ */
+export const syncTorrents =
+  (client: Transmission, callback?: VoidFunction) => {
+    return async (dispatch, getState) => {
+      const state = getState()
+      dispatch(removed({ ids: state.torrents.torrents }))
+      dispatch(added({ torrents: await client.torrents(undefined, ...TORRENT_FIELDS) }))
+
+      callback && callback!()
+    }
+  }
+
+/**
  * Asynchronously fetch the current torrent list from the transmission
  * daemon and then update the local store. If {@code callback} is provided
  * then it is invoked before this function exits.
@@ -47,20 +62,22 @@ export const selected = createAction<{ ids: TorrentId[], append?: boolean }>('to
 export const updateTorrents =
   (client: Transmission, callback?: VoidFunction) => {
     return async (dispatch, getState) => {
-      const torrents = await client.torrents(undefined, ...TORRENT_FIELDS)
-
+      const active = await client.recentlyActiveTorrents(...TORRENT_FIELDS);
+      const torrents = active.torrents as Torrent[], removedTorrents = active.removed
       const state = getState()
-      const fetchedIds  = new Set<TorrentId>(torrents.map(torrent => torrent.id))
-      const existingIds = new Set<TorrentId>(state.torrents.torrents)
-      const newEntries = new Set<TorrentId>([...fetchedIds].filter(id => !existingIds.has(id)))
-      const delEntries = new Set<TorrentId>([...existingIds].filter(id => !fetchedIds.has(id)))
 
-      if (newEntries.size > 0) {
-        const newTorrents = torrents.filter(torrent => newEntries.has(torrent.id!))
-        dispatch(added({ torrents: newTorrents }))
+      if (removed.length > 0) {
+        dispatch(removed({ ids: removedTorrents }))
       }
-      if (delEntries.size > 0) {
-        dispatch(removed({ ids: [...delEntries] }))
+
+      if (torrents.length > 0) {
+        const existingIds = new Set<TorrentId>(state.torrents.torrents)
+        const newTorrents: Torrent[] = [], updatedTorrents: Torrent[] = [];
+        torrents.forEach(torrent =>
+          (existingIds.has(torrent.id) ? updatedTorrents : newTorrents).push(torrent))
+
+        if (newTorrents.length > 0)     dispatch(added({ torrents: newTorrents }))
+        if (updatedTorrents.length > 0) dispatch(updated({ torrents: updatedTorrents }))
       }
 
       callback && callback!()
@@ -81,11 +98,16 @@ const torrentSlice = createSlice({
       })
       .addCase(removed, (state, action) => {
         action.payload.ids.forEach(id => {
-          // WARN assumes id exists, maybe check for -1
-          state.torrents.splice(state.torrents.indexOf(id), 1)
+          const index = state.torrents.indexOf(id)
+          if (index !== -1) {
+            state.torrents.splice(index, 1)
+          }
         })
       })
       .addCase(updated, (state, action) => {
+        action.payload.torrents.forEach((torrent) => {
+          state.torrentEntries[torrent.id] = torrent
+        })
       })
       .addCase(selected, (state, action) => {
         if (action.payload.append) {

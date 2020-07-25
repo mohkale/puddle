@@ -6,6 +6,7 @@ import {
   TransmissionTorrentType_Mutable as TorrentMutableFields,
   TransmissionTorrentType_WriteOnly as TorrentReadOnlyFields
 } from './responses/torrent';
+import TransmissionRecentlyActiveResponse from './responses/torrent-recent';
 
 import SessionResponseStats from './responses/session-stats';
 import NewTorrentResponse from './responses/new-torrent';
@@ -21,7 +22,7 @@ export type TorrentId = number | string
  * states that if this isn't provided (is undefined) then all torrents
  * will be affected.
 */
-export type TorrentIds = "recently-active" | TorrentId | TorrentId[] | undefined | null
+export type TorrentIds = TorrentId | TorrentId[] | undefined | null
 
 /**
  * Converts an {@code TorrentIds} argument to an object with
@@ -255,5 +256,15 @@ export default class Transmission {
     // the response definitely has. In practice that doesn't seem likely :cry:.
     return this.request('torrent-get', torrentIdsToParam(ids, {fields: fields}))
       .then(resp => resp['arguments'].torrents.map(torrent => torrent as Partial<TorrentResponse>))
+  }
+
+  /**
+   * Transmission supports a special field for the ids parameter in requests,
+   * that returns information about how the state of transmission has changed
+   * over the last [[https://github.com/transmission/transmission/issues/809][RECENTLY_ACTIVE_SECONDS]].
+   */
+  async recentlyActiveTorrents(...fields: (keyof TorrentResponse)[]) {
+    return this.request('torrent-get', {ids: 'recently-active', fields: fields})
+      .then(resp => resp['arguments'] as TransmissionRecentlyActiveResponse)
   }
 }
