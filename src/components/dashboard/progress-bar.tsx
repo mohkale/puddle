@@ -28,6 +28,7 @@ class TorrentStatusIcon extends React.PureComponent<{ status: TorrentStatus }> {
 interface ProgressBarProps {
   /** How much of our download has been completed, between 0 and 100. */
   progress: number,
+
   /** The current status of the download, used to infer an appropriate icon. */
   status: TorrentStatus,
 }

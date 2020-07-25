@@ -66,6 +66,10 @@
 		"no-shadowed-variable": false,
 		"no-string-literal": false,
 		"no-switch-case-fall-through": true,
+                "no-unused-modules": [
+                    true,
+                    {"unusedExports": true}
+                ],
 		"no-unused-expression": [
 			true,
 			"allow-fast-null-checks"
