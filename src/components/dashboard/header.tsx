@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '@puddle/stores';
 import TooltipButton from '@puddle/components/tooltip';
 
 import {
@@ -6,16 +8,37 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 
-export default class Header extends React.Component {
-  render() {
-    return (
-      <header>
-        <TooltipButton tooltip="Start Torrent" icon={faPlay} />
-        <TooltipButton tooltip="Stop Torrent" icon={faStop} />
-        <span className="vl" />
-        <TooltipButton tooltip="Add Torrent" icon={faPlus} />
-        <TooltipButton tooltip="Remove Torrent" icon={faMinus} />
-      </header>
-    );
-  }
+import AppContext from '@puddle/components/app-context';
+
+export default function Header() {
+  const selectedTorrents = useSelector(
+    (state: RootState) => state.torrents.selectedTorrents)
+
+  return (
+    <AppContext.Consumer>
+      {({ transmission }) => {
+        const startTorrents = () => {
+          if (transmission && selectedTorrents.length > 0) {
+            transmission!.startTorrent(selectedTorrents);
+          }
+        }
+
+        const stopTorrents = () => {
+          if (transmission && selectedTorrents.length > 0) {
+            transmission!.stopTorrent(selectedTorrents);
+          }
+        }
+
+        return (
+          <header>
+            <TooltipButton tooltip="Start Torrent" icon={faPlay} onClick={startTorrents} />
+            <TooltipButton tooltip="Stop Torrent" icon={faStop} onClick={stopTorrents} />
+            <span className="vl" />
+            <TooltipButton tooltip="Add Torrent" icon={faPlus} />
+            <TooltipButton tooltip="Remove Torrent" icon={faMinus} />
+          </header>
+        );
+      }}
+    </AppContext.Consumer>
+  );
 }
