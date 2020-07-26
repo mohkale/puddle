@@ -9,6 +9,8 @@ import { setPartition, arrayRemove } from '@puddle/utils';
 import torrentComparators from '@puddle/utils/comparators';
 import { torrentState, PuddleTorrentStates, PuddleTorrentStateFlags } from '@puddle/utils/filters/status';
 
+import { XOR } from 'ts-xor'
+
 import {
   ColumnState, defaultState as defaultColumnsState, resized as columnResized, selected as columnSelected
 } from './columns-store';
@@ -44,6 +46,11 @@ export interface TorrentState {
   byStatus: { [key in PuddleTorrentStates]: TorrentId[] }
 
   columns: ColumnState
+
+  filters: {
+    state: PuddleTorrentStates
+    trackers: string[]
+  }
 }
 
 function addTorrentToTracker(state: TorrentState, tracker: string, id: TorrentId) {
@@ -83,7 +90,11 @@ const defaultState: TorrentState = {
 
   byTracker: {},
   byStatus: Object.fromEntries(PuddleTorrentStateFlags.map(flag => [flag, []])),
-  columns: defaultColumnsState
+  columns: defaultColumnsState,
+  filters: {
+    state: PuddleTorrentStates.ALL,
+    trackers: []
+  }
 }
 
 /** action for when we're updating one or more torrents. */
@@ -97,6 +108,13 @@ export const removed = createAction<{ ids: TorrentId[] }>('torrents/removed')
 
 /** action for selecting one or more torrents from the torrent list. */
 export const selected = createAction<{ ids: TorrentId[], append?: boolean }>('torrents/select')
+
+interface FilterUpdatedAction {
+  status?: PuddleTorrentStates
+  filters?: XOR<{ add: string }, { remove: string }>
+
+}
+export const filterUpdated = createAction<FilterUpdatedAction>('torrents/filters/updated')
 
 /**
  * Remove all elements from the store and then fetch the current
@@ -246,6 +264,19 @@ const torrentSlice = createSlice({
       })
       .addCase(columnResized, (state, action) => {
         state.columns.columns[action.payload.column].width += action.payload.delta
+      })
+      .addCase(filterUpdated, (state, action) => {
+        if (action.payload.status)
+          state.filters.state = action.payload.status!
+
+        if (action.payload.filters) {
+          if (action.payload.filters.add) {
+            // TODO refactor types
+            state.filters.trackers.push(action.payload.filters.add as unknown as string)
+          } else if (action.payload.filters.remove) {
+            arrayRemove(state.filters.trackers, action.payload.filters.remove as unknown as string)
+          }
+        }
       })
       .addCase(columnSelected, (state, action) => {
         if (state.columns.activeColumn === action.payload.column) {

@@ -150,8 +150,31 @@ function TableRow(props: { id: TorrentId }) {
 
 export default function TableBody() {
   const torrents = useSelector((state: RootState) => state.torrents.orderedTorrents)
+  const torrentsByTracker = useSelector((state: RootState) => state.torrents.byTracker)
+  const torrentsByStatus = useSelector((state: RootState) => state.torrents.byStatus)
+  const activeState = useSelector((state: RootState) => state.torrents.filters.state)
+  const activeTrackers = useSelector((state: RootState) => state.torrents.filters.trackers)
 
-  const rows = torrents
+  let activeTrackerIds = activeTrackers.reduce((acc, tracker) => {
+    (torrentsByTracker[tracker] || []).forEach(v => acc.add(v))
+    return acc
+  }, new Set())
+
+  // TODO optimize
+  const filteredTorrents = torrents.filter(id => {
+    if (!torrentsByStatus[activeState].includes(id)) {
+      return false
+    }
+
+    if (activeTrackerIds.size !== 0 &&
+        !activeTrackerIds.has(id)) {
+      return false
+    }
+
+    return true
+  })
+
+  const rows = filteredTorrents
     .map(id => {
       return <TableRow key={id} id={id} />
     })

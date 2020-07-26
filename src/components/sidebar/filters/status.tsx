@@ -1,6 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@puddle/stores';
+import { filterUpdated } from '@puddle/stores/torrent-store';
 
 import {
   torrentState, PuddleTorrentStates, PuddleTorrentStateFlags
@@ -44,13 +45,25 @@ const statusSettings: { [key in PuddleTorrentStates]: StatusSetting } = {
 }
 
 export default function StatusFilters() {
+  const dispatch = useDispatch()
   const statuses = useSelector((state: RootState) => state.torrents.byStatus)
+  const activeState = useSelector((state: RootState) => state.torrents.filters.state)
+
   const statusEntries = Object.entries(statuses)
-    .map(([status, torrents]) => {
+    .map(([statusString, torrents]) => {
+      const status = Number(statusString)
       const settings = statusSettings[status]
+      const classes = ["filter", activeState === status ? 'active' : '']
+
+      const onClick = () => {
+        if (activeState !== status) {
+          dispatch(filterUpdated({ status: status }))
+        }
+      }
+
       return (
-        <li key={status} className="filter">
-          <FontAwesomeIcon icon={settings.icon!} className="icon" />
+        <li key={status} className={classes.join(' ')} onClick={onClick}>
+          <FontAwesomeIcon icon={settings.icon} className="icon" />
           {settings.title}
           <FilterListBadge num={torrents.length}/>
         </li>
