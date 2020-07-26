@@ -8,7 +8,7 @@ import { defaultTheme, setTheme } from '../puddle/theme';
 import Transmission, { TorrentId } from '@puddle/transmission';
 
 import store from '@puddle/stores';
-import { updateTorrents, syncTorrents } from '@puddle/stores/torrent';
+import { updateTorrents, syncTorrents } from '@puddle/stores/torrent-store';
 
 interface AppState {
   overlay?: ReactChild,

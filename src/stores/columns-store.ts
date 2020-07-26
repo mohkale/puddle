@@ -28,7 +28,7 @@ export interface ColumnState {
   columnOrder: ColumnType[]
 }
 
-const defaultState: ColumnState = {
+export const defaultState: ColumnState = {
   columns: {
     [ColumnType.NAME]: {
       title: "Name",
@@ -90,22 +90,22 @@ const defaultState: ColumnState = {
 export const resized = createAction<{ column: ColumnType, delta: number }>('columns/resized');
 export const selected = createAction<{ column: ColumnType }>('columns/selected')
 
-const columnsSlice = createSlice({
-  name: 'columns',
-  initialState: defaultState,
-  reducers: {},
-  extraReducers: builder =>
-    builder
-      .addCase(resized, (state, action) => {
-        state.columns[action.payload.column].width += action.payload.delta
-      })
-      .addCase(selected, (state, action) => {
-        if (state.activeColumn === action.payload.column) {
-          state.isDescending = !state.isDescending
-        } else {
-          state.activeColumn = action.payload.column
-        }
-      })
-})
+// const columnsSlice = createSlice({
+//   name: 'columns',
+//   initialState: defaultState,
+//   reducers: {},
+//   extraReducers: builder =>
+//     builder
+//       .addCase(resized, (state, action) => {
+//         state.columns[action.payload.column].width += action.payload.delta
+//       })
+//       .addCase(selected, (state, action) => {
+//         if (state.activeColumn === action.payload.column) {
+//           state.isDescending = !state.isDescending
+//         } else {
+//           state.activeColumn = action.payload.column
+//         }
+//       })
+// })
 
-export default columnsSlice.reducer
+// export default columnsSlice.reducer

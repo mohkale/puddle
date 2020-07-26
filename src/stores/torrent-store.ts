@@ -6,13 +6,20 @@ export * from './torrent';
 import { Torrent, TORRENT_FIELDS } from './torrent';
 import { setPartition, arrayRemove } from '@puddle/utils';
 
+import torrentComparators from '@puddle/utils/comparators';
 import { torrentState, PuddleTorrentStates, PuddleTorrentStateFlags } from '@puddle/utils/filters/status';
+
+import {
+  ColumnState, defaultState as defaultColumnsState, resized as columnResized, selected as columnSelected
+} from './columns-store';
 
 export interface TorrentState {
   /**
    * The complete list of identifierrs for torrents known to transmission.
    */
   torrents: TorrentId[]
+
+  orderedTorrents: TorrentId[]
 
   /**
    * The subset of torrents from {@code torrents} that the
@@ -34,6 +41,8 @@ export interface TorrentState {
   byTracker: { [key: string]: TorrentId[] }
 
   byStatus: { [key in PuddleTorrentStates]: TorrentId[] }
+
+  columns: ColumnState
 }
 
 function addTorrentToTracker(state: TorrentState, tracker: string, id: TorrentId) {
@@ -56,14 +65,26 @@ function removeTorrentFromTracker(state: TorrentState, tracker: string, id: Torr
   }
 }
 
+function sortByColumn(state: TorrentState, torrents: TorrentId[]) {
+  torrents.sort((idA, idB) => {
+    let res = torrentComparators[state.columns.activeColumn](
+      state.torrentEntries[idA],
+      state.torrentEntries[idB],
+    )
+    return (!state.columns.isDescending) ? -res : res
+  })
+}
+
 const defaultState: TorrentState = {
   torrents: [],
+  orderedTorrents: [],
   torrentEntries: {},
 
   selectedTorrents: [],
 
   byTracker: {},
   byStatus: Object.fromEntries(PuddleTorrentStateFlags.map(flag => [flag, []])),
+  columns: defaultColumnsState
 }
 
 /** action for when we're updating one or more torrents. */
@@ -134,6 +155,8 @@ const torrentSlice = createSlice({
           state.torrents.push(torrent.id)
           state.torrentEntries[torrent.id] = torrent
 
+          state.orderedTorrents.push(torrent.id)
+
           const tState = torrentState(torrent)
           PuddleTorrentStateFlags.forEach(flag => {
             if ((flag & tState) !== 0) {
@@ -143,6 +166,8 @@ const torrentSlice = createSlice({
 
           torrent.trackers.forEach(tracker => addTorrentToTracker(state, tracker.announce, torrent.id))
         })
+
+        sortByColumn(state, state.orderedTorrents)
       })
       .addCase(removed, (state, action) => {
         // WARN maybe it'd be more efficient to accept multiple torrents
@@ -152,6 +177,8 @@ const torrentSlice = createSlice({
           if (index !== -1) {
             const torrent = state.torrents[id]
             state.torrents.splice(index, 1)
+
+            arrayRemove(state.orderedTorrents, id)
 
             const tState = torrentState(torrent)
             PuddleTorrentStateFlags.forEach(flag => {
@@ -166,9 +193,15 @@ const torrentSlice = createSlice({
         })
       })
       .addCase(updated, (state, action) => {
+        let resort = false
         action.payload.torrents.forEach((torrent) => {
           const lastState = state.torrentEntries[torrent.id]
           state.torrentEntries[torrent.id] = torrent
+
+          const activeColumn = state.columns.activeColumn;
+          if (torrentComparators[activeColumn](torrent, lastState) !== 0) {
+            resort = true
+          }
 
           const prevTState = torrentState(lastState),
                 nextTState = torrentState(torrent);
@@ -192,6 +225,8 @@ const torrentSlice = createSlice({
           removedTrackers.forEach(tracker => removeTorrentFromTracker(state, tracker, torrent.id))
           addedTrackers.forEach(tracker => addTorrentToTracker(state, tracker, torrent.id))
         })
+
+        if (resort) sortByColumn(state, state.orderedTorrents)
       })
       .addCase(selected, (state, action) => {
         if (action.payload.append) {
@@ -199,6 +234,18 @@ const torrentSlice = createSlice({
         } else {
           state.selectedTorrents = action.payload.ids
         }
+      })
+      .addCase(columnResized, (state, action) => {
+        state.columns.columns[action.payload.column].width += action.payload.delta
+      })
+      .addCase(columnSelected, (state, action) => {
+        if (state.columns.activeColumn === action.payload.column) {
+          state.columns.isDescending = !state.columns.isDescending
+        } else {
+          state.columns.activeColumn = action.payload.column
+        }
+
+        sortByColumn(state, state.orderedTorrents)
       })
 })
 

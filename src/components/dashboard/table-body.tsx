@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import {
   Torrent, selected as torrentSelected, TorrentState
-} from '@puddle/stores/torrent';
-import { RootState } from '@puddle/stores';
-import { ColumnState, Column, ColumnType } from '@puddle/stores/columns';
+} from '@puddle/stores/torrent-store';
+import { RootState, selectColumns } from '@puddle/stores';
+import { ColumnState, Column, ColumnType } from '@puddle/stores/columns-store';
 import TorrentResponse, {
   TransmissionTorrentStatus as TorrentStatus
 } from '@puddle/transmission/responses/torrent';
@@ -14,20 +14,6 @@ import {
   scaleBytes, timeFormat, padString
 } from '@puddle/utils';
 import ProgressBar from './progress-bar';
-
-/**
- * Associates each row in the torrent list with a class representing
- * its current status.
- */
-const torrentStatusClass: { [key in TorrentStatus]: string } = {
-  [TorrentStatus.STOPPED]:       'paused',
-  [TorrentStatus.CHECK_WAIT]:    'waiting',
-  [TorrentStatus.DOWNLOAD_WAIT]: 'waiting',
-  [TorrentStatus.SEED_WAIT]:     'waiting',
-  [TorrentStatus.CHECK]:         'checking',
-  [TorrentStatus.DOWNLOAD]:      'downloading',
-  [TorrentStatus.SEED]:          'seeding'
-}
 
 // TODO maybe convert to a Pure component?
 function renderColumn(cType: ColumnType, torrent: Torrent): React.ReactNode {
@@ -84,43 +70,92 @@ function renderColumn(cType: ColumnType, torrent: Torrent): React.ReactNode {
 
       // NOTE maybe include hour.minute.second?
       return `${d.getFullYear()}.${padString(month.toString(), 2)}.${padString(day.toString(), 2)}`
-    default:
-      return torrent.name
   }
 }
 
-export default function TableBody() {
+/**
+ * Associates each row in the torrent list with a class representing
+ * its current status.
+ */
+const torrentStatusClass: { [key in TorrentStatus]: string } = {
+  [TorrentStatus.STOPPED]:       'paused',
+  [TorrentStatus.CHECK_WAIT]:    'waiting',
+  [TorrentStatus.DOWNLOAD_WAIT]: 'waiting',
+  [TorrentStatus.SEED_WAIT]:     'waiting',
+  [TorrentStatus.CHECK]:         'checking',
+  [TorrentStatus.DOWNLOAD]:      'downloading',
+  [TorrentStatus.SEED]:          'seeding'
+}
+
+/**
+ * assign the classes
+ */
+function torrentClasses(torrent: Torrent) {
+  const classes: string[] = []
+  switch (torrent.status) {
+    case TorrentStatus.STOPPED:
+      classes.push('is-stopped')
+      break
+    case TorrentStatus.DOWNLOAD_WAIT:
+      classes.push('is-downloading-queued')
+    case TorrentStatus.DOWNLOAD:
+      classes.push('is-downloading')
+      break
+    case TorrentStatus.SEED_WAIT:
+      classes.push('is-seeding-queued')
+    case TorrentStatus.SEED:
+      classes.push('is-seeding')
+      break
+    case TorrentStatus.CHECK_WAIT:
+      classes.push('is-checking-queued')
+    case TorrentStatus.CHECK:
+      classes.push('is-checking')
+      break
+  }
+  if (torrent.isFinished) classes.push('is-finished')
+
+  return classes
+}
+
+interface TableRowProps {
+  torrent: Torrent
+  selected: boolean
+}
+function TableRow(props: TableRowProps) {
   const dispatch = useDispatch()
+  const columnsState: ColumnState = useSelector(selectColumns)
+  const columns: [ColumnType, Column][] = columnsState.columnOrder
+    .map(cType => [cType, columnsState.columns[cType]])
+
+  const classes = [...torrentClasses(props.torrent), props.selected ? 'active' : ''].join(' ')
+
+  const onClick = (e: React.MouseEvent) => {
+    dispatch(torrentSelected({ ids: [props.torrent.id], append: e.ctrlKey }))
+  }
+
+  const cells = columns.map(([cType, col]) => {
+    const cellClasses = ["table-cell", col.title].join(' ')
+
+    return (
+      <div className={cellClasses} key={col.title}
+           style={{width: col.width}} >
+        <div>{renderColumn(cType, props.torrent)}</div>
+      </div>
+    )
+  })
+
+  return <li className={classes} onClick={onClick}>{cells}</li>
+}
+
+export default function TableBody() {
   const torrents: TorrentState = useSelector((state: RootState) => state.torrents)
-  const columnsState: ColumnState = useSelector((state: RootState) => state.columns)
 
-  const items = torrents.torrents
-    .map(id => torrents.torrentEntries[id])
-    .map(torrent => {
-      const columns: [ColumnType, Column][] = columnsState.columnOrder
-        .map(cType => [cType, columnsState.columns[cType]])
-      const classes = [
-        torrentStatusClass[torrent.status],
-        torrents.selectedTorrents.includes(torrent.id) ? 'active' : ''
-      ].join(' ')
-
-      const onClick = (e: React.MouseEvent) => {
-        dispatch(torrentSelected({ ids: [torrent.id], append: e.ctrlKey }))
-      }
-
-      const cells = columns.map(([cType, col]) => {
-        const cellClasses = ["table-cell", col.title].join(' ')
-
-        return (
-          <div className={cellClasses} key={col.title}
-               style={{width: col.width}} >
-            <div>{renderColumn(cType, torrent)}</div>
-          </div>
-        )
-      })
-
-      return <li key={torrent.id} className={classes} onClick={onClick}>{cells}</li>
+  const rows = torrents.orderedTorrents
+    .map(id => {
+      const torrent = torrents.torrentEntries[id]
+      const isSelected = torrents.selectedTorrents.includes(torrent.id)
+      return <TableRow key={torrent.id} torrent={torrent} selected={isSelected} />
     })
 
-  return <ul className="rows">{items}</ul>;
+  return <ul className="rows">{rows}</ul>;
 }

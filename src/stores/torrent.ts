@@ -1,4 +1,3 @@
-import { ColumnType } from '../columns';
 import { TorrentId } from '@puddle/transmission';
 import TorrentResponse, {
   TransmissionTorrentStatus as TorrentStatus
@@ -28,11 +27,12 @@ export const TORRENT_FIELDS: (keyof TorrentResponse)[] = [
   "trackers",
   "error",
   "errorString",
+  "percentDone",
 ]
 
 export type Torrent = Pick<TorrentResponse,
   "id" | "name" | "status" | "sizeWhenDone" | "haveValid" |
   "haveUnchecked" | "downloadedEver" | "rateDownload" | "uploadedEver" |
   "rateUpload" | "eta" | "status" | "uploadRatio" | "sizeWhenDone" |
-  "addedDate" | "trackers" | "isFinished" | "error" | "errorString">
+  "addedDate" | "trackers" | "isFinished" | "error" | "errorString" | "percentDone">
 

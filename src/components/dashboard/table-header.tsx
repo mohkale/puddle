@@ -1,18 +1,18 @@
 import React, { Fragment, useState } from 'react';
-import { RootState } from '@puddle/stores';
+import { RootState, selectColumns } from '@puddle/stores';
 import {
   ColumnType, ColumnState,
   resized as columnResized,
   selected as columnSelected,
   MINIMUM_WIDTH as MINIMUM_COLUMN_WIDTH
-} from '@puddle/stores/columns';
+} from '@puddle/stores/columns-store';
 import { useDispatch, useSelector } from 'react-redux';
 
 /** header of the table of torrents. */
 export default function DashboardTableColumns(props: { torrentsRef: React.MutableRefObject<HTMLDivElement | null> }) {
   const [resizing, setResizing] = React.useState<ColumnResizeContext|null>(null)
   const dispatch = useDispatch()
-  const columnsState: ColumnState = useSelector((state: RootState) => state.columns);
+  const columnsState: ColumnState = useSelector(selectColumns)
 
   const columnElems = columnsState.columnOrder
     .map(columnId => {
