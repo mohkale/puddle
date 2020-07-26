@@ -43,7 +43,7 @@ export const defaultState: ColumnState = {
       width: DEFAULT_WIDTH,
     },
     [ColumnType.DOWNLOAD_SPEED]: {
-      title: "Downloaded Speed",
+      title: "Download Speed",
       width: DEFAULT_WIDTH,
     },
     [ColumnType.UPLOADED]: {

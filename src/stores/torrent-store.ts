@@ -3,7 +3,7 @@ import { createSlice, createAction } from '@reduxjs/toolkit';
 import Transmission, { TorrentId } from '@puddle/transmission';
 
 export * from './torrent';
-import { Torrent, TORRENT_FIELDS } from './torrent';
+import { Torrent, TORRENT_FIELDS, fromResponse as torrentFromResponse } from './torrent';
 import { setPartition, arrayRemove } from '@puddle/utils';
 
 import torrentComparators from '@puddle/utils/comparators';
@@ -19,13 +19,10 @@ export interface TorrentState {
    */
   torrents: TorrentId[]
 
-  orderedTorrents: TorrentId[]
-
   /**
-   * The subset of torrents from {@code torrents} that the
-   * user has currently selected.
+   * Torrents ordered by the currently selected column.
    */
-  selectedTorrents: TorrentId[]
+  orderedTorrents: TorrentId[]
 
   /**
    * Mappings from the list of identifiers to actual torrent
@@ -40,6 +37,10 @@ export interface TorrentState {
    */
   byTracker: { [key: string]: TorrentId[] }
 
+  /**
+   * A collection of torrent states and the torrents that're associated
+   * with those states.
+   */
   byStatus: { [key in PuddleTorrentStates]: TorrentId[] }
 
   columns: ColumnState
@@ -80,8 +81,6 @@ const defaultState: TorrentState = {
   orderedTorrents: [],
   torrentEntries: {},
 
-  selectedTorrents: [],
-
   byTracker: {},
   byStatus: Object.fromEntries(PuddleTorrentStateFlags.map(flag => [flag, []])),
   columns: defaultColumnsState
@@ -107,8 +106,13 @@ export const syncTorrents =
   (client: Transmission, callback?: VoidFunction) => {
     return async (dispatch, getState) => {
       const state = getState()
+
+      // remove all the existing torrents.
       dispatch(removed({ ids: state.torrents.torrents }))
-      dispatch(added({ torrents: await client.torrents(undefined, ...TORRENT_FIELDS) }))
+
+      // add the current torrent list as specified by transmission.
+      const torrents = await client.torrents(undefined, ...TORRENT_FIELDS)
+      dispatch(added({ torrents: torrents.map(torrentFromResponse) }))
 
       callback && callback!()
     }
@@ -123,18 +127,23 @@ export const updateTorrents =
   (client: Transmission, callback?: VoidFunction) => {
     return async (dispatch, getState) => {
       const active = await client.recentlyActiveTorrents(...TORRENT_FIELDS);
-      const torrents = active.torrents as Torrent[], removedTorrents = active.removed
-      const state = getState()
+      const torrents = active.torrents, removedTorrents = active.removed
 
       if (removed.length > 0) {
         dispatch(removed({ ids: removedTorrents }))
       }
 
       if (torrents.length > 0) {
+        const state = getState()
         const existingIds = new Set<TorrentId>(state.torrents.torrents)
         const newTorrents: Torrent[] = [], updatedTorrents: Torrent[] = [];
-        torrents.forEach(torrent =>
-          (existingIds.has(torrent.id) ? updatedTorrents : newTorrents).push(torrent))
+        torrents.forEach(torrent => {
+          if (existingIds.has(torrent.id!)) {
+            updatedTorrents.push(torrentFromResponse(torrent, state.torrents[torrent.id!]))
+          } else {
+            newTorrents.push(torrentFromResponse(torrent))
+          }
+        })
 
         if (newTorrents.length > 0)     dispatch(added({ torrents: newTorrents }))
         if (updatedTorrents.length > 0) dispatch(updated({ torrents: updatedTorrents }))
@@ -157,9 +166,8 @@ const torrentSlice = createSlice({
 
           state.orderedTorrents.push(torrent.id)
 
-          const tState = torrentState(torrent)
           PuddleTorrentStateFlags.forEach(flag => {
-            if ((flag & tState) !== 0) {
+            if ((flag & torrent.puddleState) !== 0) {
               state.byStatus[flag].push(torrent.id)
             }
           })
@@ -180,9 +188,8 @@ const torrentSlice = createSlice({
 
             arrayRemove(state.orderedTorrents, id)
 
-            const tState = torrentState(torrent)
             PuddleTorrentStateFlags.forEach(flag => {
-              if ((flag & tState) !== 0) {
+              if ((flag & torrent.puddleState) !== 0) {
                 arrayRemove(state.byStatus[flag], id)
               }
             })
@@ -205,10 +212,10 @@ const torrentSlice = createSlice({
 
           const prevTState = torrentState(lastState),
                 nextTState = torrentState(torrent);
-          if (prevTState !== nextTState) {
+          if (lastState.puddleState !== torrent.puddleState) {
             PuddleTorrentStateFlags.forEach(flag => {
-              const inPrevious = (prevTState & flag) !== 0
-              const inCurrent = (nextTState & flag) !== 0
+              const inPrevious = (lastState.puddleState & flag) !== 0
+              const inCurrent  = (torrent.puddleState   & flag) !== 0
               if (inPrevious !== inCurrent) {
                 if (inPrevious) { // but not in current
                   arrayRemove(state.byStatus[flag], torrent.id)
@@ -229,11 +236,13 @@ const torrentSlice = createSlice({
         if (resort) sortByColumn(state, state.orderedTorrents)
       })
       .addCase(selected, (state, action) => {
-        if (action.payload.append) {
-          state.selectedTorrents.push(...action.payload.ids)
-        } else {
-          state.selectedTorrents = action.payload.ids
+        if (!action.payload.append) {
+          Object.values(state.torrentEntries).forEach(
+            (torrent) => torrent.selected = false)
         }
+
+        action.payload.ids.forEach(
+          (id) => state.torrentEntries[id].selected = true)
       })
       .addCase(columnResized, (state, action) => {
         state.columns.columns[action.payload.column].width += action.payload.delta

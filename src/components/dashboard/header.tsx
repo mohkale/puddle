@@ -11,8 +11,10 @@ import { faBell } from '@fortawesome/free-regular-svg-icons';
 import AppContext from '@puddle/components/app-context';
 
 export default function Header() {
-  const selectedTorrents = useSelector(
-    (state: RootState) => state.torrents.selectedTorrents)
+  const selectedTorrents = useSelector((state: RootState) =>
+    Object.values(state.torrents.torrentEntries)
+      .filter(torrent => torrent.selected))
+      .map(torrent => torrent.id)
 
   return (
     <AppContext.Consumer>

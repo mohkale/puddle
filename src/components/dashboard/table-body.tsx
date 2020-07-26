@@ -15,15 +15,16 @@ import {
 } from '@puddle/utils';
 import ProgressBar from './progress-bar';
 
+import { TorrentId } from '@puddle/transmission';
+import { selectTorrentById } from '@puddle/stores';
+
 // TODO maybe convert to a Pure component?
 function renderColumn(cType: ColumnType, torrent: Torrent): React.ReactNode {
   switch (cType) {
     case ColumnType.NAME:
       return torrent.name
     case ColumnType.PROGRESS:
-      const downloaded = (torrent.haveValid + torrent.haveUnchecked)
-      const complete = 100 * (downloaded / torrent.sizeWhenDone) || 0
-      return <ProgressBar progress={complete} status={torrent.status} />;
+      return <ProgressBar progress={torrent.percentDone * 100} status={torrent.status} />;
     case ColumnType.DOWNLOADED: {
       const [num, unit] = scaleBytes(torrent.downloadedEver!)
       return (
@@ -118,19 +119,19 @@ function torrentClasses(torrent: Torrent) {
 }
 
 interface TableRowProps {
-  torrent: Torrent
-  selected: boolean
+  id: TorrentId
 }
-function TableRow(props: TableRowProps) {
+function TableRow(props: { id: TorrentId }) {
   const dispatch = useDispatch()
+  const torrent = useSelector(selectTorrentById(props.id))
   const columnsState: ColumnState = useSelector(selectColumns)
   const columns: [ColumnType, Column][] = columnsState.columnOrder
     .map(cType => [cType, columnsState.columns[cType]])
 
-  const classes = [...torrentClasses(props.torrent), props.selected ? 'active' : ''].join(' ')
+  const classes = [...torrentClasses(torrent), torrent.selected ? 'active' : ''].join(' ')
 
   const onClick = (e: React.MouseEvent) => {
-    dispatch(torrentSelected({ ids: [props.torrent.id], append: e.ctrlKey }))
+    dispatch(torrentSelected({ ids: [props.id], append: e.ctrlKey }))
   }
 
   const cells = columns.map(([cType, col]) => {
@@ -139,7 +140,7 @@ function TableRow(props: TableRowProps) {
     return (
       <div className={cellClasses} key={col.title}
            style={{width: col.width}} >
-        <div>{renderColumn(cType, props.torrent)}</div>
+        <div>{renderColumn(cType, torrent)}</div>
       </div>
     )
   })
@@ -148,13 +149,11 @@ function TableRow(props: TableRowProps) {
 }
 
 export default function TableBody() {
-  const torrents: TorrentState = useSelector((state: RootState) => state.torrents)
+  const torrents = useSelector((state: RootState) => state.torrents.orderedTorrents)
 
-  const rows = torrents.orderedTorrents
+  const rows = torrents
     .map(id => {
-      const torrent = torrents.torrentEntries[id]
-      const isSelected = torrents.selectedTorrents.includes(torrent.id)
-      return <TableRow key={torrent.id} torrent={torrent} selected={isSelected} />
+      return <TableRow key={id} id={id} />
     })
 
   return <ul className="rows">{rows}</ul>;
