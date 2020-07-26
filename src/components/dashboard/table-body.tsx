@@ -104,6 +104,10 @@ export default function TableBody() {
         torrents.selectedTorrents.includes(torrent.id) ? 'active' : ''
       ].join(' ')
 
+      const onClick = (e: React.MouseEvent) => {
+        dispatch(torrentSelected({ ids: [torrent.id], append: e.ctrlKey }))
+      }
+
       const cells = columns.map(([cType, col]) => {
         const cellClasses = ["table-cell", col.title].join(' ')
 
@@ -115,7 +119,7 @@ export default function TableBody() {
         )
       })
 
-      return <li key={torrent.id} className={classes} onClick={() => dispatch(torrentSelected({ ids: [torrent.id] }))}>{cells}</li>
+      return <li key={torrent.id} className={classes} onClick={onClick}>{cells}</li>
     })
 
   return <ul className="rows">{items}</ul>;

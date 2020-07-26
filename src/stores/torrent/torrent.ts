@@ -25,11 +25,14 @@ export const TORRENT_FIELDS: (keyof TorrentResponse)[] = [
   "uploadRatio",
   "sizeWhenDone",
   "addedDate",
+  "trackers",
+  "error",
+  "errorString",
 ]
 
 export type Torrent = Pick<TorrentResponse,
   "id" | "name" | "status" | "sizeWhenDone" | "haveValid" |
   "haveUnchecked" | "downloadedEver" | "rateDownload" | "uploadedEver" |
   "rateUpload" | "eta" | "status" | "uploadRatio" | "sizeWhenDone" |
-  "addedDate">
+  "addedDate" | "trackers" | "isFinished" | "error" | "errorString">
 

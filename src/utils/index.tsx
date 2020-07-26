@@ -27,7 +27,7 @@ export function padString(str: string, length: number, char: string='0') {
     return str;
 }
 
-// source [[https://stackoverflow.com/questions/8498592/extract-hostname-name-from-string/54947757][here]].
+// source [[https://stackoverflow.com/questions/8498592/extract-hostname-name-from-string/54947757][here]]. TODO memoize.
 export function extractHostname(url: string): string {
   var hostname: string = '';
   //find & remove protocol (http, ftp, etc.) and get hostname
@@ -47,3 +47,26 @@ export function extractHostname(url: string): string {
   return hostname;
 }
 
+/**
+ * Find the set partition of two collections of the same type.
+ *
+ * A set partition is the list of elements that have been removed
+ * from the first collection and the list of elements added to the
+ * first collection.
+ *
+ * @returns [removed, added] a tuple of the change in state.
+ */
+export function setPartition<T>(a: T[], b: T[]) {
+  const aSet = new Set(a), bSet = new Set(b)
+  return [a.filter(x => !bSet.has(x)),
+          b.filter(y => !aSet.has(y))]
+}
+
+export function arrayRemove<T>(arr: T[], elem: T, errorHandler?: VoidFunction) {
+  const index = arr.indexOf(elem)
+  if (index === -1) {
+    errorHandler && errorHandler!()
+  } else {
+    arr.splice(index, 1)
+  }
+}
