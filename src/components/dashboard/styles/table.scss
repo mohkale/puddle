@@ -16,108 +16,26 @@ $resizer-width: 9px;
     width: max-content;
     border-collapse: collapse;
 
-    .columns {
-        border-bottom: solid 1px var(--torrents-border-color);
-    }
-    .columns > .table-cell {
-        height: 24px;
-        font-size: 12px;
-        cursor: pointer;
-        position: relative;
-        padding: 0px #{$order-indicator-width + 2 * $order-indicator-offset} 0px 6px;
-
-        color: var(--torrents-column-color);
-        transition: color $animation-duration;
-        &:hover {
-            color: var(--torrents-column-hover-color);
-        }
-
-
-        &::after {
-            opacity: 0;
-            transition: opacity $animation-duration;
-        }
-
-        &.active {
-            font-weight: 700;
-            position: relative;
-            color: var(--torrents-active-column-color);
-            &:hover {
-                color: var(--torrents-active-column-hover-color);
-            }
-
-            &::after {
-                border-left:  $order-indicator-width solid transparent;
-                border-right: $order-indicator-width solid transparent;
-                border-top:   5px solid black;
-                content: '';
-                margin-top: -3px;
-                position: absolute;
-                right: $order-indicator-offset + $resizer-width;
-                top: 50%;
-                transition: transform $animation-duration;
-                opacity: 0.5;
-            }
-
-            &.descending::after {
-                transform: rotate(180deg);
-            }
-        }
-
-        .resizer {
-            border-right:  solid 1px var(--torrents-border-color);
-            height: 100%;
-            position: absolute;
-            right: $resizer-width / 2;
-            width: $resizer-width;
-            cursor: col-resize;
-        }
-    }
-
     .table-cell {
         @include no-select;
         font-weight: normal;
         box-sizing: border-box;
-        min-width: var(--minimum-column-width);
         padding: 0px 6px;
+
+        display: inline-flex;
+        align-items: center;
 
         .label {
             @include trimWithEllipsis;
         }
-
-        display: inline-flex;
-        align-items: center;
-    }
-
-    .resize-overlay {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        cursor: col-resize;
-
-        .resize-indicator {
-            position: absolute;
-            width: 1px;
-            background-color: var(--torrents-border-color);
-            // background-color: black;
-            top: 0;
-            height: 100%;
-        }
     }
 
     .rows {
-        list-style-type: none;
-        padding: 0px;
         margin: 0px;
+        padding: 0px;
+        list-style-type: none;
 
         li {
-            border-top:    solid 1px var(--torrents-border-color);
-            border-bottom: solid 1px var(--torrents-border-color);
-
-            // transition: all $animation-duration;
-            // transition-property: border-color;
-
             height: 30px;
             display: flex;
             align-items: center;
@@ -126,11 +44,6 @@ $resizer-width: 9px;
                 border-bottom: 0px;
             }
         }
-
-        color: var(--torrents-row-fg);
-        background-color: var(--torrents-row-bg);
-        transition: all $animation-duration;
-        transition-property: color, background-color;
 
         .table-cell {
             font-size: 0.9em;
@@ -153,68 +66,86 @@ $resizer-width: 9px;
             grid-template-columns: max-content 1fr;
             grid-gap: 4px;
 
-            svg {
-                height: 12px;
-            }
+            svg { height: 12px; }
             .fill {
-                background-color: var(--torrents-row-progress-bg);
                 margin: auto 0px;
-            }
-            .progress {
-                background-color: var(--torrents-row-progress-fg);
             }
             .fill, .progress {
                 height: 3px;
             }
         }
+    }
+
+    // Start setting up color scheme for rows.
+
+    .rows li {
+        color: var(--torrents-row-fg);
+        background-color: var(--torrents-row-bg);
+
+        transition: all $animation-duration;
+        transition-property: color, background-color, fill, border-color;
+
+        border-top:    solid 1px var(--torrents-border-color);
+        border-bottom: solid 1px var(--torrents-border-color);
+
+        &.active {
+            --torrents-row-fg: var(--torrents-active-row-fg);
+            --torrents-row-bg: var(--torrents-active-row-bg);
+            --torrents-row-border-color: var(--torrents-active-row-border-color);
+            --torrents-row-progress-bg: var(--torrents-active-row-progress-bg);
+            --torrents-row-progress-fg: var(--torrents-active-row-progress-fg);
+        }
+
+        .progress-bar {
+            .fill {
+                background-color: var(--torrents-row-progress-bg);
+            }
+            .progress {
+                background-color: var(--torrents-row-progress-fg);
+            }
+        }
 
         /** variants for rows that're in different states. */
-        @mixin theme-customize($accessors, $fg, $bg, $border, $progress-fg, $progress-bg) {
-            #{$accessors} {
-                color: $fg;
-                background-color: $bg;
-                border-color: $border;
+        @mixin theme-customize($accessors, $prefix, $selected-prefix) {
+            &#{$accessors} {
+                --torrents-row-fg: var(#{$prefix}-fg);
+                --torrents-row-bg: var(#{$prefix}-bg);
+                --torrents-row-border-color: var(#{$prefix}-border-color);
+                --torrents-row-progress-fg: var(#{$prefix}-progress-fg);
+                --torrents-row-progress-bg: var(#{$prefix}-progress-bg);
 
-                .progress-bar svg {
-                    color: $progress-fg;
+                &.active {
+                    // not using active here because .active isn't specific enough above.
+                    --torrents-row-fg: var(#{$selected-prefix}-fg);
+                    --torrents-row-bg: var(#{$selected-prefix}-bg);
+                    --torrents-row-border-color: var(#{$selected-prefix}-border-color);
+                    --torrents-row-progress-fg: var(#{$selected-prefix}-progress-fg);
+                    --torrents-row-progress-bg: var(#{$selected-prefix}-progress-bg);
                 }
-                .progress { background-color: $progress-fg; }
-                .fill { background-color: $progress-bg; }
 
                 @content
             }
         }
 
         @include theme-customize(
-            ".downloading",
-            var(--torrents-row-downloading-fg),
-            var(--torrents-row-downloading-bg),
-            var(--torrents-row-downloading-border-color),
-            var(--torrents-row-downloading-progress-fg),
-            var(--torrents-row-downloading-progress-bg)) {
+            ":not(.is-stopped)",
+            "--torrents-downloading-row",
+            "--torrents-active-downloading-row") {
             .Name {
                 font-weight: 500;
             }
         }
 
         @include theme-customize(
-            ".active",
-            var(--torrents-row-selected-fg),
-            var(--torrents-row-selected-bg),
-            var(--torrents-row-selected-border-color),
-            var(--torrents-row-selected-progress-fg),
-            var(--torrents-row-selected-progress-bg));
+            ".is-seeding",
+            "--torrents-seeding-row",
+            "--torrents-active-seeding-row");
 
-        // hardcoded override.
-        .downloading.active {
-            color: white;
-            .progress-bar svg {
-                color: white;
-            }
-            .progress {
-                background-color: white;
-            }
-        }
+        @include theme-customize(
+            ".has-error",
+            "--torrents-error-row",
+            "--torrents-active-error-row");
     }
 }
 
+@import "./columns";

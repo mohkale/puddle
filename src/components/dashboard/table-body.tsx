@@ -113,7 +113,10 @@ function torrentClasses(torrent: Torrent) {
       classes.push('is-checking')
       break
   }
-  if (torrent.isFinished) classes.push('is-finished')
+  if (torrent.percentDone === 1)
+    classes.push('is-finished')
+  else if (torrent.error !== 0)
+    classes.push('has-error')
 
   return classes
 }

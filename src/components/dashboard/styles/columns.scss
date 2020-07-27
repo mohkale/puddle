@@ -1,0 +1,52 @@
+#torrents {
+    .columns {
+        border-bottom: solid 1px var(--torrents-border-color);
+    }
+    .columns > .table-cell {
+        height: 24px;
+        font-size: 12px;
+        cursor: pointer;
+        position: relative;
+        padding: 0px #{$order-indicator-width + 2 * $order-indicator-offset} 0px 6px;
+
+        color: var(--torrents-column-color);
+        transition: color $animation-duration;
+        &:hover {
+            color: var(--torrents-column-hover-color);
+        }
+
+
+        &::after {
+            opacity: 0;
+            transition: opacity $animation-duration;
+        }
+
+        &.active {
+            font-weight: 700;
+            position: relative;
+            color: var(--torrents-active-column-color);
+            &:hover {
+                color: var(--torrents-active-column-hover-color);
+            }
+
+            &::after {
+                border-left:  $order-indicator-width solid transparent;
+                border-right: $order-indicator-width solid transparent;
+                border-top:   5px solid black;
+                content: '';
+                margin-top: -3px;
+                position: absolute;
+                right: $order-indicator-offset + $resizer-width;
+                top: 50%;
+                transition: transform $animation-duration;
+                opacity: 0.5;
+            }
+
+            &.descending::after {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
+
+@import "./column-resize";

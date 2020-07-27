@@ -4,6 +4,12 @@ interface TorrentListRow {
   borderColor: string,
   progressBarBg: string,
   progressBarFg: string,
+
+  selectedFg: string,
+  selectedBg: string,
+  selectedBorderColor: string,
+  selectedProgressBarFg: string,
+  selectedProgressBarBg: string,
 }
 
 export interface Theme {
@@ -42,7 +48,8 @@ export interface Theme {
 
   torrentsIdleRow: TorrentListRow,
   torrentsDownloadingRow: TorrentListRow,
-  torrentsSelectedRow: TorrentListRow,
+  torrentsSeedingRow: TorrentListRow,
+  torrentsErrorRow: TorrentListRow,
 
   overlayContainerBackground: string,
   overlayBorderColor: string,
@@ -81,29 +88,31 @@ export function setTheme(theme: Theme) {
   root.setProperty('--header-button-hover-fg', theme.headerButtonHoverFg)
   root.setProperty('--header-button-hover-bg', theme.headerButtonHoverBg)
 
-  root.setProperty('--torrents-border-color', theme.torrentsBorderColor)
-  root.setProperty('--torrents-active-column-color', theme.torrentsActiveColumnColor)
   root.setProperty('--torrents-column-color', theme.torrentsColumnColor)
   root.setProperty('--torrents-column-hover-color', theme.torrentsColumnHoverColor)
+  root.setProperty('--torrents-active-column-color', theme.torrentsActiveColumnColor)
   root.setProperty('--torrents-active-column-hover-color', theme.torrentsActiveColumnHoverColor)
 
-  root.setProperty('--torrents-row-fg', theme.torrentsIdleRow.fg)
-  root.setProperty('--torrents-row-bg', theme.torrentsIdleRow.bg)
-  root.setProperty('--torrents-row-border-color', theme.torrentsIdleRow.bg)
-  root.setProperty('--torrents-row-progress-fg', theme.torrentsIdleRow.progressBarFg)
-  root.setProperty('--torrents-row-progress-bg', theme.torrentsIdleRow.progressBarBg)
+  root.setProperty('--torrents-border-color', theme.torrentsBorderColor)
 
-  root.setProperty('--torrents-row-selected-fg', theme.torrentsSelectedRow.fg)
-  root.setProperty('--torrents-row-selected-bg', theme.torrentsSelectedRow.bg)
-  root.setProperty('--torrents-row-selected-border-color', theme.torrentsSelectedRow.bg)
-  root.setProperty('--torrents-row-selected-progress-fg', theme.torrentsSelectedRow.progressBarFg)
-  root.setProperty('--torrents-row-selected-progress-bg', theme.torrentsSelectedRow.progressBarBg)
+  function setTorrentsRowClasses(prefix: string, selectedPrefix: string, row: TorrentListRow) {
+    root.setProperty(`${prefix}-fg`, row.fg)
+    root.setProperty(`${prefix}-bg`, row.bg)
+    root.setProperty(`${prefix}-border-color`, row.borderColor)
+    root.setProperty(`${prefix}-progress-fg`, row.progressBarFg)
+    root.setProperty(`${prefix}-progress-bg`, row.progressBarBg)
 
-  root.setProperty('--torrents-row-downloading-fg', theme.torrentsDownloadingRow.fg)
-  root.setProperty('--torrents-row-downloading-bg', theme.torrentsDownloadingRow.bg)
-  root.setProperty('--torrents-row-downloading-border-color', theme.torrentsDownloadingRow.borderColor)
-  root.setProperty('--torrents-row-downloading-progress-fg', theme.torrentsDownloadingRow.progressBarFg)
-  root.setProperty('--torrents-row-downloading-progress-bg', theme.torrentsDownloadingRow.progressBarBg)
+    root.setProperty(`${selectedPrefix}-fg`, row.selectedFg)
+    root.setProperty(`${selectedPrefix}-bg`, row.selectedBg)
+    root.setProperty(`${selectedPrefix}-border-color`, row.selectedBorderColor)
+    root.setProperty(`${selectedPrefix}-progress-fg`, row.selectedProgressBarFg)
+    root.setProperty(`${selectedPrefix}-progress-bg`, row.selectedProgressBarBg)
+  }
+
+  setTorrentsRowClasses('--torrents-row', '--torrents-active-row', theme.torrentsIdleRow)
+  setTorrentsRowClasses('--torrents-downloading-row', '--torrents-active-downloading-row', theme.torrentsDownloadingRow)
+  setTorrentsRowClasses('--torrents-seeding-row', '--torrents-active-seeding-row', theme.torrentsSeedingRow)
+  setTorrentsRowClasses('--torrents-error-row', '--torrents-active-error-row', theme.torrentsErrorRow)
 
   root.setProperty('--overlay-container-background', theme.overlayContainerBackground);
   root.setProperty('--overlay-border-color', theme.overlayBorderColor)
@@ -150,23 +159,54 @@ export const defaultTheme: Theme = {
   torrentsIdleRow: {
     fg: '#c3ccd3',
     bg: 'transparent',
-    borderColor: 'rgba(29,41,56,0.08)',
-    progressBarFg: 'grey',
-    progressBarBg: '#e7ebee',
+    borderColor: 'rgba(29, 41, 56, 0.0.8)',
+    progressBarFg: '#e7ebee',
+    progressBarBg: 'rgba(231,235,238,0.35)',
+
+    selectedFg: 'rgba(255,255,255,0.5)',
+    selectedBg: '#258de5',
+    selectedBorderColor: '#1b86e0',
+    selectedProgressBarFg: 'grey',
+    selectedProgressBarBg: 'rgba(255,255,255,0.15)',
   },
   torrentsDownloadingRow: {
     fg: '#4b677f',
-    bg: '',
-    borderColor: 'rgba(29,41,56,0.08)',
+    bg: 'transparent',
+    borderColor: 'rgba(29, 41, 56, 0.0.8)',
     progressBarFg: '#39ce83',
     progressBarBg: 'rgba(57,206,131,0.15)',
+
+    selectedFg: 'white',
+    selectedBg: '#258de5',
+    selectedBorderColor: '#1b86e0',
+    selectedProgressBarFg: 'white',
+    selectedProgressBarBg: '#459ee9',
   },
-  torrentsSelectedRow: {
-    fg: 'rgba(255,255,255,0.5)',
-    bg: '#258de5',
-    borderColor: '#1b86e0',
-    progressBarFg: 'grey',
-    progressBarBg: 'rgba(255,255,255,0.15)',
+  torrentsSeedingRow: {
+    fg: '#4b677f',
+    bg: 'transparent',
+    borderColor: 'rgba(29, 41, 56, 0.0.8)',
+    progressBarFg: '#258de5',
+    progressBarBg: 'rgba(#258de5, 0.15)',
+
+    selectedFg: 'white',
+    selectedBg: '#258de5',
+    selectedBorderColor: '#1b86e0',
+    selectedProgressBarFg: 'white',
+    selectedProgressBarBg: '#459ee9',
+  },
+  torrentsErrorRow: {
+    fg: '#f2acbc',
+    bg: 'transparent',
+    borderColor: 'rgba(29, 41, 56, 0.0.8)',
+    progressBarFg: '#f2acbc',
+    progressBarBg: 'rgba(242,172,188,0.15)',
+
+    selectedFg: 'rgba(255,255,255,0.5)',
+    selectedBg: '#e95779',
+    selectedBorderColor: '#e7496e',
+    selectedProgressBarFg: '#f2acbc',
+    selectedProgressBarBg: 'rgba(255,255,255,0.15)',
   },
   overlayContainerBackground: 'radial-gradient(circle, rgba(0,0,0,0.5) 35%, rgba(0,0,0,0.75) 100%)',
   overlayBorderColor: 'rgba(9,24,36,0.4)',
