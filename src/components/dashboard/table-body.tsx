@@ -24,7 +24,7 @@ function renderColumn(cType: ColumnType, torrent: Torrent): React.ReactNode {
     case ColumnType.NAME:
       return torrent.name
     case ColumnType.PROGRESS:
-      return <ProgressBar progress={torrent.percentDone * 100} status={torrent.status} />;
+      return <ProgressBar progress={torrent.percentDone * 100} status={torrent.puddleState} />;
     case ColumnType.DOWNLOADED: {
       const [num, unit] = scaleBytes(torrent.downloadedEver!)
       return (
@@ -72,20 +72,6 @@ function renderColumn(cType: ColumnType, torrent: Torrent): React.ReactNode {
       // NOTE maybe include hour.minute.second?
       return `${d.getFullYear()}.${padString(month.toString(), 2)}.${padString(day.toString(), 2)}`
   }
-}
-
-/**
- * Associates each row in the torrent list with a class representing
- * its current status.
- */
-const torrentStatusClass: { [key in TorrentStatus]: string } = {
-  [TorrentStatus.STOPPED]:       'paused',
-  [TorrentStatus.CHECK_WAIT]:    'waiting',
-  [TorrentStatus.DOWNLOAD_WAIT]: 'waiting',
-  [TorrentStatus.SEED_WAIT]:     'waiting',
-  [TorrentStatus.CHECK]:         'checking',
-  [TorrentStatus.DOWNLOAD]:      'downloading',
-  [TorrentStatus.SEED]:          'seeding'
 }
 
 /**

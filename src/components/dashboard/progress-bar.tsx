@@ -1,27 +1,28 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faExclamation, faPlay, faStop, faPause } from '@fortawesome/free-solid-svg-icons';
+import { faCircle } from '@fortawesome/free-regular-svg-icons';
 
 import {
-  TransmissionTorrentStatus as TorrentStatus
-} from '@puddle/transmission/responses/torrent';
+  PuddleTorrentStates as TorrentStatus
+} from '@puddle/utils/filters/status';
 
 class TorrentStatusIcon extends React.PureComponent<{ status: TorrentStatus }> {
   render() {
-    let icon;
-    switch (this.props.status) {
-      case TorrentStatus.STOPPED:
-      case TorrentStatus.CHECK_WAIT:
-      case TorrentStatus.SEED_WAIT:
-      case TorrentStatus.DOWNLOAD_WAIT:
-      case TorrentStatus.CHECK:
-      case TorrentStatus.DOWNLOAD:
-      case TorrentStatus.SEED:
-        icon = faExclamation
-        break
-    }
+    return <FontAwesomeIcon className="icon" icon={this.icon}/>
+  }
 
-    return <FontAwesomeIcon className="icon" icon={icon}/>
+  private get icon() {
+    const status = this.props.status
+    if ((status & TorrentStatus.ERROR) !== 0) {
+      return faExclamation
+    } else if ((status & TorrentStatus.STOPPED) !== 0) {
+      return faStop
+    } else if ((status & TorrentStatus.ACTIVE) !== 0) {
+      return faPlay
+    } else {
+      return faCircle
+    }
   }
 }
 
