@@ -89,7 +89,15 @@ const defaultState: TorrentState = {
   torrentEntries: {},
 
   byTracker: {},
-  byStatus: Object.fromEntries(PuddleTorrentStateFlags.map(flag => [flag, []])),
+  byStatus: {
+    [PuddleTorrentStates.ALL]: [],
+    [PuddleTorrentStates.DOWNLOADING]: [],
+    [PuddleTorrentStates.COMPLETE]: [],
+    [PuddleTorrentStates.STOPPED]: [],
+    [PuddleTorrentStates.ACTIVE]: [],
+    [PuddleTorrentStates.INACTIVE]: [],
+    [PuddleTorrentStates.ERROR]: [],
+  },
   columns: defaultColumnsState,
   filters: {
     state: PuddleTorrentStates.ALL,

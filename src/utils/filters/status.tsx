@@ -11,15 +11,13 @@ import {
 } from '@puddle/transmission/responses/torrent';
 
 export enum PuddleTorrentStates {
-  // WARN for some reason you don't get pattern
-  // matching support here. See [[https://github.com/microsoft/TypeScript/issues/39753][#39753]].
-  ALL         = 1 << 0,
-  DOWNLOADING = 1 << 2,
-  COMPLETE    = 1 << 3,
-  STOPPED     = 1 << 4,
-  ACTIVE      = 1 << 5,
-  INACTIVE    = 1 << 6,
-  ERROR       = 1 << 7
+  ALL         = 0b0000001,
+  DOWNLOADING = 0b0000010,
+  COMPLETE    = 0b0000100,
+  STOPPED     = 0b0001000,
+  ACTIVE      = 0b0010000,
+  INACTIVE    = 0b0100000,
+  ERROR       = 0b1000000,
 }
 
 // can't enumerate enums, so store copy of flag values here :sad:.
