@@ -39,6 +39,8 @@ export interface TorrentState {
    */
   byTracker: { [key: string]: TorrentId[] }
 
+  toName: { [key in TorrentId]: string }
+
   /**
    * A collection of torrent states and the torrents that're associated
    * with those states.
@@ -48,6 +50,7 @@ export interface TorrentState {
   columns: ColumnState
 
   filters: {
+    query: string
     state: PuddleTorrentStates
     trackers: string[]
   }
@@ -86,6 +89,7 @@ function sortByColumn(state: TorrentState, torrents: TorrentId[]) {
 const defaultState: TorrentState = {
   torrents: [],
   orderedTorrents: [],
+  toName: {},
   torrentEntries: {},
 
   byTracker: {},
@@ -100,6 +104,7 @@ const defaultState: TorrentState = {
   },
   columns: defaultColumnsState,
   filters: {
+    query: '',
     state: PuddleTorrentStates.ALL,
     trackers: []
   }
@@ -118,6 +123,7 @@ export const removed = createAction<{ ids: TorrentId[] }>('torrents/removed')
 export const selected = createAction<{ ids: TorrentId[], append?: boolean }>('torrents/select')
 
 interface FilterUpdatedAction {
+  query?: string
   status?: PuddleTorrentStates
   filters?: XOR<{ add: string }, { remove: string }>
 
@@ -165,7 +171,7 @@ export const updateTorrents =
         const newTorrents: Torrent[] = [], updatedTorrents: Torrent[] = [];
         torrents.forEach(torrent => {
           if (existingIds.has(torrent.id!)) {
-            updatedTorrents.push(torrentFromResponse(torrent, state.torrents[torrent.id!]))
+            updatedTorrents.push(torrentFromResponse(torrent, state.torrents.torrentEntries[torrent.id!]))
           } else {
             newTorrents.push(torrentFromResponse(torrent))
           }
@@ -191,6 +197,7 @@ const torrentSlice = createSlice({
           state.torrentEntries[torrent.id] = torrent
 
           state.orderedTorrents.push(torrent.id)
+          state.toName[torrent.id] = torrent.name
 
           PuddleTorrentStateFlags.forEach(flag => {
             if ((flag & torrent.puddleState) !== 0) {
@@ -211,6 +218,7 @@ const torrentSlice = createSlice({
           if (index !== -1) {
             const torrent = state.torrents[id]
             state.torrents.splice(index, 1)
+            delete state.toName[torrent.id]
 
             arrayRemove(state.orderedTorrents, id)
 
@@ -230,6 +238,10 @@ const torrentSlice = createSlice({
         action.payload.torrents.forEach((torrent) => {
           const lastState = state.torrentEntries[torrent.id]
           state.torrentEntries[torrent.id] = torrent
+
+          if (lastState.name !== torrent.name) {
+            state.toName[torrent.id] = torrent.name
+          }
 
           const activeColumn = state.columns.activeColumn;
           if (torrentComparators[activeColumn](torrent, lastState) !== 0) {
@@ -284,6 +296,10 @@ const torrentSlice = createSlice({
           } else if (action.payload.filters.remove) {
             arrayRemove(state.filters.trackers, action.payload.filters.remove as unknown as string)
           }
+        }
+
+        if (action.payload.query !== undefined) {
+          state.filters.query = action.payload.query!
         }
       })
       .addCase(columnSelected, (state, action) => {

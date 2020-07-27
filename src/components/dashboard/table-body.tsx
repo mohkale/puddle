@@ -9,6 +9,7 @@ import TorrentResponse, {
   TransmissionTorrentStatus as TorrentStatus
 } from '@puddle/transmission/responses/torrent';
 // import { TorrentId } from '@puddle/transmission';
+import FlexSearch from 'flexsearch';
 
 import {
   scaleBytes, timeFormat, padString
@@ -141,8 +142,10 @@ export default function TableBody() {
   const torrents = useSelector((state: RootState) => state.torrents.orderedTorrents)
   const torrentsByTracker = useSelector((state: RootState) => state.torrents.byTracker)
   const torrentsByStatus = useSelector((state: RootState) => state.torrents.byStatus)
+  const searchQuery = useSelector((state: RootState) => state.torrents.filters.query)
   const activeState = useSelector((state: RootState) => state.torrents.filters.state)
   const activeTrackers = useSelector((state: RootState) => state.torrents.filters.trackers)
+  const torrentNames = useSelector((state: RootState) => state.torrents.toName)
 
   let activeTrackerIds = activeTrackers.reduce((acc, tracker) => {
     (torrentsByTracker[tracker] || []).forEach(v => acc.add(v))
@@ -150,7 +153,7 @@ export default function TableBody() {
   }, new Set())
 
   // TODO optimize
-  const filteredTorrents = torrents.filter(id => {
+  let filteredTorrents = torrents.filter(id => {
     if (!torrentsByStatus[activeState].includes(id)) {
       return false
     }
@@ -162,6 +165,24 @@ export default function TableBody() {
 
     return true
   })
+
+  // TODO optimize
+  if (searchQuery.trim() !== '') {
+    const index = FlexSearch.create({
+      async: false,
+      encode: "icase",
+      tokenize: "reverse",
+      threshold: 1,
+      resolution: 3,
+      depth: 2,
+    })
+    filteredTorrents.forEach(torrent => {
+      index.add(torrent as number, torrentNames[torrent])
+    })
+    // flexsearch doesn't support syncrhonous rendering logic yet, for now
+    // we'll bypass type safety but hopefully, soon, we won't need to.
+    filteredTorrents = index.search(searchQuery) as unknown as TorrentId[]
+  }
 
   const rows = filteredTorrents
     .map(id => {
