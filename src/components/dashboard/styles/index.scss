@@ -53,24 +53,5 @@
     }
 }
 
-.scrollbars {
-    & > div:nth-child(2), & > div:nth-child(3) {
-        transition: opacity $animation-duration;
-        opacity: 0;
-        background-color: var(--scroll-bar-color);
-
-        &:hover {
-            background-color: var(--scroll-bar-hover-color);
-        }
-    }
-
-    &:hover {
-        & > div:nth-child(2),
-        & > div:nth-child(3) {
-            opacity: 1;
-        }
-    }
-}
-
 @import "./header";
 @import "./table";

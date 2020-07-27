@@ -9,7 +9,11 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 /** header of the table of torrents. */
-export default function DashboardTableColumns(props: { torrentsRef: React.MutableRefObject<HTMLDivElement | null> }) {
+interface DashboardTableColumnsProps {
+  parentRef: React.MutableRefObject<HTMLElement | null>;
+}
+
+const DashboardTableColumns = React.forwardRef<HTMLDivElement, DashboardTableColumnsProps>((props, ref) => {
   const [resizing, setResizing] = React.useState<ColumnResizeContext|null>(null)
   const dispatch = useDispatch()
   const columnsState: ColumnState = useSelector(selectColumns)
@@ -25,7 +29,7 @@ export default function DashboardTableColumns(props: { torrentsRef: React.Mutabl
         dispatch(columnSelected({ column: columnId }))
 
       const onResizeStart = (e) => {
-        const container = props.torrentsRef.current
+        const container = props.parentRef.current
         if (container === null) return
         const bounds = container!.getBoundingClientRect()
 
@@ -54,7 +58,7 @@ export default function DashboardTableColumns(props: { torrentsRef: React.Mutabl
 
   return (
     <Fragment>
-      <aside className="columns">{columnElems}</aside>
+      <aside className="columns" ref={ref}>{columnElems}</aside>
       {resizing &&
         <ColumnResizer ctx={resizing!} finish={(col: ColumnType, delta: number) => {
           setResizing(null)
@@ -62,7 +66,9 @@ export default function DashboardTableColumns(props: { torrentsRef: React.Mutabl
         }} />}
     </Fragment>
   );
-}
+})
+
+export default DashboardTableColumns;
 
 /**
  * metadata associated with a column resize event.
@@ -109,4 +115,3 @@ function ColumnResizer(props: ColumnResizerProps) {
     </div>
   )
 }
-

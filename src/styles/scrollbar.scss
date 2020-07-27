@@ -1,0 +1,33 @@
+@import "@puddle/styles/config";
+
+.ScrollbarsCustom {
+    .ScrollbarsCustom-Track {
+        background: transparent !important;
+    }
+
+    .ScrollbarsCustom-Thumb {
+        background: var(--scrollbar-color) !important;
+        transition: all $animation-duration;
+        transition-property: opacity, background;
+        opacity: 0;
+
+        &:hover, &.dragging {
+            background: var(--scrollbar-hover-color) !important;
+            opacity: 1;
+        }
+    }
+
+    &:hover .ScrollbarsCustom-Thumb {
+        opacity: 1;
+    }
+
+    .ScrollbarsCustom-TrackY {
+        width: $scrollbar-height !important;
+        right: $scrollbar-offset !important;
+    }
+    .ScrollbarsCustom-TrackX {
+        height: $scrollbar-height !important;
+        bottom: $scrollbar-offset !important;
+    }
+}
+

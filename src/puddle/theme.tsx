@@ -12,11 +12,16 @@ interface TorrentListRow {
   selectedProgressBarBg: string,
 }
 
+interface ScrollBar {
+  fg: string
+  selectedFg: string
+}
+
 export interface Theme {
   actionColor: string,
 
-  scrollbarColor: string,
-  scrollbarHoverColor: string,
+  scrollBar: ScrollBar
+  sidebarScrollBar: ScrollBar
 
   tooltipBg: string,
   tooltipFg: string,
@@ -63,8 +68,13 @@ export function setTheme(theme: Theme) {
   let root = document.documentElement.style;
   root.setProperty('--action-color', theme.actionColor)
 
-  root.setProperty('--scrollbar-color', theme.scrollbarColor)
-  root.setProperty('--scrollbar-hover-color', theme.scrollbarHoverColor)
+  function setScrollBarClasses(prefix: string, scrollbar: ScrollBar) {
+    root.setProperty(`${prefix}-color`, scrollbar.fg)
+    root.setProperty(`${prefix}-hover-color`, scrollbar.selectedFg)
+  }
+
+  setScrollBarClasses('--scrollbar', theme.scrollBar)
+  setScrollBarClasses('--scrollbar-sidebar', theme.sidebarScrollBar)
 
   root.setProperty('--tooltip-bg', theme.tooltipBg)
   root.setProperty('--tooltip-fg', theme.tooltipFg)
@@ -126,8 +136,15 @@ export function setTheme(theme: Theme) {
 export const defaultTheme: Theme = {
   actionColor: '#258de5',
 
-  scrollbarColor: '#999999',
-  scrollbarHoverColor: '#666666',
+  scrollBar: {
+    fg: '#999999',
+    selectedFg: '#666666',
+  },
+
+  sidebarScrollBar: {
+    fg: 'rgba(82,103,128,0.5)',
+    selectedFg: '#506480',
+  },
 
   tooltipBg: '#0f151c',
   tooltipFg: '#506480',

@@ -1,5 +1,7 @@
 #torrents {
     .columns {
+        display: inline-flex;
+        position: relative;
         border-bottom: solid 1px var(--torrents-border-color);
     }
     .columns > .table-cell {

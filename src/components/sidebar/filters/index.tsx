@@ -1,19 +1,22 @@
 import './styles';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import SearchBar from './search';
 import StatusFilters from './status';
 import TrackerFilters from './trackers';
 
-import { Scrollbars } from 'react-custom-scrollbars';
+import { Scrollbar } from 'react-scrollbars-custom';
 
 export default function Filters() {
   return (
-    <Scrollbars>
+    <Fragment>
       <SearchBar />
-      <StatusFilters />
-      <TrackerFilters />
-    </Scrollbars>
+
+      <Scrollbar>
+        <StatusFilters />
+        <TrackerFilters />
+      </Scrollbar>
+    </Fragment>
   )
 }
 

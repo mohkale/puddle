@@ -1,4 +1,14 @@
+@import "@puddle/styles/config";
 @import "@puddle/styles/no-select";
+
+#sidebar .ScrollbarsCustom {
+    --scrollbar-color: var(--scrollbar-sidebar-color);
+    --scrollbar-hover-color: var(--scrollbar-sidebar-hover-color);
+
+    .ScrollbarsCustom-TrackY {
+        right: 2 * $scrollbar-offset !important;
+    }
+}
 
 #sidebar .filters {
     $filter-spacing: 4px;
@@ -8,6 +18,10 @@
     margin: 36px 18px;
     font-size: 0.85rem;
     white-space: nowrap;
+
+    &:first-child {
+        margin-top: 0px;
+    }
 
     .icon {
         width:  12px;
