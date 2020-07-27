@@ -43,7 +43,7 @@ const statusMatchers: { [key in PuddleTorrentStates]: StateChecker } = {
     return [TorrentStatus.DOWNLOAD_WAIT,
             TorrentStatus.DOWNLOAD].includes(torrent.status)
   },
-  [PuddleTorrentStates.COMPLETE]: (torrent) => torrent.isFinished,
+  [PuddleTorrentStates.COMPLETE]: (torrent) => torrent.percentDone === 1,
   [PuddleTorrentStates.STOPPED]: (torrent) =>
     TorrentStatus.STOPPED === torrent.status,
   [PuddleTorrentStates.ACTIVE]: (torrent) => {

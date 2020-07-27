@@ -27,7 +27,6 @@ export const TORRENT_FIELDS: (keyof TorrentResponse)[] = [
   "addedDate",
   "error",
   "trackers",
-  "isFinished"
 ]
 
 /**
@@ -37,7 +36,7 @@ type TorrentDefaultFields =
   Pick<TorrentResponse, "id" | "name" | "status" | "percentDone" |
        "downloadedEver" | "rateDownload" | "uploadedEver" | "rateUpload" |
        "eta" | "uploadRatio" | "sizeWhenDone" | "addedDate" | "error" |
-       "trackers" | "isFinished">
+       "trackers">
 
 export interface Torrent extends TorrentDefaultFields {
   selected: boolean
