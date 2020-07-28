@@ -8,6 +8,7 @@ interface TooltipButtonProps {
   icon: IconDefinition,
   tooltip?: string,
   onClick?: VoidFunction,
+  className?: string
 }
 
 /**
@@ -28,7 +29,7 @@ function goesAfterPage(el: HTMLElement, parentBounds: DOMRect, offset: number) {
  * A component to render a clickable button to the DOM with an
  * optional tooltip that's shown when the button is hovered.
  */
-export default function TooltipButton({tooltip, icon, ...props}: TooltipButtonProps) {
+export default function TooltipButton({tooltip, icon, className, ...props}: TooltipButtonProps) {
   const [offsets, setOffsets] = React.useState([0, null]);
   const labelStyle = {left: `${offsets[0]}px`}
   if (offsets[1]) {
@@ -60,7 +61,7 @@ export default function TooltipButton({tooltip, icon, ...props}: TooltipButtonPr
   }, [ref.current])
 
   return (
-    <div className="tooltip" role="button" style={{cursor: (props.onClick) ? "pointer" : undefined}} >
+    <div className={["tooltip", className].join(' ')} role="button" style={{cursor: (props.onClick) ? "pointer" : undefined}} >
       <FontAwesomeIcon {...props} icon={icon} className='icon' onClick={props.onClick} />
       {tooltip &&
         <span ref={ref} style={labelStyle} className="label">{tooltip}</span>}
