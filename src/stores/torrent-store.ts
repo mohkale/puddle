@@ -152,8 +152,7 @@ export const syncTorrents =
 
 /**
  * Asynchronously fetch the current torrent list from the transmission
- * daemon and then update the local store. If {@code callback} is provided
- * then it is invoked before this function exits.
+ * daemon and then update the local store.
  */
 export const updateTorrents =
   (client: Transmission, callback?: VoidFunction) => {
@@ -180,8 +179,6 @@ export const updateTorrents =
         if (newTorrents.length > 0)     dispatch(added({ torrents: newTorrents }))
         if (updatedTorrents.length > 0) dispatch(updated({ torrents: updatedTorrents }))
       }
-
-      callback && callback!()
     }
   }
 

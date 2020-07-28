@@ -6,6 +6,7 @@ import { faCog, faRss, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 import TooltipButton from '../tooltip';
 import Filters from './filters';
+import NetworkGraph from './graph'
 
 export default function Sidebar() {
   return (
@@ -17,6 +18,7 @@ export default function Sidebar() {
         <TooltipButton icon={faSignOutAlt} tooltip="Logout" />
       </div>
 
+      <NetworkGraph />
       <Filters />
     </aside>
   );

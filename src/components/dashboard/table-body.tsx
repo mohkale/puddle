@@ -29,25 +29,25 @@ function renderColumn(cType: ColumnType, torrent: Torrent): React.ReactNode {
     case ColumnType.DOWNLOADED: {
       const [num, unit] = scaleBytes(torrent.downloadedEver!)
       return (
-        <span>{num.toFixed(2)}<em className="unit">{unit}B</em> </span>
+        <span>{num.toFixed(2)}<em className="unit">{unit}</em> </span>
       )
     }
     case ColumnType.DOWNLOAD_SPEED: {
       const [num, unit] = scaleBytes(torrent.rateDownload)
       return (
-        <span>{num.toFixed(2)}<em className="unit">{unit}B/s</em> </span>
+        <span>{num.toFixed(2)}<em className="unit">{unit}/s</em> </span>
       )
     }
     case ColumnType.UPLOADED: {
       const [num, unit] = scaleBytes(torrent.uploadedEver)
       return (
-        <span>{num.toFixed(2)}<em className="unit">{unit}B</em> </span>
+        <span>{num.toFixed(2)}<em className="unit">{unit}</em> </span>
       )
     }
     case ColumnType.UPLOAD_SPEED: {
       const [num, unit] = scaleBytes(torrent.rateUpload)
       return (
-        <span>{num.toFixed(2)}<em className="unit">{unit}B/s</em> </span>
+        <span>{num.toFixed(2)}<em className="unit">{unit}/s</em> </span>
       )
     }
     case ColumnType.ETA:

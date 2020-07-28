@@ -1,0 +1,66 @@
+@import "@puddle/styles/no-select";
+
+.network-indicators {
+    --color: var(--side-bar-fg);
+
+    .upload   { --color: var(--graph-upload);   }
+    .download { --color: var(--graph-download); }
+
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1.5em;
+    @include no-select;
+
+    & > * {
+        display: flex;
+        color: var(--color);
+    }
+
+    .direction-icon {
+        height: 100%;
+        width:  12px;
+        margin-right: 4px;
+    }
+
+    .stats {
+        display: grid;
+        column-gap: 4px;
+        grid-template-columns: auto auto;
+
+        text-align: center;
+
+        .rate {
+            grid-column: 1 / -1;
+        }
+    }
+
+    // custom styles for subinstances.
+    .rate {
+        font-size: 1.5em;
+        .unit { font-size: 0.65em; }
+    }
+
+    .total, .limit {
+        font-size: 0.8em;
+        .unit { opacity: 0.8; }
+    }
+
+    .limit {
+        &.unlimited {
+            color: var(--side-bar-bg);
+            background: var(--color);
+            border-radius: 2px;
+            width: 18px;
+
+            .icon {
+                width:  12px;
+                height: 12px;
+            }
+        }
+    }
+
+    .unit, .direction-icon {
+        opacity: 0.5;
+        font-weight: normal;
+    }
+}

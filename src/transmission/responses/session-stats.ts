@@ -6,7 +6,7 @@ export interface TransmissionSessionFineGrainedStatsType {
   secondsActive: number
 }
 
-export default class TransmissionSessionStatsType {
+export default interface TransmissionSessionStatsType {
   "activeTorrentCount": number
   "pausedTorrentCount": number
   "torrentCount": number

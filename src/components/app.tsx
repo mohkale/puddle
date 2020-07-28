@@ -9,11 +9,16 @@ import Transmission, { TorrentId } from '@puddle/transmission';
 
 import store from '@puddle/stores';
 import { updateTorrents, syncTorrents } from '@puddle/stores/torrent-store';
+import { syncStats, syncStatsLimits } from '@puddle/stores/stats-store';
 
 interface AppState {
   overlay?: ReactChild,
   transmission: Transmission,
 }
+
+const TORRENT_SYNC_INTERVAL = 2000;
+const STATS_SYNC_SPEED_INTERVAL = 1000;
+const STATS_SYNC_LIMIT_INTERVAL = 60000;
 
 export default class App extends React.Component<any, AppState> {
   constructor(props) {
@@ -25,7 +30,10 @@ export default class App extends React.Component<any, AppState> {
       transmission: transmission,
     };
 
-    store.dispatch(syncTorrents(transmission, () => this.fetchTorrents()))
+    store.dispatch(syncTorrents(transmission))
+      .then(() => this.fetchTorrents())
+      .then(() => this.updateStats())
+      .then(() => this.updateStatsLimits())
   }
 
   render() {
@@ -44,9 +52,18 @@ export default class App extends React.Component<any, AppState> {
     );
   }
 
-  fetchTorrents = () => {
-    store.dispatch(
-      updateTorrents(this.state.transmission,
-                     () => setTimeout(this.fetchTorrents, 1000)),)
-  }
+  fetchTorrents = () =>
+    store.dispatch(updateTorrents(this.state.transmission))
+      .then(() => setTimeout(this.fetchTorrents, TORRENT_SYNC_INTERVAL))
+
+
+  updateStats = () =>
+    store.dispatch(syncStats(this.state.transmission))
+      .then(() => setTimeout(this.updateStats, STATS_SYNC_SPEED_INTERVAL))
+
+
+  updateStatsLimits = () =>
+    store.dispatch(syncStatsLimits(this.state.transmission))
+      .then(() => setTimeout(this.updateStatsLimits, STATS_SYNC_LIMIT_INTERVAL))
+
 }

@@ -31,6 +31,9 @@ export interface Theme {
   sideBarHoverFg: string
   sideBarTitleColor: string,
 
+  graphDownload: string
+  graphUpload: string
+
   searchBg: string,
   searchFg: string,
   searchBorderColor: string,
@@ -83,6 +86,9 @@ export function setTheme(theme: Theme) {
   root.setProperty('--side-bar-fg', theme.sideBarFg)
   root.setProperty('--side-bar-hover-fg', theme.sideBarHoverFg)
   root.setProperty('--side-bar-title-color', theme.sideBarTitleColor)
+
+  root.setProperty('--graph-download', theme.graphDownload)
+  root.setProperty('--graph-upload', theme.graphUpload)
 
   root.setProperty('--search-bg', theme.searchBg)
   root.setProperty('--search-fg', theme.searchFg)
@@ -153,6 +159,9 @@ export const defaultTheme: Theme = {
   sideBarFg: '#506480',
   sideBarHoverFg: '#778da8',
   sideBarTitleColor: 'rgba(82,103,128,0.5)',
+
+  graphDownload: '#39ce83',
+  graphUpload: '#258de5',
 
   searchBg: 'rgba(9,24,36,0.3)',
   searchFg: 'rgba(82,103,128,0.5)',
