@@ -30,6 +30,7 @@ export interface Theme {
   sideBarFg: string,
   sideBarHoverFg: string
   sideBarTitleColor: string,
+  sideBarBadgeFg: string
 
   graphDownload: string
   graphUpload: string
@@ -37,9 +38,9 @@ export interface Theme {
   searchBg: string,
   searchFg: string,
   searchBorderColor: string,
-  searchActiveBg: string,
-  searchActiveFg: string,
-  searchActiveBorderColor: string,
+  searchSelectedBg: string,
+  searchSelectedFg: string,
+  searchSelectedBorderColor: string,
 
   headerBg: string,
   headerBorderColor: string,
@@ -51,8 +52,8 @@ export interface Theme {
   torrentsBorderColor: string,
   torrentsColumnColor: string,
   torrentsColumnHoverColor: string,
-  torrentsActiveColumnColor: string,
-  torrentsActiveColumnHoverColor: string,
+  torrentsSelectedColumnColor: string,
+  torrentsSelectedColumnHoverColor: string,
 
   torrentsIdleRow: TorrentListRow,
   torrentsDownloadingRow: TorrentListRow,
@@ -86,6 +87,7 @@ export function setTheme(theme: Theme) {
   root.setProperty('--side-bar-fg', theme.sideBarFg)
   root.setProperty('--side-bar-hover-fg', theme.sideBarHoverFg)
   root.setProperty('--side-bar-title-color', theme.sideBarTitleColor)
+  root.setProperty('--side-bar-badge-fg', theme.sideBarBadgeFg)
 
   root.setProperty('--graph-download', theme.graphDownload)
   root.setProperty('--graph-upload', theme.graphUpload)
@@ -93,9 +95,9 @@ export function setTheme(theme: Theme) {
   root.setProperty('--search-bg', theme.searchBg)
   root.setProperty('--search-fg', theme.searchFg)
   root.setProperty('--search-border-color', theme.searchBorderColor)
-  root.setProperty('--search-active-bg', theme.searchActiveBg)
-  root.setProperty('--search-active-fg', theme.searchActiveFg)
-  root.setProperty('--search-active-border-color', theme.searchActiveBorderColor)
+  root.setProperty('--search-selected-bg', theme.searchSelectedBg)
+  root.setProperty('--search-selected-fg', theme.searchSelectedFg)
+  root.setProperty('--search-selected-border-color', theme.searchSelectedBorderColor)
 
   root.setProperty('--header-bg', theme.headerBg)
   root.setProperty('--header-border-color', theme.headerBorderColor)
@@ -106,8 +108,8 @@ export function setTheme(theme: Theme) {
 
   root.setProperty('--torrents-column-color', theme.torrentsColumnColor)
   root.setProperty('--torrents-column-hover-color', theme.torrentsColumnHoverColor)
-  root.setProperty('--torrents-active-column-color', theme.torrentsActiveColumnColor)
-  root.setProperty('--torrents-active-column-hover-color', theme.torrentsActiveColumnHoverColor)
+  root.setProperty('--torrents-selected-column-color', theme.torrentsSelectedColumnColor)
+  root.setProperty('--torrents-selected-column-hover-color', theme.torrentsSelectedColumnHoverColor)
 
   root.setProperty('--torrents-border-color', theme.torrentsBorderColor)
 
@@ -125,10 +127,10 @@ export function setTheme(theme: Theme) {
     root.setProperty(`${selectedPrefix}-progress-bg`, row.selectedProgressBarBg)
   }
 
-  setTorrentsRowClasses('--torrents-row', '--torrents-active-row', theme.torrentsIdleRow)
-  setTorrentsRowClasses('--torrents-downloading-row', '--torrents-active-downloading-row', theme.torrentsDownloadingRow)
-  setTorrentsRowClasses('--torrents-seeding-row', '--torrents-active-seeding-row', theme.torrentsSeedingRow)
-  setTorrentsRowClasses('--torrents-error-row', '--torrents-active-error-row', theme.torrentsErrorRow)
+  setTorrentsRowClasses('--torrents-row', '--torrents-selected-row', theme.torrentsIdleRow)
+  setTorrentsRowClasses('--torrents-downloading-row', '--torrents-selected-downloading-row', theme.torrentsDownloadingRow)
+  setTorrentsRowClasses('--torrents-seeding-row', '--torrents-selected-seeding-row', theme.torrentsSeedingRow)
+  setTorrentsRowClasses('--torrents-error-row', '--torrents-selected-error-row', theme.torrentsErrorRow)
 
   root.setProperty('--overlay-container-background', theme.overlayContainerBackground);
   root.setProperty('--overlay-border-color', theme.overlayBorderColor)
@@ -159,6 +161,7 @@ export const defaultTheme: Theme = {
   sideBarFg: '#506480',
   sideBarHoverFg: '#778da8',
   sideBarTitleColor: 'rgba(82,103,128,0.5)',
+  sideBarBadgeFg: '#1f2731',
 
   graphDownload: '#39ce83',
   graphUpload: '#258de5',
@@ -166,9 +169,9 @@ export const defaultTheme: Theme = {
   searchBg: 'rgba(9,24,36,0.3)',
   searchFg: 'rgba(82,103,128,0.5)',
   searchBorderColor: 'rgba(9,24,36,0.4)',
-  searchActiveBg: 'rgba(37,141,229,0.25)',
-  searchActiveFg: '#258de5',
-  searchActiveBorderColor: 'rgba(37,141,229,0.3)',
+  searchSelectedBg: 'rgba(37,141,229,0.25)',
+  searchSelectedFg: '#258de5',
+  searchSelectedBorderColor: 'rgba(37,141,229,0.3)',
 
   headerBg: '#e9eef2',
   headerBorderColor: '#ccd2d7',
@@ -180,8 +183,8 @@ export const defaultTheme: Theme = {
   torrentsBorderColor: 'rgba(29,41,56,0.08)',
   torrentsColumnColor: '#abbac7',
   torrentsColumnHoverColor: '#8ca1b3',
-  torrentsActiveColumnColor: '#576e82',
-  torrentsActiveColumnHoverColor: '#425464',
+  torrentsSelectedColumnColor: '#576e82',
+  torrentsSelectedColumnHoverColor: '#425464',
   torrentsIdleRow: {
     fg: '#c3ccd3',
     bg: 'transparent',

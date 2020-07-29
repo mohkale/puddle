@@ -1,4 +1,4 @@
-export default interface TransmissionNewTorrentType {
+export interface TransmissionNewTorrent {
   hashString: string,
   id: number,
   name: string

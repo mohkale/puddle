@@ -90,12 +90,12 @@ $resizer-width: 9px;
         border-top:    solid 1px var(--torrents-border-color);
         border-bottom: solid 1px var(--torrents-border-color);
 
-        &.active {
-            --torrents-row-fg: var(--torrents-active-row-fg);
-            --torrents-row-bg: var(--torrents-active-row-bg);
-            --torrents-row-border-color: var(--torrents-active-row-border-color);
-            --torrents-row-progress-bg: var(--torrents-active-row-progress-bg);
-            --torrents-row-progress-fg: var(--torrents-active-row-progress-fg);
+        &.selected {
+            --torrents-row-fg: var(--torrents-selected-row-fg);
+            --torrents-row-bg: var(--torrents-selected-row-bg);
+            --torrents-row-border-color: var(--torrents-selected-row-border-color);
+            --torrents-row-progress-bg: var(--torrents-selected-row-progress-bg);
+            --torrents-row-progress-fg: var(--torrents-selected-row-progress-fg);
         }
 
         .progress-bar {
@@ -116,8 +116,8 @@ $resizer-width: 9px;
                 --torrents-row-progress-fg: var(#{$prefix}-progress-fg);
                 --torrents-row-progress-bg: var(#{$prefix}-progress-bg);
 
-                &.active {
-                    // not using active here because .active isn't specific enough above.
+                &.selected {
+                    // not using selected here because .selected isn't specific enough above.
                     --torrents-row-fg: var(#{$selected-prefix}-fg);
                     --torrents-row-bg: var(#{$selected-prefix}-bg);
                     --torrents-row-border-color: var(#{$selected-prefix}-border-color);
@@ -132,7 +132,7 @@ $resizer-width: 9px;
         @include theme-customize(
             ":not(.is-stopped)",
             "--torrents-downloading-row",
-            "--torrents-active-downloading-row") {
+            "--torrents-selected-downloading-row") {
             .Name {
                 font-weight: 500;
             }
@@ -141,12 +141,12 @@ $resizer-width: 9px;
         @include theme-customize(
             ".is-seeding",
             "--torrents-seeding-row",
-            "--torrents-active-seeding-row");
+            "--torrents-selected-seeding-row");
 
         @include theme-customize(
             ".has-error",
             "--torrents-error-row",
-            "--torrents-active-error-row");
+            "--torrents-selected-error-row");
     }
 }
 

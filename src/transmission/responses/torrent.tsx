@@ -9,19 +9,19 @@ export enum TransmissionTorrentStatus {
   SEED          = 6
 }
 
-export interface TransmissionTorrentFilesType {
+export interface TransmissionTorrentFiles {
   bytesCompleted: number
   length: number
   name: string
 }
 
-export interface TransmissionTorrentFileStatsType {
+export interface TransmissionTorrentFileStats {
   bytesCompleted: number
   wanted: boolean
   priority: number
 }
 
-export interface TransmissionTorrentPeersType {
+export interface TransmissionTorrentPeers {
   address: string
   clientName: string
   clientIsChoked: boolean
@@ -40,7 +40,7 @@ export interface TransmissionTorrentPeersType {
   rateToPerr: number
 }
 
-export interface TransmissionTorrentPeersFromType {
+export interface TransmissionTorrentPeersFrom {
   fromCache: number
   fromDht: number
   fromIncoming: number
@@ -50,16 +50,16 @@ export interface TransmissionTorrentPeersFromType {
   fromTracker: number
 }
 
-export type TransmissionPiecesType = string
+export type TransmissionTorrentPieces = string
 
-export interface TransmissionTrackersType {
+export interface TransmissionTorrentTrackers {
   announce: string
   id: number
   scrape: string
   tier: number
 }
 
-export interface TransmissionTrackerStatsType {
+export interface TransmissionTorrentTrackerStats {
   announce: string
   announceState: number
   downloadCount: number
@@ -98,7 +98,7 @@ type TransmissionPriorityType = 1 | 0 | -1;
  * fields of the torrent-get method, attempting to access
  * any of these will just return 0 for them.
  */
-export interface TransmissionTorrentType_WriteOnly {
+export interface TransmissionTorrent_WriteOnly {
   "files-wanted": number[]
   "files-unwanted": number[]
   "location": string
@@ -113,10 +113,10 @@ export interface TransmissionTorrentType_WriteOnly {
 /**
  * Fields of {@code TransmissionTorrentType} that can be modified
  * using the torrent-set method. Write only fields can also be found
- * in {@code TransmissionTorrentType_WriteOnly}. Any other fields are
+ * in {@code TransmissionTorrent_WriteOnly}. Any other fields are
  * read only.
  */
-export interface TransmissionTorrentType_Mutable {
+export interface TransmissionTorrent_Mutable {
   "bandwidthPriority": number
   "downloadLimit": number
   "downloadLimited": boolean
@@ -131,7 +131,8 @@ export interface TransmissionTorrentType_Mutable {
   "uploadLimited": boolean
 }
 
-export default interface TransmissionTorrentType extends TransmissionTorrentType_Mutable {
+export interface TransmissionTorrent
+       extends TransmissionTorrent_Mutable, TransmissionTorrent_WriteOnly {
   "activityDate": number
   "addedDate": number
   "comment": string
@@ -146,8 +147,8 @@ export default interface TransmissionTorrentType extends TransmissionTorrentType
   "errorString": string
   "eta": number
   "etaIdle": number
-  "files": TransmissionTorrentFilesType[]
-  "fileStats": TransmissionTorrentFileStatsType[]
+  "files": TransmissionTorrentFiles[]
+  "fileStats": TransmissionTorrentFileStats[]
   "hashString": string
   "haveUnchecked": number
   "haveValid": number
@@ -161,13 +162,13 @@ export default interface TransmissionTorrentType extends TransmissionTorrentType
   "maxConnectedPeers": number
   "metadataPercentComplete": number
   "name": string
-  "peers": TransmissionTorrentPeersType[]
-  "peersFrom": TransmissionTorrentPeersFromType
+  "peers": TransmissionTorrentPeers[]
+  "peersFrom": TransmissionTorrentPeersFrom
   "peersConnected": number
   "peersGettingFromUs": number
   "peersSendingToUs": number
   "percentDone": number
-  "pieces": TransmissionPiecesType
+  "pieces": TransmissionTorrentPieces
   "pieceCount": number
   "pieceSize": number
   "priorities": TransmissionPriorityType[]
@@ -181,11 +182,11 @@ export default interface TransmissionTorrentType extends TransmissionTorrentType
   "status": TransmissionTorrentStatus
   "totalSize": number
   "torrentFile": string
-  "trackers": TransmissionTrackersType[]
-  "trackerStats": TransmissionTrackerStatsType[]
+  "trackers": TransmissionTorrentTrackers[]
+  "trackerStats": TransmissionTorrentTrackerStats[]
   "uploadedEver": number
   "uploadRatio": number
-  "wanted": boolean[] // actually a number, 0 or 1.
+  "wanted": (0 | 1)[] // actually a number, 0 or 1.
   "webseedsSendingToUs": number
   "webseeds": string[]
 }

@@ -1,4 +1,4 @@
-export interface TransmissionSessionUnitsType {
+export interface TransmissionSessionUnits {
   "speed-units": string[]
   "speed-bytes": number[]
   "size-units": string[]
@@ -11,7 +11,7 @@ export interface TransmissionSessionUnitsType {
  * subset of fields in {@code TransmissionSession} that can be changed
  * at runtime, used for later type assertions.
  */
-export interface TransmissionSessionType_Mutable {
+export interface TransmissionSession_Mutable {
   "alt-speed-down": number
   "alt-speed-enabled": boolean
   "alt-speed-time-begin": number
@@ -56,13 +56,13 @@ export interface TransmissionSessionType_Mutable {
   "utp-enabled": boolean
 }
 
-export default interface TransmissionSessionType extends TransmissionSessionType_Mutable {
+export interface TransmissionSession extends TransmissionSession_Mutable {
   "blocklist-size": number
   "config-dir": string
   "rpc-version": number
   "rpc-version-minimum": number
   "version": string
 
-  // not called mutable in the spec... but it has to be, right :/
-  "units": TransmissionSessionUnitsType
+  // not called immutable in the spec... but it has to be, right :/
+  "units": TransmissionSessionUnits
 }

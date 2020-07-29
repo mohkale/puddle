@@ -8,7 +8,7 @@ import { faTurtle } from '@puddle/utils/fontawesome';
 
 import AppContext from '@puddle/components/app-context';
 import { RootState } from '@puddle/stores';
-import { altSpeedToggled } from '@puddle/stores/stats-store';
+import { altSpeedToggled, selectAltSpeedEnabled } from '@puddle/stores';
 
 import TooltipButton from '../tooltip';
 import Filters from './filters';
@@ -17,12 +17,12 @@ import NetworkGraph from './graph'
 function ToggleAltSpeedButton() {
   const dispatch = useDispatch()
   const { transmission } = useContext(AppContext)
-  const isActive = useSelector((state: RootState) => state.stats.altEnabled);
+  const isActive = useSelector(selectAltSpeedEnabled);
 
   const onClick = () => {
     if (transmission)
       // TODO make transmission non-nullable
-      // TODO show notification when this failes
+      // TODO show notification when this fails
       transmission!.setSession({'alt-speed-enabled': !isActive})
         .then(() => dispatch(altSpeedToggled({ value: !isActive })))
   }

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { RootState } from '@puddle/stores';
-import { filterUpdated } from '@puddle/stores/torrent-store';
+import { filterQueryUpdated, selectFilterQuery } from '@puddle/stores';
 
 import { DelayInput } from 'react-delay-input';
 
@@ -19,19 +19,19 @@ const QUERY_SET_TIMEOUT = 200
 
 export default function SearchBar() {
   const dispatch = useDispatch()
-  const query = useSelector((state: RootState) => state.torrents.filters.query)
+  const query = useSelector(selectFilterQuery)
   const isActive = query !== ''
 
   const onClear = (e: React.SyntheticEvent) => {
-    dispatch(filterUpdated({ query: '' }))
+    dispatch(filterQueryUpdated(''))
   }
 
   const onChange = (e: any) => {
-    dispatch(filterUpdated({ query: (e.target.value || '') as string }))
+    dispatch(filterQueryUpdated((e.target.value || '') as string))
   }
 
   return (
-    <div id="searchbar" className={isActive ? 'active' : ''}>
+    <div id="searchbar" className={isActive ? 'selected' : ''}>
       <FontAwesomeIcon icon={faSearch} className="icon search" />
       <DelayInput name="query" type="text" placeholder="Search Torrents"
                   autoComplete="false" onChange={onChange}
@@ -39,5 +39,5 @@ export default function SearchBar() {
       {isActive &&
         <FontAwesomeIcon icon={faTimes} className="icon cancel" onClick={onClear} />}
     </div>
-  )
+  );
 }

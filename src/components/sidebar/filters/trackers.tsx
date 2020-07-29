@@ -3,36 +3,32 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { extractHostname } from '@puddle/utils';
 import { RootState } from '@puddle/stores';
-import { filterUpdated } from '@puddle/stores/torrent-store';
+import { filterTrackersUpdated, selectTorrentTrackersWithMeta } from '@puddle/stores';
 
 import FilterList, { FilterListBadge } from './filter-list';
 
 export default function TrackerFilters() {
   const dispatch = useDispatch()
-  const trackers = useSelector((state: RootState) => state.torrents.byTracker)
-  const activeTrackers = new Set(useSelector((state: RootState) => state.torrents.filters.trackers))
+  const trackers = useSelector(selectTorrentTrackersWithMeta)
 
-  const trackerEntries = Object.entries(trackers)
-    .sort((a, b) => a[0].localeCompare(b[0]))
-    .map(([tracker, torrents]) => {
-      const isActive = activeTrackers.has(tracker)
-      const classes = ["filter", isActive ? 'active' : '']
+  const entries = trackers
+    .map(({ tracker, hostname, count, isActive }) => {
+      const classes = isActive ? 'selected' : ''
       const onClick = () => {
         if (isActive) {
-          dispatch(filterUpdated({ filters: { remove: tracker } }))
+          dispatch(filterTrackersUpdated({ remove: tracker }))
         } else {
-          dispatch(filterUpdated({ filters: { add: tracker } }))
+          dispatch(filterTrackersUpdated({ add: tracker }))
         }
       }
 
       return (
-        <li key={tracker} className={classes.join(' ')} onClick={onClick}>
+        <li key={tracker} className={classes} onClick={onClick}>
           {extractHostname(tracker)}
-          <FilterListBadge num={torrents.length}/>
+          <FilterListBadge num={count}/>
         </li>
       )
     })
 
-  return <FilterList title="Filter by Trackers">{trackerEntries}</FilterList>
+  return <FilterList title="Filter by Trackers">{entries}</FilterList>
 }
-

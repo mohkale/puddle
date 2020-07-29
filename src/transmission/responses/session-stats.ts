@@ -1,4 +1,4 @@
-export interface TransmissionSessionFineGrainedStatsType {
+export interface TransmissionSessionFineGrainedStats {
   uploadedBytes: number
   downloadedBytes: number
   filesAdded: number
@@ -6,12 +6,12 @@ export interface TransmissionSessionFineGrainedStatsType {
   secondsActive: number
 }
 
-export default interface TransmissionSessionStatsType {
+export interface TransmissionSessionStats {
   "activeTorrentCount": number
   "pausedTorrentCount": number
   "torrentCount": number
   "downloadSpeed": number
   "uploadSpeed": number
-  "cumulative-stats": TransmissionSessionFineGrainedStatsType
-  "current-stats": TransmissionSessionFineGrainedStatsType
+  "cumulative-stats": TransmissionSessionFineGrainedStats
+  "current-stats": TransmissionSessionFineGrainedStats
 }

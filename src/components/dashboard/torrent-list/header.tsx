@@ -1,11 +1,13 @@
 import React, { Fragment, useState } from 'react';
-import { RootState, selectColumns } from '@puddle/stores';
+import { RootState } from '@puddle/stores';
 import {
-  ColumnType, ColumnState,
-  resized as columnResized,
-  selected as columnSelected,
-  MINIMUM_WIDTH as MINIMUM_COLUMN_WIDTH
-} from '@puddle/stores/columns-store';
+  selectColumns,
+  selectColumnIsDescending,
+  TorrentFields,
+  columnResized,
+  activeFieldChanged,
+  COLUMN_MINIMUM_WIDTH
+} from '@puddle/stores';
 import { useDispatch, useSelector } from 'react-redux';
 
 /** header of the table of torrents. */
@@ -14,33 +16,32 @@ interface DashboardTableColumnsProps {
 }
 
 const DashboardTableColumns = React.forwardRef<HTMLDivElement, DashboardTableColumnsProps>((props, ref) => {
-  const [resizing, setResizing] = React.useState<ColumnResizeContext|null>(null)
   const dispatch = useDispatch()
-  const columnsState: ColumnState = useSelector(selectColumns)
+  const columns = useSelector(selectColumns)
+  const isDescending = useSelector(selectColumnIsDescending)
+  const [resizing, setResizing] = React.useState<ColumnResizeContext|null>(null)
 
-  const columnElems = columnsState.columnOrder
-    .map(columnId => {
-      const column = columnsState.columns[columnId]
-      const isActive = columnsState.activeColumn == columnId
-      const className = ['table-cell', isActive ? 'active' : '',
-                         columnsState.isDescending ? 'descending' : ''].join(' ')
+  const columnElems = columns
+    .map((column, i) => {
+      const className =
+        ['table-cell', column.isActive ? 'selected' : '',
+         isDescending ? 'descending' : ''].join(' ')
 
       const onHeaderClick = () =>
-        dispatch(columnSelected({ column: columnId }))
+        dispatch(activeFieldChanged({ field: column.field }))
 
       const onResizeStart = (e) => {
         const container = props.parentRef.current
         if (container === null) return
         const bounds = container!.getBoundingClientRect()
 
-        const selectedIndex = columnsState.columnOrder.indexOf(columnId)
-        const minPos = columnsState.columnOrder
-          .map(columnId => columnsState.columns[columnId])
-          .slice(0, selectedIndex)
-          .reduce((acc, col) => acc + col.width, MINIMUM_COLUMN_WIDTH)
+        const minPos = columns
+          .slice(0, i)
+          .map(c => c.width)
+          .reduce((acc, width) => acc + width, COLUMN_MINIMUM_WIDTH)
 
         setResizing({
-          column: columnId,
+          field: column.field,
           delta: bounds.left,
           startPos: e.clientX - bounds.left,
           minPos: minPos
@@ -48,7 +49,7 @@ const DashboardTableColumns = React.forwardRef<HTMLDivElement, DashboardTableCol
       }
 
       return (
-        <div title={column.title} key={columnId} className={className}
+        <div title={column.title} key={column.field} className={className}
              style={{width: column.width}} onClick={onHeaderClick}>
           <span className="label">{column.title}</span>
           <span className="resizer" onMouseDown={onResizeStart}></span>
@@ -60,9 +61,9 @@ const DashboardTableColumns = React.forwardRef<HTMLDivElement, DashboardTableCol
     <Fragment>
       <aside className="columns" ref={ref}>{columnElems}</aside>
       {resizing &&
-        <ColumnResizer ctx={resizing!} finish={(col: ColumnType, delta: number) => {
+        <ColumnResizer ctx={resizing!} finish={(field: TorrentFields, delta: number) => {
           setResizing(null)
-          dispatch(columnResized({ column: col, delta: delta }))
+          dispatch(columnResized({ field, delta }))
         }} />}
     </Fragment>
   );
@@ -75,7 +76,7 @@ export default DashboardTableColumns;
  */
 export interface ColumnResizeContext {
   /** the column that is being resized. */
-  column: ColumnType
+  field: TorrentFields
 
   /** where the mouse was first pressed */
   startPos: number
@@ -89,7 +90,7 @@ export interface ColumnResizeContext {
 
 interface ColumnResizerProps {
   ctx: ColumnResizeContext
-  finish: (w: ColumnType, delta: number) => void
+  finish: (w: TorrentFields, delta: number) => void
 }
 
 /**
@@ -106,7 +107,7 @@ function ColumnResizer(props: ColumnResizerProps) {
   return (
     <div className="resize-overlay"
          onMouseUp={(e) => {
-           props.finish(props.ctx.column, leftOffset - props.ctx.startPos)
+           props.finish(props.ctx.field, leftOffset - props.ctx.startPos)
          }}
          onMouseMove={(e) => {
            setLeftOffset(Math.max(props.ctx.minPos, e.clientX - props.ctx.delta))

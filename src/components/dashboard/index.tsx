@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './styles';
-import Header from './header';
-import DashboardTable from './table';
+import TorrentList from './torrent-list';
+import ActionButtons from './action-buttons';
+
+import { TorrentId } from '@puddle/transmission';
 
 export default function Dashboard() {
+  const [selected, setSelected] = useState<TorrentId[]>([])
+
   return (
     <main id="dashboard">
-      <Header />
-      <DashboardTable />
+      <ActionButtons />
+      <TorrentList />
     </main>
   )
 }

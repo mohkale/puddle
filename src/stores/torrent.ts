@@ -1,11 +1,7 @@
-import { TorrentId } from '@puddle/transmission';
-import TorrentResponse, {
-  TransmissionTorrentStatus as TorrentStatus
-} from '@puddle/transmission/responses/torrent';
-
+import { torrentClass, TorrentClasses } from './classes';
 import {
-  torrentState, PuddleTorrentStates, PuddleTorrentStateFlags
-} from '@puddle/utils/filters/status';
+  TorrentId, TransmissionTorrent as TorrentResponse
+} from '@puddle/transmission';
 
 // WARN typescript doesn't have a way to declare the types of
 // an interface at compile time and then reference those same
@@ -33,14 +29,22 @@ export const TORRENT_FIELDS: (keyof TorrentResponse)[] = [
  * The fields we inherit from the default API response.
  */
 type TorrentDefaultFields =
-  Pick<TorrentResponse, "id" | "name" | "status" | "percentDone" |
+  Pick<TorrentResponse, "name" | "status" | "percentDone" |
        "downloadedEver" | "rateDownload" | "uploadedEver" | "rateUpload" |
        "eta" | "uploadRatio" | "sizeWhenDone" | "addedDate" | "error" |
        "trackers">
 
+/**
+ * The model for a single torrent.
+ *
+ * This extends the fields from a torrent response (see
+ * {@code TorrentDefaultFields}) with some extra useful
+ * parameters.
+ */
 export interface Torrent extends TorrentDefaultFields {
+  id: number
   selected: boolean
-  puddleState: number
+  classes: number
 }
 
 /**
@@ -49,7 +53,7 @@ export interface Torrent extends TorrentDefaultFields {
  */
 const TORRENT_BASE: Partial<Torrent> = {
   selected: false,
-  puddleState: PuddleTorrentStates.ALL,
+  classes: TorrentClasses.ALL,
 }
 
 /**
@@ -59,7 +63,7 @@ const TORRENT_BASE: Partial<Torrent> = {
 export function fromResponse(resp: Partial<TorrentResponse>, prev?: Torrent) {
   const base = prev ? prev! : TORRENT_BASE
   const torrent = Object.assign({}, base, resp) as Torrent
-  torrent.puddleState = torrentState(torrent)
+  torrent.classes = torrentClass(torrent)
 
   return torrent
 }

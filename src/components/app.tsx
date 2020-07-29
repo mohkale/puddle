@@ -8,8 +8,9 @@ import { defaultTheme, setTheme } from '../puddle/theme';
 import Transmission, { TorrentId } from '@puddle/transmission';
 
 import store from '@puddle/stores';
-import { updateTorrents, syncTorrents } from '@puddle/stores/torrent-store';
-import { syncStats, syncStatsLimits } from '@puddle/stores/stats-store';
+import {
+  updateTorrents, syncTorrents, syncStats, syncStatsLimits
+} from '@puddle/stores';
 
 interface AppState {
   overlay?: ReactChild,
@@ -20,7 +21,7 @@ const TORRENT_SYNC_INTERVAL = 2000;
 const STATS_SYNC_SPEED_INTERVAL = 1000;
 const STATS_SYNC_LIMIT_INTERVAL = 60000;
 
-export default class App extends React.Component<any, AppState> {
+export default class App extends React.Component<{}, AppState> {
   constructor(props) {
     super(props)
     setTheme(defaultTheme);

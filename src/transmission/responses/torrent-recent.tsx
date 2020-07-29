@@ -1,11 +1,11 @@
-import TransmissionTorrentType from './torrent';
+import { TransmissionTorrent } from './torrent';
 
 // DAMN, that's a real mouthful.
-export default interface TransmissionRecentlyActiveTorrentType {
+export interface TransmissionRecentlyActiveTorrents {
   /**
    * list of torrents for which something has changed.
    */
-  torrents: Partial<TransmissionTorrentType>[]
+  torrents: Partial<TransmissionTorrent>[]
 
   /**
    * ids of torrents which have been removed from transmission.

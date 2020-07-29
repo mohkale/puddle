@@ -52,18 +52,18 @@ $cross-icon-indent: 8px;
     }
 }
 
-#searchbar.active {
-    color: var(--search-active-fg);
-    background-color: var(--search-active-bg);
-    border-color: var(--search-active-border-color);
+#searchbar.selected {
+    color: var(--search-selected-fg);
+    background-color: var(--search-selected-bg);
+    border-color: var(--search-selected-border-color);
 
     .icon {
-        fill: var(--search-active-fg);
+        fill: var(--search-selected-fg);
     }
 
     input {
         padding-right: $cross-icon-size + $search-spacing + 2 * $cross-icon-indent;
-        color: var(--search-active-fg);
-        caret-color: var(--search-active-fg);
+        color: var(--search-selected-fg);
+        caret-color: var(--search-selected-fg);
     }
 }

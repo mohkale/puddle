@@ -23,12 +23,12 @@
             transition: opacity $animation-duration;
         }
 
-        &.active {
+        &.selected {
             font-weight: 700;
             position: relative;
-            color: var(--torrents-active-column-color);
+            color: var(--torrents-selected-column-color);
             &:hover {
-                color: var(--torrents-active-column-hover-color);
+                color: var(--torrents-selected-column-hover-color);
             }
 
             &::after {

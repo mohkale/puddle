@@ -1,15 +1,15 @@
-import SessionResponse from './responses/session';
-import { TransmissionSessionType_Mutable as SessionMutableFields } from './responses/session';
+export * from './responses';
 
-import TorrentResponse from './responses/torrent';
 import {
-  TransmissionTorrentType_Mutable as TorrentMutableFields,
-  TransmissionTorrentType_WriteOnly as TorrentReadOnlyFields
-} from './responses/torrent';
-import TransmissionRecentlyActiveResponse from './responses/torrent-recent';
-
-import SessionResponseStats from './responses/session-stats';
-import NewTorrentResponse from './responses/new-torrent';
+  TransmissionSession                as SessionResponse,
+  TransmissionSession_Mutable        as SessionMutableFields,
+  TransmissionTorrent                as TorrentResponse,
+  TransmissionTorrent_Mutable        as TorrentMutableFields,
+  TransmissionTorrent_WriteOnly      as TorrentReadOnlyFields,
+  TransmissionRecentlyActiveTorrents as TransmissionRecentlyActiveResponse,
+  TransmissionSessionStats           as SessionResponseStats,
+  TransmissionNewTorrent             as NewTorrentResponse
+} from './responses';
 
 /**
  * a single torrent id, according to the transmission spec this

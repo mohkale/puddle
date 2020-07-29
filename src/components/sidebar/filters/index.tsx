@@ -2,7 +2,7 @@ import './styles';
 import React, { Fragment } from 'react';
 
 import SearchBar from './search';
-import StatusFilters from './status';
+import ClassFilters from './class';
 import TrackerFilters from './trackers';
 
 import { Scrollbar } from 'react-scrollbars-custom';
@@ -13,10 +13,9 @@ export default function Filters() {
       <SearchBar />
 
       <Scrollbar>
-        <StatusFilters />
+        <ClassFilters />
         <TrackerFilters />
       </Scrollbar>
     </Fragment>
   )
 }
-

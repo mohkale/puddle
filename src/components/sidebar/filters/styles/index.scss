@@ -10,7 +10,7 @@
     }
 }
 
-#sidebar .filters {
+#sidebar .filter-list {
     $filter-spacing: 4px;
     $filter-indent:  6px;
     list-style-type: none;
@@ -29,7 +29,7 @@
         margin-right: 4px;
     }
 
-    .filter.active .badge {
+    :not(.title).selected .badge {
         font-weight: normal;
         background: var(--action-color);
     }
@@ -37,9 +37,7 @@
     .badge {
         color: black;
         background: var(--side-bar-fg);
-
-        // TODO remove hardcoded fg
-        color: #1f2731;
+        color: var(--side-bar-badge-fg);
 
         border-radius: 100px;
         padding: 2px 5px;
@@ -57,7 +55,7 @@
         padding: 0px $filter-indent;
         transition: color 0.25s, fill 0.25s;
 
-        &:not(.filter) {
+        &.title {
             font-size: 0.8em;
             margin-bottom: 2px;
             font-weight: bold;
@@ -66,16 +64,16 @@
             cursor: default;
         }
 
-        &.active {
+        &.selected {
             color: var(--action-color);
             font-weight: bold;
         }
 
-        &.filter {
+        &:not(.title) {
             padding: $filter-spacing $filter-indent;
             cursor: pointer;
             @include no-select();
-            &:not(.active):hover {
+            &:not(.selected):hover {
                 color: var(--side-bar-hover-fg);
                 fill:  var(--side-bar-hover-fg);
             }
