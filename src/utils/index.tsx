@@ -31,7 +31,7 @@ export function padString(str: string, length: number, char: string='0') {
 
 // source [[https://stackoverflow.com/questions/8498592/extract-hostname-name-from-string/54947757][here]]. TODO memoize.
 export function extractHostname(url: string): string {
-  var hostname: string = '';
+  let hostname: string = '';
   //find & remove protocol (http, ftp, etc.) and get hostname
 
   if (url.indexOf("//") > -1) {

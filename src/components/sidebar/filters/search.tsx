@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import { RootState } from '@puddle/stores';
 import { filterQueryUpdated, selectFilterQuery } from '@puddle/stores';
 
 import { DelayInput } from 'react-delay-input';
@@ -22,7 +21,7 @@ export default function SearchBar() {
   const query = useSelector(selectFilterQuery)
   const isActive = query !== ''
 
-  const onClear = (e: React.SyntheticEvent) => {
+  const onClear = () => {
     dispatch(filterQueryUpdated(''))
   }
 

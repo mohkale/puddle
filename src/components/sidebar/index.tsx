@@ -7,8 +7,9 @@ import { faCog, faRss, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faTurtle } from '@puddle/utils/fontawesome';
 
 import AppContext from '@puddle/components/app-context';
-import { RootState } from '@puddle/stores';
-import { altSpeedToggled, selectAltSpeedEnabled } from '@puddle/stores';
+import {
+  altSpeedToggled, selectAltSpeedEnabled
+} from '@puddle/stores';
 
 import TooltipButton from '../tooltip';
 import Filters from './filters';

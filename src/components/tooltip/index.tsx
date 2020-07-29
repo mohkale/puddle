@@ -21,7 +21,7 @@ function goesBeforePage(el: HTMLElement, parentBounds: DOMRect, offset: number) 
   return parentBounds.x + offset < CORNER_OFFSET
 }
 
-function goesAfterPage(el: HTMLElement, parentBounds: DOMRect, offset: number) {
+function goesAfterPage(el: HTMLElement, parentBounds: DOMRect, _: number) {
   return parentBounds.x + el.offsetWidth - document.documentElement.offsetWidth > CORNER_OFFSET
 }
 

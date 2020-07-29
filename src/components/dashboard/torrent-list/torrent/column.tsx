@@ -1,14 +1,16 @@
 import React from 'react';
 import ProgressBar from './progress-bar';
 
-import { Torrent } from '@puddle/stores';
-import { TransmissionTorrentStatus as TorrentStatus } from '@puddle/transmission';
-import { TorrentFields } from '@puddle/stores';
+import {
+  TransmissionTorrentStatus as TorrentStatus
+} from '@puddle/transmission';
+import { Torrent, TorrentFields } from '@puddle/stores';
 
 import {
   scaleBytes, timeFormat, padString
 } from '@puddle/utils';
 
+/*eslint no-case-declarations: "off"*/
 export default function renderColumn(field: TorrentFields, torrent: Torrent): React.ReactNode {
   switch (field) {
     case TorrentFields.NAME:

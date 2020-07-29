@@ -1,14 +1,13 @@
-import React, { Fragment, ReactChild } from 'react';
+import React, { ReactChild } from 'react';
 import Sidebar from './sidebar';
 import Dashboard from './dashboard';
 import OverlayMenu from './overlays/menu';
 import AppContext from './app-context';
 
 import { defaultTheme, setTheme } from '../puddle/theme';
-import Transmission, { TorrentId } from '@puddle/transmission';
+import Transmission from '@puddle/transmission';
 
-import store from '@puddle/stores';
-import {
+import store, {
   updateTorrents, syncTorrents, syncStats, syncStatsLimits
 } from '@puddle/stores';
 
@@ -21,7 +20,7 @@ const TORRENT_SYNC_INTERVAL = 2000;
 const STATS_SYNC_SPEED_INTERVAL = 1000;
 const STATS_SYNC_LIMIT_INTERVAL = 60000;
 
-export default class App extends React.Component<{}, AppState> {
+export default class App extends React.Component<any, AppState> {
   constructor(props) {
     super(props)
     setTheme(defaultTheme);

@@ -1,16 +1,16 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@puddle/stores';
-import { filterClassesUpdated } from '@puddle/stores';
-import { TorrentClasses, selectTorrentByClassWithMeta } from '@puddle/stores';
-
-import FilterList, { FilterListBadge } from './filter-list';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import {
   faAsterisk, faDownload, faCheck, faStop, faPlay, faTimes, faBan
 } from '@fortawesome/free-solid-svg-icons';
+
+import {
+  filterClassesUpdated, TorrentClasses, selectTorrentByClassWithMeta
+} from '@puddle/stores';
+import FilterList, { FilterListBadge } from './filter-list';
 
 interface ClassSetting {
   icon: IconDefinition

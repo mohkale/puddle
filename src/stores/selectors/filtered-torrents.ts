@@ -3,7 +3,6 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from '../state';
 import { TorrentClasses } from '../classes';
-import { TorrentId } from '@puddle/transmission';
 
 /**
  * Construct and return a predicate which given some torrent id

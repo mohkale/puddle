@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Scrollbar } from 'react-scrollbars-custom';
 
-import { RootState, selectFilteredTorrents } from '@puddle/stores';
+import { selectFilteredTorrents } from '@puddle/stores';
 
 import Torrent from './torrent';
 import TorrentsHeader from './header';

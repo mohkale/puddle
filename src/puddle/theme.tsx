@@ -69,7 +69,7 @@ export interface Theme {
 }
 
 export function setTheme(theme: Theme) {
-  let root = document.documentElement.style;
+  const root = document.documentElement.style;
   root.setProperty('--action-color', theme.actionColor)
 
   function setScrollBarClasses(prefix: string, scrollbar: ScrollBar) {

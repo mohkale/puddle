@@ -1,7 +1,6 @@
 import React from 'react';
-import { NetworkStats } from '@puddle/stores';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, selectNetworkDownloadStats, selectNetworkUploadStats } from '@puddle/stores';
+import { NetworkStats, RootState } from '@puddle/stores';
+import { useSelector } from 'react-redux';
 import { scaleBytes } from '@puddle/utils';
 
 import { faInfinity } from '@puddle/utils/fontawesome';
@@ -26,7 +25,7 @@ interface NetworkIndicatorStatsProps
 const NetworkIndicatorStats =
   React.memo(({ bytes, perSecond, ...props }: NetworkIndicatorStatsProps) => {
     if (bytes < 0) {
-      let { className, ...remProps } = props;
+      const { className, ...remProps } = props;
       return (
         <span className={[className, "unlimited"].join(' ')} {...remProps}>
           <FontAwesomeIcon icon={faInfinity} className="icon" />

@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { createSelector } from '@reduxjs/toolkit';
 
 export * from './state';
 export * from './selectors'

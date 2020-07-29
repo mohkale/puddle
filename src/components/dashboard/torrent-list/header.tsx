@@ -1,73 +1,71 @@
-import React, { Fragment, useState } from 'react';
-import { RootState } from '@puddle/stores';
+import React, { Fragment } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
-  selectColumns,
-  selectColumnIsDescending,
-  TorrentFields,
-  columnResized,
-  activeFieldChanged,
+  selectColumns, selectColumnIsDescending,
+  TorrentFields, columnResized, activeFieldChanged,
   COLUMN_MINIMUM_WIDTH
 } from '@puddle/stores';
-import { useDispatch, useSelector } from 'react-redux';
 
 /** header of the table of torrents. */
 interface DashboardTableColumnsProps {
   parentRef: React.MutableRefObject<HTMLElement | null>;
 }
 
-const DashboardTableColumns = React.forwardRef<HTMLDivElement, DashboardTableColumnsProps>((props, ref) => {
-  const dispatch = useDispatch()
-  const columns = useSelector(selectColumns)
-  const isDescending = useSelector(selectColumnIsDescending)
-  const [resizing, setResizing] = React.useState<ColumnResizeContext|null>(null)
+const DashboardTableColumns =
+  React.forwardRef<HTMLDivElement, DashboardTableColumnsProps>((props, ref) => {
+    const dispatch = useDispatch()
+    const columns = useSelector(selectColumns)
+    const isDescending = useSelector(selectColumnIsDescending)
+    const [resizing, setResizing] = React.useState<ColumnResizeContext|null>(null)
 
-  const columnElems = columns
-    .map((column, i) => {
-      const className =
-        ['table-cell', column.isActive ? 'selected' : '',
-         isDescending ? 'descending' : ''].join(' ')
+    const columnElems = columns
+      .map((column, i) => {
+        const className =
+          ['table-cell', column.isActive ? 'selected' : '',
+           isDescending ? 'descending' : ''].join(' ')
 
-      const onHeaderClick = () =>
-        dispatch(activeFieldChanged({ field: column.field }))
+        const onHeaderClick = () =>
+          dispatch(activeFieldChanged({ field: column.field }))
 
-      const onResizeStart = (e) => {
-        const container = props.parentRef.current
-        if (container === null) return
-        const bounds = container!.getBoundingClientRect()
+        const onResizeStart = (e) => {
+          const container = props.parentRef.current
+          if (container === null) return
+          const bounds = container!.getBoundingClientRect()
 
-        const minPos = columns
-          .slice(0, i)
-          .map(c => c.width)
-          .reduce((acc, width) => acc + width, COLUMN_MINIMUM_WIDTH)
+          const minPos = columns
+            .slice(0, i)
+            .map(c => c.width)
+            .reduce((acc, width) => acc + width, COLUMN_MINIMUM_WIDTH)
 
-        setResizing({
-          field: column.field,
-          delta: bounds.left,
-          startPos: e.clientX - bounds.left,
-          minPos: minPos
-        })
-      }
+          setResizing({
+            field: column.field,
+            delta: bounds.left,
+            startPos: e.clientX - bounds.left,
+            minPos: minPos
+          })
+        }
 
-      return (
-        <div title={column.title} key={column.field} className={className}
-             style={{width: column.width}} onClick={onHeaderClick}>
-          <span className="label">{column.title}</span>
-          <span className="resizer" onMouseDown={onResizeStart}></span>
-        </div>
-      );
-    })
+        return (
+          <div title={column.title} key={column.field} className={className}
+               style={{width: column.width}} onClick={onHeaderClick}>
+            <span className="label">{column.title}</span>
+            <span className="resizer" onMouseDown={onResizeStart}></span>
+          </div>
+        );
+      })
 
-  return (
-    <Fragment>
-      <aside className="columns" ref={ref}>{columnElems}</aside>
-      {resizing &&
-        <ColumnResizer ctx={resizing!} finish={(field: TorrentFields, delta: number) => {
-          setResizing(null)
-          dispatch(columnResized({ field, delta }))
-        }} />}
-    </Fragment>
-  );
-})
+    return (
+      <Fragment>
+        <aside className="columns" ref={ref}>{columnElems}</aside>
+        {resizing &&
+          <ColumnResizer ctx={resizing!} finish={(field: TorrentFields, delta: number) => {
+            setResizing(null)
+            dispatch(columnResized({ field, delta }))
+          }} />}
+      </Fragment>
+    );
+  })
 
 export default DashboardTableColumns;
 

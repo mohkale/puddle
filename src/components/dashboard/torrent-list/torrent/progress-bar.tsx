@@ -1,6 +1,9 @@
 import React from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamation, faPlay, faStop, faPause } from '@fortawesome/free-solid-svg-icons';
+import {
+  faExclamation, faPlay, faStop
+} from '@fortawesome/free-solid-svg-icons';
 import { faCircle } from '@fortawesome/free-regular-svg-icons';
 
 import { TorrentClasses } from '@puddle/stores';

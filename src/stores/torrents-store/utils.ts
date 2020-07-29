@@ -24,7 +24,7 @@ export function removeTorrentFromTracker(state: TorrentState, tracker: string, i
 
 export function sortByColumn(state: TorrentState, torrents: number[]) {
   torrents.sort((idA, idB) => {
-    let res = torrentComparators[state.activeField](
+    const res = torrentComparators[state.activeField](
       state.entries[idA],
       state.entries[idB],
     )

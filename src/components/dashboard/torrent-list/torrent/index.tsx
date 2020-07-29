@@ -1,19 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import {
-  Torrent, TorrentState, selectColumns, torrentSelected
+  Torrent, selectColumns, torrentSelected,
+  RootState, selectFilteredTorrents,
+  selectTorrentById
 } from '@puddle/stores';
-import { RootState, selectFilteredTorrents } from '@puddle/stores';
-import { TorrentFields, Column } from '@puddle/stores';
 import { TransmissionTorrentStatus as TorrentStatus } from '@puddle/transmission';
-
-import FlexSearch from 'flexsearch';
-
-import {
-  scaleBytes, timeFormat, padString
-} from '@puddle/utils';
-import { TorrentId } from '@puddle/transmission';
-import { selectTorrentById } from '@puddle/stores';
 
 import renderColumn from './column';
 
