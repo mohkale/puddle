@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Scrollbar } from 'react-scrollbars-custom';
 
 import { selectFilteredTorrents } from '@puddle/stores';
@@ -7,10 +7,34 @@ import { selectFilteredTorrents } from '@puddle/stores';
 import Torrent from './torrent';
 import TorrentsHeader from './header';
 
+import ColumnResizer, { ColumnResizeContext } from './resize';
+
+import {
+  TorrentFields, columnResized
+} from '@puddle/stores';
+
 export default function TorrentList() {
+  const dispatch = useDispatch()
+
   const rootRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
+  const bodyRef = useRef<HTMLUListElement>(null)
+
   const torrents = useSelector(selectFilteredTorrents)
+  const [resizing, setResizing] = React.useState<ColumnResizeContext>()
+
+  const onResizeStart = (e: Pick<ColumnResizeContext, 'field' | 'startPos' | 'minPos'>) => {
+    if (!bodyRef.current || !rootRef.current)
+      return
+    const rootBounds = rootRef.current!.getBoundingClientRect()
+    const bodyBounds = bodyRef.current!.getBoundingClientRect()
+    setResizing({
+      ...e,
+      startPos: e.startPos - rootBounds.left,
+      delta: rootBounds.left,
+      minPos: e.minPos - ((2 * rootBounds.left) - bodyBounds.left),
+    })
+  }
 
   const onScroll = (e) => {
     // keep the list header in sync with the torrents list.
@@ -27,13 +51,18 @@ export default function TorrentList() {
           their widths don't influence each other. This way #torrents will have a
           fixed width that can be scrolled independent of its contents. */}
       <div>
-        <TorrentsHeader ref={headerRef} parentRef={rootRef} />
+        <TorrentsHeader ref={headerRef} startResizing={onResizeStart} />
       </div>
 
       <Scrollbar onScroll={onScroll}>
-        <ul className="rows">{entries}</ul>
+        <ul ref={bodyRef} className="rows">{entries}</ul>
       </Scrollbar>
+
+      {resizing &&
+        <ColumnResizer ctx={resizing!} finish={(field: TorrentFields, delta: number) => {
+          setResizing(undefined)
+          dispatch(columnResized({ field, delta }))
+        }} />}
     </div>
   );
 }
-
