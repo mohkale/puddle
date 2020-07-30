@@ -9,7 +9,6 @@ import {
 import {
   selectNetworkDownloadStats, selectNetworkUploadStats
 } from '@puddle/stores';
-import { NetworkStats } from '@puddle/stores';
 
 import NetworkIndicator from './network-indicator';
 

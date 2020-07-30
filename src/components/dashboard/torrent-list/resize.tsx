@@ -39,7 +39,7 @@ export default function ColumnResizer(props: ColumnResizerProps) {
 
   return (
     <div className="resize-overlay"
-         onMouseUp={(e) => {
+         onMouseUp={() => {
            props.finish(props.ctx.field, leftOffset - props.ctx.startPos)
          }}
          onMouseMove={(e) => {

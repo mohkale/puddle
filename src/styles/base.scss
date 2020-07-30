@@ -1,0 +1,32 @@
+@import "./scrollbar";
+
+@font-face {
+    font-family: Roboto;
+    src: url(../fonts/Roboto-regular/Roboto-regular.ttf);
+}
+
+body {
+    box-sizing: border-box;
+    font-family: Roboto, sans-serif;
+}
+
+h1, h2, h3, h4 {
+    color: var(--title);
+    font-size: 1.375rem;
+    font-weight: 600;
+}
+
+#root {
+    display: flex;
+    height: 100vh;
+}
+
+h1 {
+    text-align: center;
+}
+
+.vl {
+    border-right: solid 1px black;
+    margin: 0px 4px;
+}
+

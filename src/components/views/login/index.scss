@@ -1,43 +1,42 @@
 @import '@puddle/styles/with-banner';
 @import '@puddle/styles/fade-in-down';
 
-// TODO move colors to theme
 div.login-container {
+    color: var(--fg);
+    background-color: var(--bg);
+
     width:  100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #e9eef2;
     overflow: hidden;
 
     main {
-        @include with-banner(#34516C);
-
+        @include with-banner(var(--title));
         @include fade-in-down(2s);
+
         width: 25em;
         padding: 2em 2.5em;
+
         background-color: white;
-        border: 1px solid #d2d8de;
+        border: 1px solid var(--border-color);
         border-radius: 4px;
         box-shadow: 0 1px 1px rgba(210,216,222,0.15), 0 1px 3px 1px rgba(210,216,222,0.2);
 
         h1 {
-            font-size: 1.375rem;
             text-align: left;
-            font-weight: 600;
-            color: #34516C;
             margin: 0px;
             margin-bottom: 24px;
         }
 
         hr {
-            border-color: rgba(136,153,168,0.15);
+            border-color: var(--border-color);
+            opacity: 0.15;
         }
 
         label {
             font-size: 0.75rem;
-            color: #53718a;
         }
 
         input {
@@ -46,25 +45,25 @@ div.login-container {
             padding: 0px 12px;
             height: 34px;
             box-sizing: border-box;
-            color: #8899A8;
-            border: 1px solid #d2d8de;
+            color: var(--fg);
+            border: 1px solid var(--border-color);
             border-radius: 4px;
             width: 100%;
             transition: all 0.2s;
             margin-top: 2px;
 
             &::placeholder {
-                color: #c3ccd3;
+                color: var(--border-color);
             }
 
             &:focus {
-                color: #2266a0;
-                background-color: rgba(52,156,244,0.05);
+                color: var(--input-selected-fg);
+                background-color: var(--input-selected-bg);
                 outline: none;
-                border-color: var(--action-color);
+                border-color: var(--input-selected-border);
 
                 &::placeholder {
-                    color: #b3d4fc;
+                    color: var(--input-selected-placeholder);
                 }
             }
         }
@@ -79,6 +78,6 @@ div.login-container {
 
     &.error {
         color: white;
-        background-color: #f34570;
+        background-color: var(--error-color);
     }
 }

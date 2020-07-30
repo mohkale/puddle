@@ -25,7 +25,7 @@ export default function SearchBar() {
     dispatch(filterQueryUpdated(''))
   }
 
-  const onChange = (e: any) => {
+  const onChange = (e) => {
     dispatch(filterQueryUpdated((e.target.value || '') as string))
   }
 

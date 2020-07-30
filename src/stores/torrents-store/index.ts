@@ -7,10 +7,7 @@ export * from './thunks';
 import defaultState from './default';
 import * as actions from './actions';
 
-import {
-  torrentClass, TorrentClasses, TorrentClassFlags
-} from '../classes';
-
+import { TorrentClassFlags } from '../classes';
 import { torrentComparators } from '../fields';
 import {
   sortByColumn,
@@ -18,8 +15,7 @@ import {
   addTorrentToLabel, removeTorrentFromLabel
 } from './utils';
 
-import { arrayRemove } from '@puddle/utils';
-import { setPartition } from '@puddle/utils';
+import { arrayRemove, setPartition } from '@puddle/utils';
 
 const torrentSlice = createSlice({
   name: 'torrents',

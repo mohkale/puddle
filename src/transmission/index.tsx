@@ -11,6 +11,8 @@ import {
   TransmissionNewTorrent             as NewTorrentResponse
 } from './responses';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 /**
  * a single torrent id, according to the transmission spec this
  * can be a numerical id or the sha1 hash for the associated torrent.

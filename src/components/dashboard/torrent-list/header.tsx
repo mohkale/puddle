@@ -1,10 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
   selectColumns, selectColumnIsDescending,
-  TorrentFields, columnResized, activeFieldChanged,
-  COLUMN_MINIMUM_WIDTH
+  activeFieldChanged, COLUMN_MINIMUM_WIDTH
 } from '@puddle/stores';
 
 import { ColumnResizeContext } from './resize';
@@ -14,6 +13,7 @@ interface DashboardTableColumnsProps {
   startResizing: (o: Pick<ColumnResizeContext, 'field' | 'startPos' | 'minPos'>) => void
 }
 
+/* eslint-disable react/display-name */
 const DashboardTableColumns =
   React.forwardRef<HTMLDivElement, DashboardTableColumnsProps>((props, ref) => {
     const dispatch = useDispatch()

@@ -1,7 +1,6 @@
 import { Torrent } from '../torrent';
 import { TorrentFields } from '../fields';
 import { TorrentClasses } from '../classes';
-import Transmission, { TorrentId } from '@puddle/transmission';
 
 export interface TorrentState {
   /**

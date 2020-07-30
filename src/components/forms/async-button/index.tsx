@@ -1,14 +1,13 @@
-import './styles';
-import React, { useRef, useState, useEffect } from 'react';
+import './index.scss';
+import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCircleNotch
-} from '@fortawesome/free-solid-svg-icons';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 
 interface ButtonProps<T> extends React.HTMLProps<HTMLButtonElement> {
   run: () => (Promise<T>|T)
   onSuccess?: (T) => void
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   onFailure?: (err: any) => void
 }
 
@@ -39,9 +38,6 @@ export default function LoaderButton<T = void>(_props: ButtonProps<T>) {
           .catch(err => onFailure && onFailure!(err)))
     }
   }
-
-  const children = promise === undefined ?
-    props.children : <FontAwesomeIcon icon={faCircleNotch} className="icon" />;
 
   const classes = [props.className, 'loader', promise === undefined ? '' : 'loading']
 

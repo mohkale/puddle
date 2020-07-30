@@ -1,3 +1,19 @@
+interface Button {
+  fg: string
+  bg: string
+  border: string
+  hoverFg: string
+  hoverBg: string
+
+  // Color for async buttons when processing.
+  activeFg: string
+  activeBg: string
+
+  disabledFg: string
+  disabledBg: string
+  disabledBorder: string
+}
+
 interface TorrentListRow {
   fg: string,
   bg: string,
@@ -19,6 +35,19 @@ interface ScrollBar {
 
 export interface Theme {
   actionColor: string,
+  errorColor: string
+
+  fg: string
+  bg: string
+  title: string
+  borderColor: string
+
+  inputSelectedFg: string
+  inputSelectedBg: string
+  inputSelectedPlaceholder: string
+  inputSelectedBorder: string
+
+  button: Button
 
   scrollBar: ScrollBar
   sidebarScrollBar: ScrollBar
@@ -72,6 +101,32 @@ export interface Theme {
 export function setTheme(theme: Theme) {
   const root = document.documentElement.style;
   root.setProperty('--action-color', theme.actionColor)
+  root.setProperty('--error-color', theme.errorColor)
+
+  root.setProperty('--fg', theme.fg)
+  root.setProperty('--bg', theme.bg)
+  root.setProperty('--title', theme.title)
+  root.setProperty('--border-color', theme.borderColor)
+
+  root.setProperty('--input-selected-fg', theme.inputSelectedFg)
+  root.setProperty('--input-selected-bg', theme.inputSelectedBg)
+  root.setProperty('--input-selected-placeholder', theme.inputSelectedPlaceholder)
+  root.setProperty('--input-selected-border', theme.inputSelectedBorder)
+
+  function setButton(prefix: string, button: Button) {
+    root.setProperty(`${prefix}-fg`, button.fg)
+    root.setProperty(`${prefix}-bg`, button.bg)
+    root.setProperty(`${prefix}-border`, button.border)
+    root.setProperty(`${prefix}-hover-fg`, button.hoverFg)
+    root.setProperty(`${prefix}-hover-bg`, button.hoverBg)
+    root.setProperty(`${prefix}-active-fg`, button.activeFg)
+    root.setProperty(`${prefix}-active-bg`, button.activeBg)
+    root.setProperty(`${prefix}-disabled-fg`, button.disabledFg)
+    root.setProperty(`${prefix}-disabled-bg`, button.disabledBg)
+    root.setProperty(`${prefix}-disabled-border`, button.disabledBorder)
+  }
+
+  setButton('--button', theme.button)
 
   function setScrollBarClasses(prefix: string, scrollbar: ScrollBar) {
     root.setProperty(`${prefix}-color`, scrollbar.fg)
@@ -145,6 +200,30 @@ export function setTheme(theme: Theme) {
 // reverse engineered from [[https://github.com/Flood-UI/flood][flood]].
 export const defaultTheme: Theme = {
   actionColor: '#258de5',
+  errorColor: '#f34570',
+
+  fg: '#53718a',
+  bg: '#e9eef2',
+  title: '#34516C',
+  borderColor: '#d2d8de',
+
+  inputSelectedFg: '#2266a0',
+  inputSelectedBg: 'rgba(52,156,244,0.05)',
+  inputSelectedPlaceholder: '#b3d4fc',
+  inputSelectedBorder: '#258de5',
+
+  button: {
+    fg: 'white',
+    bg: '#8899A8',
+    border: '#768a9b',
+    hoverFg: 'white',
+    hoverBg: '#9dabb7',
+    activeFg: 'white',
+    activeBg: '#768a9b',
+    disabledFg: '#9dabb7',
+    disabledBg: '#e9eef2',
+    disabledBorder: '#d6dfe7',
+  },
 
   scrollBar: {
     fg: '#999999',
@@ -197,7 +276,7 @@ export const defaultTheme: Theme = {
     selectedFg: 'rgba(255,255,255,0.5)',
     selectedBg: '#258de5',
     selectedBorderColor: '#1b86e0',
-    selectedProgressBarFg: 'grey',
+    selectedProgressBarFg: 'rgba(255,255,255,0.5)',
     selectedProgressBarBg: 'rgba(255,255,255,0.15)',
   },
   torrentsDownloadingRow: {
@@ -232,7 +311,6 @@ export const defaultTheme: Theme = {
     borderColor: 'rgba(255, 174, 99, 0.8)',
     progressBarFg: '#ffad61',
     progressBarBg: 'hsla(29, 100%, 69%, 0.15)',
-    // #F9983E
 
     selectedFg: 'rgba(255,255,255,0.5)',
     selectedBg: '#F9983E',

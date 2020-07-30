@@ -2,16 +2,13 @@ import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Scrollbar } from 'react-scrollbars-custom';
 
-import { selectFilteredTorrents } from '@puddle/stores';
-
 import Torrent from './torrent';
 import TorrentsHeader from './header';
 import ContextMenu, { ContextMenuProps } from './context-menu';
-
 import ColumnResizer, { ColumnResizeContext } from './resize';
 
 import {
-  TorrentFields, columnResized
+  TorrentFields, columnResized, selectFilteredTorrents
 } from '@puddle/stores';
 
 export default function TorrentList() {
@@ -45,7 +42,7 @@ export default function TorrentList() {
     }
   }
 
-  const startContextMenu = (e, id) => {
+  const startContextMenu = (e) => {
     e.preventDefault()
 
     if (!bodyRef.current || !rootRef.current)

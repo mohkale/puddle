@@ -1,14 +1,12 @@
-import './styles';
-import React, { Fragment, useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import './index.scss';
+import React, { useState, useRef } from 'react';
 
 import Transmission from '@puddle/transmission';
-import AsyncButton from '@puddle/components/forms/async-button';
+import { AsyncButton } from '@puddle/components';
 
-import { viewChanged, ViewType } from '@puddle/stores';
-import appStore from '@puddle/stores';
 import store, {
-  syncTorrents, syncStats, syncStatsLimits, selectCurrentView
+  syncTorrents, syncStats, syncStatsLimits,
+  viewChanged, ViewType
 } from '@puddle/stores';
 
 const DEFAULT_TRANSMISSION_ROUTE = `http://${window.location.host}${window.location.pathname}transmission`
@@ -27,13 +25,13 @@ async function checkConnection(domain: string) {
 }
 
 function startLoading(t: Transmission) {
-  appStore.dispatch(viewChanged({ type: ViewType.LOADING }))
+  store.dispatch(viewChanged({ type: ViewType.LOADING }))
 
-  const setupPromise =  appStore.dispatch(syncTorrents(t))
-    .then(() => appStore.dispatch(syncStats(t)))
-    .then(() => appStore.dispatch(syncStatsLimits(t)))
+  store.dispatch(syncTorrents(t))
+    .then(() => store.dispatch(syncStats(t)))
+    .then(() => store.dispatch(syncStatsLimits(t)))
     .then(() => {
-      appStore.dispatch(viewChanged({
+      store.dispatch(viewChanged({
         type: ViewType.CLIENT,
         transmission: t.serialise()
       }))
@@ -43,8 +41,7 @@ function startLoading(t: Transmission) {
 // automatically connect to the default, TODO remove.
 startLoading(new Transmission(DEFAULT_TRANSMISSION_ROUTE));
 
-export default function LoginView(props: { setTransmission: (Transmission) => void }) {
-  const dispatch = useDispatch();
+export default function LoginView() {
   const [banner, setBanner] = useState<string>()
   const valueRef = useRef<HTMLInputElement>(null)
 

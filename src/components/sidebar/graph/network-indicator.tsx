@@ -7,6 +7,8 @@ import { faInfinity } from '@puddle/utils/fontawesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
+/* eslint-disable react/display-name */
+
 interface NetworkIndicatorStatsProps
           extends React.HTMLProps<HTMLElement> {
   bytes: number

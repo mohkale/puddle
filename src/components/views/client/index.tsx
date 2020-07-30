@@ -1,14 +1,14 @@
-import React, { ReactChild, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import Sidebar from '@puddle/components/sidebar';
 import Dashboard from '@puddle/components/dashboard';
-import OverlayMenu from '@puddle/components/overlays/menu';
+// import OverlayMenu from '@puddle/components/overlays/menu';
 
 import Transmission from '@puddle/transmission';
 import ClientViewContext from './context';
 
 import store, {
-  updateTorrents, syncTorrents, syncStats, syncStatsLimits
+  updateTorrents, syncStats, syncStatsLimits
 } from '@puddle/stores';
 
 const TORRENT_SYNC_INTERVAL = 2000;

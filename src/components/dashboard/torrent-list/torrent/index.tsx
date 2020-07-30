@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import {
   Torrent, selectColumns, torrentSelected,
-  RootState, selectFilteredTorrents,
   selectTorrentById, selectTorrentIsSelected
 } from '@puddle/stores';
 import { TransmissionTorrentStatus as TorrentStatus } from '@puddle/transmission';

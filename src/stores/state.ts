@@ -13,5 +13,6 @@ export interface RootState {
   settings: SettingsState
 }
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type RootThunk<ReturnType=void, ActionType=any> =
   ThunkAction<ReturnType, RootState, unknown, Action<ActionType>>;

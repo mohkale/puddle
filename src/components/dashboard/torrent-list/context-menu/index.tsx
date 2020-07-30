@@ -1,12 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import {
-  Torrent, selectColumns, torrentSelected,
-  RootState, selectFilteredTorrents,
-  selectSelectedTorrentIds,
-  selectTorrentById, selectTorrentIsSelected
-} from '@puddle/stores';
+import { selectSelectedTorrentIds } from '@puddle/stores';
 
 import {
   StartTorrentsItem, StopTorrentsItem, RemoveTorrentsItem,

@@ -1,15 +1,12 @@
-import React, { useState, Suspense } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { Suspense } from 'react';
+import { useSelector } from 'react-redux';
 import { defaultTheme, setTheme } from '../puddle/theme';
 
 import LoginView from './views/login';
 import LoadingView from './views/loading';
 
+import { selectCurrentView, ViewType } from '@puddle/stores';
 import Transmission, { TransmissionSerialised } from '@puddle/transmission';
-
-import store, {
-  syncTorrents, syncStats, syncStatsLimits, selectCurrentView, ViewType
-} from '@puddle/stores';
 
 setTheme(defaultTheme);
 
@@ -19,7 +16,7 @@ export default function App() {
   const { type: viewType, ...props } = useSelector(selectCurrentView)
   switch (viewType) {
     case ViewType.SIGN_IN:
-      return <LoginView {...props} setTransmission={() => {}} />;
+      return <LoginView {...props} />;
     case ViewType.LOADING:
       return <LoadingView {...props} />;
     case ViewType.CLIENT:

@@ -18,18 +18,17 @@
 }
 
 button.loader {
-    // TODO move to somewhere on theme.
     @include button-loader-color-scheme(
-        #fff,
-        #8899A8,
-        #fff,
-        #9dabb7,
-        #fff,
-        #768a9b,
-        #768a9b,
-        #9dabb7,
-        #e9eef2,
-        #d6dfe7);
+        var(--button-fg),
+        var(--button-bg),
+        var(--button-hover-fg),
+        var(--button-hover-bg),
+        var(--button-active-fg),
+        var(--button-active-bg),
+        var(--button-border),
+        var(--button-disabled-fg),
+        var(--button-disabled-bg),
+        var(--button-disabled-border));
 
     &[disabled] {
         --fg: var(--disabled-fg);

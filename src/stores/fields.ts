@@ -32,7 +32,7 @@ export enum TorrentFields {
  * If you could remove every field from the dashboard, then
  * what is the dashboard even showing?
  */
-const ESSENTIAL_FIELDS = [TorrentFields.NAME]
+const ESSENTIAL_FIELDS = [TorrentFields.NAME] // eslint-disable-line @typescript-eslint/no-unused-vars
 
 type Comparers = (a: Torrent, b: Torrent) => number
 

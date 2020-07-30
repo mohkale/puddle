@@ -11,8 +11,6 @@ export * from './settings-store';
 export * from './stats-store';
 export * from './ui-store';
 
-import { RootState } from './state';
-
 import uiReducer from './ui-store';
 import statsReducer from './stats-store';
 import settingsReducer from './settings-store';

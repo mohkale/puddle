@@ -1,8 +1,8 @@
+import './index.scss';
 import React from 'react';
+
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import './styles/index';
 
 interface TooltipButtonProps {
   icon: IconDefinition,
@@ -21,7 +21,7 @@ function goesBeforePage(el: HTMLElement, parentBounds: DOMRect, offset: number) 
   return parentBounds.x + offset < CORNER_OFFSET
 }
 
-function goesAfterPage(el: HTMLElement, parentBounds: DOMRect, _: number) {
+function goesAfterPage(el: HTMLElement, parentBounds: DOMRect, _: number) { // eslint-disable-line @typescript-eslint/no-unused-vars
   return parentBounds.x + el.offsetWidth - document.documentElement.offsetWidth > CORNER_OFFSET
 }
 
@@ -46,7 +46,7 @@ export default function TooltipButton({tooltip, icon, className, ...props}: Tool
       const bounds = button.getBoundingClientRect();
 
       let offset = -(elem.offsetWidth - button.offsetWidth) / 2;
-      let pointerOffset: any = null;
+      let pointerOffset: any = null // eslint-disable-line @typescript-eslint/no-explicit-any
       if (goesBeforePage(elem, bounds, offset)) {
         offset = CORNER_OFFSET - bounds.x;
         pointerOffset = bounds.x + (button.offsetWidth / 2)

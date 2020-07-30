@@ -4,7 +4,7 @@ div.loading-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #e9eef2;
+    background-color: var(--bg);
     overflow: hidden;
     fill: var(--action-color);
 }

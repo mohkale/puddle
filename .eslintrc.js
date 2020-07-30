@@ -28,5 +28,14 @@ module.exports = {
     "no-duplicate-imports": "warn",
     "react/display-name": "warn",
     "react/prop-types": "off",
+    "no-case-declarations": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "varsIgnorePattern": "_",
+        "argsIgnorePattern": "_",
+      }
+    ],
   }
 };

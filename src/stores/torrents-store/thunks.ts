@@ -1,13 +1,10 @@
 import { RootState, RootThunk } from '../state';
-import { ThunkAction } from 'redux-thunk';
-import { Torrent, fromResponse as torrentFromResponse, TORRENT_FIELDS } from '../torrent';
 import Transmission, { TorrentId } from '@puddle/transmission';
+import { torrentsAdded, torrentsRemoved, torrentsUpdated } from './actions';
 
 import {
-  torrentsAdded, torrentsRemoved, torrentsUpdated
-} from './actions';
-
-import { arrayRemove } from '@puddle/utils';
+  Torrent, fromResponse as torrentFromResponse, TORRENT_FIELDS
+} from '../torrent';
 
 /**
  * Remove all elements from the store and then fetch the current

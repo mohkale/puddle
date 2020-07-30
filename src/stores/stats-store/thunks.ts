@@ -5,7 +5,7 @@ import { statsUpdated, limitsUpdated } from './actions';
 
 export const syncStats =
   (client: Transmission): RootThunk<Promise<void>> => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
       const resp = await client.sessionStats()
       dispatch(statsUpdated(resp))
     }
@@ -13,7 +13,7 @@ export const syncStats =
 
 export const syncStatsLimits =
   (client: Transmission): RootThunk<Promise<void>> => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
       const resp = await client.session()
       dispatch(limitsUpdated(resp))
     }

@@ -2,7 +2,6 @@ import { createAction } from '@reduxjs/toolkit';
 
 import { Torrent } from '../torrent';
 import { TorrentFields } from '../fields';
-import { TorrentClasses } from '../classes';
 
 /** action for when we're updating one or more torrents. */
 export const torrentsUpdated = createAction<{ torrents: Torrent[] }>('torrents/updated')

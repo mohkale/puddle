@@ -2,9 +2,9 @@ import { XOR } from 'ts-xor'
 import { createAction } from '@reduxjs/toolkit';
 
 import { ViewType } from './views';
-import { Torrent } from '../torrent';
-import { TorrentFields } from '../fields';
 import { TorrentClasses } from '../classes';
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 export const filterQueryUpdated = createAction<string>('ui/filters/update-query')
 

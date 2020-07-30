@@ -1,6 +1,5 @@
 import { torrentClass, TorrentClasses } from './classes';
 import {
-  TorrentId,
   TransmissionTorrent as TorrentResponse,
   TransmissionTorrentStatus as TorrentStatus
 } from '@puddle/transmission';

@@ -1,6 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
-import { TransmissionSession as Session } from '@puddle/transmission';
-import { TransmissionSessionStats as SessionStats } from '@puddle/transmission';
+import {
+  TransmissionSession as Session,
+  TransmissionSessionStats as SessionStats
+} from '@puddle/transmission';
 
 export const statsUpdated = createAction<SessionStats>('stats/update-stats')
 

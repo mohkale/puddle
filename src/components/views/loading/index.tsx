@@ -1,4 +1,4 @@
-import './styles';
+import './index.scss';
 import React from 'react';
 import Loading from 'react-loading';
 
