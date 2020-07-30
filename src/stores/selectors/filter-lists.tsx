@@ -28,3 +28,22 @@ export const selectTorrentByClassWithMeta =
     [(state: RootState) => state.torrents.byClass,
      (state: RootState) => state.torrents.filters.classes],
     (byClass, activeClass) => [byClass, activeClass])
+
+export const selectTorrentByLabelsWithMeta =
+  createSelector(
+    [(state: RootState) => state.torrents.byLabels,
+     (state: RootState) => state.torrents.filters.labels],
+    (byLabels, _activeLabels) => {
+      const activeLabels = new Set(_activeLabels)
+
+      return Object.entries(byLabels)
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .map(([label, torrents]) => {
+          return {
+            label: label,
+            count: torrents.length,
+            isActive: activeLabels.has(label)
+          }
+        })
+    }
+  )

@@ -27,6 +27,27 @@ const selectTorrentsMatchingClassPredicate =
   )
 
 /**
+ * Convert a mapping from some index type to torrent ids, into
+ * a set of unique ids filtered by membership in {@code active}.
+ *
+ * @param collection of some arbitrary identifier to torrent ids
+ * @param active, subset of keys in collection
+ * @returns the flattened unique set of torrent ids retrieved by
+ *          mapping each key in {@code active} through
+ *          {@code collection}.
+ */
+function reduceMapping(collection: { [key: string]: number[] }, active: string[]) {
+  return active.reduce((acc, key) => {
+    const entries = collection[key]
+    if (entries) {
+      entries.forEach(v => acc.add(v))
+    }
+
+    return acc
+  }, new Set())
+}
+
+/**
  * Construct and return a predicate which, given some torrent id
  * returns whether the associated torrent has a tracker in the
  * active trackers filter. If the filter is empty then every torrent
@@ -41,12 +62,26 @@ const selectTorrentsMatchingTrackersPredicate =
         return () => true
       }
 
-      const activeTrackerIds = activeTrackers.reduce((acc, tracker) => {
-        (byTracker[tracker] || []).forEach(v => acc.add(v))
-        return acc
-      }, new Set())
+      const activeTrackerIds = reduceMapping(byTracker, activeTrackers)
+      return (id: number) => activeTrackerIds.has(id)
+    }
+  )
 
-      return (id: number) => activeTrackerIds.has(id);
+/**
+ * Like {@code selectTorrentsMatchingTrackersPredicate} but targets
+ * torrent labels instead of torrent trackers.
+ */
+const selectTorrentsMatchingLabelsPredicate =
+  createSelector(
+    [(state: RootState) => state.torrents.byLabels,
+     (state: RootState) => state.torrents.filters.labels],
+    (byLabel, activeLabels) => {
+      if (activeLabels.length === 0) {
+        return () => true
+      }
+
+      const activeLabelIds = reduceMapping(byLabel, activeLabels)
+      return (id: number) => activeLabelIds.has(id);
     }
   )
 
@@ -114,12 +149,14 @@ const selectTorrentsMatchingQueryPredicate =
 export const selectFilteredTorrents = createSelector(
   [(state: RootState) => state.torrents.ordered,
    selectTorrentsMatchingClassPredicate,
+   selectTorrentsMatchingLabelsPredicate,
    selectTorrentsMatchingTrackersPredicate,
    selectTorrentsMatchingQueryPredicate],
-  (ids, classPredicate, trackersPredicate, queryPredicate) => {
+  (ids, classPredicate, labelsPredicate, trackersPredicate, queryPredicate) => {
     return ids.filter(
       id => classPredicate(id) &&
             trackersPredicate(id) &&
+            labelsPredicate(id) &&
             queryPredicate(id))
    }
 )

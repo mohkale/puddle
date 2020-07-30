@@ -23,7 +23,7 @@ export default function TrackerFilters() {
       }
 
       return (
-        <li key={tracker} className={classes} onClick={onClick}>
+        <li key={tracker} className={classes} onClick={onClick} title={tracker}>
           {hostname}
           <FilterListBadge num={count}/>
         </li>

@@ -65,5 +65,7 @@ export default function renderColumn(field: TorrentFields, torrent: Torrent) {
 
       // NOTE maybe include hour.minute.second?
       return `${year}.${padString(month.toString(), 2)}.${padString(day.toString(), 2)}`
+    case TorrentFields.TAGS:
+      return torrent.labels.join(', ')
   }
 }

@@ -24,6 +24,7 @@ export const TORRENT_FIELDS: (keyof TorrentResponse)[] = [
   "error",
   "trackers",
   "queuePosition",
+  "labels",
 ]
 
 /**
@@ -33,7 +34,7 @@ type TorrentDefaultFields =
   Pick<TorrentResponse, "name" | "status" | "percentDone" |
        "downloadedEver" | "rateDownload" | "uploadedEver" | "rateUpload" |
        "eta" | "uploadRatio" | "sizeWhenDone" | "addedDate" | "error" |
-       "trackers" | "queuePosition">
+       "trackers" | "queuePosition" | "labels">
 
 /**
  * The model for a single torrent.

@@ -37,6 +37,11 @@ export interface TorrentState {
    */
   byClass: { [key in TorrentClasses]: number[] }
 
+  /**
+   * A collection of known labels alongside torrents associated with them.
+   */
+  byLabels: { [key: string]: number[] }
+
   /** Maps from torrent ids to torrent names. */
   toName: { [key: number]: string }
 
@@ -48,5 +53,6 @@ export interface TorrentState {
     query: string
     classes: TorrentClasses
     trackers: string[]
+    labels: string[]
   }
 }

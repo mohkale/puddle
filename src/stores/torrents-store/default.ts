@@ -12,6 +12,7 @@ const defaultState: TorrentState = {
 
   toName: {},
   byTracker: {},
+  byLabels: {},
   byClass: {
     [TorrentClasses.ALL]: [],
     [TorrentClasses.DOWNLOADING]: [],
@@ -25,7 +26,8 @@ const defaultState: TorrentState = {
   filters: {
     query: '',
     classes: TorrentClasses.ALL,
-    trackers: []
+    trackers: [],
+    labels: [],
   }
 }
 

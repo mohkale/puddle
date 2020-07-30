@@ -23,6 +23,7 @@ export enum TorrentFields {
   RATIO,
   FILE_SIZE,
   ADDED,
+  TAGS,
 }
 
 /**
@@ -54,6 +55,9 @@ export const torrentComparators: { [key in TorrentFields]: Comparers } = {
   [TorrentFields.RATIO]:          (a, b) => a.uploadRatio    - b.uploadRatio,
   [TorrentFields.FILE_SIZE]:      (a, b) => a.sizeWhenDone   - b.sizeWhenDone,
   [TorrentFields.ADDED]:          (a, b) => a.addedDate      - b.addedDate,
+
+  // TODO maybe we can come up with a better comparison metric here.
+  [TorrentFields.TAGS]: (a, b) => a.labels.length  - b.labels.length,
 
   [TorrentFields.ETA]: (a, b) => {
     if (a.eta === b.eta) {

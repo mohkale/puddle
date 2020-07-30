@@ -52,6 +52,10 @@ const defaultState: SettingsState = {
         title: "Added",
         width: DEFAULT_WIDTH,
       },
+      [TorrentFields.TAGS]: {
+        title: "Tags",
+        width: DEFAULT_WIDTH,
+      },
     },
     order: [
       TorrentFields.QUEUE_POSITION,
@@ -64,7 +68,8 @@ const defaultState: SettingsState = {
       TorrentFields.ETA,
       TorrentFields.RATIO,
       TorrentFields.FILE_SIZE,
-      TorrentFields.ADDED
+      TorrentFields.TAGS,
+      TorrentFields.ADDED,
     ]
   },
 }

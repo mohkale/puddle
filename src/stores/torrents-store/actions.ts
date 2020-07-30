@@ -23,4 +23,6 @@ export const filterClassesUpdated = createAction<TorrentClasses>('torrents/filte
 
 export const filterTrackersUpdated = createAction<XOR<{ add: string }, { remove: string }>>('torrents/filters/update-trackers')
 
+export const filterLabelsUpdated = createAction<XOR<{ add: string }, { remove: string }>>('torrents/filters/update-labels')
+
 export const activeFieldChanged = createAction<{ field: TorrentFields }>('settings/column-select')

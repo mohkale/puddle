@@ -13,7 +13,9 @@ import {
 
 import { torrentComparators } from '../fields';
 import {
-  addTorrentToTracker, sortByColumn, removeTorrentFromTracker
+  sortByColumn,
+  addTorrentToTracker, removeTorrentFromTracker,
+  addTorrentToLabel, removeTorrentFromLabel
 } from './utils';
 
 import { arrayRemove } from '@puddle/utils';
@@ -39,8 +41,11 @@ const torrentSlice = createSlice({
             }
           })
 
-          torrent.trackers.forEach(
-            tracker => addTorrentToTracker(state, tracker.announce, torrent.id))
+          torrent.trackers.forEach(tracker =>
+            addTorrentToTracker(state, tracker.announce, torrent.id))
+
+          torrent.labels.forEach(label =>
+            addTorrentToLabel(state, label, torrent.id))
         })
 
         sortByColumn(state, state.ordered)
@@ -62,8 +67,10 @@ const torrentSlice = createSlice({
             })
 
             delete state.entries[id]
-            torrent.trackers.forEach(
-              tracker => removeTorrentFromTracker(state, tracker.announce, id))
+            torrent.trackers.forEach(tracker =>
+              removeTorrentFromTracker(state, tracker.announce, id))
+            torrent.labels.forEach(label =>
+              removeTorrentFromLabel(state, label, id))
           }
         })
       })
@@ -106,6 +113,10 @@ const torrentSlice = createSlice({
             torrent.trackers.map(t => t.announce))
           removedTrackers.forEach(tracker => removeTorrentFromTracker(state, tracker, torrent.id))
           addedTrackers.forEach(tracker => addTorrentToTracker(state, tracker, torrent.id))
+
+          const [removedLabels, addedLabels] = setPartition(lastState.labels, torrent.labels)
+          removedLabels.forEach(label => removeTorrentFromLabel(state, label, torrent.id))
+          addedLabels.forEach(label => addTorrentToLabel(state, label, torrent.id))
         })
 
         if (resort) sortByColumn(state, state.ordered)
@@ -140,6 +151,13 @@ const torrentSlice = createSlice({
           state.filters.trackers.push(action.payload.add!)
         } else if (action.payload.remove) {
           arrayRemove(state.filters.trackers, action.payload.remove!)
+        }
+      })
+      .addCase(actions.filterLabelsUpdated, (state, action) => {
+        if (action.payload.add) {
+          state.filters.labels.push(action.payload.add!)
+        } else if (action.payload.remove) {
+          arrayRemove(state.filters.labels, action.payload.remove!)
         }
       })
 })

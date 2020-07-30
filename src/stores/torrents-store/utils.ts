@@ -2,24 +2,40 @@ import { TorrentState } from './state';
 import { torrentComparators } from '../fields';
 import { arrayRemove } from '@puddle/utils';
 
-export function addTorrentToTracker(state: TorrentState, tracker: string, id: number) {
-  if (state.byTracker[tracker] === undefined) {
-    state.byTracker[tracker] = [id]
+function pushToCollection<T>(collection: { [key: string]: T[] }, key: string, val: T) {
+  if (collection[key] === undefined) {
+    collection[key] = [val]
   } else {
-    state.byTracker[tracker].push(id)
+    collection[key].push(val)
   }
 }
 
-export function removeTorrentFromTracker(state: TorrentState, tracker: string, id: number) {
-  const trackerTorrents = state.byTracker[tracker]
-  if (trackerTorrents.length === 1) {
-    delete state.byTracker[tracker]
+function removeFromCollection<T>(collection: { [key: string]: T[] }, key: string, val: T) {
+  const entries = collection[key]
+  if (entries.length === 1) {
+    delete collection[key]
   } else {
-    arrayRemove(state.byTracker[tracker], id, () => {
+    arrayRemove(entries, val, () => {
       // NOTE this should never happen, but you should account for it anyways.
-      console.warn(`removing torrent ${id} but associated tracker doesn't contain it ${tracker}.`)
+      console.warn(`removing torrent ${val} but associated entry doesn't contain it ${key}.`)
     })
   }
+}
+
+export function addTorrentToTracker(state: TorrentState, tracker: string, id: number) {
+  pushToCollection(state.byTracker, tracker, id)
+}
+
+export function removeTorrentFromTracker(state: TorrentState, tracker: string, id: number) {
+  removeFromCollection(state.byTracker, tracker, id)
+}
+
+export function addTorrentToLabel(state: TorrentState, label: string, id: number) {
+  pushToCollection(state.byLabels, label, id)
+}
+
+export function removeTorrentFromLabel(state: TorrentState, label: string, id: number) {
+  removeFromCollection(state.byLabels, label, id)
 }
 
 export function sortByColumn(state: TorrentState, torrents: number[]) {
