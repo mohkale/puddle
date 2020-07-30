@@ -144,6 +144,11 @@ $resizer-width: 9px;
             "--torrents-selected-seeding-row");
 
         @include theme-customize(
+            ".is-checking",
+            "--torrents-checking-row",
+            "--torrents-selected-checking-row");
+
+        @include theme-customize(
             ".has-error",
             "--torrents-error-row",
             "--torrents-selected-error-row");

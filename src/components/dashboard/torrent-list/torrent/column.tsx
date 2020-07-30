@@ -18,7 +18,7 @@ export default function renderColumn(field: TorrentFields, torrent: Torrent) {
     case TorrentFields.NAME:
       return torrent.name
     case TorrentFields.PROGRESS:
-      return <ProgressBar progress={torrent.percentDone * 100} classes={torrent.classes} />;
+      return <ProgressBar progress={torrent.progress * 100} classes={torrent.classes} />;
     case TorrentFields.DOWNLOADED: {
       const [num, unit] = scaleBytes(torrent.downloadedEver!)
       return (

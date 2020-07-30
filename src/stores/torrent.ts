@@ -1,6 +1,8 @@
 import { torrentClass, TorrentClasses } from './classes';
 import {
-  TorrentId, TransmissionTorrent as TorrentResponse
+  TorrentId,
+  TransmissionTorrent as TorrentResponse,
+  TransmissionTorrentStatus as TorrentStatus
 } from '@puddle/transmission';
 
 // WARN typescript doesn't have a way to declare the types of
@@ -25,6 +27,7 @@ export const TORRENT_FIELDS: (keyof TorrentResponse)[] = [
   "trackers",
   "queuePosition",
   "labels",
+  "recheckProgress",
 ]
 
 /**
@@ -34,7 +37,7 @@ type TorrentDefaultFields =
   Pick<TorrentResponse, "name" | "status" | "percentDone" |
        "downloadedEver" | "rateDownload" | "uploadedEver" | "rateUpload" |
        "eta" | "uploadRatio" | "sizeWhenDone" | "addedDate" | "error" |
-       "trackers" | "queuePosition" | "labels">
+       "trackers" | "queuePosition" | "labels" | "recheckProgress">
 
 /**
  * The model for a single torrent.
@@ -46,6 +49,15 @@ type TorrentDefaultFields =
 export interface Torrent extends TorrentDefaultFields {
   id: number
   selected: boolean
+
+  /**
+   * A percentage value (between 0 and 1) indicating how much of
+   * this torrent is completed. When regularly downloading, this
+   * value will just match percentageComplete. When the torrent
+   * is checking, it will instead match recheckProgress.
+   */
+  progress: number
+
   classes: number
 }
 
@@ -66,6 +78,13 @@ export function fromResponse(resp: Partial<TorrentResponse>, prev?: Torrent) {
   const base = prev ? prev! : TORRENT_BASE
   const torrent = Object.assign({}, base, resp) as Torrent
   torrent.classes = torrentClass(torrent)
+  // torrent.progress = (torrent.status === TorrentS)
+  if (torrent.status === TorrentStatus.CHECK ||
+      torrent.status === TorrentStatus.CHECK_WAIT) {
+    torrent.progress = torrent.recheckProgress
+  } else {
+    torrent.progress = torrent.percentDone
+  }
 
   return torrent
 }

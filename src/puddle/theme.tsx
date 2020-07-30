@@ -59,6 +59,7 @@ export interface Theme {
   torrentsDownloadingRow: TorrentListRow,
   torrentsSeedingRow: TorrentListRow,
   torrentsErrorRow: TorrentListRow,
+  torrentsCheckingRow: TorrentListRow,
 
   overlayContainerBackground: string,
   overlayBorderColor: string,
@@ -131,6 +132,7 @@ export function setTheme(theme: Theme) {
   setTorrentsRowClasses('--torrents-downloading-row', '--torrents-selected-downloading-row', theme.torrentsDownloadingRow)
   setTorrentsRowClasses('--torrents-seeding-row', '--torrents-selected-seeding-row', theme.torrentsSeedingRow)
   setTorrentsRowClasses('--torrents-error-row', '--torrents-selected-error-row', theme.torrentsErrorRow)
+  setTorrentsRowClasses('--torrents-checking-row', '--torrents-selected-checking-row', theme.torrentsCheckingRow)
 
   root.setProperty('--overlay-container-background', theme.overlayContainerBackground);
   root.setProperty('--overlay-border-color', theme.overlayBorderColor)
@@ -188,7 +190,7 @@ export const defaultTheme: Theme = {
   torrentsIdleRow: {
     fg: '#c3ccd3',
     bg: 'transparent',
-    borderColor: 'rgba(29, 41, 56, 0.0.8)',
+    borderColor: 'rgba(29, 41, 56, 0.8)',
     progressBarFg: '#e7ebee',
     progressBarBg: 'rgba(231,235,238,0.35)',
 
@@ -201,7 +203,7 @@ export const defaultTheme: Theme = {
   torrentsDownloadingRow: {
     fg: '#4b677f',
     bg: 'transparent',
-    borderColor: 'rgba(29, 41, 56, 0.0.8)',
+    borderColor: 'rgba(29, 41, 56, 0.8)',
     progressBarFg: '#39ce83',
     progressBarBg: 'rgba(57,206,131,0.15)',
 
@@ -214,7 +216,7 @@ export const defaultTheme: Theme = {
   torrentsSeedingRow: {
     fg: '#4b677f',
     bg: 'transparent',
-    borderColor: 'rgba(29, 41, 56, 0.0.8)',
+    borderColor: 'rgba(29, 41, 56, 0.8)',
     progressBarFg: '#258de5',
     progressBarBg: 'rgba(#258de5, 0.15)',
 
@@ -224,10 +226,24 @@ export const defaultTheme: Theme = {
     selectedProgressBarFg: 'white',
     selectedProgressBarBg: '#459ee9',
   },
+  torrentsCheckingRow: {
+    fg: '#ffc894',
+    bg: 'transparent',
+    borderColor: 'rgba(255, 174, 99, 0.8)',
+    progressBarFg: '#ffad61',
+    progressBarBg: 'hsla(29, 100%, 69%, 0.15)',
+    // #F9983E
+
+    selectedFg: 'rgba(255,255,255,0.5)',
+    selectedBg: '#F9983E',
+    selectedBorderColor: 'rgba(255, 174, 99, 0.8)',
+    selectedProgressBarFg: 'white',
+    selectedProgressBarBg: 'rgba(255,255,255,0.15)',
+  },
   torrentsErrorRow: {
     fg: '#f2acbc',
     bg: 'transparent',
-    borderColor: 'rgba(29, 41, 56, 0.0.8)',
+    borderColor: 'rgba(29, 41, 56, 0.8)',
     progressBarFg: '#f2acbc',
     progressBarBg: 'rgba(242,172,188,0.15)',
 

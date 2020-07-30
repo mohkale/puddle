@@ -33,7 +33,7 @@ function torrentClasses(torrent: Torrent, isSelected: boolean) {
       break
   }
 
-  if (torrent.percentDone === 1)
+  if (torrent.progress === 1)
     classes.push('is-finished')
   else if (torrent.error !== 0)
     classes.push('has-error')
