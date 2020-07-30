@@ -25,3 +25,6 @@ export const selectNetworkUploadStats =
 
 export const selectFilterQuery =
   (state: RootState) => state.ui.filters.query
+
+export const selectCurrentView =
+  (state: RootState) => state.ui.view

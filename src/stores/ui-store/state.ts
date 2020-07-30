@@ -1,6 +1,9 @@
+import { ViewType } from './views';
 import { TorrentClasses } from '../classes';
 
 export interface UIState {
+  view: { type: ViewType }
+
   /** subset of torrents that have been selected. */
   selected: number[]
 

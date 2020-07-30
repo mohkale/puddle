@@ -43,6 +43,12 @@ function torrentIdsToParam(ids: TorrentIds, extraProps?: any) {
   return {ids: ids, ...extraProps}
 }
 
+export interface TransmissionSerialised {
+  url: string
+  sessionId: string
+  requestTag?: number
+}
+
 /**
  * The Puddle Transmission Interface.
  *
@@ -66,6 +72,30 @@ export default class Transmission {
     host: string, port: number, path: string, secure: boolean=false
   ) {
     return new Transmission(`${secure ? "https" : "http"}://${host}:${port}/${path}/rpc`)
+  }
+
+  /**
+   * Convert this transmission instance to a serialisable object
+   * that can be passed to fromSerialise to reconstruct you're
+   * current transmission session.
+   */
+  serialise(): TransmissionSerialised {
+    return {
+      url: this.url,
+      sessionId: this.sessionId,
+      requestTag: this.requestTag,
+    }
+  }
+
+  /**
+   * Construct a new transmission instance from a serialised
+   * property struct.
+   */
+  static fromSerialised(o: TransmissionSerialised) {
+    const t = new Transmission(o.url);
+    t.sessionId = o.sessionId
+    t.requestTag = o.requestTag
+    return t
   }
 
   /**

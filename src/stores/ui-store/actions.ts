@@ -1,6 +1,7 @@
 import { XOR } from 'ts-xor'
 import { createAction } from '@reduxjs/toolkit';
 
+import { ViewType } from './views';
 import { Torrent } from '../torrent';
 import { TorrentFields } from '../fields';
 import { TorrentClasses } from '../classes';
@@ -15,3 +16,5 @@ export const filterLabelsUpdated = createAction<XOR<{ add: string }, { remove: s
 
 /** action for selecting one or more torrents from the torrent list. */
 export const torrentSelected = createAction<{ ids: number[], append?: boolean }>('torrents/select')
+
+export const viewChanged = createAction<{ type: ViewType, [key: string]: any }>('ui/view-change')

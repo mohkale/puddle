@@ -1,7 +1,12 @@
 import { UIState } from './state';
+import { ViewType } from './views';
 import { TorrentClasses } from '../classes';
 
 const defaultState: UIState = {
+  view: {
+    type: ViewType.SIGN_IN
+  },
+
   selected: [],
 
   filters: {

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export * from './state';
 export * from './actions';
+export * from './views';
 
 import defaultState from './default';
 import * as actions from './actions';
@@ -51,6 +52,9 @@ const uiSlice = createSlice({
       .addCase(torrentsRemoved, (state, action) => {
         action.payload.ids.forEach(id =>
           arrayRemove(state.selected, id))
+      })
+      .addCase(actions.viewChanged, (state, action) => {
+        state.view = action.payload
       })
 })
 

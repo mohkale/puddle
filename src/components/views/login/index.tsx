@@ -5,7 +5,43 @@ import { useDispatch } from 'react-redux';
 import Transmission from '@puddle/transmission';
 import AsyncButton from '@puddle/components/forms/async-button';
 
+import { viewChanged, ViewType } from '@puddle/stores';
+import appStore from '@puddle/stores';
+import store, {
+  syncTorrents, syncStats, syncStatsLimits, selectCurrentView
+} from '@puddle/stores';
+
 const DEFAULT_TRANSMISSION_ROUTE = `http://${window.location.host}${window.location.pathname}transmission`
+
+async function checkConnection(domain: string) {
+  if (!domain) {
+    throw `You must supply a value for Transmission Host.`
+  }
+
+  const transmission = new Transmission(domain)
+  try { await transmission.session() } catch {
+    throw `failed to exchange handshake, is transmission really there?.`
+  }
+
+  return transmission;
+}
+
+function startLoading(t: Transmission) {
+  appStore.dispatch(viewChanged({ type: ViewType.LOADING }))
+
+  const setupPromise =  appStore.dispatch(syncTorrents(t))
+    .then(() => appStore.dispatch(syncStats(t)))
+    .then(() => appStore.dispatch(syncStatsLimits(t)))
+    .then(() => {
+      appStore.dispatch(viewChanged({
+        type: ViewType.CLIENT,
+        transmission: t.serialise()
+      }))
+    })
+}
+
+// automatically connect to the default, TODO remove.
+startLoading(new Transmission(DEFAULT_TRANSMISSION_ROUTE));
 
 export default function LoginView(props: { setTransmission: (Transmission) => void }) {
   const dispatch = useDispatch();
@@ -17,31 +53,10 @@ export default function LoginView(props: { setTransmission: (Transmission) => vo
       console.warn('reference to value input box is undefined')
       return
     }
-    const domain = valueRef.current!.value
-    if (!domain) {
-      throw `You must supply a value for Transmission Host.`
-    }
-
-    const transmission = new Transmission(domain)
-    try { await transmission.session() } catch {
-      throw `failed to exchange handshake, is transmission really there?.`
-    }
-
-    return transmission;
+    return await checkConnection(valueRef.current!.value)
   }
 
-  const onFailure = (err) => {
-    setBanner(err.toString())
-  }
-
-  const onSuccess = (t: Transmission) => {
-    props.setTransmission(t)
-  }
-
-  React.useEffect(() => {
-    // automatically connect to the default, TODO remove.
-    props.setTransmission(new Transmission(DEFAULT_TRANSMISSION_ROUTE));
-  })
+  const onFailure = (err) => setBanner(err.toString())
 
   return (
     <div className="login-container">
@@ -51,10 +66,10 @@ export default function LoginView(props: { setTransmission: (Transmission) => vo
         {banner &&
           <div className="banner error">{banner}</div>}
 
-        <form action="">
+        <form>
           <label>
             Transmission Host:
-            <input name="foo" type="text" placeholder="Host Path"
+            <input name="host" type="text" placeholder="Host Path"
                    defaultValue={DEFAULT_TRANSMISSION_ROUTE}
                    ref={valueRef} />
           </label>
@@ -63,7 +78,7 @@ export default function LoginView(props: { setTransmission: (Transmission) => vo
         <hr/>
 
         <AsyncButton style={{float: 'right'}} run={onSubmit}
-                     onFailure={onFailure} onSuccess={onSuccess}>
+                     onFailure={onFailure} onSuccess={startLoading}>
           Submit
         </AsyncButton>
       </main>
