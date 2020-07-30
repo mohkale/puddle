@@ -121,6 +121,8 @@ export interface TransmissionTorrent_Mutable {
   "downloadLimit": number
   "downloadLimited": boolean
   "honorsSessionLimits": boolean
+  "ids": number[]
+  "labels": string[]
   "peer-limit": number
   "queuePosition": number
   "seedIdleLimit": number
@@ -143,6 +145,7 @@ export interface TransmissionTorrent
   "doneDate": number
   "downloadDir": string
   "downloadedEver": number
+  "editDate": number
   "error": number
   "errorString": string
   "eta": number

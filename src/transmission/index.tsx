@@ -5,7 +5,7 @@ import {
   TransmissionSession_Mutable        as SessionMutableFields,
   TransmissionTorrent                as TorrentResponse,
   TransmissionTorrent_Mutable        as TorrentMutableFields,
-  TransmissionTorrent_WriteOnly      as TorrentReadOnlyFields,
+  TransmissionTorrent_WriteOnly      as TorrentWriteOnlyFields,
   TransmissionRecentlyActiveTorrents as TransmissionRecentlyActiveResponse,
   TransmissionSessionStats           as SessionResponseStats,
   TransmissionNewTorrent             as NewTorrentResponse
@@ -237,7 +237,7 @@ export default class Transmission {
       });
   }
 
-  async setTorrent(ids: TorrentIds, props: Partial<TorrentMutableFields & TorrentReadOnlyFields>) {
+  async setTorrent(ids: TorrentIds, props: Partial<TorrentMutableFields & TorrentWriteOnlyFields>) {
     return this.request('torrent-set', torrentIdsToParam(ids, props))
   }
 
