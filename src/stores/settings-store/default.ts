@@ -1,9 +1,17 @@
 import { TorrentFields } from '../fields';
-import { SettingsState, COLUMN_DEFAULT_WIDTH as DEFAULT_WIDTH } from './state';
+import {
+  SettingsState, COLUMN_DEFAULT_WIDTH as DEFAULT_WIDTH,
+  COLUMN_MINIMUM_WIDTH as MINIMUM_WIDTH,
+} from './state';
 
 const defaultState: SettingsState = {
   columns: {
     entries: {
+      [TorrentFields.QUEUE_POSITION]: {
+        title: '#',
+        tooltip: 'Queue Position',
+        width: Math.max(MINIMUM_WIDTH, 40),
+      },
       [TorrentFields.NAME]: {
         title: "Name",
         width: 244,
@@ -46,6 +54,7 @@ const defaultState: SettingsState = {
       },
     },
     order: [
+      TorrentFields.QUEUE_POSITION,
       TorrentFields.NAME,
       TorrentFields.PROGRESS,
       TorrentFields.DOWNLOADED,

@@ -12,6 +12,7 @@ import { Torrent } from './torrent';
  * A subset of these will commonly be presented and the user retains.
  */
 export enum TorrentFields {
+  QUEUE_POSITION,
   NAME,
   PROGRESS,
   DOWNLOADED,
@@ -21,7 +22,7 @@ export enum TorrentFields {
   ETA,
   RATIO,
   FILE_SIZE,
-  ADDED
+  ADDED,
 }
 
 /**
@@ -43,6 +44,7 @@ type Comparers = (a: Torrent, b: Torrent) => number
  */
 export const torrentComparators: { [key in TorrentFields]: Comparers } = {
   // simple field by field comparisons across different torrents.
+  [TorrentFields.QUEUE_POSITION]: (a, b) => b.queuePosition - a.queuePosition,
   [TorrentFields.NAME]:           (a, b) => b.name.localeCompare(a.name),
   [TorrentFields.PROGRESS]:       (a, b) => a.percentDone    - b.percentDone,
   [TorrentFields.DOWNLOADED]:     (a, b) => a.downloadedEver - b.downloadedEver,

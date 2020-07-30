@@ -11,8 +11,10 @@ import {
 } from '@puddle/utils';
 
 /*eslint no-case-declarations: "off"*/
-export default function renderColumn(field: TorrentFields, torrent: Torrent): React.ReactNode {
+export default function renderColumn(field: TorrentFields, torrent: Torrent) {
   switch (field) {
+    case TorrentFields.QUEUE_POSITION:
+      return torrent.queuePosition + 1
     case TorrentFields.NAME:
       return torrent.name
     case TorrentFields.PROGRESS:

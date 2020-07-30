@@ -5,6 +5,7 @@ export const COLUMN_MINIMUM_WIDTH = 10;
 
 export interface Column {
   title: string
+  tooltip?: string
   width: number
 }
 

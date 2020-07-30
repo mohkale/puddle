@@ -47,7 +47,8 @@ const DashboardTableColumns =
         }
 
         return (
-          <div title={column.title} key={column.field} className={className}
+          <div title={column.tooltip || column.title}
+               key={column.field} className={className}
                style={{width: column.width}} onClick={onHeaderClick}>
             <span className="label">{column.title}</span>
             <span className="resizer" onMouseDown={onResizeStart}></span>

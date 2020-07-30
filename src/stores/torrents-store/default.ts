@@ -6,7 +6,7 @@ const defaultState: TorrentState = {
   ids: [],
   entries: {},
 
-  activeField: TorrentFields.NAME,
+  activeField: TorrentFields.QUEUE_POSITION,
   showDescending: false,
   ordered: [],
 
