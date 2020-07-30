@@ -55,6 +55,7 @@
     "react": "^16.13.1",
     "react-delay-input": "^4.1.0",
     "react-dom": "^16.13.1",
+    "react-loading": "^2.0.3",
     "react-redux": "^7.2.0",
     "react-scrollbars-custom": "^4.0.25",
     "sass": "^1.26.10",

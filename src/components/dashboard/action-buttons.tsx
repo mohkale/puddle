@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux';
 import { selectSelectedTorrents } from '@puddle/stores';
 import TooltipButton from '@puddle/components/tooltip';
 
-import AppContext from '@puddle/components/app-context';
+import { ClientContext } from '@puddle/components';
 import {
   faPlus, faMinus, faPlay, faStop
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function ActionButtons() {
-  const { transmission } = useContext(AppContext)
+  const { transmission } = useContext(ClientContext)
   const selectedTorrents = useSelector(selectSelectedTorrents)
       .map(torrent => torrent.id)
 

@@ -1,0 +1,10 @@
+div.loading-container {
+    width:  100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9eef2;
+    overflow: hidden;
+    fill: var(--action-color);
+}

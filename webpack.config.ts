@@ -31,7 +31,8 @@ let mainConfig: ConfigurationFunction = env => Object.assign({}, sharedConfig, {
   entry: './src/index',
   output: {
     path: pathResolve('build'),
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
   },
   devtool: (env === "production") ? false : "inline-source-map",
   resolve: {

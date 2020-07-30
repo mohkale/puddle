@@ -1,0 +1,18 @@
+@mixin with-banner($color, $width: 12px, $offset: 28px) {
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+        top:   0;
+        right: 0;
+
+        content: "";
+        width: $width;
+        height: 100em;
+        background: $color;
+        position: absolute;
+        transform: rotate(45deg);
+        transform: translateX(50%) translateY(calc(-50% + #{$width + $offset})) rotate(-45deg);
+    }
+}
+

@@ -1,69 +1,63 @@
-import React, { ReactChild } from 'react';
-import Sidebar from './sidebar';
-import Dashboard from './dashboard';
-import OverlayMenu from './overlays/menu';
-import AppContext from './app-context';
-
+import React, { useState, Suspense } from 'react';
 import { defaultTheme, setTheme } from '../puddle/theme';
+
+import LoginView from './views/login';
+import LoadingView from './views/loading';
+
 import Transmission from '@puddle/transmission';
 
 import store, {
-  updateTorrents, syncTorrents, syncStats, syncStatsLimits
+  syncTorrents, syncStats, syncStatsLimits
 } from '@puddle/stores';
 
-interface AppState {
-  overlay?: ReactChild,
-  transmission: Transmission,
-}
+setTheme(defaultTheme);
 
-const TORRENT_SYNC_INTERVAL = 2000;
-const STATS_SYNC_SPEED_INTERVAL = 1000;
-const STATS_SYNC_LIMIT_INTERVAL = 60000;
+const ClientView = React.lazy(() => import('./views/client'))
+
+interface AppState {
+  loading?: boolean
+  transmission?: Transmission
+}
 
 export default class App extends React.Component<any, AppState> {
   constructor(props) {
     super(props)
-    setTheme(defaultTheme);
-    const transmission = new Transmission(`${window.location.href}transmission`)
-    this.state = {
-      // overlay: <div className="overlay"></div>,
-      transmission: transmission,
-    };
-
-    store.dispatch(syncTorrents(transmission))
-      .then(() => this.fetchTorrents())
-      .then(() => this.updateStats())
-      .then(() => this.updateStatsLimits())
+    this.state = {}
   }
 
   render() {
-    return (
-      <AppContext.Provider
-        value={{
-          setOverlay: (el: ReactChild) => this.setState({overlay: el}),
-          transmission: this.state.transmission
-        }} >
-        {this.state.overlay &&
-          <OverlayMenu render={this.state.overlay as React.ReactChild}
-                       onClick={() => this.setState({overlay: undefined})} />}
-        <Sidebar />
-        <Dashboard />
-      </AppContext.Provider>
-    );
+    if (!this.state.transmission) {
+      return <LoginView setTransmission={this.setTransmission} />;
+    } else if (this.state.loading) {
+      return <LoadingView />
+    } else {
+      return (
+        <Suspense fallback={<LoadingView />}>
+          <ClientView transmission={this.state.transmission} />
+        </Suspense>
+      );
+    }
   }
 
-  fetchTorrents = () =>
-    store.dispatch(updateTorrents(this.state.transmission))
-      .then(() => setTimeout(this.fetchTorrents, TORRENT_SYNC_INTERVAL))
+  private setTransmission = (t: Transmission) => {
+    this.setState({
+      transmission: t,
+      loading: true,
+    })
 
+    // used for debugging, TODO remove
+    const wait = new Promise(res => {
+      // setTimeout(res, 500)
+      res()
+    })
 
-  updateStats = () =>
-    store.dispatch(syncStats(this.state.transmission))
-      .then(() => setTimeout(this.updateStats, STATS_SYNC_SPEED_INTERVAL))
+    const setupPromise = store.dispatch(syncTorrents(t))
+      .then(() => store.dispatch(syncStats(t)))
+      .then(() => store.dispatch(syncStatsLimits(t)))
 
-
-  updateStatsLimits = () =>
-    store.dispatch(syncStatsLimits(this.state.transmission))
-      .then(() => setTimeout(this.updateStatsLimits, STATS_SYNC_LIMIT_INTERVAL))
-
+    Promise.all([wait, setupPromise])
+      .then(() => {
+        this.setState({ loading: false })
+      })
+  }
 }

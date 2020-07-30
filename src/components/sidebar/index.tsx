@@ -6,7 +6,7 @@ import { faBell } from '@fortawesome/free-regular-svg-icons';
 import { faCog, faRss, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faTurtle } from '@puddle/utils/fontawesome';
 
-import AppContext from '@puddle/components/app-context';
+import { ClientContext } from '@puddle/components';
 import {
   altSpeedToggled, selectAltSpeedEnabled
 } from '@puddle/stores';
@@ -17,7 +17,7 @@ import NetworkGraph from './graph'
 
 function ToggleAltSpeedButton() {
   const dispatch = useDispatch()
-  const { transmission } = useContext(AppContext)
+  const { transmission } = useContext(ClientContext)
   const isActive = useSelector(selectAltSpeedEnabled);
 
   const onClick = () => {
@@ -30,10 +30,10 @@ function ToggleAltSpeedButton() {
 
   return (
     <TooltipButton
-      className={isActive ? 'active' : ''}
+      className={isActive ? 'selected' : ''}
       onClick={onClick}
       icon={faTurtle}
-      tooltip={`${isActive ? 'Disable' : 'Enabled'} Alt Speed`} />
+      tooltip={`${isActive ? 'Disable' : 'Enable'} Alt Speed`} />
   );
 }
 
