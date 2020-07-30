@@ -48,7 +48,6 @@ type TorrentDefaultFields =
  */
 export interface Torrent extends TorrentDefaultFields {
   id: number
-  selected: boolean
 
   /**
    * A percentage value (between 0 and 1) indicating how much of
@@ -66,7 +65,6 @@ export interface Torrent extends TorrentDefaultFields {
  * that aren't in {@code TorrentDefaultFields}.
  */
 const TORRENT_BASE: Partial<Torrent> = {
-  selected: false,
   classes: TorrentClasses.ALL,
 }
 

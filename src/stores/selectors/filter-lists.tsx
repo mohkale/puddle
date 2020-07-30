@@ -5,7 +5,7 @@ import { createSelector } from '@reduxjs/toolkit';
 export const selectTorrentTrackersWithMeta =
   createSelector(
     [(state: RootState) => state.torrents.byTracker,
-     (state: RootState) => state.torrents.filters.trackers],
+     (state: RootState) => state.ui.filters.trackers],
 
     (trackers, _activeTrackers) => {
       const activeTrackers = new Set(_activeTrackers);
@@ -26,13 +26,13 @@ export const selectTorrentTrackersWithMeta =
 export const selectTorrentByClassWithMeta =
   createSelector(
     [(state: RootState) => state.torrents.byClass,
-     (state: RootState) => state.torrents.filters.classes],
+     (state: RootState) => state.ui.filters.classes],
     (byClass, activeClass) => [byClass, activeClass])
 
 export const selectTorrentByLabelsWithMeta =
   createSelector(
     [(state: RootState) => state.torrents.byLabels,
-     (state: RootState) => state.torrents.filters.labels],
+     (state: RootState) => state.ui.filters.labels],
     (byLabels, _activeLabels) => {
       const activeLabels = new Set(_activeLabels)
 

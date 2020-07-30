@@ -12,7 +12,7 @@ import { TorrentClasses } from '../classes';
 const selectTorrentsMatchingClassPredicate =
   createSelector(
     [(state: RootState) => state.torrents.byClass,
-     (state: RootState) => state.torrents.filters.classes],
+     (state: RootState) => state.ui.filters.classes],
     (byClasses, activeClass) => {
       // we ignore the single source of truth principle here
       // because implicitly there's no need to have a check
@@ -56,7 +56,7 @@ function reduceMapping(collection: { [key: string]: number[] }, active: string[]
 const selectTorrentsMatchingTrackersPredicate =
   createSelector(
     [(state: RootState) => state.torrents.byTracker,
-     (state: RootState) => state.torrents.filters.trackers],
+     (state: RootState) => state.ui.filters.trackers],
     (byTracker, activeTrackers) => {
       if (activeTrackers.length === 0) {
         return () => true
@@ -74,7 +74,7 @@ const selectTorrentsMatchingTrackersPredicate =
 const selectTorrentsMatchingLabelsPredicate =
   createSelector(
     [(state: RootState) => state.torrents.byLabels,
-     (state: RootState) => state.torrents.filters.labels],
+     (state: RootState) => state.ui.filters.labels],
     (byLabel, activeLabels) => {
       if (activeLabels.length === 0) {
         return () => true
@@ -121,7 +121,7 @@ const selectTorrentsSearchIndex =
 const selectTorrentsMatchingQueryPredicate =
   createSelector(
     [selectTorrentsSearchIndex,
-     (state: RootState) => state.torrents.filters.query],
+     (state: RootState) => state.ui.filters.query],
     (index, query) => {
       if (query.trim() === '') {
         return () => true

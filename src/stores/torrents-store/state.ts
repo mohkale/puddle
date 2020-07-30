@@ -44,15 +44,4 @@ export interface TorrentState {
 
   /** Maps from torrent ids to torrent names. */
   toName: { [key: number]: string }
-
-  /**
-   * Field that are used to filter down the displayed list of
-   * torrents.
-   */
-  filters: {
-    query: string
-    classes: TorrentClasses
-    trackers: string[]
-    labels: string[]
-  }
 }

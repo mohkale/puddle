@@ -121,15 +121,6 @@ const torrentSlice = createSlice({
 
         if (resort) sortByColumn(state, state.ordered)
       })
-      .addCase(actions.torrentSelected, (state, action) => {
-        if (!action.payload.append) {
-          Object.values(state.entries).forEach(
-            (torrent) => torrent.selected = false)
-        }
-
-        action.payload.ids.forEach(
-          (id) => state.entries[id].selected = true)
-      })
       .addCase(actions.activeFieldChanged, (state, action) => {
         if (state.activeField === action.payload.field) {
           state.showDescending = !state.showDescending
@@ -139,26 +130,6 @@ const torrentSlice = createSlice({
         }
 
         sortByColumn(state, state.ordered)
-      })
-      .addCase(actions.filterQueryUpdated, (state, action) => {
-        state.filters.query = action.payload
-      })
-      .addCase(actions.filterClassesUpdated, (state, action) => {
-        state.filters.classes = action.payload
-      })
-      .addCase(actions.filterTrackersUpdated, (state, action) => {
-        if (action.payload.add) {
-          state.filters.trackers.push(action.payload.add!)
-        } else if (action.payload.remove) {
-          arrayRemove(state.filters.trackers, action.payload.remove!)
-        }
-      })
-      .addCase(actions.filterLabelsUpdated, (state, action) => {
-        if (action.payload.add) {
-          state.filters.labels.push(action.payload.add!)
-        } else if (action.payload.remove) {
-          arrayRemove(state.filters.labels, action.payload.remove!)
-        }
       })
 })
 

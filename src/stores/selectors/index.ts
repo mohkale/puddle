@@ -3,17 +3,13 @@ import { createSelector } from '@reduxjs/toolkit';
 
 export * from './columns';
 export * from './filter-lists';
+export * from './selected-torrents';
 export * from './filtered-torrents';
 
 import { TorrentId } from '@puddle/transmission';
 
 export const selectColumnIsDescending = (state: RootState) =>
   state.torrents.showDescending
-
-export const selectSelectedTorrents = createSelector(
-  [(state: RootState) => state.torrents.entries],
-  (torrents) => Object.values(torrents)
-    .filter(torrent => torrent.selected))
 
 export const selectTorrentById = (id: TorrentId) =>
   (state: RootState) => state.torrents.entries[id]
@@ -28,4 +24,4 @@ export const selectNetworkUploadStats =
   (state: RootState) => state.stats.upload
 
 export const selectFilterQuery =
-  (state: RootState) => state.torrents.filters.query
+  (state: RootState) => state.ui.filters.query

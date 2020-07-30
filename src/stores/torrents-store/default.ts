@@ -22,13 +22,6 @@ const defaultState: TorrentState = {
     [TorrentClasses.INACTIVE]: [],
     [TorrentClasses.ERROR]: [],
   },
-
-  filters: {
-    query: '',
-    classes: TorrentClasses.ALL,
-    trackers: [],
-    labels: [],
-  }
 }
 
 export default defaultState;
