@@ -6,6 +6,7 @@ import { selectFilteredTorrents } from '@puddle/stores';
 
 import Torrent from './torrent';
 import TorrentsHeader from './header';
+import ContextMenu, { ContextMenuProps } from './context-menu';
 
 import ColumnResizer, { ColumnResizeContext } from './resize';
 
@@ -22,6 +23,7 @@ export default function TorrentList() {
 
   const torrents = useSelector(selectFilteredTorrents)
   const [resizing, setResizing] = React.useState<ColumnResizeContext>()
+  const [contextMenu, setContextMenu] = React.useState<Pick<ContextMenuProps, 'location'>>()
 
   const onResizeStart = (e: Pick<ColumnResizeContext, 'field' | 'startPos' | 'minPos'>) => {
     if (!bodyRef.current || !rootRef.current)
@@ -43,7 +45,18 @@ export default function TorrentList() {
     }
   }
 
-  const entries = torrents.map(id => (<Torrent key={id} id={id} />))
+  const startContextMenu = (e, id) => {
+    e.preventDefault()
+
+    if (!bodyRef.current || !rootRef.current)
+      return
+    const rootBounds = rootRef.current!.getBoundingClientRect()
+    const bodyBounds = bodyRef.current!.getBoundingClientRect()
+
+    setContextMenu({ location: [e.clientX - rootBounds.left, e.clientY - bodyBounds.top] })
+  }
+
+  const entries = torrents.map(id => (<Torrent key={id} id={id} onRightClick={startContextMenu} />))
 
   return (
     <div id="torrents" ref={rootRef} style={{ display: 'flex', flexDirection: 'column' }}>
@@ -55,7 +68,14 @@ export default function TorrentList() {
       </div>
 
       <Scrollbar onScroll={onScroll}>
-        <ul ref={bodyRef} className="rows">{entries}</ul>
+        <ul ref={bodyRef} className="rows">
+          {entries}
+
+          <li>
+            {contextMenu &&
+              <ContextMenu {...contextMenu} cancel={() => setContextMenu(undefined)} />}
+          </li>
+        </ul>
       </Scrollbar>
 
       {resizing &&

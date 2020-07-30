@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
   Torrent, selectColumns, torrentSelected,
   RootState, selectFilteredTorrents,
-  selectTorrentById
+  selectTorrentById, selectTorrentIsSelected
 } from '@puddle/stores';
 import { TransmissionTorrentStatus as TorrentStatus } from '@puddle/transmission';
 
@@ -11,7 +11,7 @@ import renderColumn from './column';
 
 /** assign the classes for a torrent row. */
 function torrentClasses(torrent: Torrent, isSelected: boolean) {
-  const classes: string[] = []
+  const classes: string[] = ['torrent']
   switch (torrent.status) {
     case TorrentStatus.STOPPED:
       classes.push('is-stopped')
@@ -44,15 +44,24 @@ function torrentClasses(torrent: Torrent, isSelected: boolean) {
   return classes.join(' ')
 }
 
-export default function TorrentRow(props: { id: number }) {
+export default function TorrentRow(props: { id: number, onRightClick: (e: React.MouseEvent, id: number) => void }) {
   const dispatch = useDispatch()
   const torrent = useSelector(selectTorrentById(props.id))
   const columns = useSelector(selectColumns)
+  const isSelected = useSelector(selectTorrentIsSelected(props.id))
 
-  const classes = torrentClasses(torrent, torrent.selected)
+  const classes = torrentClasses(torrent, isSelected)
 
   const onClick = (e: React.MouseEvent) => {
     dispatch(torrentSelected({ ids: [props.id], append: e.ctrlKey }))
+  }
+
+  const onContextMenu = (e: React.MouseEvent) => {
+    if (!isSelected) {
+      dispatch(torrentSelected({ ids: [props.id] }))
+    }
+
+    props.onRightClick(e, props.id)
   }
 
   const cells = columns.map((column) => {
@@ -66,5 +75,5 @@ export default function TorrentRow(props: { id: number }) {
     )
   })
 
-  return <li className={classes} onClick={onClick}>{cells}</li>
+  return <li className={classes} onClick={onClick} onContextMenu={onContextMenu}>{cells}</li>
 }

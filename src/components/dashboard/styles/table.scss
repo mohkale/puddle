@@ -36,8 +36,9 @@ $resizer-width: 9px;
         margin: 0px;
         padding: 0px;
         list-style-type: none;
+        position: relative;
 
-        li {
+        li.torrent {
             height: 30px;
             display: flex;
             align-items: center;
@@ -80,7 +81,7 @@ $resizer-width: 9px;
 
     // Start setting up color scheme for rows.
 
-    .rows li {
+    .rows li.torrent {
         color: var(--torrents-row-fg);
         background-color: var(--torrents-row-bg);
 

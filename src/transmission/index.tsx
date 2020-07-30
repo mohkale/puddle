@@ -185,7 +185,7 @@ export default class Transmission {
     return this.request('torrent-stop', torrentIdsToParam(torrents))
   }
 
-  async vertifyTorrent(torrents: TorrentIds) {
+  async verifyTorrent(torrents: TorrentIds) {
     return this.request('torrent-verify', torrentIdsToParam(torrents))
   }
 
