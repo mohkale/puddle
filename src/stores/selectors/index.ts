@@ -27,3 +27,6 @@ export const selectFilterQuery =
 
 export const selectCurrentView =
   (state: RootState) => state.ui.view
+
+export const selectNotifications =
+  (state: RootState) => state.notifications.active

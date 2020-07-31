@@ -11,6 +11,8 @@ import {
   TorrentFields, columnResized, selectFilteredTorrents,
 } from '@puddle/stores';
 
+import { NotificationList } from '@puddle/components/notifications';
+
 /*
  * Push the context menu by this much before rendering.
  */
@@ -91,6 +93,8 @@ export default function TorrentList() {
           </li>
         </ul>
       </Scrollbar>
+
+      <NotificationList />
 
       {resizing &&
         <ColumnResizer ctx={resizing!} finish={(field: TorrentFields, delta: number) => {

@@ -1,0 +1,86 @@
+@import "@puddle/styles/config";
+@import "@puddle/styles/no-select";
+@import "@puddle/styles/fade-in-down";
+
+@mixin notification-color-scheme($selector, $fg, $bg, $hover-bg, $icon-fg, $icon-bg) {
+    .notifications li#{$selector} {
+        --bg: #{$bg};
+        --fg: #{$fg};
+        --hover-bg: #{$hover-bg};
+        --icon-fg: #{$icon-fg};
+        --icon-bg: #{$icon-bg};
+    }
+}
+
+// TODO create dedicated vars in theme.
+@include notification-color-scheme(
+    ".info",
+    var(--side-bar-hover-fg),
+    var(--side-bar-bg),
+    #3d4c61,
+    var(--torrents-downloading-row-progress-fg),
+    var(--torrents-downloading-row-progress-bg));
+
+@include notification-color-scheme(
+    ".warning",
+    var(--side-bar-hover-fg),
+    var(--side-bar-bg),
+    #3d4c61,
+    var(--torrents-checking-row-progress-fg),
+    var(--torrents-checking-row-progress-bg));
+
+@include notification-color-scheme(
+    ".error",
+    var(--side-bar-hover-fg),
+    var(--side-bar-bg),
+    #3d4c61,
+    var(--torrents-error-row-progress-fg),
+    var(--torrents-error-row-progress-bg));
+
+.notifications li {
+    @include fade-in-down;
+    @include no-select;
+    &:hover {
+        --bg: var(--hover-bg)
+    }
+
+    color: var(--fg);
+    background: var(--bg);
+    transition: background $animation-duration, width $animation-duration;
+
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-top: 0.75em;
+
+    .highlight {
+        font-weight: bold;
+        color: var(--icon-fg);
+    }
+
+    .icon {
+        box-sizing: border-box;
+        border: solid 1px var(--icon-fg);
+        color: var(--icon-fg);
+        background: var(--icon-bg);
+        border-radius: 100%;
+        padding: 4px;
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+    }
+
+    span.content {
+        min-width: 260px;
+        max-width: 320px;
+
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        height: fit-content;
+        font-size: 0.85rem;
+    }
+}
