@@ -11,6 +11,11 @@ import {
   TorrentFields, columnResized, selectFilteredTorrents,
 } from '@puddle/stores';
 
+/*
+ * Push the context menu by this much before rendering.
+ */
+const CONTEXT_MENU_OFFSET: [number, number] = [-10, 10];
+
 export default function TorrentList() {
   const dispatch = useDispatch()
 
@@ -50,7 +55,14 @@ export default function TorrentList() {
     const rootBounds = rootRef.current!.getBoundingClientRect()
     const bodyBounds = bodyRef.current!.getBoundingClientRect()
 
-    setContextMenu({ location: [e.clientX - rootBounds.left, e.clientY - bodyBounds.top] })
+    const scrollOffset = bodyBounds.left - rootBounds.left
+
+    setContextMenu({
+      location: [
+        e.clientX - rootBounds.left - scrollOffset + CONTEXT_MENU_OFFSET[0],
+        e.clientY - bodyBounds.top + CONTEXT_MENU_OFFSET[1]
+      ]
+    })
   }
 
   const entries = torrents.map(id => (<Torrent key={id} id={id} onRightClick={startContextMenu} />))
