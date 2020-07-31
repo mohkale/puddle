@@ -56,6 +56,11 @@ const defaultState: SettingsState = {
         title: "Tags",
         width: DEFAULT_WIDTH,
       },
+      [TorrentFields.COMPLETED_DATE]: {
+        title: "Completed",
+        tooltip: "Date Completed",
+        width: DEFAULT_WIDTH,
+      },
     },
     order: [
       TorrentFields.QUEUE_POSITION,
@@ -69,6 +74,7 @@ const defaultState: SettingsState = {
       TorrentFields.RATIO,
       TorrentFields.FILE_SIZE,
       TorrentFields.TAGS,
+      TorrentFields.COMPLETED_DATE,
       TorrentFields.ADDED,
     ]
   },

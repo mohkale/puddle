@@ -24,6 +24,7 @@ export enum TorrentFields {
   FILE_SIZE,
   ADDED,
   TAGS,
+  COMPLETED_DATE,
 }
 
 /**
@@ -55,6 +56,10 @@ export const torrentComparators: { [key in TorrentFields]: Comparers } = {
   [TorrentFields.RATIO]:          (a, b) => a.uploadRatio    - b.uploadRatio,
   [TorrentFields.FILE_SIZE]:      (a, b) => a.sizeWhenDone   - b.sizeWhenDone,
   [TorrentFields.ADDED]:          (a, b) => a.addedDate      - b.addedDate,
+
+  // TODO always sort incomplete torrents at the bottom, regardless of
+  // ascending or descending.
+  [TorrentFields.COMPLETED_DATE]: (a, b) => a.doneDate       - b.doneDate,
 
   // TODO maybe we can come up with a better comparison metric here.
   [TorrentFields.TAGS]: (a, b) => a.labels.length  - b.labels.length,

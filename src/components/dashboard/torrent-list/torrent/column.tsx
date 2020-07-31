@@ -10,6 +10,16 @@ import {
   scaleBytes, timeFormat, padString
 } from '@puddle/utils';
 
+function formatDate(timestamp: number) {
+  const d = new Date(timestamp * 1000),
+        year = d.getFullYear(),
+        month = d.getMonth() + 1,
+        day = d.getDay() + 1;
+
+  // NOTE maybe include hour.minute.second?
+  return `${year}.${padString(month.toString(), 2)}.${padString(day.toString(), 2)}`
+}
+
 /*eslint no-case-declarations: "off"*/
 export default function renderColumn(field: TorrentFields, torrent: Torrent) {
   switch (field) {
@@ -58,14 +68,12 @@ export default function renderColumn(field: TorrentFields, torrent: Torrent) {
       )
     }
     case TorrentFields.ADDED:
-      const d = new Date(torrent.addedDate * 1000),
-            year = d.getFullYear(),
-            month = d.getMonth() + 1,
-            day = d.getDay() + 1;
-
-      // NOTE maybe include hour.minute.second?
-      return `${year}.${padString(month.toString(), 2)}.${padString(day.toString(), 2)}`
+      return formatDate(torrent.addedDate)
     case TorrentFields.TAGS:
       return torrent.labels.join(', ')
+    case TorrentFields.COMPLETED_DATE:
+      if (torrent.doneDate === 0)
+        return ''
+      return formatDate(torrent.doneDate)
   }
 }
