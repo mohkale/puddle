@@ -52,6 +52,7 @@
     }
 
     li {
+        @include no-select();
         padding: 0px $filter-indent;
         transition: color 0.25s, fill 0.25s;
 
@@ -72,10 +73,12 @@
         &:not(.title) {
             padding: $filter-spacing $filter-indent;
             cursor: pointer;
-            @include no-select();
-            &:not(.selected):hover {
-                color: var(--side-bar-hover-fg);
-                fill:  var(--side-bar-hover-fg);
+            outline: none;
+            &:not(.selected) {
+                &:hover, &:focus {
+                    color: var(--side-bar-hover-fg);
+                    fill:  var(--side-bar-hover-fg);
+                }
             }
         }
     }

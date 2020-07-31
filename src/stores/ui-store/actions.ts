@@ -15,6 +15,8 @@ export const filterTrackersUpdated = createAction<XOR<{ add: string }, { remove:
 export const filterLabelsUpdated = createAction<XOR<{ add: string }, { remove: string }>>('ui/filters/update-labels')
 
 /** action for selecting one or more torrents from the torrent list. */
-export const torrentSelected = createAction<{ ids: number[], append?: boolean }>('torrents/select')
+export const torrentSelected = createAction<{ ids: number[], append?: boolean }>('ui/torrents/select')
+
+export const allTorrentsDeselected = createAction('ui/torrents/deselect-all')
 
 export const viewChanged = createAction<{ type: ViewType, [key: string]: any }>('ui/view-change')

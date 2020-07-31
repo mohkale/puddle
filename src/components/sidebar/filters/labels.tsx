@@ -14,7 +14,7 @@ export default function TrackerFilters() {
   const entries = labels
     .map(({label, count, isActive}) => {
       const classes = isActive ? 'selected' : ''
-      const onClick = () => {
+      const toggleSelection = () => {
         if (isActive) {
           dispatch(filterLabelsUpdated({ remove: label }))
         } else {
@@ -22,8 +22,15 @@ export default function TrackerFilters() {
         }
       }
 
+      const onKeyPress = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+          toggleSelection()
+        }
+      }
+
       return (
-        <li key={label} className={classes} onClick={onClick}>
+        <li key={label} className={classes} onClick={toggleSelection}
+            tabIndex={0} onKeyPress={onKeyPress}>
           {label}
           <FilterListBadge num={count}/>
         </li>

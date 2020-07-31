@@ -50,15 +50,22 @@ export default function ClassFilters() {
       const classVal = Number(classKey)
       const settings = classSettings[classVal]
 
-      const onClick = () => {
+      const select = () => {
         if (classVal !== activeClass) {
           dispatch(filterClassesUpdated(classVal))
         }
       }
 
+      const onKeyPress = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+          select()
+        }
+      }
+
       const classes = activeClass === classVal ? 'selected' : ''
       return (
-        <li key={classKey} className={classes} onClick={onClick}>
+        <li key={classKey} className={classes} onClick={select}
+            tabIndex={0} onKeyPress={onKeyPress}>
           <FontAwesomeIcon icon={settings.icon} className="icon" />
           {settings.title}
           <FilterListBadge num={torrents.length}/>

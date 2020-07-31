@@ -4,6 +4,7 @@
 .tooltip {
     $arrow-height: 5px;
 
+    outline: none;
     position: relative;
     display: inline-block;
     --pointer-offset: calc(50% - #{$arrow-height});

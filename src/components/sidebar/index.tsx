@@ -10,7 +10,11 @@ import {
   LogoutButton
 } from './buttons';
 
-export default function Sidebar() {
+interface SidebarProps {
+  searchRef: React.MutableRefObject<HTMLInputElement|undefined>
+}
+
+export default function Sidebar(props: SidebarProps) {
   return (
     <aside id="sidebar">
       <div className="buttons">
@@ -22,7 +26,7 @@ export default function Sidebar() {
       </div>
 
       <NetworkGraph />
-      <Filters />
+      <Filters {...props} />
     </aside>
   );
 }

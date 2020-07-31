@@ -5,9 +5,9 @@ import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface TooltipButtonProps {
-  icon: IconDefinition,
-  tooltip?: string,
-  onClick?: VoidFunction,
+  icon: IconDefinition
+  tooltip?: string
+  onClick?: VoidFunction
   className?: string
 }
 
@@ -60,9 +60,29 @@ export default function TooltipButton({tooltip, icon, className, ...props}: Tool
     }
   }, [ref.current])
 
+  const onKeyPress = (e: React.KeyboardEvent) => {
+    if (props.onClick && e.key === 'Enter') {
+      props.onClick()
+    }
+  }
+
+  const onClick = (e: React.MouseEvent) => {
+    if (props.onClick) {
+      props.onClick()
+    }
+    // don't keep focus on clicked tooltip
+    // WARN for some reason... blur() isn't a method on currentTarget
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    const target = e.currentTarget as any
+    target.blur()
+  }
+
   return (
-    <div className={["tooltip", className].join(' ')} role="button" style={{cursor: (props.onClick) ? "pointer" : undefined}} >
-      <FontAwesomeIcon {...props} icon={icon} className='icon' onClick={props.onClick} />
+    <div className={["tooltip", className].join(' ')} role="button"
+         style={{cursor: (props.onClick) ? "pointer" : undefined}}
+         onClick={onClick} tabIndex={0}
+         onKeyPress={onKeyPress} >
+      <FontAwesomeIcon {...props} icon={icon} className='icon' />
       {tooltip &&
         <span ref={ref} style={labelStyle} className="label">{tooltip}</span>}
     </div>

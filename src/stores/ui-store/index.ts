@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 export * from './state';
 export * from './actions';
 export * from './views';
+export * from './thunks';
+export * from './key-commands';
 
 import defaultState from './default';
 import * as actions from './actions';
@@ -55,6 +57,9 @@ const uiSlice = createSlice({
       })
       .addCase(actions.viewChanged, (state, action) => {
         state.view = action.payload
+      })
+      .addCase(actions.allTorrentsDeselected, (state) => {
+        state.selected = []
       })
 })
 

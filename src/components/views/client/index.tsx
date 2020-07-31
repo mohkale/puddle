@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import './styles';
+import React, { useEffect, useRef } from 'react';
 
 import Sidebar from '@puddle/components/sidebar';
 import Dashboard from '@puddle/components/dashboard';
@@ -7,13 +8,8 @@ import Dashboard from '@puddle/components/dashboard';
 import Transmission from '@puddle/transmission';
 import ClientViewContext from './context';
 
-import store, {
-  updateTorrents, syncStats, syncStatsLimits
-} from '@puddle/stores';
-
-const TORRENT_SYNC_INTERVAL = 2000;
-const STATS_SYNC_SPEED_INTERVAL = 1000;
-const STATS_SYNC_LIMIT_INTERVAL = 60000;
+import rootKeyHandler from './key-handler';
+import startUpdater from './updater';
 
 interface ClientViewProps {
   // overlay?: ReactChild
@@ -21,48 +17,28 @@ interface ClientViewProps {
 }
 
 export default function Client(props: ClientViewProps) {
-  let updateTorrentsTimeout, syncStatsTimeout, syncStatsLimitTimeout;
-  useEffect(() => {
-    const fetchTorrents = () =>
-      updateTorrentsTimeout = setTimeout(() => {
-        store.dispatch(updateTorrents(props.transmission))
-          .then(fetchTorrents)
-      }, TORRENT_SYNC_INTERVAL)
-
-    const updateStats = () =>
-      syncStatsTimeout = setTimeout(() => {
-        store.dispatch(syncStats(props.transmission))
-          .then(updateStats)
-      }, STATS_SYNC_SPEED_INTERVAL)
-
-    const updateStatsLimits = () =>
-      syncStatsLimitTimeout = setTimeout(() => {
-        store.dispatch(syncStatsLimits(props.transmission))
-          .then(updateStatsLimits)
-      }, STATS_SYNC_LIMIT_INTERVAL)
-
-    fetchTorrents();
-    updateStats();
-    updateStatsLimits();
-
-    return () => {
-      updateTorrentsTimeout && clearTimeout(updateTorrentsTimeout)
-      syncStatsTimeout && clearTimeout(syncStatsTimeout)
-      syncStatsLimitTimeout && clearTimeout(syncStatsLimitTimeout)
-    }
-  }, [])
+  const searchRef = useRef<HTMLInputElement>()
+  const rootRef = useRef<HTMLDivElement>(null)
+  useEffect(() => startUpdater(props.transmission), [])
+  useEffect(() => rootRef?.current?.focus(), [])
 
   // {this.state.overlay &&
   //   <OverlayMenu render={this.state.overlay as React.ReactChild}
   //                onClick={() => this.setState({overlay: undefined})} />}
+
+  const onKeyPress = (e: React.KeyboardEvent) => {
+    rootKeyHandler(e, { searchRef, rootRef })
+  }
 
   return (
     <ClientViewContext.Provider
       value={{
         transmission: props.transmission
       }}>
-      <Sidebar />
-      <Dashboard />
+      <div ref={rootRef} className="client-view" tabIndex={-1} onKeyDown={onKeyPress}>
+        <Sidebar searchRef={searchRef} />
+        <Dashboard />
+      </div>
     </ClientViewContext.Provider>
   );
 }

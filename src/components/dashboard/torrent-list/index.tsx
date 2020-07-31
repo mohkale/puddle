@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Scrollbar } from 'react-scrollbars-custom';
 
@@ -8,7 +8,7 @@ import ContextMenu, { ContextMenuProps } from './context-menu';
 import ColumnResizer, { ColumnResizeContext } from './resize';
 
 import {
-  TorrentFields, columnResized, selectFilteredTorrents
+  TorrentFields, columnResized, selectFilteredTorrents,
 } from '@puddle/stores';
 
 export default function TorrentList() {
@@ -54,6 +54,11 @@ export default function TorrentList() {
   }
 
   const entries = torrents.map(id => (<Torrent key={id} id={id} onRightClick={startContextMenu} />))
+
+  useEffect(() => {
+    // bodyRef.current && bodyRef.current.focus()
+    // console.log(bodyRef.current.focus())
+  }, [])
 
   return (
     <div id="torrents" ref={rootRef} style={{ display: 'flex', flexDirection: 'column' }}>

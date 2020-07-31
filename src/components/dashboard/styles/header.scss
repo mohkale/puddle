@@ -16,6 +16,7 @@ header {
     }
 
     .icon {
+        outline: 0px;
         height: 100%;
         width: 12px !important;
         padding: 0px 14px;
@@ -25,8 +26,10 @@ header {
         border-right: solid 1px transparent;
         transition: all $animation-duration;
         transition-property: background, fill, border-color;
+    }
 
-        &:hover {
+    .tooltip:hover, .tooltip:focus {
+        .icon {
             color: var(--header-button-hover-fg);
             background: var(--header-button-hover-bg);
             border-color: var(--header-border-color);

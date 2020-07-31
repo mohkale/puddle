@@ -1,9 +1,9 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import { filterQueryUpdated, selectFilterQuery } from '@puddle/stores';
+import store, { filterQueryUpdated, selectFilterQuery } from '@puddle/stores';
 
 import { DelayInput } from 'react-delay-input';
 
@@ -14,29 +14,59 @@ import { DelayInput } from 'react-delay-input';
  *
  * TODO calibrate to feel just right.
  */
-const QUERY_SET_TIMEOUT = 200
+const QUERY_SET_TIMEOUT = 100
 
-export default function SearchBar() {
-  const dispatch = useDispatch()
+const removeSearchQuery = () => store.dispatch(filterQueryUpdated(''))
+const updateSearchQuery = (query: string) => store.dispatch(filterQueryUpdated(query))
+
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+function unfocusSearchBar(ref: any) {
+  if (!ref.current) {
+    console.warn('search bar reference is unassigned');
+    return
+  }
+
+  ref.current!.blur()
+}
+
+/**
+ * parent key handler for the search bar. This suppresses all of the
+ * root key bindings of the client view and introduces new bindings
+ * over the defaults for an Input Element.
+ */
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+function searchBarKeyHandler(e: React.KeyboardEvent, searchRef: any) {
+  // isolate key requests to within the search input.
+  // prevents the root key handler being invoked from here.
+  e.stopPropagation()
+
+  if (e.ctrlKey && e.key === 'k') {
+    e.preventDefault()
+    removeSearchQuery()
+    unfocusSearchBar(searchRef)
+  } else if (e.key === 'Escape') {
+    unfocusSearchBar(searchRef)
+  }
+}
+
+/* eslint-disable-next-line react/display-name */
+const SearchBar = React.forwardRef<HTMLInputElement|undefined>((_, ref) => {
   const query = useSelector(selectFilterQuery)
   const isActive = query !== ''
 
-  const onClear = () => {
-    dispatch(filterQueryUpdated(''))
-  }
-
-  const onChange = (e) => {
-    dispatch(filterQueryUpdated((e.target.value || '') as string))
-  }
+  const onChange = (e) => updateSearchQuery((e.target.value || '') as string)
 
   return (
-    <div id="searchbar" className={isActive ? 'selected' : ''}>
+    <div id="searchbar" className={isActive ? 'selected' : ''}
+         onKeyDown={(e) => searchBarKeyHandler(e, ref)}>
       <FontAwesomeIcon icon={faSearch} className="icon search" />
       <DelayInput name="query" type="text" placeholder="Search Torrents"
-                  autoComplete="false" onChange={onChange}
+                  autoComplete="false" onChange={onChange} inputRef={ref}
                   delayTimeout={QUERY_SET_TIMEOUT} value={query} />
       {isActive &&
-        <FontAwesomeIcon icon={faTimes} className="icon cancel" onClick={onClear} />}
+        <FontAwesomeIcon icon={faTimes} className="icon cancel" onClick={removeSearchQuery} />}
     </div>
   );
-}
+})
+
+export default SearchBar

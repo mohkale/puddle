@@ -8,10 +8,14 @@ import TrackerFilters from './trackers';
 
 import { Scrollbar } from 'react-scrollbars-custom';
 
-export default function Filters() {
+export interface FiltersProps {
+  searchRef: React.MutableRefObject<HTMLInputElement|undefined>
+}
+
+export default function Filters(props: FiltersProps) {
   return (
     <Fragment>
-      <SearchBar />
+      <SearchBar ref={props.searchRef} />
 
       <Scrollbar>
         <ClassFilters />
