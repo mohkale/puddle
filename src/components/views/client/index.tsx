@@ -25,18 +25,12 @@ export default function Client(props: ClientViewProps) {
   useEffect(() => startUpdater(props.transmission), [])
   useEffect(() => rootRef?.current?.focus(), [])
   const intervals = useSelector(selectIntervals)
-  const [stopUpdates, setStopUpdates] = useState<VoidFunction>()
   useEffect(() => {
-    if (stopUpdates) {
-      stopUpdates() // cancel the existing updaters.
-    }
-
-    // start a new set of updaters
-    setStopUpdates(() => startUpdater(
+    const stopUpdates = startUpdater(
       props.transmission, intervals.torrentsSync,
-      intervals.speedSync, intervals.speedLimitsSync))
+      intervals.speedSync, intervals.speedLimitsSync)
 
-    return () => stopUpdates && stopUpdates()
+    return () => stopUpdates()
   }, [intervals])
 
   const onKeyPress = (e: React.KeyboardEvent) => {
