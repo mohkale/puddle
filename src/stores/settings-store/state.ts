@@ -9,6 +9,12 @@ export interface Column {
   width: number
 }
 
+export interface IntervalsType {
+  torrentsSync: number
+  speedSync: number
+  speedLimitsSync: number
+}
+
 export interface SettingsState {
   /** Settings related to the columns shown on the dashboard. */
   columns: {
@@ -24,4 +30,6 @@ export interface SettingsState {
      */
     order: TorrentFields[]
   }
+
+  intervals: IntervalsType
 }

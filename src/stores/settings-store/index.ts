@@ -15,6 +15,9 @@ const settingsSlice = createSlice({
       .addCase(actions.columnResized, (state, action) => {
         state.columns.entries[action.payload.field].width += action.payload.delta
       })
+      .addCase(actions.intervalsUpdated, (state, action) => {
+        state.intervals = {...state.intervals, ...action.payload}
+      })
 })
 
 export default settingsSlice.reducer

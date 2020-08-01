@@ -78,6 +78,12 @@ const defaultState: SettingsState = {
       TorrentFields.ADDED,
     ]
   },
+
+  intervals: {
+    torrentsSync: 2000,
+    speedSync: 1000,
+    speedLimitsSync: 60000,
+  }
 }
 
 export default defaultState;

@@ -1,5 +1,8 @@
 import './styles';
-import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+
+import { selectIntervals } from '@puddle/stores';
 
 import Sidebar from '@puddle/components/sidebar';
 import Dashboard from '@puddle/components/dashboard';
@@ -21,10 +24,20 @@ export default function Client(props: ClientViewProps) {
   const rootRef = useRef<HTMLDivElement>(null)
   useEffect(() => startUpdater(props.transmission), [])
   useEffect(() => rootRef?.current?.focus(), [])
+  const intervals = useSelector(selectIntervals)
+  const [stopUpdates, setStopUpdates] = useState<VoidFunction>()
+  useEffect(() => {
+    if (stopUpdates) {
+      stopUpdates() // cancel the existing updaters.
+    }
 
-  // {this.state.overlay &&
-  //   <OverlayMenu render={this.state.overlay as React.ReactChild}
-  //                onClick={() => this.setState({overlay: undefined})} />}
+    // start a new set of updaters
+    setStopUpdates(() => startUpdater(
+      props.transmission, intervals.torrentsSync,
+      intervals.speedSync, intervals.speedLimitsSync))
+
+    return () => stopUpdates && stopUpdates()
+  }, [intervals])
 
   const onKeyPress = (e: React.KeyboardEvent) => {
     rootKeyHandler(e, { searchRef, rootRef })

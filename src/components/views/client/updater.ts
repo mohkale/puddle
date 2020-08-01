@@ -4,29 +4,32 @@ import store, {
   updateTorrents, syncStats, syncStatsLimits,
 } from '@puddle/stores';
 
-const TORRENT_SYNC_INTERVAL = 2000;
-const STATS_SYNC_SPEED_INTERVAL = 1000;
-const STATS_SYNC_LIMIT_INTERVAL = 60000;
+// TODO this can be refactored. Group each of theses into
+// objects with an associated timeout and a reference to
+// itself in a closure.
 
-export default function updater(t: Transmission) {
+export default function updater(
+  t: Transmission, torrentSyncInterval: number,
+  speedSyncInterval: number, speedLimitsSyncInterval: number
+) {
   let updateTorrentsTimeout, syncStatsTimeout, syncStatsLimitTimeout;
   const fetchTorrents = () =>
     updateTorrentsTimeout = setTimeout(() => {
       store.dispatch(updateTorrents(t))
         .then(fetchTorrents)
-    }, TORRENT_SYNC_INTERVAL)
+    }, torrentSyncInterval)
 
   const updateStats = () =>
     syncStatsTimeout = setTimeout(() => {
       store.dispatch(syncStats(t))
         .then(updateStats)
-    }, STATS_SYNC_SPEED_INTERVAL)
+    }, speedSyncInterval)
 
   const updateStatsLimits = () =>
     syncStatsLimitTimeout = setTimeout(() => {
       store.dispatch(syncStatsLimits(t))
         .then(updateStatsLimits)
-    }, STATS_SYNC_LIMIT_INTERVAL)
+    }, speedLimitsSyncInterval)
 
   fetchTorrents();
   updateStats();
@@ -36,5 +39,10 @@ export default function updater(t: Transmission) {
     updateTorrentsTimeout && clearTimeout(updateTorrentsTimeout)
     syncStatsTimeout && clearTimeout(syncStatsTimeout)
     syncStatsLimitTimeout && clearTimeout(syncStatsLimitTimeout)
+
+    // after clearing, invoke updateTorrents anyways, just in
+    // case we missed the duration in which changes are
+    // transmitted.
+    store.dispatch(updateTorrents(t))
   }
 }
