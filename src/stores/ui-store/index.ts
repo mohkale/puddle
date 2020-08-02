@@ -5,6 +5,7 @@ export * from './actions';
 export * from './views';
 export * from './thunks';
 export * from './key-commands';
+export * from './overlays';
 
 import defaultState from './default';
 import * as actions from './actions';
@@ -60,6 +61,9 @@ const uiSlice = createSlice({
       })
       .addCase(actions.allTorrentsDeselected, (state) => {
         state.selected = []
+      })
+      .addCase(actions.overlayAssigned, (state, action) => {
+        state.overlay = action.payload
       })
 })
 

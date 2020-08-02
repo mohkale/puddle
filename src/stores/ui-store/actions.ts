@@ -2,6 +2,7 @@ import { XOR } from 'ts-xor'
 import { createAction } from '@reduxjs/toolkit';
 
 import { ViewType } from './views';
+import { OverlayType } from './overlays';
 import { TorrentClasses } from '../classes';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -20,3 +21,5 @@ export const torrentSelected = createAction<{ ids: number[], append?: boolean }>
 export const allTorrentsDeselected = createAction('ui/torrents/deselect-all')
 
 export const viewChanged = createAction<{ type: ViewType, [key: string]: any }>('ui/view-change')
+
+export const overlayAssigned = createAction<OverlayType|undefined>('ui/set-overlay')

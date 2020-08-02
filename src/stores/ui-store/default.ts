@@ -8,6 +8,7 @@ const defaultState: UIState = {
   },
 
   selected: [],
+  overlay: undefined,
 
   filters: {
     query: '',

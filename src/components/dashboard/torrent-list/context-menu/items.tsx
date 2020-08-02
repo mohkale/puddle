@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { ClientContext } from '@puddle/components';
+import store, { overlayAssigned, OverlayKind } from '@puddle/stores';
 
 export interface ContextItemProps {
   torrents: number[]
@@ -51,7 +52,14 @@ export function SetTorrentLocationItem(props: ContextItemProps) {
 
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 export function DetailsItem(props: ContextItemProps) {
-  return <li>Details</li>;
+  const onClick = () => {
+    store.dispatch(overlayAssigned({
+      kind: OverlayKind.TORRENT_DETAILS,
+      torrentId: props.torrents[0]
+    }))
+  }
+
+  return <li onClick={onClick}>Details</li>;
 }
 
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */

@@ -1,4 +1,5 @@
 import { ViewType } from './views';
+import { OverlayType } from './overlays';
 import { TorrentClasses } from '../classes';
 
 export interface UIState {
@@ -6,6 +7,8 @@ export interface UIState {
 
   /** subset of torrents that have been selected. */
   selected: number[]
+
+  overlay: OverlayType|undefined
 
   /**
    * Field that are used to filter down the displayed list of

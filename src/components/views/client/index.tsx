@@ -1,12 +1,11 @@
-import '@cstyles/views/client';
 import { useSelector } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { selectIntervals } from '@puddle/stores';
+import { selectOverlay, selectIntervals } from '@puddle/stores';
 
 import Sidebar from '@puddle/components/sidebar';
 import Dashboard from '@puddle/components/dashboard';
-// import OverlayMenu from '@puddle/components/overlays/menu';
+import Overlay from '@puddle/components/overlays';
 
 import Transmission from '@puddle/transmission';
 import ClientViewContext from './context';
@@ -15,14 +14,18 @@ import rootKeyHandler from './key-handler';
 import startUpdater from './updater';
 
 interface ClientViewProps {
-  // overlay?: ReactChild
   transmission: Transmission
+}
+
+// apply to wrap a bunch of inline items without modifying their
+// own stylings.
+const WRAPPER_STYLES = {
+  display: 'flex', width: '100%', height: '100%'
 }
 
 export default function Client(props: ClientViewProps) {
   const searchRef = useRef<HTMLInputElement>()
   const rootRef = useRef<HTMLDivElement>(null)
-  useEffect(() => rootRef?.current?.focus(), [])
   const intervals = useSelector(selectIntervals)
   useEffect(() => {
     const stopUpdates = startUpdater(
@@ -31,6 +34,8 @@ export default function Client(props: ClientViewProps) {
 
     return () => stopUpdates()
   }, [intervals])
+  useEffect(() => rootRef?.current?.focus(), [])
+  const overlay = useSelector(selectOverlay)
 
   const onKeyPress = (e: React.KeyboardEvent) => {
     rootKeyHandler(e, { searchRef, rootRef })
@@ -41,12 +46,15 @@ export default function Client(props: ClientViewProps) {
       value={{
         transmission: props.transmission
       }}>
-      <div ref={rootRef} className="client-view" tabIndex={-1} onKeyDown={onKeyPress}>
-        <Sidebar searchRef={searchRef} />
-        <Dashboard />
+      {overlay &&
+        <Overlay {...overlay} />}
+      <div ref={rootRef} className="client-view" tabIndex={-1} onKeyDown={onKeyPress}
+           style={{...WRAPPER_STYLES, outline: 'none'}} >
+        <div className="client-root" style={WRAPPER_STYLES}>
+          <Sidebar searchRef={searchRef} />
+          <Dashboard />
+        </div>
       </div>
     </ClientViewContext.Provider>
   );
 }
-
-

@@ -90,12 +90,13 @@ export interface Theme {
   torrentsErrorRow: TorrentListRow,
   torrentsCheckingRow: TorrentListRow,
 
-  overlayContainerBackground: string,
-  overlayBorderColor: string,
-  overlayBg: string,
-  overlayFg: string,
-  overlayTitle: string,
-  overlayHighlight: string,
+  overlayBackground: string,
+
+  modalBorderColor: string,
+  modalBg: string,
+  modalFg: string,
+  modalTitle: string,
+  modalHighlight: string,
 }
 
 export function setTheme(theme: Theme) {
@@ -189,12 +190,13 @@ export function setTheme(theme: Theme) {
   setTorrentsRowClasses('--torrents-error-row', '--torrents-selected-error-row', theme.torrentsErrorRow)
   setTorrentsRowClasses('--torrents-checking-row', '--torrents-selected-checking-row', theme.torrentsCheckingRow)
 
-  root.setProperty('--overlay-container-background', theme.overlayContainerBackground);
-  root.setProperty('--overlay-border-color', theme.overlayBorderColor)
-  root.setProperty('--overlay-bg', theme.overlayBg)
-  root.setProperty('--overlay-fg', theme.overlayFg)
-  root.setProperty('--overlay-title', theme.overlayTitle)
-  root.setProperty('--overlay-highlight', theme.overlayHighlight)
+  root.setProperty('--overlay-background', theme.overlayBackground);
+
+  root.setProperty('--modal-border-color', theme.modalBorderColor)
+  root.setProperty('--modal-bg', theme.modalBg)
+  root.setProperty('--modal-fg', theme.modalFg)
+  root.setProperty('--modal-title', theme.modalTitle)
+  root.setProperty('--modal-highlight', theme.modalHighlight)
 }
 
 // reverse engineered from [[https://github.com/Flood-UI/flood][flood]].
@@ -331,10 +333,13 @@ export const defaultTheme: Theme = {
     selectedProgressBarFg: '#f2acbc',
     selectedProgressBarBg: 'rgba(255,255,255,0.15)',
   },
-  overlayContainerBackground: 'radial-gradient(circle, rgba(0,0,0,0.5) 35%, rgba(0,0,0,0.75) 100%)',
-  overlayBorderColor: 'rgba(9,24,36,0.4)',
-  overlayBg: '#3A4553',
-  overlayFg: '#7d8d9f',
-  overlayTitle: 'white',
-  overlayHighlight: '#abc2e2',
+  // overlayContainerBackground: 'radial-gradient(circle, rgba(0,0,0,0.5) 35%, rgba(0,0,0,0.75) 100%)',
+
+  overlayBackground: 'rgba(11,16,20,0.95)',
+
+  modalBorderColor: '#363e48',
+  modalBg: '#3A4553',
+  modalFg: '#7d8d9f',
+  modalTitle: 'white',
+  modalHighlight: '#abc2e2',
 };

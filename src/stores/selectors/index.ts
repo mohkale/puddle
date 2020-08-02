@@ -31,5 +31,8 @@ export const selectCurrentView =
 export const selectNotifications =
   (state: RootState) => state.notifications.active
 
+export const selectOverlay =
+  (state: RootState) => state.ui.overlay
+
 export const selectIntervals =
   (state: RootState) => state.settings.intervals
