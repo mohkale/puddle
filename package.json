@@ -50,6 +50,7 @@
     "flexsearch": "^0.6.32",
     "fork-ts-checker-webpack-plugin": "^5.0.7",
     "html-webpack-plugin": "^4.3.0",
+    "interval-promise": "^1.4.0",
     "jsdoc": "^3.6.4",
     "moment": "^2.27.0",
     "normalize.css": "^8.0.1",

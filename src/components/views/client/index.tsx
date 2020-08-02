@@ -22,7 +22,6 @@ interface ClientViewProps {
 export default function Client(props: ClientViewProps) {
   const searchRef = useRef<HTMLInputElement>()
   const rootRef = useRef<HTMLDivElement>(null)
-  useEffect(() => startUpdater(props.transmission), [])
   useEffect(() => rootRef?.current?.focus(), [])
   const intervals = useSelector(selectIntervals)
   useEffect(() => {

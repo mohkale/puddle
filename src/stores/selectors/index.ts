@@ -30,3 +30,6 @@ export const selectCurrentView =
 
 export const selectNotifications =
   (state: RootState) => state.notifications.active
+
+export const selectIntervals =
+  (state: RootState) => state.settings.intervals
