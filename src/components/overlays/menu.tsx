@@ -1,6 +1,5 @@
+import '@cstyles/overlays';
 import React from 'react';
-
-import './styles';
 
 interface OverlayProps {
   render: React.ReactChild | React.ReactChildren,

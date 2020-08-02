@@ -1,4 +1,4 @@
-import './index.scss';
+import '@cstyles/sidebar';
 import React from 'react';
 
 import Filters from './filters';

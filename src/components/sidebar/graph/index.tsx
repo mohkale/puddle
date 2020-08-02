@@ -1,4 +1,4 @@
-import './styles';
+import '@cstyles/sidebar/graph';
 import React from 'react';
 import { useSelector } from 'react-redux';
 

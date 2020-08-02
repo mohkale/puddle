@@ -1,6 +1,6 @@
-@import "@puddle/styles/config";
-@import "@puddle/styles/no-select";
-@import "@puddle/styles/fade-in-down";
+@import "@styles/config";
+@import "@styles/no-select";
+@import "@styles/animations/fade-in-down";
 
 @mixin notification-color-scheme($selector, $fg, $bg, $hover-bg, $icon-fg, $icon-bg) {
     .notifications li#{$selector} {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './styles';
+import '@cstyles/dashboard';
 import TorrentList from './torrent-list';
 import ActionButtons from './action-buttons';
 

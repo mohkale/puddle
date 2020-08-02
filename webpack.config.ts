@@ -39,7 +39,9 @@ let mainConfig: ConfigurationFunction = env => Object.assign({}, sharedConfig, {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss'],
     alias: {
       // use this to access from root of src hirearchy.
-      '@puddle': pathResolve('src')
+      '@puddle': pathResolve('src'),
+      '@styles': pathResolve('src/styles'),
+      '@cstyles': pathResolve('src/styles/components'),
     }
   },
   optimization: {

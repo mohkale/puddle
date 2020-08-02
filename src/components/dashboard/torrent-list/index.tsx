@@ -1,5 +1,8 @@
+import '@cstyles/torrent-list';
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
+
+import '@cstyles/scrollbar';
 import { Scrollbar } from 'react-scrollbars-custom';
 
 import Torrent from './torrent';

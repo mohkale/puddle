@@ -1,2 +1,2 @@
-import './styles';
+import '@cstyles/notifications';
 export { NotificationList } from './list';

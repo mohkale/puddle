@@ -1,4 +1,4 @@
-import './index.scss';
+import '@cstyles/views/login';
 import React, { useState, useRef } from 'react';
 
 import Transmission from '@puddle/transmission';

@@ -1,5 +1,5 @@
-@import "@puddle/styles/config";
-@import "@puddle/styles/rotating";
+@import "@styles/config";
+@import "@styles/animations/rotating";
 
 @mixin button-loader-color-scheme(
     $fg, $bg, $hover-fg, $hover-bg, $active-fg,

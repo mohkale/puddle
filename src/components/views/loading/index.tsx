@@ -1,4 +1,4 @@
-import './index.scss';
+import '@cstyles/views/loading';
 import React from 'react';
 import Loading from 'react-loading';
 

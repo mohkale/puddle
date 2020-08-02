@@ -1,4 +1,4 @@
-import './styles';
+import '@cstyles/sidebar/filters';
 import React, { Fragment } from 'react';
 
 import SearchBar from './search';
@@ -6,6 +6,7 @@ import ClassFilters from './class';
 import LabelFilters from './labels';
 import TrackerFilters from './trackers';
 
+import '@cstyles/scrollbar';
 import { Scrollbar } from 'react-scrollbars-custom';
 
 export interface FiltersProps {

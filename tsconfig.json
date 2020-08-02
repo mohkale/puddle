@@ -28,7 +28,9 @@
     "forceConsistentCasingInFileNames": true,   /* Disallow inconsistently-cased references to the same file. */
     "isolatedModules": true,
     "paths": {
-      "@puddle/*": ["src/*"]
+      "@puddle/*": ["src/*"],
+      "@styles/*": ["src/styles/*"],
+      "@cstyles/*":  ["src/styles/components/*"],
     }
   },
   "include": [
