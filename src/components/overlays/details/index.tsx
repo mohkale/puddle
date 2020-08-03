@@ -1,7 +1,7 @@
 import '@cstyles/overlays/details';
 import React, { useEffect, useState, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { OverlayType, TorrentDetailsOverlay, selectTorrentById, intervalsUpdated, selectIntervals } from '@puddle/stores'
+import { OverlayType, selectTorrentDetailsOverlayTorrentId, selectTorrentById, intervalsUpdated, selectIntervals } from '@puddle/stores'
 import OverlayContainer from '../container';
 import { ClientContext } from '@puddle/components';
 import Header from './header';
@@ -40,10 +40,13 @@ const TORRENT_DETAILS_VIEWS: { [key in DetailsFields]: TabbedMenuViewType } = {
   }
 }
 
-export default function TorrentDetails(props: TorrentDetailsOverlay) {
+export default function TorrentDetails() {
   const dispatch = useDispatch()
   const { transmission } = useContext(ClientContext)
   const originalIntervals = useSelector(selectIntervals)
+
+  const torrentId = useSelector(selectTorrentDetailsOverlayTorrentId)
+
   // reduce the time durations of the background requests, so that
   // we can request information about the current torrent easily.
   useEffect(() => {
@@ -60,7 +63,7 @@ export default function TorrentDetails(props: TorrentDetailsOverlay) {
     let timeoutId: number|undefined
 
     const updateTorrentInInterval = () => {
-      transmission.torrent(props.torrentId, ...TORRENT_FULL_FIELDS)
+      transmission.torrent(torrentId, ...TORRENT_FULL_FIELDS)
         .then(torrent => {
           setTorrent(torrentFromResponse(torrent))
           timeoutId = setTimeout(updateTorrentInInterval, VIEW_DETAILS_INTERVAL)
@@ -84,7 +87,7 @@ export default function TorrentDetails(props: TorrentDetailsOverlay) {
     <TorrentDetailsContext.Provider value={{torrent, updateTorrent}}>
       <OverlayContainer>
         <div className={`modal torrent-details`}>
-          <Header torrentId={props.torrentId} />
+          <Header torrentId={torrentId} />
           <TabbedMenu active={DetailsFields.DETAILS} views={TORRENT_DETAILS_VIEWS} />
         </div>
       </OverlayContainer>

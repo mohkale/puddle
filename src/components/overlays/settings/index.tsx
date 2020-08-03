@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { SettingsOverlay } from '@puddle/stores'
 import OverlayContainer from '../container';
 
-export default function Settings(props: SettingsOverlay) {
+export default function Settings() {
   return (
     <OverlayContainer>
       <div className={`modal settings`}>

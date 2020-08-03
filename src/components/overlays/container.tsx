@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDispatch } from 'react-redux';
-import { overlayAssigned } from '@puddle/stores';
+import { overlayRemoved } from '@puddle/stores';
 
 /**
  * A [[https://reactjs.org/docs/higher-order-components.html][higher order component]] to construct overlays. These
@@ -14,7 +14,7 @@ export default function OverlayContainer(props) {
 
   const onClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
-      dispatch(overlayAssigned(undefined))
+      dispatch(overlayRemoved())
     }
   }
 

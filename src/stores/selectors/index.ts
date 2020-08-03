@@ -1,6 +1,7 @@
 import { RootState } from '../state';
 
 export * from './columns';
+export * from './overlays';
 export * from './filter-lists';
 export * from './selected-torrents';
 export * from './filtered-torrents';

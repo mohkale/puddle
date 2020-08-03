@@ -6,6 +6,7 @@ import { StatsState } from './stats-store';
 import { SettingsState } from './settings-store';
 import { UIState } from './ui-store';
 import { NotificationsState } from './notifications-store';
+import { OverlaysState } from './overlays-store';
 
 export interface RootState {
   ui: UIState
@@ -13,6 +14,7 @@ export interface RootState {
   torrents: TorrentState
   settings: SettingsState
   notifications: NotificationsState
+  overlays: OverlaysState
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */

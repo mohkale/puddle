@@ -46,8 +46,8 @@ export default function Client(props: ClientViewProps) {
       value={{
         transmission: props.transmission
       }}>
-      {overlay &&
-        <Overlay {...overlay} />}
+      {overlay !== undefined &&
+        <Overlay type={overlay} />}
       <div ref={rootRef} className="client-view" tabIndex={-1} onKeyDown={onKeyPress}
            style={{...WRAPPER_STYLES, outline: 'none'}} >
         <div className="client-root" style={WRAPPER_STYLES}>

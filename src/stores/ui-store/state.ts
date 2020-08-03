@@ -1,5 +1,5 @@
 import { ViewType } from './views';
-import { OverlayType } from './overlays';
+import { OverlayType } from '../overlays-store';
 import { TorrentClasses } from '../classes';
 
 export interface UIState {

@@ -5,14 +5,17 @@ export * from './actions';
 export * from './views';
 export * from './thunks';
 export * from './key-commands';
-export * from './overlays';
 
 import defaultState from './default';
 import * as actions from './actions';
 
 import { torrentsRemoved } from '../torrents-store/actions';
-
 import { arrayRemove } from '@puddle/utils';
+
+import {
+  OverlayType, overlayRemoved, torrentDetailsOverlayAssigned,
+  settingsOverlayAssigned
+} from '../overlays-store';
 
 const uiSlice = createSlice({
   name: 'ui',
@@ -62,8 +65,14 @@ const uiSlice = createSlice({
       .addCase(actions.allTorrentsDeselected, (state) => {
         state.selected = []
       })
-      .addCase(actions.overlayAssigned, (state, action) => {
-        state.overlay = action.payload
+      .addCase(overlayRemoved, (state, action) => {
+        state.overlay = undefined
+      })
+      .addCase(settingsOverlayAssigned, (state, action) => {
+        state.overlay = OverlayType.SETTINGS
+      })
+      .addCase(torrentDetailsOverlayAssigned, (state, action) => {
+        state.overlay = OverlayType.TORRENT_DETAILS
       })
 })
 
