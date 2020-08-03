@@ -81,7 +81,7 @@ export default class Transmission {
    * that can be passed to fromSerialise to reconstruct you're
    * current transmission session.
    */
-  serialise(): TransmissionSerialised {
+  serialise = (): TransmissionSerialised => {
     return {
       url: this.url,
       sessionId: this.sessionId,
@@ -106,7 +106,7 @@ export default class Transmission {
    *
    * @returns an object that can be passed to {@code fetch}.
    */
-  private requestInit(params: any): RequestInit {
+  private requestInit = (params: any): RequestInit => {
     if (this.requestTag) {
       // WARN mutates params in place, TODO check
       // whether there's any benefit to cloning it.
@@ -136,7 +136,7 @@ export default class Transmission {
    * @param args the associated arguments for {@code method}.
    * @returns a promise containing the JSON response of the request.
    */
-  request(method: string, args: any) {
+  request = (method: string, args: any) => {
     const params = { method: method, 'arguments': args }
     return fetch(this.url, this.requestInit(params))
       .then(resp => {
@@ -164,12 +164,12 @@ export default class Transmission {
         }});
   }
 
-  async session() {
+  session = async () => {
     return this.request('session-get', {})
       .then(json => json["arguments"] as SessionResponse);
   }
 
-  async sessionStats() {
+  sessionStats = async () => {
     return this.request('session-stats', {})
       .then(json => json['arguments'] as SessionResponseStats)
   }
@@ -185,60 +185,60 @@ export default class Transmission {
    *
    * @param props the new assignments for the session fields.
    */
-  async setSession(props: Partial<SessionMutableFields>) {
+  setSession = async (props: Partial<SessionMutableFields>) => {
     return this.request('session-set', props);
   }
 
-  async moveTorrentsUp(torrents: TorrentIds) {
+  moveTorrentsUp = async (torrents: TorrentIds) => {
     return this.request('queue-move-up', torrentIdsToParam(torrents))
   }
 
-  async moveTorrentsDown(torrents: TorrentIds) {
+  moveTorrentsDown = async (torrents: TorrentIds) => {
     return this.request('queue-move-down', torrentIdsToParam(torrents))
   }
 
-  async moveTorrentsToTop(torrents: TorrentIds) {
+  moveTorrentsToTop = async (torrents: TorrentIds) => {
     return this.request('queue-move-top', torrentIdsToParam(torrents))
   }
 
-  async moveTorrentsToBottom(torrents: TorrentIds) {
+  moveTorrentsToBottom = async (torrents: TorrentIds) => {
     return this.request('queue-move-bottom', torrentIdsToParam(torrents))
   }
 
-  async startTorrent(torrents: TorrentIds) {
+  startTorrent = async (torrents: TorrentIds) => {
     return this.request('torrent-start', torrentIdsToParam(torrents))
   }
 
-  async startTorrentNow(torrents: TorrentIds) {
+  startTorrentNow = async (torrents: TorrentIds) => {
     return this.request('torrent-start-now', torrentIdsToParam(torrents))
   }
 
-  async stopTorrent(torrents: TorrentIds) {
+  stopTorrent = async (torrents: TorrentIds) => {
     return this.request('torrent-stop', torrentIdsToParam(torrents))
   }
 
-  async verifyTorrent(torrents: TorrentIds) {
+  verifyTorrent = async (torrents: TorrentIds) => {
     return this.request('torrent-verify', torrentIdsToParam(torrents))
   }
 
-  async reannounceTorrent(torrents: TorrentIds) {
+  reannounceTorrent = async (torrents: TorrentIds) => {
     return this.request('torrent-reannounce', torrentIdsToParam(torrents))
   }
 
-  async setTorrentLocation(torrents: TorrentIds, location: string, move: boolean=false) {
+  setTorrentLocation = async (torrents: TorrentIds, location: string, move: boolean=false) => {
     return this.request('torrent-set-location', torrentIdsToParam(torrents, {
       location: location,
       move: move
     }))
   }
 
-  async removeTorrent(ids: TorrentIds, eraseLocalData: boolean) {
+  removeTorrent = async (ids: TorrentIds, eraseLocalData: boolean) => {
     return this.request('torrent-remove', torrentIdsToParam(ids, {
       'delete-local-data': eraseLocalData
     }))
   }
 
-  async addTorrent(
+  addTorrent = async (
     filename:     string,
     cookies?:     string,
     downloadDir?: string,
@@ -253,7 +253,7 @@ export default class Transmission {
        priorityNormal: string[],
        bandwidthPriority?: number,
        peerLimit?: number, */
-  ) {
+  ) => {
     const props = { filename: filename }
     if (undefined !== cookies)     props['cookies'] = cookies
     if (undefined !== downloadDir) props['download-dir'] = downloadDir
@@ -269,7 +269,7 @@ export default class Transmission {
       });
   }
 
-  async setTorrent(ids: TorrentIds, props: Partial<TorrentMutableFields & TorrentWriteOnlyFields>) {
+  setTorrent = async (ids: TorrentIds, props: Partial<TorrentMutableFields & TorrentWriteOnlyFields>) => {
     return this.request('torrent-set', torrentIdsToParam(ids, props))
   }
 
@@ -277,12 +277,12 @@ export default class Transmission {
    * An alias for {@code this.torrents} which operates specifically on a single
    * torrent.
    */
-  async torrent(id: TorrentId, ...fields: (keyof TorrentResponse)[]) {
+  torrent = async (id: TorrentId, ...fields: (keyof TorrentResponse)[]) => {
     return this.torrents(id, ...fields)
       .then(torrents => torrents[0]);
   }
 
-  async torrents(ids: TorrentIds, ...fields: (keyof TorrentResponse)[]) {
+  torrents = async (ids: TorrentIds, ...fields: (keyof TorrentResponse)[]) => {
     // NOTE there may be a way to get even more helpful type information here.
     // if typescripts Partial lets you specify at compile time the fields that
     // the response definitely has. In practice that doesn't seem likely :cry:.
@@ -295,7 +295,7 @@ export default class Transmission {
    * that returns information about how the state of transmission has changed
    * over the last [[https://github.com/transmission/transmission/issues/809][RECENTLY_ACTIVE_SECONDS]].
    */
-  async recentlyActiveTorrents(...fields: (keyof TorrentResponse)[]) {
+  recentlyActiveTorrents = async (...fields: (keyof TorrentResponse)[]) => {
     return this.request('torrent-get', {ids: 'recently-active', fields: fields})
       .then(resp => resp['arguments'] as TransmissionRecentlyActiveResponse)
   }

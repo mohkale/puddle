@@ -1,16 +1,5 @@
 @import "@styles/animations/fade-in-down";
 
-@keyframes lineInserted {
-    from {
-        height: 0;
-        color: blue;
-    }
-    to {
-        height: 20px; /* your line height here */
-        color: green;
-    }
-}
-
 .context-menu {
     position: absolute;
     width: 100%;

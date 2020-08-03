@@ -37,7 +37,7 @@ export interface TransmissionTorrentPeers {
   port: number
   progress: number
   rateToClient: number
-  rateToPerr: number
+  rateToPeer: number
 }
 
 export interface TransmissionTorrentPeersFrom {
@@ -88,8 +88,6 @@ export interface TransmissionTorrentTrackerStats {
   tier: number
 }
 
-type TransmissionPriorityType = 1 | 0 | -1;
-
 /**
  * Fields that you can assign using the torrent-set method
  * but you can't retrieve using the torrent-get method.
@@ -110,6 +108,12 @@ export interface TransmissionTorrent_WriteOnly {
   "trackerReplace": { [id: number]: string }
 }
 
+export enum TransmissionPriorityType {
+  HIGH = +1,
+  NORM = 0,
+  LOW  = -1
+}
+
 /**
  * Fields of {@code TransmissionTorrentType} that can be modified
  * using the torrent-set method. Write only fields can also be found
@@ -117,7 +121,7 @@ export interface TransmissionTorrent_WriteOnly {
  * read only.
  */
 export interface TransmissionTorrent_Mutable {
-  "bandwidthPriority": number
+  "bandwidthPriority": TransmissionPriorityType
   "downloadLimit": number
   "downloadLimited": boolean
   "honorsSessionLimits": boolean
@@ -133,6 +137,14 @@ export interface TransmissionTorrent_Mutable {
   "uploadLimited": boolean
 }
 
+// see [[https://github.com/transmission/transmission/blob/master/libtransmission/transmission.h#L1674][tr_stat_errtype]].
+export enum TransmissionError {
+  OK,
+  TRACKER_WARNING,
+  TRACKER_ERROR,
+  LOCAL_ERROR,
+}
+
 export interface TransmissionTorrent
        extends TransmissionTorrent_Mutable, TransmissionTorrent_WriteOnly {
   "activityDate": number
@@ -146,7 +158,7 @@ export interface TransmissionTorrent
   "downloadDir": string
   "downloadedEver": number
   "editDate": number
-  "error": number
+  "error": TransmissionError
   "errorString": string
   "eta": number
   "etaIdle": number

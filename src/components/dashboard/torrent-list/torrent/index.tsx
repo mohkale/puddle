@@ -9,7 +9,7 @@ import { TransmissionTorrentStatus as TorrentStatus } from '@puddle/transmission
 import renderColumn from './column';
 
 /** assign the classes for a torrent row. */
-function torrentClasses(torrent: Torrent, isSelected: boolean) {
+export function torrentClasses(torrent: Torrent, isSelected: boolean) {
   const classes: string[] = ['torrent']
   switch (torrent.status) {
     case TorrentStatus.STOPPED:

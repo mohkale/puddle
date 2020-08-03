@@ -117,6 +117,10 @@ const torrentSlice = createSlice({
 
         if (resort) sortByColumn(state, state.ordered)
       })
+      .addCase(actions.torrentPriorityChanged, (state, action) => {
+        action.payload.ids.forEach(id =>
+          state.entries[id].bandwidthPriority = action.payload.priority)
+      })
       .addCase(actions.activeFieldChanged, (state, action) => {
         if (state.activeField === action.payload.field) {
           state.showDescending = !state.showDescending

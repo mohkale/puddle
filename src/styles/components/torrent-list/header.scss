@@ -1,7 +1,7 @@
 @import "@styles/config";
 @import "@styles/no-select";
 
-header {
+#dashboard header {
     display: flex;
     justify-content: flex-end;
     background-color: var(--header-bg);

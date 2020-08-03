@@ -64,20 +64,6 @@ $resizer-width: 9px;
                 width: 100%;
             }
         }
-
-        .progress-bar {
-            display: grid;
-            grid-template-columns: max-content 1fr;
-            grid-gap: 4px;
-
-            svg { height: 8px; }
-            .fill {
-                margin: auto 0px;
-            }
-            .fill, .progress {
-                height: 3px;
-            }
-        }
     }
 
     // Start setting up color scheme for rows.
@@ -92,69 +78,83 @@ $resizer-width: 9px;
         border-top:    solid 1px var(--torrents-border-color);
         border-bottom: solid 1px var(--torrents-border-color);
 
-        &.selected {
-            --torrents-row-fg: var(--torrents-selected-row-fg);
-            --torrents-row-bg: var(--torrents-selected-row-bg);
-            --torrents-row-border-color: var(--torrents-selected-row-border-color);
-            --torrents-row-progress-bg: var(--torrents-selected-row-progress-bg);
-            --torrents-row-progress-fg: var(--torrents-selected-row-progress-fg);
+        &:not(.is-stopped) .Name {
+            font-weight: 500;
         }
-
-        .progress-bar {
-            .fill {
-                background-color: var(--torrents-row-progress-bg);
-            }
-            .progress {
-                background-color: var(--torrents-row-progress-fg);
-            }
-        }
-
-        /** variants for rows that're in different states. */
-        @mixin theme-customize($accessors, $prefix, $selected-prefix) {
-            &#{$accessors} {
-                --torrents-row-fg: var(#{$prefix}-fg);
-                --torrents-row-bg: var(#{$prefix}-bg);
-                --torrents-row-border-color: var(#{$prefix}-border-color);
-                --torrents-row-progress-fg: var(#{$prefix}-progress-fg);
-                --torrents-row-progress-bg: var(#{$prefix}-progress-bg);
-
-                &.selected {
-                    // not using selected here because .selected isn't specific enough above.
-                    --torrents-row-fg: var(#{$selected-prefix}-fg);
-                    --torrents-row-bg: var(#{$selected-prefix}-bg);
-                    --torrents-row-border-color: var(#{$selected-prefix}-border-color);
-                    --torrents-row-progress-fg: var(#{$selected-prefix}-progress-fg);
-                    --torrents-row-progress-bg: var(#{$selected-prefix}-progress-bg);
-                }
-
-                @content
-            }
-        }
-
-        @include theme-customize(
-            ":not(.is-stopped)",
-            "--torrents-downloading-row",
-            "--torrents-selected-downloading-row") {
-            .Name {
-                font-weight: 500;
-            }
-        }
-
-        @include theme-customize(
-            ".is-seeding",
-            "--torrents-seeding-row",
-            "--torrents-selected-seeding-row");
-
-        @include theme-customize(
-            ".is-checking",
-            "--torrents-checking-row",
-            "--torrents-selected-checking-row");
-
-        @include theme-customize(
-            ".has-error",
-            "--torrents-error-row",
-            "--torrents-selected-error-row");
     }
+}
+
+.torrent {
+    &.selected {
+        --torrents-row-fg: var(--torrents-selected-row-fg);
+        --torrents-row-bg: var(--torrents-selected-row-bg);
+        --torrents-row-border-color: var(--torrents-selected-row-border-color);
+        --torrents-row-progress-bg: var(--torrents-selected-row-progress-bg);
+        --torrents-row-progress-fg: var(--torrents-selected-row-progress-fg);
+    }
+
+    /** variants for rows that're in different states. */
+    @mixin theme-customize($accessors, $prefix, $selected-prefix) {
+        &#{$accessors} {
+            --torrents-row-fg: var(#{$prefix}-fg);
+            --torrents-row-bg: var(#{$prefix}-bg);
+            --torrents-row-border-color: var(#{$prefix}-border-color);
+            --torrents-row-progress-fg: var(#{$prefix}-progress-fg);
+            --torrents-row-progress-bg: var(#{$prefix}-progress-bg);
+
+            &.selected {
+                // not using selected here because .selected isn't specific enough above.
+                --torrents-row-fg: var(#{$selected-prefix}-fg);
+                --torrents-row-bg: var(#{$selected-prefix}-bg);
+                --torrents-row-border-color: var(#{$selected-prefix}-border-color);
+                --torrents-row-progress-fg: var(#{$selected-prefix}-progress-fg);
+                --torrents-row-progress-bg: var(#{$selected-prefix}-progress-bg);
+            }
+
+            @content
+        }
+    }
+
+    .progress-bar {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        grid-gap: 4px;
+
+        svg { height: 8px; }
+        .fill {
+            margin: auto 0px;
+        }
+        .fill, .progress {
+            height: 3px;
+        }
+
+        .fill {
+            background-color: var(--torrents-row-progress-bg);
+        }
+        .progress {
+            background-color: var(--torrents-row-progress-fg);
+        }
+    }
+
+    @include theme-customize(
+        ":not(.is-stopped)",
+        "--torrents-downloading-row",
+        "--torrents-selected-downloading-row");
+
+    @include theme-customize(
+        ".is-seeding",
+        "--torrents-seeding-row",
+        "--torrents-selected-seeding-row");
+
+    @include theme-customize(
+        ".is-checking",
+        "--torrents-checking-row",
+        "--torrents-selected-checking-row");
+
+    @include theme-customize(
+        ".has-error",
+        "--torrents-error-row",
+        "--torrents-selected-error-row");
 }
 
 @import "./columns";

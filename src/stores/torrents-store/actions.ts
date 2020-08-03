@@ -2,6 +2,9 @@ import { createAction } from '@reduxjs/toolkit';
 
 import { Torrent } from '../torrent';
 import { TorrentFields } from '../fields';
+import {
+  TransmissionPriorityType as TorrentPriority
+} from '@puddle/transmission';
 
 /** action for when we're updating one or more torrents. */
 export const torrentsUpdated = createAction<{ torrents: Torrent[] }>('torrents/updated')
@@ -13,3 +16,6 @@ export const torrentsAdded = createAction<{ torrents: Torrent[] }>('torrents/add
 export const torrentsRemoved = createAction<{ ids: number[] }>('torrents/removed')
 
 export const activeFieldChanged = createAction<{ field: TorrentFields }>('settings/column-select')
+
+// updaters for specific fields in a torrent.
+export const torrentPriorityChanged = createAction<{ ids: number[], priority: TorrentPriority }>('torrents/priority-updated')

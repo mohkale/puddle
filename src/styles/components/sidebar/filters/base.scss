@@ -34,23 +34,6 @@
         background: var(--action-color);
     }
 
-    .badge {
-        color: black;
-        background: var(--side-bar-fg);
-        color: var(--side-bar-badge-fg);
-
-        border-radius: 100px;
-        padding: 2px 5px;
-        margin-left: 8px;
-        font-size: 0.75rem;
-        line-height: 1;
-        display: inline-block;
-        padding: 2px 5px;
-        transition: background 0.25s;
-        vertical-align: middle;
-        font-weight: 700;
-    }
-
     li {
         @include no-select();
         padding: 0px $filter-indent;

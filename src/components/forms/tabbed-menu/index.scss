@@ -1,0 +1,51 @@
+@import "@puddle/styles/config";
+
+$border-width: 1px;
+
+.tabbed-menu {
+    display: flex;
+
+    .tabs {
+        border-right: solid $border-width var(--modal-border-color);
+        padding: 20px 0px;
+        margin: 0px;
+        list-style-type: none;
+
+        flex-grow: 0;
+        flex-shrink: 0;
+
+        font-size: 0.85rem;
+        line-height: 1.25;
+        font-weight: 700;
+
+        li {
+            position: relative;
+            cursor: pointer;
+            box-sizing: border-box;
+            padding: 5px 35px;
+            transition: color $animation-duration;
+
+            &::after {
+                content: '';
+                position: absolute;
+                height: 100%;
+                width: $border-width;
+                right: -$border-width;
+                top: 0;
+                transition: background $animation-duration;
+            }
+
+            &.selected {
+                color: var(--action-color);
+
+                &::after {
+                    background: currentColor;
+                }
+            }
+        }
+    }
+
+    .tab {
+        flex-grow: 1;
+    }
+}

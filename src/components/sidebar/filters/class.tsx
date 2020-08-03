@@ -10,7 +10,8 @@ import {
 import {
   filterClassesUpdated, TorrentClasses, selectTorrentByClassWithMeta
 } from '@puddle/stores';
-import FilterList, { FilterListBadge } from './filter-list';
+import FilterList from './filter-list';
+import { Badge } from '@puddle/components'
 
 interface ClassSetting {
   icon: IconDefinition
@@ -68,7 +69,7 @@ export default function ClassFilters() {
             tabIndex={0} onKeyPress={onKeyPress}>
           <FontAwesomeIcon icon={settings.icon} className="icon" />
           {settings.title}
-          <FilterListBadge num={torrents.length}/>
+          <Badge num={torrents.length}/>
         </li>
       )
     })

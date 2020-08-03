@@ -28,6 +28,7 @@ export const TORRENT_FIELDS: (keyof TorrentResponse)[] = [
   "labels",
   "recheckProgress",
   "doneDate",
+  "bandwidthPriority",
 ]
 
 /**
@@ -37,7 +38,8 @@ type TorrentDefaultFields =
   Pick<TorrentResponse, "name" | "status" | "percentDone" |
        "downloadedEver" | "rateDownload" | "uploadedEver" | "rateUpload" |
        "eta" | "uploadRatio" | "sizeWhenDone" | "addedDate" | "error" |
-       "trackers" | "queuePosition" | "labels" | "recheckProgress" | "doneDate">
+       "trackers" | "queuePosition" | "labels" | "recheckProgress" | "doneDate" |
+       "bandwidthPriority" >
 
 /**
  * The model for a single torrent.
@@ -64,7 +66,7 @@ export interface Torrent extends TorrentDefaultFields {
  * A base type to supply defaults for the fields in {@code Torrent}
  * that aren't in {@code TorrentDefaultFields}.
  */
-const TORRENT_BASE: Partial<Torrent> = {
+export const TORRENT_BASE: Partial<Torrent> = {
   classes: TorrentClasses.ALL,
 }
 
@@ -76,7 +78,6 @@ export function fromResponse(resp: Partial<TorrentResponse>, prev?: Torrent) {
   const base = prev ? prev! : TORRENT_BASE
   const torrent = Object.assign({}, base, resp) as Torrent
   torrent.classes = torrentClass(torrent)
-  // torrent.progress = (torrent.status === TorrentS)
   if (torrent.status === TorrentStatus.CHECK ||
       torrent.status === TorrentStatus.CHECK_WAIT) {
     torrent.progress = torrent.recheckProgress

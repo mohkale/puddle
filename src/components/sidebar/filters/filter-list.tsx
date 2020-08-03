@@ -1,18 +1,5 @@
 import React from 'react';
 
-/**
- * Component to associate a number of torrents with a
- * given filter. If the number isn't provided than a ?
- * is shown to indicate it's still being determined.
- */
-export function FilterListBadge(props: { num?: number }) {
-  return (
-    <span className="badge" key="badge">
-      {props.num != null ? props.num.toString() : '?'}
-    </span>
-  );
-}
-
 interface FilterListProps {
   title: string
   children: React.ReactNode

@@ -54,3 +54,15 @@ export const faTriangle: IconDefinition = {
     "M 16 3.21875 L 15.125 4.71875 L 3.125 25.5 L 2.28125 27 L 29.71875 27 L 28.875 25.5 L 16.875 4.71875 Z M 16 7.21875 L 26.25 25 L 5.75 25 Z M 15 14 L 15 20 L 17 20 L 17 14 Z M 15 21 L 15 23 L 17 23 L 17 21 Z"
   ]
 }
+
+export const faFile: IconDefinition = {
+  "prefix": "fas",
+  "iconName": "file",
+  "icon": [
+    32,
+    32,
+    [],
+    "",
+    "M 6 3 L 6 4 L 6 28 L 6 29 L 7 29 L 25 29 L 26 29 L 26 28 L 26 10 L 26 9.59375 L 25.71875 9.28125 L 19.71875 3.28125 L 19.40625 3 L 19 3 L 7 3 L 6 3 z M 8 5 L 18 5 L 18 10 L 18 11 L 19 11 L 24 11 L 24 27 L 8 27 L 8 5 z M 20 6.4375 L 22.5625 9 L 20 9 L 20 6.4375 z"
+  ]
+}

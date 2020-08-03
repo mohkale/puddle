@@ -96,3 +96,11 @@ export const updateTorrents =
       }
     }
   }
+
+export const updateTorrent =
+  (id: number, client: Transmission): RootThunk<Promise<void>> => {
+    return async (dispatch, getState) => {
+      const torrent = await client.torrent(id, ...TORRENT_FIELDS);
+      dispatch(torrentsUpdated({ torrents: [torrent] }))
+    }
+  }

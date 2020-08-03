@@ -1,0 +1,208 @@
+@import "@styles/no-select";
+@import "@styles/config";
+
+.modal.torrent-details {
+    width: 700px;
+    height: 45em;
+    display: flex;
+    flex-direction: column;
+
+    .badge {
+        background: rgba(125,141,159,0.2);
+        color: #7d8d9f;
+    }
+
+    .tabbed-menu {
+        flex-grow: 1;
+    }
+
+    header .icon {
+        width:  12px;
+        height: 12px;
+        margin-right: 3px;
+    }
+
+    .control-bar {
+        display: flex;
+        justify-content: space-between;
+
+        font-size: 0.85rem;
+        .unit {
+            font-size: 0.8em;
+        }
+
+        ul {
+            display: flex;
+            list-style-type: none;
+            padding: 0px;
+        }
+
+        li {
+            font-weight: 400;
+            margin-right: 1em;
+
+            &:last-child { margin-right: 0px; }
+
+            &.button {
+                cursor: pointer;
+            }
+
+            &.active {
+                font-weight: bold;
+
+                &.button {
+                    color: var(--action-color);
+                }
+                &.download {
+                    color: var(--torrents-downloading-row-progress-fg);
+                }
+                &.upload {
+                    color: var(--torrents-seeding-row-progress-fg);
+                }
+            }
+        }
+    }
+
+    header {
+        border-bottom: solid 1px var(--modal-border-color);
+    }
+}
+
+.torrent-details-table {
+    width: 100%;
+    padding: 1em 1.5em;
+    font-size: 0.8rem;
+
+    td:first-child {
+        color: #8393a3;
+        font-weight: 500;
+        padding-right: 12px;
+    }
+
+    td:not(:first-child) {
+        color: #7d8d9f;
+        font-weight: 400;
+    }
+
+    td[colspan="2"] {
+        color: #b8c1cb;
+        font-size: 0.85rem;
+        padding-top: 10px;
+        font-weight: 700;
+    }
+
+    span.missing {
+        font-style: italic;
+    }
+}
+
+.torrent-trackers-table {
+    width: 100%;
+    padding: 1em 1.5em;
+    font-size: 0.8rem;
+
+    thead td {
+        color: rgba(125,141,159,0.6);
+        font-size: 0.9rem;
+    }
+
+    td:nth-child(2) {
+        text-align: center;
+    }
+}
+
+.torrent-peers-table {
+    width: 100%;
+    padding: 1em 1.5em;
+    font-size: 0.8rem;
+
+    thead td {
+        color: rgba(125,141,159,0.6);
+        font-size: 0.9rem;
+    }
+
+    .icon.check {
+        color: var(--action-color);
+    }
+}
+
+.torrent-files-view {
+    $horizontal-padding: 25px;
+    $scrollbar-offset: 6px;
+
+    display: flex;
+    flex-direction: column;
+    width: 100%; height: 100%;
+    padding: 20px $horizontal-padding;
+    box-sizing: border-box;
+
+    padding-right: $scrollbar-offset;
+    .file-tree:first-child {
+        padding-right: $horizontal-padding - $scrollbar-offset;
+    }
+
+    .file-tree {
+        list-style-type: none;
+        font-size: 0.85rem;
+        padding: 0px;
+        margin: 0px;
+        margin-left: 8px;
+
+        li {
+            padding: 1px 0px;
+        }
+
+        .file {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #7d8d9f;
+            font-size: 0.8rem;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            transition: color $animation-duration;
+
+            &:hover {
+                color: #8799ad;
+            }
+
+            .name {
+                flex: 1 1 auto;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            & > *:not(:last-child) {
+                margin-right: 6.25px;
+            }
+        }
+
+        .directory > .file {
+            font-weight: 700;
+            color: #8799ad;
+        }
+    }
+}
+
+.submission-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: solid 1px var(--modal-border-color);
+    height: 34px;
+    padding-top: 9px;
+
+    p {
+        margin: 0px;
+    }
+}
+
+#priority-selector {
+    width: 220px;
+    padding: 5px;
+    background: #293341;
+    border-color: #202D3C;
+    box-shadow: 0 1px 1px rgba(41,51,65,0.15), 0 1px 3px 1px rgba(41,51,65,0.2);
+    color: #8899A8;
+}

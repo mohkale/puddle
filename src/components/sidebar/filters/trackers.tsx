@@ -5,7 +5,8 @@ import {
   filterTrackersUpdated, selectTorrentTrackersWithMeta
 } from '@puddle/stores';
 
-import FilterList, { FilterListBadge } from './filter-list';
+import FilterList from './filter-list';
+import { Badge } from '@puddle/components'
 
 export default function TrackerFilters() {
   const dispatch = useDispatch()
@@ -32,7 +33,7 @@ export default function TrackerFilters() {
         <li key={tracker} className={classes} title={tracker}
             onClick={toggleSelection} tabIndex={0} onKeyPress={onKeyPress}>
           {hostname}
-          <FilterListBadge num={count}/>
+          <Badge num={count}/>
         </li>
       )
     })

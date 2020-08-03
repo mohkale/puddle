@@ -27,3 +27,17 @@ h1 {
     border-right: solid 1px black;
     margin: 0px 4px;
 }
+
+.seperator {
+    width: 2em;
+    height: 1px;
+    display: inline-block;
+    border-top: solid 1px defaultColor;
+    vertical-align: middle;
+    margin: 0px 4px;
+}
+
+.highlight {
+    color: var(--action-color);
+    font-weight: bold;
+}

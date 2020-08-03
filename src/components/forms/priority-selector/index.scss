@@ -1,0 +1,46 @@
+.torrent-priority {
+    .label {
+        margin-left: 8px;
+    }
+    .indicator {
+        --color: currentColor;
+
+        width: 26px;
+        height: 8px;
+        cursor: pointer;
+        position: relative;
+        display: inline-block;
+
+        &::before, &::after {
+            background: var(--color);
+            content: '';
+            position: absolute;
+        }
+
+        &::after {
+            left: 0;
+            width: 100%;
+            height: 2px;
+            opacity: 0.25;
+
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        &::before {
+            width: 2px;
+            height: 100%;
+            transition: left 0.5s;
+        }
+
+        &.low::before           { left:  25%; }
+        &.norm::before          { left:  50%; }
+        &.high::before          { left: 100%; }
+        &.dont-download::before { left:   0%; }
+
+        // TODO move these to the theme
+        &.low  { --color: var(--torrents-seeding-row-progress-fg); }
+        &.norm { --color: var(--torrents-downloading-row-progress-fg); }
+        &.high { --color: var(--torrents-downloading-row-progress-fg); }
+    }
+}
