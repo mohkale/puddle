@@ -66,3 +66,39 @@ export function DetailsItem(props: ContextItemProps) {
 export function PriorityItem(props: ContextItemProps) {
   return <li>Priority</li>;
 }
+
+export function MoveToTopItem(props: ContextItemProps) {
+  const { transmission } = useContext(ClientContext)
+  const onClick = () => {
+    transmission.moveTorrentsToTop(props.torrents)
+  }
+
+  return <li onClick={onClick}>Move to Top</li>;
+}
+
+export function MoveToBottomItem(props: ContextItemProps) {
+  const { transmission } = useContext(ClientContext)
+  const onClick = () => {
+    transmission.moveTorrentsToBottom(props.torrents)
+  }
+
+  return <li onClick={onClick}>Move to Bottom</li>;
+}
+
+export function MoveUpItem(props: ContextItemProps) {
+  const { transmission } = useContext(ClientContext)
+  const onClick = () => {
+    transmission.moveTorrentsUp(props.torrents)
+  }
+
+  return <li onClick={onClick}>Move Up</li>;
+}
+
+export function MoveDownItem(props: ContextItemProps) {
+  const { transmission } = useContext(ClientContext)
+  const onClick = () => {
+    transmission.moveTorrentsDown(props.torrents)
+  }
+
+  return <li onClick={onClick}>Move Down</li>;
+}
