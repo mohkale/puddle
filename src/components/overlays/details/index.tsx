@@ -1,15 +1,16 @@
 import '@cstyles/overlays/details';
 import React, { useEffect, useState, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { OverlayType, selectTorrentDetailsOverlayTorrentId, selectTorrentById, intervalsUpdated, selectIntervals } from '@puddle/stores'
+import store, { OverlayType, selectTorrentDetailsOverlayTorrentId, selectTorrentById, intervalsUpdated, selectIntervals, torrentDetailsOverlayTorrentUpdated, selectTorrentDetailsOverlayTorrent } from '@puddle/stores'
 import OverlayContainer from '../container';
 import { ClientContext } from '@puddle/components';
 import Header from './header';
 import { torrentClasses } from '@puddle/components/dashboard/torrent-list/torrent';
 import { TabbedMenu, TabbedMenuViewType } from '@puddle/components';
 import { FilesView, PeersView, DetailsView, TrackersView } from './views';
-import { TorrentFull, fromResponse as torrentFromResponse, TORRENT_FULL_FIELDS } from './torrent-full';
+import { TorrentFull, torrentFullFromResponse as torrentFromResponse, TORRENT_FULL_FIELDS, updateTorrentDetails } from '@puddle/stores';
 import { TorrentDetailsContext } from './context';
+import { Updater } from '@puddle/components/views/client/updater'
 
 const VIEW_DETAILS_INTERVAL = 1000
 
@@ -43,6 +44,7 @@ const TORRENT_DETAILS_VIEWS: { [key in DetailsFields]: TabbedMenuViewType } = {
 export default function TorrentDetails() {
   const dispatch = useDispatch()
   const { transmission } = useContext(ClientContext)
+  const torrent = useSelector(selectTorrentDetailsOverlayTorrent)
   const originalIntervals = useSelector(selectIntervals)
 
   const torrentId = useSelector(selectTorrentDetailsOverlayTorrentId)
@@ -58,21 +60,14 @@ export default function TorrentDetails() {
 
     return () => { dispatch(intervalsUpdated(originalIntervals)) }
   }, [])
-  const [torrent, setTorrent] = useState<TorrentFull>()
+
+  // const [torrent, setTorrent] = useState<TorrentFull>()
   useEffect(() => {
-    let timeoutId: number|undefined
-
-    const updateTorrentInInterval = () => {
-      transmission.torrent(torrentId, ...TORRENT_FULL_FIELDS)
-        .then(torrent => {
-          setTorrent(torrentFromResponse(torrent))
-          timeoutId = setTimeout(updateTorrentInInterval, VIEW_DETAILS_INTERVAL)
-        })
-    }
-
-    updateTorrentInInterval()
-
-    return () => { timeoutId && clearTimeout(timeoutId) }
+    const updater =
+      new Updater(() => store.dispatch(updateTorrentDetails(transmission, torrentId)),
+                  VIEW_DETAILS_INTERVAL)
+    updater.start()
+    return () => { updater.stop() }
   }, [])
 
   if (torrent === undefined) {
@@ -80,7 +75,7 @@ export default function TorrentDetails() {
   }
 
   const updateTorrent = (t: Partial<TorrentFull>) => {
-    setTorrent(Object.assign({}, torrent, t))
+    dispatch(torrentDetailsOverlayTorrentUpdated(Object.assign({}, torrent, t)))
   }
 
   return (

@@ -11,7 +11,7 @@ import interval from 'interval-promise'
  * fixed intervals while offering a means to stop the action
  * at any point (including in between a running action).
  */
-class Updater {
+export class Updater {
   constructor(func: () => Promise<void>, interval: number) {
     this.promiser = func
     this.interval = interval

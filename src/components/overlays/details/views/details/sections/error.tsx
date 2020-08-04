@@ -3,7 +3,7 @@ import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectTorrentById, torrentPriorityChanged, torrentsUpdated, TorrentState, updateTorrent, Torrent } from '@puddle/stores'
 import { TorrentDetailsContext } from '../../../context';
-import { TorrentFull } from '../../../torrent-full';
+import { TorrentFull } from '@puddle/stores';
 import { scaleBytes } from '@puddle/utils';
 import { TransmissionError } from '@puddle/transmission';
 import { TableSection } from '../section';

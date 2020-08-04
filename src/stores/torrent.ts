@@ -74,7 +74,7 @@ export const TORRENT_BASE: Partial<Torrent> = {
  * Convert an API response that's guaranteed to have the fields in
  * {@code TORRENT_FIELDS} to a Torrent instance.
  */
-export function fromResponse(resp: Partial<TorrentResponse>, prev?: Torrent) {
+export function torrentFromResponse(resp: Partial<TorrentResponse>, prev?: Torrent) {
   const base = prev ? prev! : TORRENT_BASE
   const torrent = Object.assign({}, base, resp) as Torrent
   torrent.classes = torrentClass(torrent)

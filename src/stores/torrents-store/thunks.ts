@@ -8,7 +8,7 @@ import {
 } from '../notifications-store'
 
 import {
-  Torrent, fromResponse as torrentFromResponse, TORRENT_FIELDS
+  Torrent, torrentFromResponse, TORRENT_FIELDS
 } from '../torrent';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */

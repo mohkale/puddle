@@ -1,5 +1,5 @@
 import React from 'react';
-import { TorrentFull } from './torrent-full';
+import { TorrentFull } from '@puddle/stores';
 
 export interface TorrentDetailsContextType {
   torrent: TorrentFull

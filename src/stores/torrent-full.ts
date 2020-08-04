@@ -5,8 +5,8 @@
  */
 
 import {
-  Torrent, TORRENT_FIELDS, TORRENT_BASE, fromResponse as torrentFromResponse
-} from '@puddle/stores/torrent'
+  Torrent, TORRENT_FIELDS, TORRENT_BASE, torrentFromResponse
+} from './torrent'
 import { TransmissionTorrent as TorrentResponse } from '@puddle/transmission';
 
 export const TORRENT_FULL_FIELDS: (keyof TorrentResponse)[] = [
@@ -40,7 +40,7 @@ const TORRENT_FULL_BASE: Partial<TorrentFull> = {
   ...TORRENT_BASE,
 }
 
-export function fromResponse(resp: Partial<TorrentResponse>, prev?: TorrentFull): TorrentFull {
+export function torrentFullFromResponse(resp: Partial<TorrentResponse>, prev?: TorrentFull): TorrentFull {
   const base = prev ? prev! : TORRENT_FULL_BASE
   const torrent = Object.assign({}, torrentFromResponse(resp), base) as TorrentFull
 

@@ -2,10 +2,10 @@ import { TorrentDetailsOverlayState } from './state';
 
 const defaultState: TorrentDetailsOverlayState = {
   torrentId: -1,
-  // torrent: undefined,
+  torrent: undefined,
   // files: undefined,
   // fileStats: undefined,
-  // selectedFiles: [],
+  selectedFiles: [],
 }
 
 export default defaultState
