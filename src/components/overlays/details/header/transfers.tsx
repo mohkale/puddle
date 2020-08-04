@@ -1,5 +1,4 @@
 import React, { Fragment, useContext, useState } from 'react';
-import { TorrentDetailsContext } from '../context';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectTorrentById, torrentPriorityChanged, TorrentState,

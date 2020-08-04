@@ -1,12 +1,18 @@
 import { Action, ThunkDispatch } from '@reduxjs/toolkit';
 import { RootState, RootThunk } from '../../state';
-import Transmission, { TorrentId, TransmissionTorrent as TorrentResponse } from '@puddle/transmission';
-import { torrentDetailsOverlayAssigned, torrentDetailsOverlayTorrentUpdated } from './actions';
+import Transmission, { TorrentId, TransmissionTorrent as TorrentResponse, TransmissionPriorityType as PriorityType } from '@puddle/transmission';
+import { torrentDetailsOverlayAssigned, torrentDetailsOverlayTorrentUpdated, torrentDetailsOverlayTorrentAssigned } from './actions';
 import {
   TorrentDetailed,
   torrentDetailedFromResponse as torrentFromResponse,
   TORRENT_DETAILED_FIELDS
 } from '@puddle/models';
+import { selectTorrentDetailsOverlayTorrentId } from '../../selectors';
+import { TransmissionPriorityType as TorrentPriority } from '@puddle/transmission';
+
+import {
+  BandwidthPrioritySlider, isPriorityType, ExtendedPriorityType
+} from '@puddle/components';
 
 export const showTorrentDetails =
   (client: Transmission, id: number): RootThunk<Promise<void>> => {
@@ -21,12 +27,53 @@ export const showTorrentDetails =
   }
 
 export const updateTorrentDetails =
-  (client: Transmission, id: number): RootThunk<Promise<void>> => {
-    // TODO we can get id from the current state.
+  (client: Transmission): RootThunk<Promise<void>> => {
     return async (dispatch, getState) => {
+      const id = selectTorrentDetailsOverlayTorrentId(getState())
       client.torrent(id, ...TORRENT_DETAILED_FIELDS)
         .then(torrent => {
           dispatch(torrentDetailsOverlayTorrentUpdated(torrent))
         })
+    }
+  }
+
+export const setFilePriorities =
+  (client: Transmission, fileIds: number[],
+   priority: ExtendedPriorityType): RootThunk<Promise<void>> => {
+    return async (dispatch, getState) => {
+      const state = getState()
+      const torrentId = state.overlays.torrentDetails.torrentId
+      const fileStats = state.overlays.torrentDetails.torrent!.fileStats
+
+      // TODO cleanup, too much repitition
+      if (isPriorityType(priority)) {
+        switch (priority) {
+          case PriorityType.HIGH:
+            await client.setTorrent(torrentId, { 'files-wanted': fileIds, 'priority-high': fileIds })
+            break;
+          case PriorityType.NORM:
+            await client.setTorrent(torrentId, { 'files-wanted': fileIds, 'priority-normal': fileIds })
+            break;
+          case PriorityType.LOW:
+            await client.setTorrent(torrentId, { 'files-wanted': fileIds, 'priority-low': fileIds })
+            break;
+        }
+      } else {
+        await client.setTorrent(torrentId, { 'files-unwanted': fileIds })
+      }
+
+      dispatch(torrentDetailsOverlayTorrentAssigned({
+        fileStats: fileStats.map((stat, i) => {
+          if (!fileIds.includes(i)) {
+            return stat
+          }
+
+          return {
+            ...stat,
+            wanted: isPriorityType(priority) ? stat.wanted : false,
+            priority: isPriorityType(priority) ? priority : stat.priority,
+          }
+        })
+      }))
     }
   }

@@ -5,19 +5,20 @@ import {
   selectTorrentById, torrentPriorityChanged, torrentsUpdated,
   TorrentState, updateTorrent
 } from '@puddle/stores'
-import { TorrentDetailsContext } from '../../../context';
 import { TorrentDetailed, Torrent } from '@puddle/models';
 import { scaleBytes } from '@puddle/utils';
 import { TransmissionError } from '@puddle/transmission';
 import { TableSection, Missing, formatDate } from '../section';
+import { torrentSelector } from '../../../utils';
 
-type GeneralSectionProps =
-  Pick<TorrentDetailed, 'addedDate' | 'downloadDir' | 'labels'>
+export function GeneralSection() {
+  const addedDate = useSelector(torrentSelector(t => t.addedDate));
+  const downloadDir = useSelector(torrentSelector(t => t.downloadDir));
+  const labels = useSelector(torrentSelector(t => t.labels));
 
-export const GeneralSection = React.memo<GeneralSectionProps>((props) => {
-  const tags = props.labels.length === 0 ? (<Missing/>) : (
+  const tags = labels.length === 0 ? (<Missing/>) : (
     <ul className="tags">
-      {props.labels.map(label => <li key={label}>{label}</li>)}
+      {labels.map(label => <li key={label}>{label}</li>)}
     </ul>
   )
 
@@ -26,11 +27,11 @@ export const GeneralSection = React.memo<GeneralSectionProps>((props) => {
     entries: [
       {
         key: 'Added',
-        val: formatDate(props.addedDate)
+        val: formatDate(addedDate)
       },
       {
         key: 'Location',
-        val: props.downloadDir,
+        val: downloadDir,
       },
       {
         key: 'Tags',
@@ -38,6 +39,4 @@ export const GeneralSection = React.memo<GeneralSectionProps>((props) => {
       }
     ]
   })
-})
-
-
+}

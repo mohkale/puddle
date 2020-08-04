@@ -1,5 +1,4 @@
 import React, { Fragment, useContext, useState } from 'react';
-import { TorrentDetailsContext } from '../../context';
 import { Badge } from '@puddle/components';
 import { TorrentDetailed } from '@puddle/models';
 import { constructFileTree, FileTreeEntry, scaleBytes } from '@puddle/utils';
@@ -16,7 +15,6 @@ import { safeDivide } from '@puddle/utils';
 import '@cstyles/scrollbar';
 import { Scrollbar } from 'react-scrollbars-custom';
 
-import { FilesViewContext } from './context';
 import { FileRow } from './file-row';
 import { DirectoryRow } from './dir-row';
 import {
@@ -25,28 +23,20 @@ import {
 
 interface FileTreeProps {
   tree: FileTreeEntry
-  files: TransmissionTorrentFiles[]
-  fileStats: TransmissionTorrentFileStats[]
 };
 
 export function FileTree(props: FileTreeProps) {
   const entries = Object.entries(props.tree).map(([key, val]) => {
     if (Number.isInteger(val)) {
-      const file = props.files[val]
-      const wanted = props.fileStats[val].wanted
-      const priority: ExtendedPriorityType = wanted ? props.fileStats[val].priority : 'dont-download'
-      const percentageComplete = safeDivide(file.bytesCompleted, file.length)
-
       return (
         <li key={key}>
-          <FileRow icon={faFile} name={key} size={file.length} percentageComplete={percentageComplete} fileId={val}
-            priority={priority} />
+          <FileRow name={key} fileId={val} />
         </li>
       );
     } else {
       return (
         <li key={key} className="directory">
-          <DirectoryRow icon={faFolderOpen} name={key} />
+          <DirectoryRow name={key} />
           <FileTree {...props} tree={val} />
         </li>
       )

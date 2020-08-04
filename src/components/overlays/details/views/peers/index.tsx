@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from 'react';
-import { TorrentDetailsContext } from '../../context';
+import { useSelector } from 'react-redux';
 import { Badge } from '@puddle/components';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,6 +8,7 @@ import {
 } from '@puddle/transmission'
 import { scaleBytes } from '@puddle/utils';
 import FallbackMessage from '../../fallback';
+import { torrentSelector } from '../../utils';
 
 function PeerRow(peer: TorrentPeers) {
   const [upload, uploadUnit] = scaleBytes(peer.rateToClient)
@@ -30,9 +31,9 @@ function PeerRow(peer: TorrentPeers) {
 }
 
 export function PeersView() {
-  const { torrent } = useContext(TorrentDetailsContext)
+  const peers = useSelector(torrentSelector(t => t.peers))
 
-  if (torrent.peers.length === 0) {
+  if (peers.length === 0) {
     return (
       <FallbackMessage>
         No <span className="highlight">Peer</span> Information is Available For This Torrent.
@@ -54,7 +55,7 @@ export function PeersView() {
         </tr>
       </thead>
       <tbody>
-        {torrent.peers.map(peer => <PeerRow key={peer.address} {...peer} />)}
+        {peers.map(peer => <PeerRow key={peer.address} {...peer} />)}
       </tbody>
     </table>
   );

@@ -1,5 +1,4 @@
 import React, { Fragment, useContext, useState } from 'react';
-import { TorrentDetailsContext } from '../../context';
 import { Badge } from '@puddle/components';
 import { TorrentDetailed } from '@puddle/models';
 import { constructFileTree, FileTreeEntry, scaleBytes } from '@puddle/utils';
@@ -15,18 +14,15 @@ import { Checkbox } from '@puddle/components';
 import '@cstyles/scrollbar';
 import { Scrollbar } from 'react-scrollbars-custom';
 
-import { FilesViewContext } from './context';
-
 
 export interface DirectoryRowProps {
-  icon: IconDefinition
   name: string
 }
 
 export function DirectoryRow(props: DirectoryRowProps) {
   return (
     <div className="file">
-      <FontAwesomeIcon icon={props.icon} className="icon" />
+      <FontAwesomeIcon icon={faFolderOpen} className="icon" />
       <span className="name">{props.name}</span>
     </div>
   )

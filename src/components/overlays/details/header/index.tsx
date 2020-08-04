@@ -1,8 +1,8 @@
 import React, { Fragment, useContext, useState } from 'react';
-import { TorrentDetailsContext } from '../context';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  selectTorrentById, torrentPriorityChanged, TorrentState, updateTorrent
+  selectTorrentById, torrentPriorityChanged, TorrentState, updateTorrent,
+  selectTorrentDetailsOverlayTorrent
 } from '@puddle/stores'
 import { Torrent } from '@puddle/models';
 import ProgressBar from '@puddle/components/dashboard/torrent-list/torrent/progress-bar'
@@ -30,21 +30,26 @@ import { BandwidthPrioritySlider, isPriorityType, ExtendedPriorityType } from '@
 
 import { TorrentProperties } from './properties';
 import { TorrentControls } from './controls';
+import { RootState } from '@puddle/stores';
+import { torrentSelector } from '../utils';
 
 export default function Header(props: { torrentId: number }) {
-  const { torrent } = useContext(TorrentDetailsContext)
-  const classes = torrentClasses(torrent, false)
+  const name = useSelector(torrentSelector(t => t.name))
+  const progress = useSelector(torrentSelector(t => t.progress))
+  const classes = useSelector(torrentSelector(t => t.classes))
+  const torrent = useSelector(selectTorrentDetailsOverlayTorrent)!
+  const className = torrentClasses(torrent, false)
 
   return (
-    <header className={`${classes}`}>
-      <h1>{torrent.name}</h1>
+    <header className={className}>
+      <h1>{name}</h1>
 
       <div className="control-bar">
-        <TorrentProperties torrent={torrent} />
-        <TorrentControls torrent={torrent} />
+        <TorrentProperties />
+        <TorrentControls />
       </div>
 
-      <ProgressBar progress={torrent.progress * 100} classes={torrent.classes} />
+      <ProgressBar progress={progress * 100} classes={classes} />
     </header>
   )
 }

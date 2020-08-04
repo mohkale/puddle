@@ -5,33 +5,34 @@ import {
   selectTorrentById, torrentPriorityChanged, torrentsUpdated,
   TorrentState, updateTorrent
 } from '@puddle/stores'
-import { TorrentDetailsContext } from '../../../context';
 import { TorrentDetailed, Torrent } from '@puddle/models';
 import { scaleBytes } from '@puddle/utils';
 import { TransmissionError } from '@puddle/transmission';
 import { TableSection, Missing, formatDate } from '../section';
+import { torrentSelector } from '../../../utils';
 
-type TorrentSectionProps =
-  Pick<TorrentDetailed, 'dateCreated' | 'hashString' | 'totalSize' | 'creator' | 'comment' |
-    'isPrivate'>
-
-export const TorrentSection = React.memo<TorrentSectionProps>((props) => {
-  const [size, sizeUnit] = scaleBytes(props.totalSize)
+export function TorrentSection() {
+  const [size, sizeUnit] = scaleBytes(useSelector(torrentSelector(t => t.totalSize)))
+  const dateCreated = useSelector(torrentSelector(t => t.dateCreated))
+  const hashString = useSelector(torrentSelector(t => t.hashString))
+  const creator = useSelector(torrentSelector(t => t.creator))
+  const comment = useSelector(torrentSelector(t => t.comment))
+  const isPrivate = useSelector(torrentSelector(t => t.isPrivate))
 
   return TableSection({
     title: 'Torrent',
     entries: [
       {
         key: 'Creator',
-        val: props.creator === '' ? (<Missing>Unknown</Missing>) : props.creator,
+        val: creator === '' ? (<Missing>Unknown</Missing>) : creator,
       },
       {
         key: 'Creation Date',
-        val: formatDate(props.dateCreated)
+        val: formatDate(dateCreated)
       },
       {
         key: 'Hash',
-        val: props.hashString
+        val: hashString
       },
       {
         key: 'Size',
@@ -39,12 +40,12 @@ export const TorrentSection = React.memo<TorrentSectionProps>((props) => {
       },
       {
         key: 'Comment',
-        val: props.comment === '' ? (<Missing />) : props.comment,
+        val: comment === '' ? (<Missing />) : comment,
       },
       {
         key: 'Type',
-        val: props.isPrivate ? 'Private' : 'Public'
+        val: isPrivate ? 'Private' : 'Public'
       }
     ]
   })
-})
+}

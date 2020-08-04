@@ -1,11 +1,12 @@
 import React, { Fragment, useContext } from 'react';
-import { TorrentDetailsContext } from '../../context';
+import { useSelector } from 'react-redux';
 import { Badge } from '@puddle/components';
 import FallbackMessage from '../../fallback';
+import { torrentSelector } from '../../utils';
 
 export function TrackersView() {
-  const { torrent } = useContext(TorrentDetailsContext)
-  const trackerCount = Object.keys(torrent.trackers).length
+  const trackers = useSelector(torrentSelector(t => t.trackers))
+  const trackerCount = Object.keys(trackers).length
   if (trackerCount === 0) {
     return (
       <FallbackMessage>
@@ -14,7 +15,7 @@ export function TrackersView() {
     );
   }
 
-  const entries = torrent.trackers
+  const entries = trackers
     .map(tracker => {
       const protocol = (new URL(tracker.announce)).protocol.slice(0, -1)
 

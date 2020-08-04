@@ -35,7 +35,7 @@
 
         &.low::before           { left:  25%; }
         &.norm::before          { left:  50%; }
-        &.high::before          { left: 100%; }
+        &.high::before          { left: calc(100% - 2px); }
         &.dont-download::before { left:   0%; }
 
         // TODO move these to the theme

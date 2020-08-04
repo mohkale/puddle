@@ -5,14 +5,11 @@ import {
   selectTorrentById, torrentPriorityChanged, torrentsUpdated,
   TorrentState, updateTorrent
 } from '@puddle/stores'
-import { TorrentDetailsContext } from '../../../context';
 import { TorrentDetailed, Torrent } from '@puddle/models';
 import { scaleBytes } from '@puddle/utils';
 import { TransmissionError } from '@puddle/transmission';
 import { TableSection } from '../section';
-
-type ErrorSectionProps =
-  Pick<TorrentDetailed, 'error' | 'errorString'>
+import { torrentSelector } from '../../../utils';
 
 const ERROR_TYPES: { [key in TransmissionError]: string } = {
   [TransmissionError.OK]: 'OK',
@@ -21,8 +18,11 @@ const ERROR_TYPES: { [key in TransmissionError]: string } = {
   [TransmissionError.LOCAL_ERROR]: 'Local Error',
 }
 
-export const ErrorSection = React.memo<ErrorSectionProps>((props) =>  {
-  if (props.error === 0)
+export function ErrorSection() {
+  const error = useSelector(torrentSelector(t => t.error))
+  const errorString = useSelector(torrentSelector(t => t.errorString))
+
+  if (error === 0)
     return null
 
   return TableSection({
@@ -30,12 +30,12 @@ export const ErrorSection = React.memo<ErrorSectionProps>((props) =>  {
     entries: [
       {
         key: 'Kind',
-        val: `(${props.error}) ${ERROR_TYPES[props.error]}`
+        val: `(${error}) ${ERROR_TYPES[error]}`
       },
       {
         key: 'message',
-        val: props.errorString
+        val: errorString
       }
     ]
   })
-})
+}

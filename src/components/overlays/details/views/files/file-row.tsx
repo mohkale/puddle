@@ -1,9 +1,16 @@
 import React, { Fragment, useContext, useState } from 'react';
-import { TorrentDetailsContext } from '../../context';
+import { useSelector, useDispatch } from 'react-redux';
 import { Badge } from '@puddle/components';
 import { TorrentDetailed } from '@puddle/models';
 import { constructFileTree, FileTreeEntry, scaleBytes } from '@puddle/utils';
+import { ClientContext } from '@puddle/components';
 import { TransmissionTorrentFiles, TransmissionTorrentFileStats } from '@puddle/transmission';
+import {
+  selectTorrentDetailsOverlayFileProps,
+  torrentDetailsOverlaySelectFiles,
+  torrentDetailsOverlayDeselectFiles,
+  setFilePriorities
+} from '@puddle/stores';
 
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +22,6 @@ import { Checkbox } from '@puddle/components';
 import '@cstyles/scrollbar';
 import { Scrollbar } from 'react-scrollbars-custom';
 
-import { FilesViewContext } from './context';
 import { DirectoryRow, DirectoryRowProps } from './dir-row';
 import {
   BandwidthPrioritySlider, isPriorityType, ExtendedPriorityType
@@ -23,30 +29,32 @@ import {
 
 interface FileRowProps extends DirectoryRowProps {
   fileId: number
-  size: number
-  percentageComplete: number
-  priority: ExtendedPriorityType
 }
 
 export function FileRow(props: FileRowProps) {
-  const { selectFiles, deselectFiles, isSelected, setFilePriorities } = useContext(FilesViewContext)
-  const [size, sizeUnit] = scaleBytes(props.size);
-  const selected = isSelected(props.fileId)
+  const dispatch = useDispatch()
+  const { transmission } = useContext(ClientContext)
+  const file = useSelector(selectTorrentDetailsOverlayFileProps(props.fileId))
+  const [size, sizeUnit] = scaleBytes(file.size);
 
-  const toggleFile = () =>
-    (selected ? deselectFiles : selectFiles)([props.fileId])
+  const toggleFile = () => {
+    const toggleDispatcher = file.isSelected ?
+      torrentDetailsOverlayDeselectFiles : torrentDetailsOverlaySelectFiles
+    dispatch(toggleDispatcher([props.fileId]))
+  }
 
   const setPriority = (p: ExtendedPriorityType) => {
-    setFilePriorities([props.fileId], p)
+    dispatch(setFilePriorities(transmission, [props.fileId], p))
   }
 
   return (
     <div className="file">
-      <Checkbox isChecked={selected} onCheck={toggleFile}  fallback={() => <FontAwesomeIcon icon={props.icon} className="icon" />}/>
+      <Checkbox isChecked={file.isSelected} onCheck={toggleFile}
+                fallback={() => <FontAwesomeIcon icon={faFile} className="icon" />}/>
       <span className="name">{props.name}</span>
-      <span className="percentage">{(props.percentageComplete * 100).toFixed()}%</span>
+      <span className="percentage">{(file.percentageComplete * 100).toFixed()}%</span>
       <span className="size">{size.toFixed(2)}<em className="unit">{sizeUnit}</em></span>
-      <BandwidthPrioritySlider priority={props.priority} setPriority={setPriority} />
+      <BandwidthPrioritySlider priority={file.priority} setPriority={setPriority} canNotDownload={true} />
     </div>
   )
 }

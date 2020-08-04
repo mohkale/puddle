@@ -1,9 +1,10 @@
 import React, { Fragment, useContext, useState } from 'react';
-import { TorrentDetailsContext } from '../context';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectTorrentById, torrentPriorityChanged, TorrentState,
-  updateTorrent
+  updateTorrent, torrentDetailsOverlayAssigned,
+  selectTorrentDetailsOverlayTorrentId,
+  torrentDetailsOverlayTorrentAssigned
 } from '@puddle/stores'
 import { Torrent } from '@puddle/models'
 import ProgressBar from '@puddle/components/dashboard/torrent-list/torrent/progress-bar'
@@ -29,15 +30,19 @@ import {
 import { torrentClasses } from '@puddle/components/dashboard/torrent-list/torrent';
 import { BandwidthPrioritySlider, isPriorityType, ExtendedPriorityType } from '@puddle/components';
 import { StartStopButtons } from './buttons';
+import { torrentSelector } from '../utils';
 
-export function TorrentControls(props: { torrent: Torrent }) {
+export function TorrentControls() {
+  const dispatch = useDispatch()
   const { transmission } = useContext(ClientContext)
-  const { updateTorrent } = useContext(TorrentDetailsContext)
+  const priority = useSelector(torrentSelector(t => t.bandwidthPriority))
+  const id = useSelector(selectTorrentDetailsOverlayTorrentId)
+
   const updatePriority = (p: ExtendedPriorityType) => {
     if (isPriorityType(p)) {
-      transmission.setTorrent(props.torrent.id, {
-        bandwidthPriority: p
-      }).then(() => updateTorrent({ bandwidthPriority: p }))
+      transmission.setTorrent(id, { bandwidthPriority: p })
+        .then(() => dispatch(torrentDetailsOverlayTorrentAssigned(
+          { bandwidthPriority: p })))
     }
   }
 
@@ -45,14 +50,12 @@ export function TorrentControls(props: { torrent: Torrent }) {
     <ul className="torrent-controls">
       <li>
         <BandwidthPrioritySlider
-          priority={props.torrent.bandwidthPriority}
-          attachLabel={true} setPriority={updatePriority} />
+          attachLabel={true}
+          priority={priority}
+          setPriority={updatePriority} />
       </li>
 
-      <StartStopButtons
-         torrentId={props.torrent.id}
-         status={props.torrent.status} />
+      <StartStopButtons />
     </ul>
   )
 }
-

@@ -1,5 +1,4 @@
 import React, { Fragment, useContext, useState } from 'react';
-import { TorrentDetailsContext } from '../context';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectTorrentById, torrentPriorityChanged, TorrentState,
@@ -29,26 +28,31 @@ import {
 import { torrentClasses } from '@puddle/components/dashboard/torrent-list/torrent';
 import { BandwidthPrioritySlider, isPriorityType, ExtendedPriorityType } from '@puddle/components';
 import { TransferMeasure } from './transfers';
+import { torrentSelector } from '../utils';
 
-export function TorrentProperties(props: { torrent: Torrent }) {
-  const torrent = props.torrent;
+export function TorrentProperties() {
+  const downloadRate = useSelector(torrentSelector(t => t.rateDownload))
+  const downloadedEver = useSelector(torrentSelector(t => t.downloadedEver))
+  const uploadRate = useSelector(torrentSelector(t => t.rateUpload))
+  const uploadedEver = useSelector(torrentSelector(t => t.uploadedEver))
+  const uploadRatio = useSelector(torrentSelector(t => t.uploadRatio))
+  const eta = useSelector(torrentSelector(t => t.eta))
 
   return (
     <ul className="torrent-props">
       <TransferMeasure icon={faLongArrowAltDown} className="download"
-                       rate={torrent.rateDownload} total={torrent.downloadedEver} />
+                       rate={downloadRate} total={downloadedEver} />
       <TransferMeasure icon={faLongArrowAltUp} className="upload"
-                       rate={torrent.rateUpload} total={torrent.uploadedEver} />
+                       rate={uploadRate} total={uploadedEver} />
 
       <li>
         <FontAwesomeIcon icon={faTachometerAlt} className="icon" />
-        {torrent.uploadRatio > 0 &&
-          torrent.uploadRatio}
+        {uploadRatio > 0 && uploadRatio}
       </li>
 
       <li>
         <FontAwesomeIcon icon={faClock} className="icon" />
-        {torrent.doneDate.toFixed(2)}
+        {eta > 0 && eta.toFixed(2)}
       </li>
     </ul>
   )

@@ -23,6 +23,20 @@ const torrentDetailsOverlaySlice = createSlice({
       .addCase(actions.torrentDetailsOverlayTorrentUpdated, (state, action) => {
         state.torrent = action.payload
       })
+      .addCase(actions.torrentDetailsOverlayTorrentAssigned, (state, action) => {
+        Object.assign(state.torrent, action.payload)
+      })
+      .addCase(actions.torrentDetailsOverlaySelectFiles, (state, action) => {
+        state.selectedFiles = [...state.selectedFiles, ...action.payload]
+      })
+      .addCase(actions.torrentDetailsOverlayDeselectFiles, (state, action) => {
+        // WARN unoptomized search based solution.
+        state.selectedFiles = state.selectedFiles.filter(id => !action.payload.includes(id))
+      })
+      .addCase(actions.torrentDetailsOverlayClearFileSelection, (state, action) => {
+        console.log('removing all')
+        state.selectedFiles = []
+      })
 })
 
 export default torrentDetailsOverlaySlice.reducer

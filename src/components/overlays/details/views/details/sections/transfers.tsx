@@ -5,29 +5,28 @@ import {
   selectTorrentById, torrentPriorityChanged, torrentsUpdated,
   TorrentState, updateTorrent
 } from '@puddle/stores'
-import { TorrentDetailsContext } from '../../../context';
 import { TorrentDetailed, Torrent } from '@puddle/models';
 import { scaleBytes } from '@puddle/utils';
 import { TransmissionError } from '@puddle/transmission';
 import { TableSection, Missing } from '../section';
+import { torrentSelector } from '../../../utils';
 
-type TranferSectionProps =
-  { peerCount: number } &
-  Pick<TorrentDetailed, 'percentDone' | 'peersConnected'>
+export function TransferSection() {
+  const percentDone = useSelector(torrentSelector(t => t.percentDone))
+  const peersConnected = useSelector(torrentSelector(t => t.peersConnected))
+  const peerCount = useSelector(torrentSelector(t => Object.keys(t.peers).length))
 
-export const TransferSection = React.memo<TranferSectionProps>((props) => {
   return TableSection({
     title: 'Transfer',
     entries: [
       {
         key: 'Downloaded',
-        val: `${(props.percentDone * 100).toFixed(2)}%`
+        val: `${(percentDone * 100).toFixed(2)}%`
       },
       {
         key: 'Peers',
-        val: `${props.peersConnected} of ${props.peerCount}`
+        val: `${peersConnected} of ${peerCount}`
       }
     ]
   })
-})
-
+}

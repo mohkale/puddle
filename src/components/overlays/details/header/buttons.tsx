@@ -1,7 +1,6 @@
 import React, { Fragment, useContext, useState } from 'react';
-import { TorrentDetailsContext } from '../context';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectTorrentById, torrentPriorityChanged, TorrentState, updateTorrent } from '@puddle/stores'
+import { selectTorrentById, torrentPriorityChanged, TorrentState, updateTorrent, selectTorrentDetailsOverlayTorrentId, torrentDetailsOverlayTorrentAssigned } from '@puddle/stores'
 import { Torrent } from '@puddle/models'
 import ProgressBar from '@puddle/components/dashboard/torrent-list/torrent/progress-bar'
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
@@ -25,31 +24,27 @@ import {
 
 import { torrentClasses } from '@puddle/components/dashboard/torrent-list/torrent';
 import { BandwidthPrioritySlider, isPriorityType, ExtendedPriorityType } from '@puddle/components';
-
-interface StartStopButtonProps {
-  torrentId: number
-  status: TorrentStatus
-}
+import { torrentSelector } from '../utils';
 
 /**
  * Component hoisting two buttons to indicate whether the current torrent
  * is paused or running and lets you click on it to toggle these possible
  * states.
  */
-export const StartStopButtons = React.memo<StartStopButtonProps>((props) => {
+export const StartStopButtons = () => {
+  const dispatch = useDispatch()
   const { transmission } = useContext(ClientContext)
-  const { updateTorrent } = useContext(TorrentDetailsContext)
-  let stopped = props.status === TorrentStatus.STOPPED
+  const torrentId = useSelector(selectTorrentDetailsOverlayTorrentId)
+  const status = useSelector(torrentSelector(t => t.status))
+  const stopped = status === TorrentStatus.STOPPED
 
   const startStopPress =
-    (predicate: boolean,
-     invoke: (id: number) => Promise<Torrent>,
-     newState: TorrentStatus) => {
+    (predicate: boolean, invoke: (id: number) => Promise<Torrent>, newState: TorrentStatus) => {
       return () => {
         if (predicate) {
-          invoke(props.torrentId)
+          invoke(torrentId)
             .then(resp => {
-              updateTorrent({ status: newState })
+              dispatch(torrentDetailsOverlayTorrentAssigned({ status: newState }))
             })
         }
       }
@@ -77,4 +72,4 @@ export const StartStopButtons = React.memo<StartStopButtonProps>((props) => {
       </li>
     </Fragment>
   )
-})
+}
