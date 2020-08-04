@@ -1,4 +1,4 @@
-import { TorrentFields } from '../fields';
+import { TorrentFields } from '@puddle/models';
 import {
   SettingsState, COLUMN_DEFAULT_WIDTH as DEFAULT_WIDTH,
   COLUMN_MINIMUM_WIDTH as MINIMUM_WIDTH,

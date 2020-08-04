@@ -3,7 +3,7 @@ import { createAction } from '@reduxjs/toolkit';
 
 import { ViewType } from './views';
 import { OverlayType } from '../overlays-store';
-import { TorrentClasses } from '../classes';
+import { TorrentClasses } from '@puddle/models';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 

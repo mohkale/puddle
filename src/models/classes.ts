@@ -6,7 +6,7 @@
  *
  */
 
-import { Torrent } from '@puddle/stores';
+import { Torrent } from './torrent';
 import {
   TransmissionTorrentStatus as TorrentStatus
 } from '@puddle/transmission';

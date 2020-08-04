@@ -6,7 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faCircle } from '@fortawesome/free-regular-svg-icons';
 
-import { TorrentClasses } from '@puddle/stores';
+import { TorrentClasses } from '@puddle/models';
 
 class TorrentStatusIcon extends React.PureComponent<{ status: number }> {
   render() {

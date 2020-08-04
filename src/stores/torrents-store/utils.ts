@@ -1,5 +1,5 @@
 import { TorrentState } from './state';
-import { torrentComparators } from '../fields';
+import { torrentComparators } from '@puddle/models';
 import { arrayRemove } from '@puddle/utils';
 
 function pushToCollection<T>(collection: { [key: string]: T[] }, key: string, val: T) {

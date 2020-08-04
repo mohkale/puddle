@@ -1,6 +1,6 @@
 import { UIState } from './state';
 import { ViewType } from './views';
-import { TorrentClasses } from '../classes';
+import { TorrentClasses } from '@puddle/models';
 
 const defaultState: UIState = {
   view: {

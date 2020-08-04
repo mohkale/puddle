@@ -9,7 +9,7 @@ import {
 } from './torrent'
 import { TransmissionTorrent as TorrentResponse } from '@puddle/transmission';
 
-export const TORRENT_FULL_FIELDS: (keyof TorrentResponse)[] = [
+export const TORRENT_DETAILED_FIELDS: (keyof TorrentResponse)[] = [
   ...TORRENT_FIELDS,
   "downloadDir",
   "peers",
@@ -30,19 +30,19 @@ export const TORRENT_FULL_FIELDS: (keyof TorrentResponse)[] = [
   "priority-normal",
 ]
 
-export type TorrentFull = Torrent &
+export type TorrentDetailed = Torrent &
   Pick<TorrentResponse, 'downloadDir' | 'peers' | 'peersConnected' | 'dateCreated' |
     'hashString' | 'creator' | 'comment' | 'totalSize' | 'isPrivate' | 'errorString' |
     'files' | 'fileStats' | 'files-wanted' | 'files-unwanted' | 'priority-high' |
     'priority-low' | 'priority-normal'>
 
-const TORRENT_FULL_BASE: Partial<TorrentFull> = {
+const TORRENT_DETAILED_BASE: Partial<TorrentDetailed> = {
   ...TORRENT_BASE,
 }
 
-export function torrentFullFromResponse(resp: Partial<TorrentResponse>, prev?: TorrentFull): TorrentFull {
-  const base = prev ? prev! : TORRENT_FULL_BASE
-  const torrent = Object.assign({}, torrentFromResponse(resp), base) as TorrentFull
+export function torrentDetailedFromResponse(resp: Partial<TorrentResponse>, prev?: TorrentDetailed): TorrentDetailed {
+  const base = prev ? prev! : TORRENT_DETAILED_BASE
+  const torrent = Object.assign({}, torrentFromResponse(resp), base) as TorrentDetailed
 
   return torrent
 }

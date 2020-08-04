@@ -1,6 +1,6 @@
-import { Torrent } from '../torrent';
-import { TorrentFields } from '../fields';
-import { TorrentClasses } from '../classes';
+import {
+  Torrent, TorrentFields, TorrentClasses
+} from '@puddle/models';
 
 export interface TorrentState {
   /**

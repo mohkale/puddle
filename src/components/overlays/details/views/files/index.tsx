@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { TorrentDetailsContext } from '../../context';
 import { Badge } from '@puddle/components';
-import { TorrentFull } from '@puddle/stores';
+import { TorrentDetailed } from '@puddle/models';
 import { constructFileTree, FileTreeEntry, scaleBytes } from '@puddle/utils';
 import { TransmissionTorrentFiles, TransmissionTorrentFileStats } from '@puddle/transmission';
 

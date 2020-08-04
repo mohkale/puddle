@@ -2,10 +2,6 @@ import { configureStore } from '@reduxjs/toolkit';
 
 export * from './state';
 export * from './selectors'
-export * from './torrent';
-export * from './torrent-full';
-export * from './fields';
-export * from './classes';
 
 export * from './torrents-store';
 export * from './settings-store';

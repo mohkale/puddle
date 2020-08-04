@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { TorrentFields } from '../fields';
+import { TorrentFields } from '@puddle/models';
 import { IntervalsType } from './state';
 
 export const columnResized  = createAction<{ field: TorrentFields, delta: number }>('settings/column-resized');

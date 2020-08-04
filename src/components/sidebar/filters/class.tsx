@@ -8,8 +8,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
-  filterClassesUpdated, TorrentClasses, selectTorrentByClassWithMeta
+  filterClassesUpdated, selectTorrentByClassWithMeta
 } from '@puddle/stores';
+import { TorrentClasses } from '@puddle/models';
+
 import FilterList from './filter-list';
 import { Badge } from '@puddle/components'
 

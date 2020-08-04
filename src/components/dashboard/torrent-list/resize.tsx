@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 
-import {
-  TorrentFields
-} from '@puddle/stores';
+import { TorrentFields } from '@puddle/models';
 
 /**
  * metadata associated with a column resize event.

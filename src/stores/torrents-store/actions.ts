@@ -1,7 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 
-import { Torrent } from '../torrent';
-import { TorrentFields } from '../fields';
+import { Torrent, TorrentFields } from '@puddle/models';
 import {
   TransmissionPriorityType as TorrentPriority
 } from '@puddle/transmission';

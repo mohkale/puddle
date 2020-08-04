@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import {
-  Torrent, selectColumns, torrentSelected,
+  selectColumns, torrentSelected,
   selectTorrentById, selectTorrentIsSelected
 } from '@puddle/stores';
+import { Torrent } from '@puddle/models';
 import { TransmissionTorrentStatus as TorrentStatus } from '@puddle/transmission';
 
 import renderColumn from './column';

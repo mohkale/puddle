@@ -7,8 +7,7 @@ export * from './thunks';
 import defaultState from './default';
 import * as actions from './actions';
 
-import { TorrentClassFlags } from '../classes';
-import { torrentComparators } from '../fields';
+import { torrentComparators, TorrentClassFlags } from '@puddle/models';
 import {
   sortByColumn,
   addTorrentToTracker, removeTorrentFromTracker,

@@ -9,7 +9,7 @@ import {
 
 import {
   Torrent, torrentFromResponse, TORRENT_FIELDS
-} from '../torrent';
+} from '@puddle/models';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 

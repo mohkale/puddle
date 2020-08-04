@@ -1,7 +1,11 @@
 import React, { Fragment, useContext, useState } from 'react';
 import { TorrentDetailsContext } from '../context';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectTorrentById, torrentPriorityChanged, TorrentState, updateTorrent, Torrent } from '@puddle/stores'
+import {
+  selectTorrentById, torrentPriorityChanged, TorrentState,
+  updateTorrent
+} from '@puddle/stores'
+import { Torrent } from '@puddle/models'
 import ProgressBar from '@puddle/components/dashboard/torrent-list/torrent/progress-bar'
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

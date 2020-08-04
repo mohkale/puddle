@@ -8,9 +8,10 @@ import Header from './header';
 import { torrentClasses } from '@puddle/components/dashboard/torrent-list/torrent';
 import { TabbedMenu, TabbedMenuViewType } from '@puddle/components';
 import { FilesView, PeersView, DetailsView, TrackersView } from './views';
-import { TorrentFull, torrentFullFromResponse as torrentFromResponse, TORRENT_FULL_FIELDS, updateTorrentDetails } from '@puddle/stores';
+import { updateTorrentDetails } from '@puddle/stores';
+import { TorrentDetailed, TORRENT_DETAILED_FIELDS, torrentDetailedFromResponse as torrentFromResponse } from '@puddle/models';
 import { TorrentDetailsContext } from './context';
-import { Updater } from '@puddle/components/views/client/updater'
+import { Updater } from '@puddle/utils'
 
 const VIEW_DETAILS_INTERVAL = 1000
 
@@ -61,7 +62,7 @@ export default function TorrentDetails() {
     return () => { dispatch(intervalsUpdated(originalIntervals)) }
   }, [])
 
-  // const [torrent, setTorrent] = useState<TorrentFull>()
+  // const [torrent, setTorrent] = useState<TorrentDetailed>()
   useEffect(() => {
     const updater =
       new Updater(() => store.dispatch(updateTorrentDetails(transmission, torrentId)),
@@ -74,7 +75,7 @@ export default function TorrentDetails() {
     return null
   }
 
-  const updateTorrent = (t: Partial<TorrentFull>) => {
+  const updateTorrent = (t: Partial<TorrentDetailed>) => {
     dispatch(torrentDetailsOverlayTorrentUpdated(Object.assign({}, torrent, t)))
   }
 

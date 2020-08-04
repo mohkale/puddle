@@ -10,9 +10,8 @@ import TorrentsHeader from './header';
 import ContextMenu, { ContextMenuProps } from './context-menu';
 import ColumnResizer, { ColumnResizeContext } from './resize';
 
-import {
-  TorrentFields, columnResized, selectFilteredTorrents,
-} from '@puddle/stores';
+import { TorrentFields } from '@puddle/models';
+import { columnResized, selectFilteredTorrents } from '@puddle/stores';
 
 import { NotificationList } from '@puddle/components/notifications';
 

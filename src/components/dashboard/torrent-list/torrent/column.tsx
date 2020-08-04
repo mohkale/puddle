@@ -4,7 +4,7 @@ import ProgressBar from './progress-bar';
 import {
   TransmissionTorrentStatus as TorrentStatus
 } from '@puddle/transmission';
-import { Torrent, TorrentFields } from '@puddle/stores';
+import { Torrent, TorrentFields } from '@puddle/models';
 
 import {
   scaleBytes, timeFormat, padString

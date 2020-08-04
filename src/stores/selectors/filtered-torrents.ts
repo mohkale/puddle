@@ -2,7 +2,7 @@ import FlexSearch from 'flexsearch';
 import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from '../state';
-import { TorrentClasses } from '../classes';
+import { TorrentClasses } from '@puddle/models';
 
 /**
  * Construct and return a predicate which given some torrent id

@@ -1,15 +1,18 @@
 import React, { Fragment, useContext } from 'react';
 import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectTorrentById, torrentPriorityChanged, torrentsUpdated, TorrentState, updateTorrent, Torrent } from '@puddle/stores'
+import {
+  selectTorrentById, torrentPriorityChanged, torrentsUpdated,
+  TorrentState, updateTorrent
+} from '@puddle/stores'
 import { TorrentDetailsContext } from '../../../context';
-import { TorrentFull } from '@puddle/stores';
+import { TorrentDetailed, Torrent } from '@puddle/models';
 import { scaleBytes } from '@puddle/utils';
 import { TransmissionError } from '@puddle/transmission';
 import { TableSection, Missing, formatDate } from '../section';
 
 type TorrentSectionProps =
-  Pick<TorrentFull, 'dateCreated' | 'hashString' | 'totalSize' | 'creator' | 'comment' |
+  Pick<TorrentDetailed, 'dateCreated' | 'hashString' | 'totalSize' | 'creator' | 'comment' |
     'isPrivate'>
 
 export const TorrentSection = React.memo<TorrentSectionProps>((props) => {

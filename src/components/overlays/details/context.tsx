@@ -1,9 +1,9 @@
 import React from 'react';
-import { TorrentFull } from '@puddle/stores';
+import { TorrentDetailed } from '@puddle/models';
 
 export interface TorrentDetailsContextType {
-  torrent: TorrentFull
-  updateTorrent: (torrent: Partial<TorrentFull>) => void
+  torrent: TorrentDetailed
+  updateTorrent: (torrent: Partial<TorrentDetailed>) => void
 }
 
 export const TorrentDetailsContext =

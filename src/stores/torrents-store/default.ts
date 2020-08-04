@@ -1,6 +1,5 @@
 import { TorrentState } from './state';
-import { TorrentFields } from '../fields';
-import { TorrentClasses } from '../classes';
+import { TorrentFields, TorrentClasses } from '@puddle/models';
 
 const defaultState: TorrentState = {
   ids: [],
