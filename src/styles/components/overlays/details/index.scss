@@ -1,6 +1,7 @@
 @import "@styles/no-select";
 @import "@styles/config";
 
+// TODO move color vars to theme.
 .modal.torrent-details {
     width: 700px;
     height: 45em;
@@ -191,18 +192,10 @@
     justify-content: space-between;
     border-top: solid 1px var(--modal-border-color);
     height: 34px;
-    padding-top: 9px;
+    padding: 18px 12px 0px 12px;
 
     p {
         margin: 0px;
     }
 }
 
-#priority-selector {
-    width: 220px;
-    padding: 5px;
-    background: #293341;
-    border-color: #202D3C;
-    box-shadow: 0 1px 1px rgba(41,51,65,0.15), 0 1px 3px 1px rgba(41,51,65,0.2);
-    color: #8899A8;
-}

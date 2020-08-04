@@ -5,3 +5,4 @@ export { default as Badge } from './badge';
 export * from './forms/tabbed-menu';
 export * from './forms/priority-selector';
 export * from './forms/checkbox';
+export * from './forms/select';

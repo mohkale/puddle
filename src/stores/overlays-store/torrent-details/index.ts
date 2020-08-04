@@ -34,7 +34,6 @@ const torrentDetailsOverlaySlice = createSlice({
         state.selectedFiles = state.selectedFiles.filter(id => !action.payload.includes(id))
       })
       .addCase(actions.torrentDetailsOverlayClearFileSelection, (state, action) => {
-        console.log('removing all')
         state.selectedFiles = []
       })
 })

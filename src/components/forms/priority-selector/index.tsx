@@ -29,7 +29,7 @@ const PRIORITY_CLASSES: { [key in ExtendedPriorityType]: string } = {
 /**
  * The labels shown alongside each priority level when allowed.
  */
-const PRIORITY_LABELS: { [key in ExtendedPriorityType]: string } = {
+export const PRIORITY_LABELS: { [key in ExtendedPriorityType]: string } = {
   [PriorityType.LOW]:  'Low',
   [PriorityType.NORM]: 'Normal',
   [PriorityType.HIGH]: 'High',
