@@ -1,7 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { ClientContext } from '@puddle/components';
 import { showTorrentDetails, OverlayType } from '@puddle/stores';
+import { TransmissionPriorityType as PriorityType } from '@puddle/transmission';
+import {
+  BandwidthPrioritySlider, isPriorityType, ExtendedPriorityType, cyclePriority
+} from '@puddle/components';
 
 export interface ContextItemProps {
   torrents: number[]
@@ -62,9 +66,30 @@ export function DetailsItem(props: ContextItemProps) {
   return <li onClick={onClick}>Details</li>;
 }
 
-/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 export function PriorityItem(props: ContextItemProps) {
-  return <li>Priority</li>;
+  const { transmission } = useContext(ClientContext)
+  // TODO if all torrents share same priority, use that as default
+  // instead of NORM.
+  const [priority, setPriority] = useState(PriorityType.NORM)
+  const updatePriority = (p: ExtendedPriorityType) => {
+    if (isPriorityType(p)) {
+      transmission.setTorrent(props.torrents, { bandwidthPriority: p })
+        .then(() => setPriority(p))
+    }
+  }
+  const onRootClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    // clicking parent should be the same as clicking the slider.
+    updatePriority(cyclePriority(priority, false))
+  }
+
+  return (
+    <li onClick={onRootClick}
+        style={{display: 'flex', justifyContent: 'space-between'}}>
+      Priority
+      <BandwidthPrioritySlider priority={priority} setPriority={updatePriority} />
+    </li>
+  );
 }
 
 export function MoveToTopItem(props: ContextItemProps) {

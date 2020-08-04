@@ -47,7 +47,7 @@ export function isPriorityType(p: ExtendedPriorityType): p is PriorityType {
 /**
  * Cycle a priority type to the next priority type.
  */
-function cyclePriority(
+export function cyclePriority(
   priority: ExtendedPriorityType,
   canNotDownload: boolean
 ): ExtendedPriorityType {
