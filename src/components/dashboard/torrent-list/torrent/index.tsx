@@ -2,7 +2,8 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import {
   selectColumns, torrentSelected,
-  selectTorrentById, selectTorrentIsSelected
+  selectTorrentById, selectTorrentIsSelected,
+  torrentRangeSelected
 } from '@puddle/stores';
 import { Torrent } from '@puddle/models';
 import { TransmissionTorrentStatus as TorrentStatus } from '@puddle/transmission';
@@ -53,7 +54,11 @@ export default function TorrentRow(props: { id: number, onRightClick: (e: React.
   const classes = torrentClasses(torrent, isSelected)
 
   const onClick = (e: React.MouseEvent) => {
-    dispatch(torrentSelected({ ids: [props.id], append: e.ctrlKey }))
+    if (e.shiftKey) {
+      dispatch(torrentRangeSelected(props.id))
+    } else {
+      dispatch(torrentSelected({ ids: [props.id], append: e.ctrlKey }))
+    }
   }
 
   const onContextMenu = (e: React.MouseEvent) => {
