@@ -4,8 +4,12 @@
   <!-- TODO add puddle logo here -->
 
   <div>
-    <img src="https://github.com/mohkale/puddle/workflows/build/badge.svg" />
-    <img src="https://github.com/mohkale/puddle/workflows/tests/badge.svg" />
+    <a href="https://github.com/mohkale/puddle/actions">
+      <img src="https://github.com/mohkale/puddle/workflows/build/badge.svg" />
+    </a>
+    <a href="https://github.com/mohkale/puddle/actions">
+      <img src="https://github.com/mohkale/puddle/workflows/tests/badge.svg" />
+    </a>
     <a href="https://opensource.org/licenses/MIT">
       <img alt="License-MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
     </a>
