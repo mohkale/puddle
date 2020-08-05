@@ -1,13 +1,5 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment } from 'react';
 import moment from 'moment';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectTorrentById, torrentPriorityChanged, torrentsUpdated,
-  TorrentState, updateTorrent
-} from '@puddle/stores'
-import { TorrentDetailed, Torrent } from '@puddle/models';
-import { scaleBytes } from '@puddle/utils';
-import { TransmissionError } from '@puddle/transmission';
 
 export function Missing(props) {
   return <span className="missing">{props.children || 'None'}</span>

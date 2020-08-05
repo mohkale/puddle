@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { selectOverlay, selectIntervals } from '@puddle/stores';
 

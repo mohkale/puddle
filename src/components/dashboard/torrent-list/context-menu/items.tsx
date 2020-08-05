@@ -1,10 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { ClientContext } from '@puddle/components';
-import { showTorrentDetails, OverlayType } from '@puddle/stores';
+
+import { showTorrentDetails } from '@puddle/stores';
 import { TransmissionPriorityType as PriorityType } from '@puddle/transmission';
+
 import {
-  BandwidthPrioritySlider, isPriorityType, ExtendedPriorityType, cyclePriority
+  ClientContext, BandwidthPrioritySlider, isPriorityType,
+  ExtendedPriorityType, cyclePriority
 } from '@puddle/components';
 
 export interface ContextItemProps {

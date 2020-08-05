@@ -1,14 +1,14 @@
-import React, { Fragment, useContext } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { Badge } from '@puddle/components';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  TransmissionTorrentPeers as TorrentPeers
-} from '@puddle/transmission'
+
 import { scaleBytes } from '@puddle/utils';
 import FallbackMessage from '../../fallback';
 import { torrentSelector } from '../../utils';
+
+import { TransmissionTorrentPeers as TorrentPeers } from '@puddle/transmission'
 
 function PeerRow(peer: TorrentPeers) {
   const [upload, uploadUnit] = scaleBytes(peer.rateToClient)

@@ -1,10 +1,11 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Badge } from '@puddle/components';
-import { TorrentDetailed } from '@puddle/models';
-import { constructFileTree, FileTreeEntry, scaleBytes } from '@puddle/utils';
-import { ClientContext } from '@puddle/components';
-import { TransmissionTorrentFiles, TransmissionTorrentFileStats } from '@puddle/transmission';
+
+import { faFile } from '@puddle/utils/fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { scaleBytes } from '@puddle/utils';
+
 import {
   selectTorrentDetailsOverlayFileProps,
   torrentDetailsOverlaySelectFiles,
@@ -12,20 +13,12 @@ import {
   setFilePriorities
 } from '@puddle/stores';
 
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconDefinition } from '@fortawesome/fontawesome-common-types';
-import { faFolderOpen } from '@fortawesome/free-solid-svg-icons';
-import { faFile } from '@puddle/utils/fontawesome';
-import { Checkbox } from '@puddle/components';
-
-import '@cstyles/scrollbar';
-import { Scrollbar } from 'react-scrollbars-custom';
-
-import { DirectoryRow, DirectoryRowProps } from './dir-row';
 import {
-  BandwidthPrioritySlider, isPriorityType, ExtendedPriorityType
+  BandwidthPrioritySlider, ExtendedPriorityType,
+  Checkbox, ClientContext
 } from '@puddle/components';
+
+import { DirectoryRowProps } from './dir-row';
 
 interface FileRowProps extends DirectoryRowProps {
   fileId: number

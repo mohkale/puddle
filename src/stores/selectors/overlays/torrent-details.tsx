@@ -1,10 +1,8 @@
+import { createSelector } from '@reduxjs/toolkit';
+
 import { RootState } from '../../state';
 import { safeDivide } from '@puddle/utils';
-import { constructFileTree, FileTreeEntry, scaleBytes } from '@puddle/utils';
-import { createSelector } from '@reduxjs/toolkit';
-import {
-  BandwidthPrioritySlider, isPriorityType, ExtendedPriorityType
-} from '@puddle/components';
+import { ExtendedPriorityType } from '@puddle/components';
 
 export const selectTorrentDetailsOverlayTorrentId =
   (state: RootState) => state.overlays.torrentDetails.torrentId

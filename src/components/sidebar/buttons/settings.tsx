@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { TooltipButton } from '@puddle/components';
 
-import { settingsOverlayAssigned, OverlayType } from '@puddle/stores';
+import { settingsOverlayAssigned } from '@puddle/stores';
 
 export function SettingsButton() {
   const dispatch = useDispatch()

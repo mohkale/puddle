@@ -1,10 +1,7 @@
 import './index.scss'
 import React from 'react';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconDefinition } from '@fortawesome/fontawesome-common-types';
-import { faFolderOpen } from '@fortawesome/free-solid-svg-icons';
-import { faFile } from '@puddle/utils/fontawesome';
 
 interface CheckboxProps {
   fallback?: () => React.ReactChild

@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
-import { TorrentDetailsOverlayState } from './state';
+
 import { TorrentDetailed } from '@puddle/models';
-import { TransmissionPriorityType as TorrentPriority } from '@puddle/transmission';
+import { TorrentDetailsOverlayState } from './state';
 
 type TorrentDetailsOverlayProps = Pick<TorrentDetailsOverlayState, 'torrentId' | 'torrent'>
 

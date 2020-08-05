@@ -1,15 +1,9 @@
-import React, { Fragment, useContext } from 'react';
-import moment from 'moment';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectTorrentById, torrentPriorityChanged, torrentsUpdated,
-  TorrentState, updateTorrent
-} from '@puddle/stores'
-import { TorrentDetailed, Torrent } from '@puddle/models';
+import React from 'react';
+import { useSelector } from 'react-redux';
+
 import { scaleBytes } from '@puddle/utils';
-import { TransmissionError } from '@puddle/transmission';
-import { TableSection, Missing, formatDate } from '../section';
 import { torrentSelector } from '../../../utils';
+import { TableSection, Missing, formatDate } from '../section';
 
 export function TorrentSection() {
   const [size, sizeUnit] = scaleBytes(useSelector(torrentSelector(t => t.totalSize)))

@@ -1,22 +1,22 @@
-import { Action, ThunkDispatch } from '@reduxjs/toolkit';
-import { RootState, RootThunk } from '../../state';
-import Transmission, { TorrentId, TransmissionTorrent as TorrentResponse, TransmissionPriorityType as PriorityType } from '@puddle/transmission';
-import { torrentDetailsOverlayAssigned, torrentDetailsOverlayTorrentUpdated, torrentDetailsOverlayTorrentAssigned } from './actions';
-import {
-  TorrentDetailed,
-  torrentDetailedFromResponse as torrentFromResponse,
-  TORRENT_DETAILED_FIELDS
-} from '@puddle/models';
-import { selectTorrentDetailsOverlayTorrentId } from '../../selectors';
-import { TransmissionPriorityType as TorrentPriority } from '@puddle/transmission';
+import { RootThunk } from '../../state';
+
+import Transmission, {
+  TransmissionPriorityType as PriorityType
+} from '@puddle/transmission';
 
 import {
-  BandwidthPrioritySlider, isPriorityType, ExtendedPriorityType
-} from '@puddle/components';
+  torrentDetailsOverlayAssigned,
+  torrentDetailsOverlayTorrentUpdated,
+  torrentDetailsOverlayTorrentAssigned
+} from './actions';
+import { selectTorrentDetailsOverlayTorrentId } from '../../selectors';
+
+import { TORRENT_DETAILED_FIELDS } from '@puddle/models';
+import { isPriorityType, ExtendedPriorityType } from '@puddle/components';
 
 export const showTorrentDetails =
   (client: Transmission, id: number): RootThunk<Promise<void>> => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
       dispatch(torrentDetailsOverlayAssigned({ torrentId: id }))
 
       client.torrent(id, ...TORRENT_DETAILED_FIELDS)

@@ -1,12 +1,6 @@
 import './index.scss';
-import React, { useContext } from 'react';
-import { useDispatch } from 'react-redux';
-
-import { ClientContext } from '@puddle/components';
-import {
-  TransmissionTorrentStatus as TorrentStatus,
-  TransmissionPriorityType as PriorityType
-} from '@puddle/transmission';
+import React from 'react';
+import { TransmissionPriorityType as PriorityType } from '@puddle/transmission';
 
 /**
  * Builds on the known priority types to also include not downloading
@@ -73,13 +67,13 @@ interface BandwidthPrioritySliderTypes {
   priority: ExtendedPriorityType
   attachLabel?: boolean
   canNotDownload?: boolean
-  setPriority: (p: ExtendedPriorityType) => any
+  setPriority: (p: ExtendedPriorityType) => void
 }
 
 export function BandwidthPrioritySlider(props: BandwidthPrioritySliderTypes) {
   const indicatorClassName = `indicator ${PRIORITY_CLASSES[props.priority]}`
 
-  const onClick = (e: React.MouseEvent) =>
+  const onClick = () =>
     props.setPriority(cyclePriority(props.priority, props.canNotDownload!))
 
   return (

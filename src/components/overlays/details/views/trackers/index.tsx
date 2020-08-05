@@ -1,5 +1,6 @@
-import React, { Fragment, useContext } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
+
 import { Badge } from '@puddle/components';
 import FallbackMessage from '../../fallback';
 import { torrentSelector } from '../../utils';

@@ -1,39 +1,27 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Badge } from '@puddle/components';
-import { TorrentDetailed } from '@puddle/models';
-import { constructFileTree, FileTreeEntry, scaleBytes } from '@puddle/utils';
-import { ClientContext } from '@puddle/components';
-import { TransmissionTorrentFiles, TransmissionTorrentFileStats } from '@puddle/transmission';
-import {
-  TransmissionTorrentStatus as TorrentStatus,
-  TransmissionPriorityType as PriorityType
-} from '@puddle/transmission';
-import { selectTorrentDetailsOverlayFiles, selectTorrentDetailsOverlaySelectedFiles, torrentDetailsOverlayClearFileSelection } from '@puddle/stores';
-
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconDefinition } from '@fortawesome/fontawesome-common-types';
-import { faFolderOpen } from '@fortawesome/free-solid-svg-icons';
-import { faFile } from '@puddle/utils/fontawesome';
-import { Checkbox } from '@puddle/components';
-import { Select } from '@puddle/components';
 
 import '@cstyles/scrollbar';
 import { Scrollbar } from 'react-scrollbars-custom';
 
-import { FileTree } from './file-tree';
+import { constructFileTree } from '@puddle/utils';
 
 import {
-  BandwidthPrioritySlider, isPriorityType, ExtendedPriorityType, PRIORITY_LABELS
+  Select, ExtendedPriorityType, PRIORITY_LABELS, ClientContext
 } from '@puddle/components';
 
 import {
-  selectTorrentDetailsOverlayFileProps,
-  torrentDetailsOverlaySelectFiles,
-  torrentDetailsOverlayDeselectFiles,
+  TransmissionPriorityType as PriorityType, TransmissionTorrentFiles
+} from '@puddle/transmission';
+
+import {
+  selectTorrentDetailsOverlayFiles,
+  selectTorrentDetailsOverlaySelectedFiles,
+  torrentDetailsOverlayClearFileSelection,
   setFilePriorities
 } from '@puddle/stores';
+
+import { FileTree } from './file-tree';
 
 function torrentFileTree(files: TransmissionTorrentFiles[]) {
   return {

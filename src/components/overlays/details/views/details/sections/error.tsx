@@ -1,15 +1,8 @@
-import React, { Fragment, useContext } from 'react';
-import moment from 'moment';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectTorrentById, torrentPriorityChanged, torrentsUpdated,
-  TorrentState, updateTorrent
-} from '@puddle/stores'
-import { TorrentDetailed, Torrent } from '@puddle/models';
-import { scaleBytes } from '@puddle/utils';
-import { TransmissionError } from '@puddle/transmission';
+import { useSelector } from 'react-redux';
+
 import { TableSection } from '../section';
 import { torrentSelector } from '../../../utils';
+import { TransmissionError } from '@puddle/transmission';
 
 const ERROR_TYPES: { [key in TransmissionError]: string } = {
   [TransmissionError.OK]: 'OK',

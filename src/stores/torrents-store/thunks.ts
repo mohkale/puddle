@@ -1,15 +1,13 @@
 import { Action, ThunkDispatch } from '@reduxjs/toolkit';
+
 import { RootState, RootThunk } from '../state';
-import Transmission, { TorrentId, TransmissionTorrent as TorrentResponse } from '@puddle/transmission';
 import { torrentsAdded, torrentsRemoved, torrentsUpdated } from './actions';
+import { notifyTorrentAdded, notifyTorrentRemoved } from '../notifications-store'
 
-import {
-  notifyTorrentAdded, notifyTorrentRemoved
-} from '../notifications-store'
-
-import {
-  Torrent, torrentFromResponse, TORRENT_FIELDS
-} from '@puddle/models';
+import { Torrent, torrentFromResponse, TORRENT_FIELDS } from '@puddle/models';
+import Transmission, {
+  TorrentId, TransmissionTorrent as TorrentResponse
+} from '@puddle/transmission';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -99,7 +97,7 @@ export const updateTorrents =
 
 export const updateTorrent =
   (id: number, client: Transmission): RootThunk<Promise<void>> => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
       const torrent = await client.torrent(id, ...TORRENT_FIELDS);
       dispatch(torrentsUpdated({ torrents: [torrent] }))
     }

@@ -65,13 +65,13 @@ const uiSlice = createSlice({
       .addCase(actions.allTorrentsDeselected, (state) => {
         state.selected = []
       })
-      .addCase(overlayRemoved, (state, action) => {
+      .addCase(overlayRemoved, (state) => {
         state.overlay = undefined
       })
-      .addCase(settingsOverlayAssigned, (state, action) => {
+      .addCase(settingsOverlayAssigned, (state) => {
         state.overlay = OverlayType.SETTINGS
       })
-      .addCase(torrentDetailsOverlayAssigned, (state, action) => {
+      .addCase(torrentDetailsOverlayAssigned, (state) => {
         state.overlay = OverlayType.TORRENT_DETAILS
       })
 })

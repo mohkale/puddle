@@ -1,34 +1,16 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import {
-  selectTorrentById, torrentPriorityChanged, TorrentState,
-  updateTorrent, torrentDetailsOverlayAssigned,
   selectTorrentDetailsOverlayTorrentId,
   torrentDetailsOverlayTorrentAssigned
 } from '@puddle/stores'
-import { Torrent } from '@puddle/models'
-import ProgressBar from '@puddle/components/dashboard/torrent-list/torrent/progress-bar'
-import { IconDefinition } from '@fortawesome/fontawesome-common-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ClientContext } from '@puddle/components';
-import {
-  TransmissionTorrentStatus as TorrentStatus,
-  TransmissionPriorityType as PriorityType
-} from '@puddle/transmission';
-import {
-  faLongArrowAltDown, faLongArrowAltUp, faPlay, faStop
-} from '@fortawesome/free-solid-svg-icons';
 
 import {
-  faTachometerAlt, faClock
-} from '@fortawesome/free-solid-svg-icons';
+  ClientContext, BandwidthPrioritySlider, isPriorityType,
+  ExtendedPriorityType
+} from '@puddle/components';
 
-import {
-  scaleBytes, timeFormat, padString
-} from '@puddle/utils';
-
-import { torrentClasses } from '@puddle/components/dashboard/torrent-list/torrent';
-import { BandwidthPrioritySlider, isPriorityType, ExtendedPriorityType } from '@puddle/components';
 import { StartStopButtons } from './buttons';
 import { torrentSelector } from '../utils';
 

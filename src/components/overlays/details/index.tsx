@@ -1,22 +1,20 @@
 import '@cstyles/overlays/details';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import store, {
-  OverlayType, selectTorrentDetailsOverlayTorrentId,
-  selectTorrentById, intervalsUpdated, selectIntervals,
-  torrentDetailsOverlayTorrentUpdated,
-  selectTorrentDetailsOverlayTorrent,
-  selectTorrentDetailsTorrentAssigned
+  intervalsUpdated, selectIntervals,
+  selectTorrentDetailsTorrentAssigned,
+  updateTorrentDetails
 } from '@puddle/stores'
-import OverlayContainer from '../container';
-import { ClientContext } from '@puddle/components';
+
 import Header from './header';
-import { torrentClasses } from '@puddle/components/dashboard/torrent-list/torrent';
-import { TabbedMenu, TabbedMenuViewType } from '@puddle/components';
+import OverlayContainer from '../container';
 import { FilesView, PeersView, DetailsView, TrackersView } from './views';
-import { updateTorrentDetails } from '@puddle/stores';
-import { TorrentDetailed, TORRENT_DETAILED_FIELDS, torrentDetailedFromResponse as torrentFromResponse } from '@puddle/models';
+
 import { Updater } from '@puddle/utils'
+import { TORRENT_DETAILED_FIELDS } from '@puddle/models';
+import { ClientContext, TabbedMenu, TabbedMenuViewType } from '@puddle/components';
 
 const VIEW_DETAILS_INTERVAL = 1000
 
@@ -28,6 +26,7 @@ enum DetailsFields {
   // MEDIA_INFO
 }
 
+/* eslint-disable react/display-name */
 const TORRENT_DETAILS_VIEWS: { [key in DetailsFields]: TabbedMenuViewType } = {
   [DetailsFields.DETAILS]: {
     key: "Details",
@@ -45,10 +44,6 @@ const TORRENT_DETAILS_VIEWS: { [key in DetailsFields]: TabbedMenuViewType } = {
     key: 'Peers',
     children: () => <PeersView />
   }
-}
-
-function setupUpdater() {
-  
 }
 
 export default function TorrentDetails() {
@@ -77,22 +72,15 @@ export default function TorrentDetails() {
   }, [])
 
   const isTorrentAssigned = useSelector(selectTorrentDetailsTorrentAssigned)
-  const torrent = useSelector(selectTorrentDetailsOverlayTorrent)
-  const torrentId = useSelector(selectTorrentDetailsOverlayTorrentId)
-
 
   if (!isTorrentAssigned) {
     return null
   }
 
-  const updateTorrent = (t: Partial<TorrentDetailed>) => {
-    dispatch(torrentDetailsOverlayTorrentUpdated(Object.assign({}, torrent, t)))
-  }
-
   return (
     <OverlayContainer>
       <div className={`modal torrent-details`}>
-        <Header torrentId={torrentId} />
+        <Header />
         <TabbedMenu active={DetailsFields.DETAILS} views={TORRENT_DETAILS_VIEWS} />
       </div>
     </OverlayContainer>

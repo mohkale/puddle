@@ -13,6 +13,7 @@ const styles = {
  * Root component for displaying some sort of a fallback message
  * when the information associated with a torrents view is missing.
  */
+/* eslint-disable react/display-name */
 const FallbackMessage =
   React.memo((props) => {
     return (

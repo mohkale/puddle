@@ -1,30 +1,18 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectTorrentById, torrentPriorityChanged, TorrentState, updateTorrent, selectTorrentDetailsOverlayTorrentId, torrentDetailsOverlayTorrentAssigned } from '@puddle/stores'
+
 import { Torrent } from '@puddle/models'
-import ProgressBar from '@puddle/components/dashboard/torrent-list/torrent/progress-bar'
-import { IconDefinition } from '@fortawesome/fontawesome-common-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ClientContext } from '@puddle/components';
 import {
-  TransmissionTorrentStatus as TorrentStatus,
-  TransmissionPriorityType as PriorityType
-} from '@puddle/transmission';
-import {
-  faLongArrowAltDown, faLongArrowAltUp, faPlay, faStop
-} from '@fortawesome/free-solid-svg-icons';
+  selectTorrentDetailsOverlayTorrentId,
+  torrentDetailsOverlayTorrentAssigned
+} from '@puddle/stores'
+import { TransmissionTorrentStatus as TorrentStatus } from '@puddle/transmission';
 
-import {
-  faTachometerAlt, faClock
-} from '@fortawesome/free-solid-svg-icons';
-
-import {
-  scaleBytes, timeFormat, padString
-} from '@puddle/utils';
-
-import { torrentClasses } from '@puddle/components/dashboard/torrent-list/torrent';
-import { BandwidthPrioritySlider, isPriorityType, ExtendedPriorityType } from '@puddle/components';
 import { torrentSelector } from '../utils';
+import { ClientContext } from '@puddle/components';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faStop } from '@fortawesome/free-solid-svg-icons';
 
 /**
  * Component hoisting two buttons to indicate whether the current torrent
@@ -43,7 +31,7 @@ export const StartStopButtons = () => {
       return () => {
         if (predicate) {
           invoke(torrentId)
-            .then(resp => {
+            .then(() => {
               dispatch(torrentDetailsOverlayTorrentAssigned({ status: newState }))
             })
         }
