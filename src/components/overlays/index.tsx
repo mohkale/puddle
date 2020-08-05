@@ -6,6 +6,7 @@ import TorrentDetails from './details';
 import Settings from './settings';
 import SetLabels from './set-labels';
 import Statistics from './statistics';
+import RemoveTorrent from './torrent-remove';
 
 interface RenderOverlayProps {
   type: OverlayType
@@ -21,6 +22,8 @@ export default function RenderOverlay(props: RenderOverlayProps) {
       return <SetLabels />
     case OverlayType.STATISTICS:
       return <Statistics />
+    case OverlayType.TORRENT_REMOVE:
+        return <RemoveTorrent />
   }
 
   return null

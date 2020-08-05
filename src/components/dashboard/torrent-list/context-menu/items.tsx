@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { showTorrentDetails, setLabelsOverlayAssigned } from '@puddle/stores';
+import { showTorrentDetails, setLabelsOverlayAssigned, removeTorrentOverlayAssigned } from '@puddle/stores';
 import { TransmissionPriorityType as PriorityType } from '@puddle/transmission';
 
 import {
@@ -34,8 +34,12 @@ export function StopTorrentsItem(props: ContextItemProps) {
 
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 export function RemoveTorrentsItem(props: ContextItemProps) {
-  // TODO remove not yet implemented
-  return <li>Remove</li>;
+  const dispatch = useDispatch()
+  const onClick = () => {
+    dispatch(removeTorrentOverlayAssigned(props.torrents))
+  }
+
+  return <li onClick={onClick}>Remove</li>;
 }
 
 export function CheckHashesItem(props: ContextItemProps) {

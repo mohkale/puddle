@@ -114,7 +114,7 @@ button {
         cursor: not-allowed;
     }
 
-    &:hover {
+    &:hover, &:focus {
         --fg: var(--hover-fg);
         --bg: var(--hover-bg);
     }
