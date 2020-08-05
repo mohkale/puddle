@@ -1,8 +1,10 @@
 import { RootState } from '../state';
+import { createSelector } from '@reduxjs/toolkit';
 
 export * from './columns';
 export * from './overlays';
 export * from './filter-lists';
+export * from './labels-by-id';
 export * from './selected-torrents';
 export * from './filtered-torrents';
 
@@ -37,3 +39,9 @@ export const selectOverlay =
 
 export const selectIntervals =
   (state: RootState) => state.settings.intervals
+
+export const selectTorrentLabels =
+  createSelector(
+    [(state: RootState) => state.torrents.byLabels],
+    Object.keys
+  )

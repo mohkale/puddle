@@ -79,7 +79,7 @@ const handleTorrentUpdated =
  * Asynchronously fetch the current torrent list from the transmission
  * daemon and then update the local store.
  */
-export const updateTorrents =
+export const updateRecentlyActiveTorrents =
   (client: Transmission): RootThunk<Promise<void>> => {
     return async (dispatch, getState) => {
       const active = await client.recentlyActiveTorrents(...TORRENT_FIELDS);
@@ -96,9 +96,9 @@ export const updateTorrents =
   }
 
 export const updateTorrent =
-  (id: number, client: Transmission): RootThunk<Promise<void>> => {
+  (ids: number[], client: Transmission): RootThunk<Promise<void>> => {
     return async (dispatch) => {
-      const torrent = await client.torrent(id, ...TORRENT_FIELDS);
-      dispatch(torrentsUpdated({ torrents: [torrent] }))
+      const torrents = await client.torrents(ids, ...TORRENT_FIELDS);
+      dispatch(torrentsUpdated({ torrents }))
     }
   }

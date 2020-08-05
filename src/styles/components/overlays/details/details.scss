@@ -1,0 +1,27 @@
+.torrent-details-table {
+    width: 100%;
+    padding: 1em 1.5em;
+    font-size: 0.8rem;
+
+    td:first-child {
+        color: #8393a3;
+        font-weight: 500;
+        padding-right: 12px;
+    }
+
+    td:not(:first-child) {
+        color: #7d8d9f;
+        font-weight: 400;
+    }
+
+    td[colspan="2"] {
+        color: #b8c1cb;
+        font-size: 0.85rem;
+        padding-top: 10px;
+        font-weight: 700;
+    }
+
+    span.missing {
+        font-style: italic;
+    }
+}

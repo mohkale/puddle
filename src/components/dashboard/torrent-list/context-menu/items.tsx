@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { showTorrentDetails } from '@puddle/stores';
+import { showTorrentDetails, setLabelsOverlayAssigned } from '@puddle/stores';
 import { TransmissionPriorityType as PriorityType } from '@puddle/transmission';
 
 import {
@@ -47,9 +47,13 @@ export function CheckHashesItem(props: ContextItemProps) {
   return <li onClick={onClick}>Check Hash</li>;
 }
 
-/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-export function SetTagsItem(props: ContextItemProps) {
-  return <li>Set Tags</li>;
+export function SetLabelsItem(props: ContextItemProps) {
+  const dispatch = useDispatch()
+  const onClick = () => {
+    dispatch(setLabelsOverlayAssigned(props.torrents))
+  }
+
+  return <li onClick={onClick}>Set Tags</li>;
 }
 
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */

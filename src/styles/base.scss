@@ -1,3 +1,5 @@
+@import "./config";
+
 @font-face {
     font-family: Roboto;
     src: url(../fonts/Roboto-regular/Roboto-regular.ttf);
@@ -40,4 +42,67 @@ h1 {
 .highlight {
     color: var(--action-color);
     font-weight: bold;
+}
+
+@mixin button-color-scheme(
+    $fg, $bg, $hover-fg, $hover-bg, $active-fg,
+    $active-bg, $border, $disabled-fg, $disabled-bg,
+    $disabled-border) {
+    --fg: #{$fg};
+    --bg: #{$bg};
+    --hover-fg: #{$hover-fg};
+    --hover-bg: #{$hover-bg};
+    --active-fg: #{$active-fg};
+    --active-bg: #{$active-bg};
+    --border: #{$border};
+    --disabled-fg: #{$disabled-fg};
+    --disabled-bg: #{$disabled-bg};
+    --disabled-border: #{$disabled-border};
+}
+
+button {
+    height: 34px;
+    outline: none;
+    padding: 0px 12px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all $animation-duration;
+
+    border-radius: 4px;
+    cursor: pointer;
+    border-style: double;
+    outline: none;
+
+    @include button-color-scheme(
+        var(--button-fg),
+        var(--button-bg),
+        var(--button-hover-fg),
+        var(--button-hover-bg),
+        var(--button-active-fg),
+        var(--button-active-bg),
+        var(--button-border),
+        var(--button-disabled-fg),
+        var(--button-disabled-bg),
+        var(--button-disabled-border));
+
+    color: var(--fg);
+    background: var(--bg);
+    border-color: var(--border);
+
+    &[disabled] {
+        --fg: var(--disabled-fg);
+        --bg: var(--disabled-bg);
+        --hover-fg: var(--disabled-fg);
+        --hover-bg: var(--disabled-bg);
+        --active-fg: var(--disabled-fg);
+        --active-bg: var(--disabled-bg);
+        --border: var(--disabled-border);
+
+        cursor: not-allowed;
+    }
+
+    &:hover {
+        --fg: var(--hover-fg);
+        --bg: var(--hover-bg);
+    }
 }

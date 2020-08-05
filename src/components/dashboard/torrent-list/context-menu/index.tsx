@@ -5,7 +5,7 @@ import { selectSelectedTorrentIds } from '@puddle/stores';
 
 import {
   StartTorrentsItem, StopTorrentsItem, RemoveTorrentsItem,
-  CheckHashesItem, SetTagsItem, SetTorrentLocationItem,
+  CheckHashesItem, SetLabelsItem, SetTorrentLocationItem,
   DetailsItem, PriorityItem, MoveToTopItem, MoveToBottomItem,
   MoveUpItem, MoveDownItem
 } from './items';
@@ -42,7 +42,7 @@ export default function ContextMenu(props: ContextMenuProps) {
         <RemoveTorrentsItem torrents={selectedTorrents} />
         <CheckHashesItem torrents={selectedTorrents} />
         <li className="seperator"></li>
-        <SetTagsItem torrents={selectedTorrents} />
+        <SetLabelsItem torrents={selectedTorrents} />
         <SetTorrentLocationItem torrents={selectedTorrents} />
         <li className="seperator"></li>
         <MoveToTopItem torrents={selectedTorrents} />

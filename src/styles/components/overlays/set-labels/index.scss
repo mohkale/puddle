@@ -1,0 +1,22 @@
+.modal.set-labels {
+    width: 500px;
+
+    .selector {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .submission-controls {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        padding-top: 15px;
+
+        border-top: solid 1px var(--modal-border-color);
+
+        button {
+            margin-right: 15px;
+        }
+    }
+}

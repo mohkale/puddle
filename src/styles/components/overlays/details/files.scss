@@ -1,0 +1,71 @@
+.torrent-files-view {
+    $horizontal-padding: 25px;
+    $scrollbar-offset: 6px;
+
+    display: flex;
+    flex-direction: column;
+    width: 100%; height: 100%;
+    padding: 20px $horizontal-padding;
+    box-sizing: border-box;
+
+    padding-right: $scrollbar-offset;
+    .file-tree:first-child {
+        padding-right: $horizontal-padding - $scrollbar-offset;
+    }
+
+    .file-tree {
+        list-style-type: none;
+        font-size: 0.85rem;
+        padding: 0px;
+        margin: 0px;
+        margin-left: 8px;
+
+        li {
+            padding: 1px 0px;
+        }
+
+        .file {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #7d8d9f;
+            font-size: 0.8rem;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            transition: color $animation-duration;
+
+            &:hover {
+                color: #8799ad;
+            }
+
+            .name {
+                flex: 1 1 auto;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            & > *:not(:last-child) {
+                margin-right: 6.25px;
+            }
+        }
+
+        .directory > .file {
+            font-weight: 700;
+            color: #8799ad;
+        }
+    }
+
+    .submission-controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: solid 1px var(--modal-border-color);
+        height: 34px;
+        padding: 18px 12px 0px 12px;
+
+        p {
+            margin: 0px;
+        }
+    }
+}

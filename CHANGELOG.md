@@ -1,7 +1,6 @@
 ## [Unreleased]
 ### TODO
 - set torrent location
-- set torrent tags
 - settings controls (see transmission web view)
 - expanded notifications history
 - set download limits from sidebar button
@@ -35,3 +34,5 @@
 - Expanded details view showing specific information for a single torrent
   - Bandwidth priority control for individual files in a torrent list
 - Options for moving torrents up and down in the queue
+- set torrent tags/labels
+  - auto completion depending on already existing tags

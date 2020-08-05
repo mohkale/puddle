@@ -1,0 +1,71 @@
+@import "@styles/no-select";
+@import "@styles/config";
+
+// TODO move color vars to theme.
+.modal.torrent-details {
+    width: 700px;
+    height: 45em;
+    display: flex;
+    flex-direction: column;
+
+    .badge {
+        background: rgba(125,141,159,0.2);
+        color: #7d8d9f;
+    }
+
+    .tabbed-menu {
+        flex-grow: 1;
+    }
+
+    header .icon {
+        width:  12px;
+        height: 12px;
+        margin-right: 3px;
+    }
+
+    .control-bar {
+        display: flex;
+        justify-content: space-between;
+
+        font-size: 0.85rem;
+        .unit {
+            font-size: 0.8em;
+        }
+
+        ul {
+            display: flex;
+            list-style-type: none;
+            padding: 0px;
+        }
+
+        li {
+            font-weight: 400;
+            margin-right: 1em;
+
+            &:last-child { margin-right: 0px; }
+
+            &.button {
+                cursor: pointer;
+            }
+
+            &.active {
+                font-weight: bold;
+
+                &.button {
+                    color: var(--action-color);
+                }
+                &.download {
+                    color: var(--torrents-downloading-row-progress-fg);
+                }
+                &.upload {
+                    color: var(--torrents-seeding-row-progress-fg);
+                }
+            }
+        }
+    }
+
+    header {
+        border-bottom: solid 1px var(--modal-border-color);
+    }
+}
+

@@ -1,0 +1,14 @@
+.torrent-peers-table {
+    width: 100%;
+    padding: 1em 1.5em;
+    font-size: 0.8rem;
+
+    thead td {
+        color: rgba(125,141,159,0.6);
+        font-size: 0.9rem;
+    }
+
+    .icon.check {
+        color: var(--action-color);
+    }
+}

@@ -1,7 +1,8 @@
 import Transmission from '@puddle/transmission';
 
 import store, {
-  updateTorrents, syncStats, syncStatsLimits,
+  syncStats, syncStatsLimits,
+  updateRecentlyActiveTorrents as updateTorrents
 } from '@puddle/stores';
 import { Updater } from '@puddle/utils';
 
