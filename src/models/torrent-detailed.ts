@@ -28,13 +28,15 @@ export const TORRENT_DETAILED_FIELDS: (keyof TorrentResponse)[] = [
   "priority-high",
   "priority-low",
   "priority-normal",
+  "activityDate",
+  "startDate",
 ]
 
 export type TorrentDetailed = Torrent &
   Pick<TorrentResponse, 'downloadDir' | 'peers' | 'peersConnected' | 'dateCreated' |
     'hashString' | 'creator' | 'comment' | 'totalSize' | 'isPrivate' | 'errorString' |
     'files' | 'fileStats' | 'files-wanted' | 'files-unwanted' | 'priority-high' |
-    'priority-low' | 'priority-normal'>
+    'priority-low' | 'priority-normal' | 'activityDate' | 'startDate'>
 
 const TORRENT_DETAILED_BASE: Partial<TorrentDetailed> = {
   ...TORRENT_BASE,

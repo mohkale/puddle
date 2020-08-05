@@ -44,6 +44,19 @@ h1 {
     font-weight: bold;
 }
 
+.inline-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0px;
+    margin: 0px;
+    list-style-type: none;
+
+    li:not(:last-child)::after {
+        content: ",";
+        margin-right: 8px;
+    }
+}
+
 @mixin button-color-scheme(
     $fg, $bg, $hover-fg, $hover-bg, $active-fg,
     $active-bg, $border, $disabled-fg, $disabled-bg,

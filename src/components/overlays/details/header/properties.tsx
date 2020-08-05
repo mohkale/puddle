@@ -9,6 +9,7 @@ import {
 
 import { TransferMeasure } from './transfers';
 import { torrentSelector } from '../utils';
+import { formatDuration } from '@puddle/utils';
 
 export function TorrentProperties() {
   const downloadRate = useSelector(torrentSelector(t => t.rateDownload))
@@ -32,7 +33,8 @@ export function TorrentProperties() {
 
       <li>
         <FontAwesomeIcon icon={faClock} className="icon" />
-        {eta > 0 && eta.toFixed(2)}
+        {eta > 0 &&
+          formatDuration(eta * 1000)}
       </li>
     </ul>
   )

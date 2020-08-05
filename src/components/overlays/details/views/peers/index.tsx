@@ -1,24 +1,24 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import '@cstyles/scrollbar';
+import { Scrollbar } from 'react-scrollbars-custom';
+
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { scaleBytes } from '@puddle/utils';
 import FallbackMessage from '../../fallback';
 import { torrentSelector } from '../../utils';
 
+import { BytesWithUnit } from '@puddle/components';
 import { TransmissionTorrentPeers as TorrentPeers } from '@puddle/transmission'
 
 function PeerRow(peer: TorrentPeers) {
-  const [upload, uploadUnit] = scaleBytes(peer.rateToClient)
-  const [download, downloadUnit] = scaleBytes(peer.rateToPeer)
-
   return (
     <tr>
       <td>{peer.address}</td>
-      <td>{download.toFixed(2)}<em className="unit">{downloadUnit}</em></td>
-      <td>{upload.toFixed(2)}<em className="unit">{uploadUnit}</em></td>
+      <td><BytesWithUnit bytes={peer.rateToClient} /></td>
+      <td><BytesWithUnit bytes={peer.rateToPeer} /></td>
       <td>{(peer.progress * 100).toFixed()}%</td>
       <td>{peer.flagStr}</td>
       <td>{peer.clientName}</td>
@@ -42,22 +42,24 @@ export function PeersView() {
   }
 
   return (
-    <table className="torrent-peers-table">
-      <thead>
-        <tr>
-          <td>Peer</td>
-          <td>DL</td>
-          <td>UL</td>
-          <td>%</td>
-          <td>Flags</td>
-          <td>Client</td>
-          <td>Encrypted</td>
-        </tr>
-      </thead>
-      <tbody>
-        {peers.map(peer => <PeerRow key={peer.address} {...peer} />)}
-      </tbody>
-    </table>
+    <Scrollbar>
+      <table className="torrent-peers-table">
+        <thead>
+          <tr>
+            <td>Peer</td>
+            <td>DL</td>
+            <td>UL</td>
+            <td>%</td>
+            <td>Flags</td>
+            <td>Client</td>
+            <td>Encrypted</td>
+          </tr>
+        </thead>
+        <tbody>
+          {peers.map(peer => <PeerRow key={peer.address} {...peer} />)}
+        </tbody>
+      </table>
+    </Scrollbar>
   );
 }
 

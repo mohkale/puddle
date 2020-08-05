@@ -25,8 +25,3 @@ export const formatDuration = (time: number): string => {
 
   return `00:${formatInt(seconds)}`;
 };
-
-// https://github.com/tremc/tremc/blob/master/tremc#L3362
-export function timeFormat(duration: number): string {
-  return formatDuration(duration * 1000)
-}

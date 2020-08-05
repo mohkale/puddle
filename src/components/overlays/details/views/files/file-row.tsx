@@ -4,8 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { faFile } from '@puddle/utils/fontawesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { scaleBytes } from '@puddle/utils';
-
 import {
   selectTorrentDetailsOverlayFileProps,
   torrentDetailsOverlaySelectFiles,
@@ -15,10 +13,11 @@ import {
 
 import {
   BandwidthPrioritySlider, ExtendedPriorityType,
-  Checkbox, ClientContext
+  Checkbox, ClientContext, BytesWithUnit
 } from '@puddle/components';
 
 import { DirectoryRowProps } from './dir-row';
+
 
 interface FileRowProps extends DirectoryRowProps {
   fileId: number
@@ -28,7 +27,6 @@ export function FileRow(props: FileRowProps) {
   const dispatch = useDispatch()
   const { transmission } = useContext(ClientContext)
   const file = useSelector(selectTorrentDetailsOverlayFileProps(props.fileId))
-  const [size, sizeUnit] = scaleBytes(file.size);
 
   const toggleFile = () => {
     const toggleDispatcher = file.isSelected ?
@@ -45,8 +43,15 @@ export function FileRow(props: FileRowProps) {
       <Checkbox isChecked={file.isSelected} onCheck={toggleFile}
                 fallback={() => <FontAwesomeIcon icon={faFile} className="icon" />}/>
       <span className="name">{props.name}</span>
-      <span className="percentage">{(file.percentageComplete * 100).toFixed()}%</span>
-      <span className="size">{size.toFixed(2)}<em className="unit">{sizeUnit}</em></span>
+
+      <span className="percentage">
+        {(file.percentageComplete * 100).toFixed()}%
+      </span>
+
+      <span className="size">
+        <BytesWithUnit bytes={file.size} />
+      </span>
+
       <BandwidthPrioritySlider priority={file.priority} setPriority={setPriority} canNotDownload={true} />
     </div>
   )

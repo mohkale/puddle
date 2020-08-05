@@ -2,20 +2,17 @@ import React from 'react';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { scaleBytes } from '@puddle/utils';
+import { BytesWithUnit } from '@puddle/components';
 
 export function TransferMeasure(props: {
   rate: number, total: number, icon: IconDefinition
 } & React.HTMLProps<HTMLLIElement>) {
-  const [rate, rateUnit] = scaleBytes(props.rate)
-  const [total, totalUnit] = scaleBytes(props.total)
-
   return (
-    <li className={[rate !== 0 ? 'active' : '', props.className].join(' ')}>
+    <li className={[props.rate !== 0 ? 'active' : '', props.className].join(' ')}>
       <FontAwesomeIcon icon={props.icon} className="icon" />
-      {rate.toFixed(2)}<span className="unit">{rateUnit}/s</span>
+      <BytesWithUnit bytes={props.rate} perSecond={true} />
       {' — '}
-      {total.toFixed(2)}<span className="unit">{totalUnit}</span>
+      <BytesWithUnit bytes={props.total} />
     </li>
   )
 }

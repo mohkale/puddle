@@ -6,3 +6,4 @@ export * from './time-format';
 export * from './file-tree';
 export * from './safe-divide';
 export * from './set-equal';
+export * from './format-torrent-state';

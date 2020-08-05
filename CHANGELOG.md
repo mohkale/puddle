@@ -4,12 +4,6 @@
 - settings controls (see transmission web view)
 - expanded notifications history
 - set download limits from sidebar button
-- add fields to torrent details:
-  - running time
-  - remaining time
-  - last activity
-  - availability
-  - total uploaded/downloaded
 - use directories in the file tree view to select
   all files within that directory
 - offer "expanded" view for torrents (see flood)
