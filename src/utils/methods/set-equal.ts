@@ -12,7 +12,7 @@ export function setsEqual<T>(setEntries: T[][]) {
   if (setEntries.length <= 1)
     return true
 
-  let equal = false
+  let equal = true
   setEntries
     .map(entries => new Set(entries))
     .reduce((prev, next) => {
