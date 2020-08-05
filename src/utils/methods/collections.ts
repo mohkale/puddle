@@ -1,3 +1,10 @@
+export function setUnionExcludingIntersection<T>(a: T[], b: T[]) {
+  const aSet = new Set(a), bSet = new Set(b)
+  return [...a, ...b].filter(o => {
+    return !(aSet.has(o) && bSet.has(o))
+  })
+}
+
 /**
  * Find the set partition of two collections of the same type.
  *

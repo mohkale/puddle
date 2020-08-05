@@ -10,7 +10,7 @@ import defaultState from './default';
 import * as actions from './actions';
 
 import { torrentsRemoved } from '../torrents-store/actions';
-import { arrayRemove } from '@puddle/utils';
+import { arrayRemove, setUnionExcludingIntersection } from '@puddle/utils';
 
 import {
   OverlayType, overlayRemoved, torrentDetailsOverlayAssigned,
@@ -51,9 +51,12 @@ const uiSlice = createSlice({
       .addCase(actions.torrentSelected, (state, action) => {
         if (!action.payload.append) {
           state.selected = action.payload.ids
+        } else if (state.selected.length <= 1) {
+          action.payload.ids
+            .filter(id => !state.selected.includes(id))
+            .forEach(id => state.selected.push(id))
         } else {
-          action.payload.ids.forEach(
-            (id) => state.selected.push(id))
+          state.selected = setUnionExcludingIntersection(state.selected, action.payload.ids)
         }
       })
       .addCase(torrentsRemoved, (state, action) => {
