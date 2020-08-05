@@ -14,7 +14,8 @@ import { arrayRemove } from '@puddle/utils';
 
 import {
   OverlayType, overlayRemoved, torrentDetailsOverlayAssigned,
-  settingsOverlayAssigned, setLabelsOverlayAssigned
+  settingsOverlayAssigned, setLabelsOverlayAssigned,
+  statisticsOverlayAssigned
 } from '../overlays-store';
 
 const uiSlice = createSlice({
@@ -76,6 +77,9 @@ const uiSlice = createSlice({
       })
       .addCase(setLabelsOverlayAssigned, (state) => {
         state.overlay = OverlayType.SET_LABELS
+      })
+      .addCase(statisticsOverlayAssigned, (state) => {
+        state.overlay = OverlayType.STATISTICS
       })
 })
 

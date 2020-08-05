@@ -16,11 +16,19 @@ const statsSlice = createSlice({
       .addCase(actions.statsUpdated, (state, action) => {
         const resp = action.payload
         const currentStats = resp['current-stats']
+        const totalStats = resp['cumulative-stats']
 
+        state.download.cumulativeTotal = totalStats.downloadedBytes
         state.download.total = currentStats.downloadedBytes
         state.download.rate = resp.downloadSpeed
+
+        state.upload.cumulativeTotal = totalStats.uploadedBytes
         state.upload.total = currentStats.uploadedBytes
         state.upload.rate = resp.uploadSpeed
+
+        state.sessionCount = totalStats.sessionCount
+        state.totalSecondsActive = totalStats.secondsActive
+        state.totalSecondsActiveThisSession = currentStats.secondsActive
       })
       .addCase(actions.limitsUpdated, (state, action) => {
         const resp = action.payload

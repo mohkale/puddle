@@ -7,4 +7,5 @@ export enum OverlayType {
   TORRENT_DETAILS,
   SETTINGS,
   SET_LABELS,
+  STATISTICS,
 }

@@ -1,0 +1,30 @@
+.modal.statistics {
+    width: 220px;
+    padding: 20px 25px;
+    font-size: 0.8rem;
+
+    header {
+        padding-left: 0px;
+    }
+
+    table {
+        width: 100%;
+        margin-bottom: 1em;
+    }
+
+    thead {
+        color: #b8c1cb;
+        font-size: 0.85rem;
+        padding-top: 10px;
+        font-weight: 700;
+    }
+
+    tbody {
+        color: #7d8d9f;
+        font-weight: 400;
+
+        td:last-child {
+            text-align: right;
+        }
+    }
+}

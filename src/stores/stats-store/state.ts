@@ -5,6 +5,9 @@ export interface NetworkStats {
   /** total number of bytes transferred this session */
   total: number
 
+  /** total number of bytes transferred */
+  cumulativeTotal: number
+
   /** maxmimm possible value for {@code rate} */
   limit: number
 
@@ -21,5 +24,10 @@ export interface StatsState {
 
   /** Whether alternative download settings are enabled. */
   altEnabled: boolean
+
+  sessionCount: number
+
+  totalSecondsActive: number
+  totalSecondsActiveThisSession: number
 }
 

@@ -5,9 +5,8 @@ import Filters from './filters';
 import NetworkGraph from './graph'
 
 import {
-  SpeedLimitsButton, SettingsButton,
-  ToggleAltSpeedButton, NotificationsButton,
-  LogoutButton
+  SettingsButton, ToggleAltSpeedButton, NotificationsButton,
+  LogoutButton, StatisticsButton
 } from './buttons';
 
 interface SidebarProps {
@@ -18,8 +17,8 @@ export default function Sidebar(props: SidebarProps) {
   return (
     <aside id="sidebar">
       <div className="buttons">
-        <SpeedLimitsButton />
         <SettingsButton />
+        <StatisticsButton />
         <ToggleAltSpeedButton />
         <NotificationsButton />
         <LogoutButton />

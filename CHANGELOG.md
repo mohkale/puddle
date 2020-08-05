@@ -7,7 +7,6 @@
 - use directories in the file tree view to select
   all files within that directory
 - offer "expanded" view for torrents (see flood)
-- add statistics overlay (see transmission web view)
 - arrow keys to move up and down torrents
 - shift arrow keys to select torrents (above and below)
 - disable context menu entries which only work for one torrent
