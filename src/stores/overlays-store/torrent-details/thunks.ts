@@ -9,9 +9,12 @@ import {
   torrentDetailsOverlayTorrentUpdated,
   torrentDetailsOverlayTorrentAssigned
 } from './actions';
-import { selectTorrentDetailsOverlayTorrentId } from '../../selectors';
+import {
+  selectTorrentDetailsOverlayTorrentId,
+  selectTorrentDetailsOverlayTorrent
+} from '../../selectors';
 
-import { TORRENT_DETAILED_FIELDS } from '@puddle/models';
+import { TORRENT_DETAILED_FIELDS, torrentDetailedFromResponse as fromResponse } from '@puddle/models';
 import { isPriorityType, ExtendedPriorityType } from '@puddle/components';
 
 export const showTorrentDetails =
@@ -32,7 +35,9 @@ export const updateTorrentDetails =
       const id = selectTorrentDetailsOverlayTorrentId(getState())
       client.torrent(id, ...TORRENT_DETAILED_FIELDS)
         .then(torrent => {
-          dispatch(torrentDetailsOverlayTorrentUpdated(torrent))
+          const base = selectTorrentDetailsOverlayTorrent(getState())
+          const torrentDetailed = fromResponse(torrent, base)
+          dispatch(torrentDetailsOverlayTorrentUpdated(torrentDetailed))
         })
     }
   }
