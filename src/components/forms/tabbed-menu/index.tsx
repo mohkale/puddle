@@ -24,7 +24,7 @@ export function TabbedMenu(props: TabbedMenuProps) {
     .map(([key, view]) => {
       return (
         <li key={view.key}
-            className={key == activeView ? 'selected' : ''}
+            className={key === activeView ? 'selected' : ''}
             onClick={() => setActiveView(key)}>
           {view.key}
         </li>

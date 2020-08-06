@@ -8,6 +8,7 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
+  "ignorePatterns": ["**/__tests__/**/*"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -37,5 +38,5 @@ module.exports = {
         "argsIgnorePattern": "_",
       }
     ],
-  }
+  },
 };
