@@ -34,9 +34,9 @@
     }
   },
   "include": [
-    "./src/**/*.ts", "./src/**/*.tsx"
+    "./src/**/*.ts", "./src/**/*.tsx",
   ],
   "exclude": [
-    "node_modules", "**/*.spec.ts"
+    "node_modules", "**/*.spec.ts", "**/__tests__/**/*.ts"
   ]
 }
