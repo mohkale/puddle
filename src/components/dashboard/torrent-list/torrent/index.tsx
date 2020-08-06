@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import {
-  selectColumns, torrentSelected,
+  showTorrentDetails, selectColumns, torrentSelected,
   selectTorrentById, selectTorrentIsSelected,
-  torrentRangeSelected
+  torrentRangeSelected, selectSelectedTorrentCount
 } from '@puddle/stores';
 import { Torrent } from '@puddle/models';
+import { ClientContext } from '@puddle/components';
 import { TransmissionTorrentStatus as TorrentStatus } from '@puddle/transmission';
 
 import renderColumn from './column';
@@ -47,15 +48,19 @@ export function torrentClasses(torrent: Torrent, isSelected: boolean) {
 
 export default function TorrentRow(props: { id: number, onRightClick: (e: React.MouseEvent, id: number) => void }) {
   const dispatch = useDispatch()
+  const { transmission } = useContext(ClientContext)
   const torrent = useSelector(selectTorrentById(props.id))
   const columns = useSelector(selectColumns)
   const isSelected = useSelector(selectTorrentIsSelected(props.id))
+  const onlyOneSelected = useSelector(selectSelectedTorrentCount) === 1
 
   const classes = torrentClasses(torrent, isSelected)
 
   const onClick = (e: React.MouseEvent) => {
     if (e.shiftKey) {
       dispatch(torrentRangeSelected(props.id))
+    } else if (onlyOneSelected && isSelected) {
+      dispatch(showTorrentDetails(transmission, props.id))
     } else {
       dispatch(torrentSelected({ ids: [props.id], append: e.ctrlKey }))
     }

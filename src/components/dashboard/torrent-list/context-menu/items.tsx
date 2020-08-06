@@ -65,7 +65,6 @@ export function SetTorrentLocationItem(props: ContextItemProps) {
   return <li>Set Torrent Location</li>;
 }
 
-/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 export function DetailsItem(props: ContextItemProps) {
   const dispatch = useDispatch()
   const { transmission } = useContext(ClientContext)

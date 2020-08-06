@@ -28,3 +28,8 @@ export const selectTorrentIsSelected = (id: number) =>
   createSelector(
     [selectSelectedTorrentsSet],
     (isSelected) => isSelected(id))
+
+export const selectSelectedTorrentCount =
+  createSelector(
+    [selectSelectedTorrentIds],
+    (selected) => selected.length)
