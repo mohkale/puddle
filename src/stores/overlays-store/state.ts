@@ -1,4 +1,4 @@
-import { TorrentDetailsOverlayState } from './torrent-details';
+import { TorrentDetailsOverlayState } from './details';
 import { SetLabelsOverlayState } from './set-labels';
 import { RemoveTorrentOverlayState } from './torrent-remove';
 

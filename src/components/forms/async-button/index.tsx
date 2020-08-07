@@ -20,7 +20,7 @@ interface ButtonProps<T> extends React.HTMLProps<HTMLButtonElement> {
  */
 export default function LoaderButton<T = void>(_props: ButtonProps<T>) {
   const [promise, setPromise] = useState<Promise<T|void|undefined>>()
-  const { run, disabled, onSuccess, onFailure, ...props } = _props;
+  const { run, className, disabled, onSuccess, onFailure, ...props } = _props;
 
   const onClick = () => {
     if (promise !== undefined || disabled)
@@ -39,7 +39,7 @@ export default function LoaderButton<T = void>(_props: ButtonProps<T>) {
     }
   }
 
-  const classes = [props.className, 'loader', promise === undefined ? '' : 'loading']
+  const classes = [className, className, 'loader', promise === undefined ? '' : 'loading']
 
   return (
     <button className={classes.join(' ')} {...props}

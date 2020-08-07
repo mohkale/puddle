@@ -45,15 +45,17 @@ export const StartStopButtons = () => {
   const onStartButtonPress = startStopPress(stopped, transmission.startTorrent, TorrentStatus.DOWNLOAD_WAIT)
   const onStopButtonPress = startStopPress(!stopped, transmission.stopTorrent, TorrentStatus.STOPPED)
 
+  const activeClass = 'torrent-details__bar-button--active';
+
   return (
     <Fragment>
-      <li className={['button', stopped ? '' : 'active'].join(' ')}
+      <li className={['torrent-details__bar-button', !stopped && activeClass].join(' ')}
           onClick={onStartButtonPress}>
         <FontAwesomeIcon icon={faPlay} className="icon" />
         Start
       </li>
 
-      <li className={['button', stopped ? 'active' : ''].join(' ')}
+      <li className={['torrent-details__bar-button', stopped && activeClass].join(' ')}
           onClick={onStopButtonPress}>
         <FontAwesomeIcon icon={faStop} className="icon" />
         Stop

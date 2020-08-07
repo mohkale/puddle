@@ -1,10 +1,10 @@
 import '@cstyles/overlays/settings';
 import React from 'react';
-import OverlayContainer from '../container';
 
-import { TabbedMenu, TabbedMenuViewType } from '@puddle/components';
 import { Orientation } from '@puddle/utils/types'
-import { ClientContext, AsyncButton } from '@puddle/components';
+import { TabbedMenu, TabbedMenuViewType } from '@puddle/components';
+
+import Modal from '../modal';
 
 import {
   TorrentsView, NetworkView, SpeedView,
@@ -44,21 +44,12 @@ const SETTINGS_FIELDS_VIEWS: { [key in SettingsFields]: TabbedMenuViewType } = {
 }
 
 export default function Settings() {
-  const onSubmit = () => {}
-  const removeOverlay = () => {}
-
   return (
-    <OverlayContainer>
-      <div className={`modal settings`}>
-        <header>
-          <h1>Settings</h1>
-        </header>
-
-        <TabbedMenu
-          orientation={Orientation.VERTICAL}
-          active={SettingsFields.TORRENTS}
-          views={SETTINGS_FIELDS_VIEWS} />
-      </div>
-    </OverlayContainer>
+    <Modal title="Settings" className="settings">
+      <TabbedMenu
+        orientation={Orientation.VERTICAL}
+        active={SettingsFields.TORRENTS}
+        views={SETTINGS_FIELDS_VIEWS} />
+    </Modal>
   )
 }

@@ -1,15 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { SelectCreatable } from '@puddle/components';
 import { selectTorrentLabels } from '@puddle/stores'
+import { SelectCreatable, SelectOption } from '@puddle/components';
 
-interface LabelSelectorProps {
-  selectedLabels: number[]
-  onChange: (options: string[]) => void
+export interface LabelSelectorProps<T> {
+  selectedLabels: SelectOption<T>[]
+  onChange: (options: SelectOption<T>[]) => void
 }
 
-export function LabelSelector(props: LabelSelectorProps) {
+export function LabelSelector<T>(props: LabelSelectorProps<T>) {
   const labels = useSelector(selectTorrentLabels)
   const options = labels.map(label => ({ label, value: label }))
 

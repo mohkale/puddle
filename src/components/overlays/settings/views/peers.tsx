@@ -1,13 +1,12 @@
-import React, { Fragment, useState, useContext } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useContext } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { Checkbox, ClientContext } from '@puddle/components';
-import { Form, Section, Row, MessageType, MessageLevel, NumberInput } from '../controls';
-import { sessionSelector, useStateFromSelector } from '../utils';
 import { syncSession } from '@puddle/stores';
-import { Select } from '@puddle/components'
-
+import { Select, Checkbox, ClientContext, NumberInput } from '@puddle/components';
 import { TransmissionSessionEncryption as SessionEncryption } from '@puddle/transmission';
+
+import { sessionSelector, useStateFromSelector } from '../utils';
+import { Form, Section, Row, MessageType, MessageLevel } from '../controls';
 
 const ENCRYPTION_OPTIONS = Object.values(SessionEncryption)
   .map(value => ({
@@ -15,8 +14,8 @@ const ENCRYPTION_OPTIONS = Object.values(SessionEncryption)
   }))
 
 export function PeersView() {
-  const { transmission } = useContext(ClientContext)
   const dispatch = useDispatch()
+  const { transmission } = useContext(ClientContext)
   const [messages, setMessages] = useState<MessageType[]>([])
 
   const [usePex, setUsePex] = useStateFromSelector(sessionSelector(s => s['pex-enabled']))
@@ -113,7 +112,9 @@ export function PeersView() {
             onCheck={setEnableBlocklist}
             label="Enable blocklist" />
 
-          <input disabled={!enableBlocklist} type="text" value={blocklistUrl} onChange={(e) => setBlocklistUrl(e.target.value)} />
+          <input
+            disabled={!enableBlocklist} type="text" className="textbox"
+            value={blocklistUrl} onChange={(e) => setBlocklistUrl(e.target.value)} />
         </Row>
       </Section>
     </Form>

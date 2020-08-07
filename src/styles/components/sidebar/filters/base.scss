@@ -1,5 +1,5 @@
 @import "@styles/config";
-@import "@styles/no-select";
+@import "@styles/mixins/no-select";
 
 #sidebar .ScrollbarsCustom {
     --scrollbar-color: var(--scrollbar-sidebar-color);
@@ -10,7 +10,7 @@
     }
 }
 
-#sidebar .filter-list {
+.sidebar__filter-list {
     $filter-spacing: 4px;
     $filter-indent:  6px;
     list-style-type: none;
@@ -57,6 +57,7 @@
             padding: $filter-spacing $filter-indent;
             cursor: pointer;
             outline: none;
+
             &:not(.selected) {
                 &:hover, &:focus {
                     color: var(--side-bar-hover-fg);

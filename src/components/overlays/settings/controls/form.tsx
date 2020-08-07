@@ -1,13 +1,12 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
-import { ClientContext, AsyncButton } from '@puddle/components';
-import {
-  selectSetLabelsOverlayTorrentIds, selectLabelsById,
-  overlayRemoved, updateTorrent
-} from '@puddle/stores'
+
+import { overlayRemoved } from '@puddle/stores';
+import { AsyncButton } from '@puddle/components';
 
 export enum MessageLevel {
   ERROR = 'error',
@@ -27,6 +26,7 @@ export interface MessageType {
 export interface FormProps {
   children: React.ReactNode
   messages: MessageType[]
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   onSubmit: () => (Promise<any>|any)
 }
 
@@ -52,8 +52,9 @@ export function Form(props: FormProps) {
       {props.children}
 
       <div className="submission-controls">
-        <button onClick={removeOverlay}>Cancel</button>
-        <AsyncButton run={props.onSubmit}>
+        <button onClick={removeOverlay} className="btn">Cancel</button>
+
+        <AsyncButton run={props.onSubmit} className="btn btn--submit">
           Submit
         </AsyncButton>
       </div>

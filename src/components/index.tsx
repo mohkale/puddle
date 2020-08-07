@@ -6,4 +6,6 @@ export * from './forms/tabbed-menu';
 export * from './forms/priority-selector';
 export * from './forms/checkbox';
 export * from './forms/select';
+export * from './forms/label-selector';
+export * from './forms/number-input';
 export * from './misc/byte-unit';

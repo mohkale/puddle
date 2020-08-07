@@ -66,9 +66,9 @@ export default function LoginView() {
         <form>
           <label>
             Transmission Host:
-            <input name="host" type="text" placeholder="Host Path"
+            <input name="host" type="text" className="textbox"
                    defaultValue={DEFAULT_TRANSMISSION_ROUTE}
-                   ref={valueRef} />
+                   ref={valueRef} placeholder="Host Path" />
           </label>
         </form>
 

@@ -1,5 +1,5 @@
 @import "./config";
-@import "./no-select";
+@import "./mixins/no-select";
 
 @font-face {
     font-family: Roboto;
@@ -11,26 +11,28 @@ body {
     font-family: Roboto, sans-serif;
 }
 
+#root {
+    display: flex;
+    height: 100vh;
+}
+
 h1, h2, h3, h4 {
     color: var(--title);
     font-size: 1.375rem;
     font-weight: 600;
 }
 
-#root {
-    display: flex;
-    height: 100vh;
-}
-
 h1 {
     text-align: center;
 }
 
+// vertical line
 .vl {
     border-right: solid 1px black;
     margin: 0px 4px;
 }
 
+// horizontal seperator
 .seperator {
     width: 2em;
     height: 1px;
@@ -55,93 +57,5 @@ h1 {
     li:not(:last-child)::after {
         content: ",";
         margin-right: 8px;
-    }
-}
-
-@mixin button-color-scheme(
-    $fg, $bg, $hover-fg, $hover-bg, $active-fg,
-    $active-bg, $border, $disabled-fg, $disabled-bg,
-    $disabled-border) {
-    --fg: #{$fg};
-    --bg: #{$bg};
-    --hover-fg: #{$hover-fg};
-    --hover-bg: #{$hover-bg};
-    --active-fg: #{$active-fg};
-    --active-bg: #{$active-bg};
-    --border: #{$border};
-    --disabled-fg: #{$disabled-fg};
-    --disabled-bg: #{$disabled-bg};
-    --disabled-border: #{$disabled-border};
-}
-
-button {
-    height: 34px;
-    outline: none;
-    padding: 0px 12px;
-    font-weight: 500;
-    font-size: 0.875rem;
-    transition: all $animation-duration;
-
-    border-radius: 4px;
-    cursor: pointer;
-    border-style: double;
-    outline: none;
-
-    @include button-color-scheme(
-        var(--button-fg),
-        var(--button-bg),
-        var(--button-hover-fg),
-        var(--button-hover-bg),
-        var(--button-active-fg),
-        var(--button-active-bg),
-        var(--button-border),
-        var(--button-disabled-fg),
-        var(--button-disabled-bg),
-        var(--button-disabled-border));
-
-    color: var(--fg);
-    background: var(--bg);
-    border-color: var(--border);
-
-    &[disabled] {
-        --fg: var(--disabled-fg);
-        --bg: var(--disabled-bg);
-        --hover-fg: var(--disabled-fg);
-        --hover-bg: var(--disabled-bg);
-        --active-fg: var(--disabled-fg);
-        --active-bg: var(--disabled-bg);
-        --border: var(--disabled-border);
-
-        cursor: not-allowed;
-    }
-
-    &:hover, &:focus {
-        --fg: var(--hover-fg);
-        --bg: var(--hover-bg);
-    }
-}
-
-input[type=text] {
-    background: #293341;
-    border: 1px solid #202D3C;
-    box-shadow: 0 1px 1px rgba(41,51,65,0.15), 0 1px 3px 1px rgba(41,51,65,0.2);
-    color: #8899A8;
-    font-size: 0.875rem;
-    border-radius: 4px;
-    height: 34px;
-    outline: none;
-    padding: 0 12px;
-
-    transition: opacity $animation-duration;
-    &[disabled] {
-        @include no-select;
-        opacity: 0.5;
-    }
-
-    &:focus {
-        background-color: rgba(52,156,244,0.15);
-        color: #f6fafe;
-        border-color: #349CF4;
-        box-shadow: 0 1px 1px rgba(52,156,244,0.15), 0 1px 3px 1px rgba(52,156,244,0.2), 0 0 0 1px #349cf4;
     }
 }

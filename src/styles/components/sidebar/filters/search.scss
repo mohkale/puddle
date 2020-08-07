@@ -4,8 +4,9 @@ $search-spacing: 12px;
 $cross-icon-size: 8px;
 $cross-icon-indent: 8px;
 
-#searchbar {
+.searchbar {
     position: relative;
+    outline: none;
     margin-bottom: 3 * $search-spacing;
 
     color: var(--search-fg);
@@ -15,24 +16,6 @@ $cross-icon-indent: 8px;
 
     transition: all $animation-duration;
     transition-property: color, background-color, border;
-
-    .icon {
-        transition: fill $animation-duration;
-        position: absolute;
-        margin: $search-spacing;
-
-        &.search {
-            width: 12px;
-        }
-
-        &.cancel {
-            width: $cross-icon-size;
-            top: 0;
-            right: 0;
-            padding: 0px $cross-icon-indent;
-            cursor: pointer;
-        }
-    }
 
     input {
         width: 100%;
@@ -47,17 +30,33 @@ $cross-icon-indent: 8px;
             color: var(--search-fg);
             font-style: italic;
         }
-
-        &:focus { outline: none; }
     }
 }
 
-#searchbar.selected {
+.searchbar__icon {
+    transition: fill $animation-duration;
+    position: absolute;
+    margin: $search-spacing;
+}
+
+.searchbar__search-icon {
+    width: 12px !important;
+}
+
+.searchbar__cancel-icon {
+    width: $cross-icon-size !important;
+    top: 0;
+    right: 0;
+    padding: 0px $cross-icon-indent;
+    cursor: pointer;
+}
+
+.searchbar--selected {
     color: var(--search-selected-fg);
     background-color: var(--search-selected-bg);
     border-color: var(--search-selected-border-color);
 
-    .icon {
+    .searchbar__icon {
         fill: var(--search-selected-fg);
     }
 

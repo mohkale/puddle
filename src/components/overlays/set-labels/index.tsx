@@ -7,10 +7,9 @@ import {
   overlayRemoved, updateTorrent
 } from '@puddle/stores'
 import { setsEqual } from '@puddle/utils'
-import { ClientContext, AsyncButton } from '@puddle/components';
+import { ClientContext, AsyncButton, LabelSelector } from '@puddle/components';
 
-import OverlayContainer from '../container';
-import { LabelSelector } from './label-selector';
+import Modal from '../modal';
 
 export default function SetLabels() {
   const dispatch = useDispatch()
@@ -34,25 +33,18 @@ export default function SetLabels() {
       .then(() => dispatch(updateTorrent(ids, transmission)))
 
   return (
-    <OverlayContainer>
-      <div className={`modal set-labels`}>
-        <header>
-          <h1>Set Tags</h1>
-        </header>
-        <div className="modal-body">
-          <LabelSelector
-            onChange={setSelectedLabels}
-            selectedLabels={selectedLabels} />
+    <Modal title="Set Tags" className="set-labels">
+      <LabelSelector
+        onChange={setSelectedLabels}
+        selectedLabels={selectedLabels} />
 
-          <div className="submission-controls">
-            <button onClick={removeOverlay}>Cancel</button>
-            <AsyncButton run={onSubmit} onSuccess={removeOverlay}>
-              Submit
-            </AsyncButton>
-          </div>
-        </div>
+      <div className="submission-controls">
+        <button onClick={removeOverlay} className="btn">Cancel</button>
+        <AsyncButton run={onSubmit} onSuccess={removeOverlay}
+                     className="btn btn--submit">
+          Submit
+        </AsyncButton>
       </div>
-    </OverlayContainer>
+    </Modal>
   )
 }
-

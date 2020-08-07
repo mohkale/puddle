@@ -1,5 +1,5 @@
 @import "@styles/config";
-@import "@styles/no-select";
+@import "@styles/mixins/no-select";
 
 $order-indicator-width: 4px;
 $order-indicator-offset: 3px;
@@ -12,12 +12,12 @@ $resizer-width: 9px;
     text-overflow: ellipsis;
 }
 
-#torrents {
+.torrents-list {
     width: 100%;
     height: 100%;
     border-collapse: collapse;
 
-    .table-cell {
+    .cell {
         @include no-select;
         font-weight: normal;
         box-sizing: border-box;
@@ -30,45 +30,41 @@ $resizer-width: 9px;
             @include trimWithEllipsis;
         }
     }
+}
 
-    .rows {
-        outline: none;
-        display: inline-block;
-        margin: 0px;
-        padding: 0px;
-        list-style-type: none;
-        position: relative;
+.torrents-list__entries {
+    outline: none;
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+    position: relative;
 
-        li.torrent {
-            height: 30px;
-            display: flex;
-            align-items: center;
+    .cell {
+        font-size: 0.9em;
+        font-weight: 400;
+        cursor: default;
 
-            &:last-child {
-                border-bottom: 0px;
-            }
+        .unit {
+            font-size: 0.8em;
+            font-style: normal;
         }
 
-        .table-cell {
-            font-size: 0.9em;
-            font-weight: 400;
-            cursor: default;
-
-            .unit {
-                font-size: 0.8em;
-                font-style: normal;
-            }
-
-            & > div {
-                @include trimWithEllipsis;
-                width: 100%;
-            }
+        & > div {
+            @include trimWithEllipsis;
+            width: 100%;
         }
     }
 
-    // Start setting up color scheme for rows.
+    li.torrent {
+        height: 30px;
+        display: flex;
+        align-items: center;
 
-    .rows li.torrent {
+        &:last-child {
+            border-bottom: 0px;
+        }
+
         color: var(--torrents-row-fg);
         background-color: var(--torrents-row-bg);
 
@@ -83,6 +79,8 @@ $resizer-width: 9px;
         }
     }
 }
+
+// Start setting up color scheme for rows.
 
 .torrent {
     &.selected {
@@ -156,5 +154,3 @@ $resizer-width: 9px;
         "--torrents-error-row",
         "--torrents-selected-error-row");
 }
-
-@import "./columns";

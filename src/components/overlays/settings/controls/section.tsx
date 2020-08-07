@@ -1,5 +1,4 @@
 import React from 'react';
-import { ClientContext, AsyncButton } from '@puddle/components';
 
 export interface SectionProps {
   title: string

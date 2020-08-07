@@ -19,6 +19,8 @@ export function NumberInput({ value, setValue, ...props }: NumberInputProps) {
   }
 
   return (
-    <input {...props} type="text" value={stringValue} onChange={onChange} />
+    <input {...props}
+      type="text" className="textbox"
+      value={stringValue} onChange={onChange} />
   )
 }

@@ -1,20 +1,15 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Checkbox, ClientContext } from '@puddle/components';
-import { Form, Section, Row, NumberInput, MessageType, MessageLevel } from '../controls';
-import { sessionSelector, useStateFromSelector } from '../utils';
-import { syncSession } from '@puddle/stores';
+import { NumberInput } from '@puddle/components';
+import { intervalsUpdated, selectIntervals } from '@puddle/stores'
 
-import store, {
-  intervalsUpdated, selectIntervals,
-  selectTorrentDetailsTorrentAssigned,
-  updateTorrentDetails
-} from '@puddle/stores'
+import { Form, Section, Row, MessageType, MessageLevel } from '../controls';
 
 export function PuddleView() {
   const dispatch = useDispatch()
   const [messages, setMessages] = useState<MessageType[]>([])
+
   const intervals = useSelector(selectIntervals)
   const [torrentSyncInterval, setTorrentSyncInterval] = useState(intervals.torrentsSync)
   const [speedSyncInterval, setSpeedSyncInterval] = useState(intervals.speedSync)

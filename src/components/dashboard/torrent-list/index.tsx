@@ -77,7 +77,7 @@ export default function TorrentList() {
   }, [])
 
   return (
-    <div id="torrents" ref={rootRef} style={{ display: 'flex', flexDirection: 'column' }}>
+    <div className="torrents-list" ref={rootRef} style={{ display: 'flex', flexDirection: 'column' }}>
       {/* The list Header and the list Body are wrapped into their own divs, so
           their widths don't influence each other. This way #torrents will have a
           fixed width that can be scrolled independent of its contents. */}
@@ -86,7 +86,7 @@ export default function TorrentList() {
       </div>
 
       <Scrollbar onScroll={onScroll}>
-        <ul ref={bodyRef} className="rows">
+        <ul ref={bodyRef} className="torrents-list__entries">
           {entries}
 
           <li>

@@ -15,7 +15,7 @@ export default function FilterList(props: FilterListProps) {
   }
 
   return (
-    <ul className="filter-list">
+    <ul className="sidebar__filter-list">
       <li className="title">{ props.title }</li>
       {props.children}
     </ul>

@@ -16,7 +16,7 @@ interface SidebarProps {
 export default function Sidebar(props: SidebarProps) {
   return (
     <aside id="sidebar">
-      <div className="buttons">
+      <div className="sidebar__buttons">
         <SettingsButton />
         <StatisticsButton />
         <ToggleAltSpeedButton />

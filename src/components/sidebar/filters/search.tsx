@@ -56,15 +56,19 @@ const SearchBar = React.forwardRef<HTMLInputElement|undefined>((_, ref) => {
 
   const onChange = (e) => updateSearchQuery((e.target.value || '') as string)
 
+  const classNames = [
+    'searchbar', isActive && 'searchbar--selected'
+  ]
+
   return (
-    <div id="searchbar" className={isActive ? 'selected' : ''}
+    <div className={classNames.join(' ')}
          onKeyDown={(e) => searchBarKeyHandler(e, ref)}>
-      <FontAwesomeIcon icon={faSearch} className="icon search" />
+      <FontAwesomeIcon icon={faSearch} className="searchbar__search-icon searchbar__icon" />
       <DelayInput name="query" type="text" placeholder="Search Torrents"
                   autoComplete="false" onChange={onChange} inputRef={ref}
                   delayTimeout={QUERY_SET_TIMEOUT} value={query} />
       {isActive &&
-        <FontAwesomeIcon icon={faTimes} className="icon cancel" onClick={removeSearchQuery} />}
+        <FontAwesomeIcon icon={faTimes} className="searchbar__cancel-icon searchbar__icon" onClick={removeSearchQuery} />}
     </div>
   );
 })

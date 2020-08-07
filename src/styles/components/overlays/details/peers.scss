@@ -1,12 +1,7 @@
-.torrent-peers-table {
-    width: 100%;
-    padding: 1em 1.5em;
-    font-size: 0.8rem;
+@import "./trackers";
 
-    thead td {
-        color: rgba(125,141,159,0.6);
-        font-size: 0.9rem;
-    }
+.torrent-details__peers {
+    @extend .torrent-details__trackers;
 
     .icon.check {
         color: var(--action-color);

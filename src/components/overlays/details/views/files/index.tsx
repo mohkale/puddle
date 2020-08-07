@@ -56,7 +56,8 @@ function SubmissionControls() {
       <p>
         <span className="highlight">{selectedFiles.length}</span> selected files
       </p>
-      <button onClick={clearSelected}>Clear Selection</button>
+
+      <button onClick={clearSelected} className="btn">Clear Selection</button>
 
       <Select
         menuPlacement="top"
@@ -79,7 +80,7 @@ export function FilesView() {
   }
 
   return (
-    <div className="torrent-files-view">
+    <div className="torrent-details__files-view">
       <Scrollbar>
         <FileTree tree={fileTree} />
       </Scrollbar>

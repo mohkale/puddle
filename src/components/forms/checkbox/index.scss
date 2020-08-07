@@ -1,31 +1,70 @@
-@import "@styles/no-select";
+@import "@styles/mixins/no-select";
 @import "@styles/config";
 
-.checkbox:not(.with-fallback),
-*:hover > .checkbox-container > .checkbox.with-fallback,
-.checkbox:focus,
-.checkbox.checked {
-    background: #293341;
-    border: 1px solid #202D3C;
+.checkbox-container:not(.with-fallback),
+*:hover > .checkbox-container.with-fallback,
+.checkbox-container:focus,
+.checkbox-container.checked {
+    .checkbox {
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+    }
 }
 
-*:hover > .checkbox-container > .checkbox.with-fallback,
-.checkbox.with-fallback.checked,
-.checkbox.with-fallback:focus {
-    & > .icon:not(.check) {
+*:hover > .checkbox-container.with-fallback,
+.checkbox-container.with-fallback.checked,
+.checkbox-container.with-fallback:focus {
+    & > .checkbox > .icon:not(.check) {
         opacity: 0;
         transition: opacity $animation-duration;
     }
 }
 
 .checkbox-container {
+    outline: none;
+
+    transition: all $animation-duration;
+    transition-property: color, background-color, border;
+
     display: flex;
     @include no-select;
     align-items: center;
 
     & > label {
-        margin-left: 6px;
+        padding-left: 6px;
         cursor: pointer;
+    }
+
+    .check {
+        transition: opacity $animation-duration;
+    }
+
+    &:not(.checked) .check {
+        opacity: 0;
+    }
+
+    &:active .checkbox {
+        color: var(--input-selected-border);
+        background-color: var(--input-selected-bg);
+    }
+
+    &:not(:focus) .check {
+        width: 16px;
+        height: 16px;
+    }
+
+    // don't ask, need to increase focus to have more specifity
+    // than the *:hover border rule from above.
+    &:focus:focus:focus:focus {
+        label {
+            color: var(--action-color);
+        }
+
+        .checkbox {
+            border-width: 2px;
+            border-color: var(--input-selected-border);
+            .check { color: var(--input-selected-border); }
+        }
     }
 }
 
@@ -37,12 +76,8 @@
     flex-grow: 0;
     flex-shrink: 0;
     cursor: pointer;
-    outline: none;
-
-    transition: all $animation-duration;
-    transition-property: background-color, border;
-
     position: relative;
+
     .icon {
         position: absolute;
         width:  100%;
@@ -50,30 +85,5 @@
         top: 0; left: 0;
         padding: 2px;
         box-sizing: border-box;
-    }
-
-    .check {
-        transition: opacity $animation-duration;
-    }
-
-    input[type=checkbox] {
-        display: none;
-    }
-
-    &:active {
-        color: rgba(52,156,244,0.8);
-        background-color: rgba(52,156,244,0.1);
-    }
-
-    // don't ask, need to increase focus to have more specifity
-    // than the *:hover border rule from above.
-    &:focus:focus:focus:focus {
-        border-width: 2px;
-        border-color: #349CF4;
-        .check { color: var(--action-color); }
-    }
-
-    &:not(.checked) .check {
-        opacity: 0;
     }
 }

@@ -1,15 +1,16 @@
-import React, { Fragment, useState, useContext } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useContext } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { Checkbox, ClientContext } from '@puddle/components';
-import { Form, Section, Row, MessageType, MessageLevel, NumberInput } from '../controls';
+import { Checkbox, ClientContext, NumberInput } from '@puddle/components';
+import { Form, Section, Row, MessageType, MessageLevel } from '../controls';
 import { sessionSelector, useStateFromSelector } from '../utils';
 import { syncSession } from '@puddle/stores';
 
 export function NetworkView() {
-  const { transmission } = useContext(ClientContext)
   const dispatch = useDispatch()
+  const { transmission } = useContext(ClientContext)
   const [messages, setMessages] = useState<MessageType[]>([])
+
   const [randomizePortOnLaunch, setRandomizePortOnLaunch] = useStateFromSelector(sessionSelector(s => s['peer-port-random-on-start']))
   const [usePortForwarding, setUsePortForwarding] = useStateFromSelector(sessionSelector(s => s['port-forwarding-enabled']))
   const [enableUTP, setEnableUTP] = useStateFromSelector(sessionSelector(s => s['utp-enabled']));

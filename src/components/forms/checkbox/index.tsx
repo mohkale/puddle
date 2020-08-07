@@ -11,7 +11,8 @@ interface CheckboxProps {
 }
 
 export function Checkbox(props: CheckboxProps) {
-  const classes = ['checkbox', props.isChecked ? 'checked' : '',
+  const classes = ['checkbox-container',
+                   props.isChecked ? 'checked' : '',
                    props.fallback && 'with-fallback'].join(' ')
 
   const onClick = () => props.onCheck(!props.isChecked)
@@ -20,9 +21,8 @@ export function Checkbox(props: CheckboxProps) {
   }
 
   return (
-    <div className="checkbox-container" onClick={onClick}>
-      <div className={`${classes}`} tabIndex={0}
-          onKeyPress={onKeyPress}>
+    <div className={classes} onClick={onClick} onKeyPress={onKeyPress} tabIndex={0}>
+      <div className="checkbox">
         <FontAwesomeIcon icon={faCheck} className="check icon" />
         {props.fallback &&
           props.fallback()}

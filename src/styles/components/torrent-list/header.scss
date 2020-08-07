@@ -1,39 +1,77 @@
-@import "@styles/config";
-@import "@styles/no-select";
+.torrents-list__header {
+    display: inline-flex;
+    position: relative;
+    border-bottom: solid 1px var(--torrents-border-color);
 
-#dashboard header {
-    display: flex;
-    justify-content: flex-end;
-    background-color: var(--header-bg);
-    border: solid 1px var(--header-border-color);
-    height: 30px;
-    padding-right: 8px;
-    flex-grow: 0;
-    flex-shrink: 0;
+    & > .cell {
+        height: 24px;
+        font-size: 12px;
+        cursor: pointer;
+        position: relative;
+        padding: 0px #{$order-indicator-width + 2 * $order-indicator-offset} 0px 6px;
 
-    .vl {
-        border-color: var(--header-border-color);
-    }
+        color: var(--torrents-column-color);
+        transition: color $animation-duration;
+        &:hover {
+            color: var(--torrents-column-hover-color);
+        }
 
-    .icon {
-        outline: 0px;
-        height: 100%;
-        width: 12px !important;
-        padding: 0px 14px;
-        background: var(--header-button-bg);
-        color: var(--header-button-fg);
-        border-left:  solid 1px transparent;
-        border-right: solid 1px transparent;
-        transition: all $animation-duration;
-        transition-property: background, fill, border-color;
-    }
 
-    .tooltip:hover, .tooltip:focus {
-        .icon {
-            color: var(--header-button-hover-fg);
-            background: var(--header-button-hover-bg);
-            border-color: var(--header-border-color);
+        &::after {
+            opacity: 0;
+            transition: opacity $animation-duration;
+        }
+
+        &.selected {
+            font-weight: 700;
+            position: relative;
+            color: var(--torrents-selected-column-color);
+            &:hover {
+                color: var(--torrents-selected-column-hover-color);
+            }
+
+            &::after {
+                border-left:  $order-indicator-width solid transparent;
+                border-right: $order-indicator-width solid transparent;
+                border-top:   5px solid black;
+                content: '';
+                margin-top: -3px;
+                position: absolute;
+                right: $order-indicator-offset + $resizer-width;
+                top: 50%;
+                transition: transform $animation-duration;
+                opacity: 0.5;
+            }
+
+            &.descending::after {
+                transform: rotate(180deg);
+            }
         }
     }
 }
 
+.torrents-list .resize-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    cursor: col-resize;
+
+    .resize-indicator {
+        position: absolute;
+        width: 1px;
+        background-color: var(--torrents-border-color);
+        // background-color: black;
+        top: 0;
+        height: 100%;
+    }
+}
+
+.torrents-list__header > .cell .resizer {
+    border-right:  solid 1px var(--torrents-border-color);
+    height: 100%;
+    position: absolute;
+    right: $resizer-width / 2;
+    width: $resizer-width;
+    cursor: col-resize;
+}

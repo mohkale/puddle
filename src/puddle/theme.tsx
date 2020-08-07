@@ -42,12 +42,12 @@ export interface Theme {
   title: string
   borderColor: string
 
-  inputSelectedFg: string
-  inputSelectedBg: string
-  inputSelectedPlaceholder: string
-  inputSelectedBorder: string
+  priorityLow: string
+  priorityNorm: string
+  priorityHigh: string
 
   button: Button
+  submitButton: Button
 
   scrollBar: ScrollBar
   sidebarScrollBar: ScrollBar
@@ -96,7 +96,21 @@ export interface Theme {
   modalBg: string,
   modalFg: string,
   modalTitle: string,
-  modalHighlight: string,
+
+  contextMenuFg: string
+  contextMenuBg: string
+  contextMenuBorder: string
+  contextMenuHoverFg: string
+  contextMenuHoverBg: string
+
+  inputBg: string
+  inputFg: string
+  inputBorder: string
+  inputPlaceholder: string
+  inputSelectedBg: string
+  inputSelectedFg: string
+  inputSelectedPlaceholder: string
+  inputSelectedBorder: string
 }
 
 export function setTheme(theme: Theme) {
@@ -109,10 +123,9 @@ export function setTheme(theme: Theme) {
   root.setProperty('--title', theme.title)
   root.setProperty('--border-color', theme.borderColor)
 
-  root.setProperty('--input-selected-fg', theme.inputSelectedFg)
-  root.setProperty('--input-selected-bg', theme.inputSelectedBg)
-  root.setProperty('--input-selected-placeholder', theme.inputSelectedPlaceholder)
-  root.setProperty('--input-selected-border', theme.inputSelectedBorder)
+  root.setProperty('priority-low', theme.priorityLow)
+  root.setProperty('priority-norm', theme.priorityNorm)
+  root.setProperty('priority-high', theme.priorityHigh)
 
   function setButton(prefix: string, button: Button) {
     root.setProperty(`${prefix}-fg`, button.fg)
@@ -128,6 +141,7 @@ export function setTheme(theme: Theme) {
   }
 
   setButton('--button', theme.button)
+  setButton('--button-submit', theme.submitButton)
 
   function setScrollBarClasses(prefix: string, scrollbar: ScrollBar) {
     root.setProperty(`${prefix}-color`, scrollbar.fg)
@@ -196,7 +210,21 @@ export function setTheme(theme: Theme) {
   root.setProperty('--modal-bg', theme.modalBg)
   root.setProperty('--modal-fg', theme.modalFg)
   root.setProperty('--modal-title', theme.modalTitle)
-  root.setProperty('--modal-highlight', theme.modalHighlight)
+
+  root.setProperty('--context-menu-fg', theme.contextMenuFg)
+  root.setProperty('--context-menu-bg', theme.contextMenuBg)
+  root.setProperty('--context-menu-border', theme.contextMenuBorder)
+  root.setProperty('--context-menu-hover-fg', theme.contextMenuHoverFg)
+  root.setProperty('--context-menu-hover-bg', theme.contextMenuHoverBg)
+
+  root.setProperty('--input-bg', theme.inputBg)
+  root.setProperty('--input-fg', theme.inputFg)
+  root.setProperty('--input-border', theme.inputBorder)
+  root.setProperty('--input-placeholder', theme.inputPlaceholder)
+  root.setProperty('--input-selected-bg', theme.inputSelectedBg)
+  root.setProperty('--input-selected-fg', theme.inputSelectedFg)
+  root.setProperty('--input-selected-border', theme.inputSelectedBorder)
+  root.setProperty('--input-selected-placeholder', theme.inputSelectedPlaceholder)
 }
 
 // reverse engineered from [[https://github.com/Flood-UI/flood][flood]].
@@ -209,10 +237,9 @@ export const defaultTheme: Theme = {
   title: '#34516C',
   borderColor: '#d2d8de',
 
-  inputSelectedFg: '#2266a0',
-  inputSelectedBg: 'rgba(52,156,244,0.05)',
-  inputSelectedPlaceholder: '#b3d4fc',
-  inputSelectedBorder: '#258de5',
+  priorityLow: '#258de5',
+  priorityNorm: '#39ce83',
+  priorityHigh: '#39ce83',
 
   button: {
     fg: 'white',
@@ -222,6 +249,21 @@ export const defaultTheme: Theme = {
     hoverBg: '#9dabb7',
     activeFg: 'white',
     activeBg: '#768a9b',
+    disabledFg: '#9dabb7',
+    disabledBg: '#e9eef2',
+    disabledBorder: '#d6dfe7',
+  },
+  submitButton: {
+    fg: 'white',
+    bg: '#349CF4',
+    border: '#0d86ed',
+
+    hoverFg: 'white',
+    hoverBg: '#56adf6',
+
+    activeFg: 'white',
+    activeBg: '#56adf6',
+
     disabledFg: '#9dabb7',
     disabledBg: '#e9eef2',
     disabledBorder: '#d6dfe7',
@@ -340,6 +382,20 @@ export const defaultTheme: Theme = {
   modalBorderColor: '#363e48',
   modalBg: '#3A4553',
   modalFg: '#7d8d9f',
-  modalTitle: 'white',
-  modalHighlight: '#abc2e2',
+  modalTitle: '#b8c1cb',
+
+  contextMenuFg: '#53718a',
+  contextMenuBg: '#fff',
+  contextMenuBorder: 'rgba(41,51,65,0.075)',
+  contextMenuHoverFg: '#3e4e61',
+  contextMenuHoverBg: 'rgba(233,238,242,0.4)',
+
+  inputBg: '#293341',
+  inputFg: '#8899A8',
+  inputBorder: '#202D3C',
+  inputPlaceholder: 'rgba(171,186,199,0.25)',
+  inputSelectedBg: 'rgba(52,156,244,0.1)',
+  inputSelectedFg: '#f6fafe',
+  inputSelectedPlaceholder: 'rgba(125,191,248,0.5)',
+  inputSelectedBorder: '#349CF4',
 };

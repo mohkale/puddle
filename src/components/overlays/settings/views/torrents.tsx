@@ -1,31 +1,22 @@
-import React, { Fragment, useState, useContext } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useContext } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { Checkbox, ClientContext } from '@puddle/components';
-import { Form, Section, Row, MessageType, MessageLevel, NumberInput, FileInput } from '../controls';
 import { sessionSelector, useStateFromSelector  } from '../utils';
-import { syncSession } from '@puddle/stores';
-import { Select } from '@puddle/components';
-import { padString } from '@puddle/utils';
+import { Form, Section, Row, MessageType, MessageLevel } from '../controls';
 
-import {
-  TransmissionSessionEncryption as SessionEncryption,
-  TransmissionScheduleDays as ScheduleDays
-} from '@puddle/transmission';
+import { syncSession } from '@puddle/stores';
+import { NumberInput, Checkbox, ClientContext } from '@puddle/components';
 
 export function TorrentsView() {
-  const { transmission } = useContext(ClientContext)
   const dispatch = useDispatch()
+  const { transmission } = useContext(ClientContext)
   const [messages, setMessages] = useState<MessageType[]>([])
 
   const [downloadDir, setDownloadDir] = useStateFromSelector(sessionSelector(s => s['download-dir']))
-
   const [startWhenAdded, setStartWhenAdded] = useStateFromSelector(sessionSelector(s => s['start-added-torrents']))
   const [appendToIncomplete, setAppendToIncomplete] = useStateFromSelector(sessionSelector(s => s['rename-partial-files']))
-
   const [stopSeedingRatio, setStopSeedingRatio] = useStateFromSelector(sessionSelector(s => s['seedRatioLimit']))
   const [enableStopSeedingRatio, setEnableStopSeedingRatio] = useStateFromSelector(sessionSelector(s => s['seedRatioLimited']))
-
   const [stopSeedingIdleDuration, setStopSeedingIdleDuration] = useStateFromSelector(sessionSelector(s => s['idle-seeding-limit']))
   const [enableStopSeedingIdleDuration, setEnableStopSeedingIdleDuration] = useStateFromSelector(sessionSelector(s => s['idle-seeding-limit-enabled']))
 
@@ -50,6 +41,7 @@ export function TorrentsView() {
     setMessages(newMessages)
     if (failed) return
 
+    // TODO show error message on failure
     transmission.setSession({
       'download-dir': downloadDir,
       'start-added-torrents': startWhenAdded,
@@ -68,7 +60,7 @@ export function TorrentsView() {
         <Row>
           <label>Download to</label>
           <input
-            type="text"
+            type="text" className="textbox"
             style={{ width: '100%', marginLeft: '25px' }}
             value={downloadDir} onChange={(e) => setDownloadDir(e.target.value)} />
         </Row>

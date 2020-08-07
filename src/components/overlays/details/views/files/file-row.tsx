@@ -39,7 +39,7 @@ export function FileRow(props: FileRowProps) {
   }
 
   return (
-    <div className="file">
+    <div className="file-tree__file">
       <Checkbox isChecked={file.isSelected} onCheck={toggleFile}
                 fallback={() => <FontAwesomeIcon icon={faFile} className="icon" />}/>
       <span className="name">{props.name}</span>

@@ -1,40 +1,7 @@
 .modal.torrent-remove {
     width: 500px;
-    padding: 10px 20px;
 
-    header {
-        padding-top: 15px;
-    }
-
-    .removal-list {
-        width: 100%;
-        margin-bottom: 2em;
-
-        ul {
-            padding: 0px;
-            margin: 0px;
-            white-space: nowrap;
-            list-style-type: none;
-        }
-    }
-
-    label {
-        display: flex;
-
-        .checkbox { margin-right: 8px; }
-    }
-
-    .submission-controls {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 20px;
-        margin-bottom: 10px;
-        padding-top: 15px;
-
-        border-top: solid 1px var(--modal-border-color);
-
-        button {
-            margin-right: 15px;
-        }
+    .modal--modal-body {
+        padding: 0px 0px 20px 20px;
     }
 }

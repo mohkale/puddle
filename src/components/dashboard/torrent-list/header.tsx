@@ -23,7 +23,7 @@ const DashboardTableColumns =
     const columnElems = columns
       .map((column, i) => {
         const className =
-          ['table-cell', column.isActive ? 'selected' : '',
+          ['cell', column.isActive ? 'selected' : '',
            isDescending ? 'descending' : ''].join(' ')
 
         const onHeaderClick = (e) => {
@@ -54,7 +54,7 @@ const DashboardTableColumns =
       })
 
     return (
-      <aside className="columns" ref={ref}>{columnElems}</aside>
+      <aside className="torrents-list__header" ref={ref}>{columnElems}</aside>
     );
   })
 

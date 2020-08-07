@@ -11,7 +11,7 @@ interface DetailsViewProps {
 
 export function DetailsView() {
   return (
-    <table className="torrent-details-table">
+    <table className="torrent-details__general-view">
       <tbody>
         <GeneralSection />
         <TransferSection />

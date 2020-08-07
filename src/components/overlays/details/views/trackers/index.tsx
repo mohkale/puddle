@@ -29,7 +29,7 @@ export function TrackersView() {
     })
 
   return (
-    <table className="torrent-trackers-table">
+    <table className="torrent-details__trackers">
       <thead>
         <tr>
           <td>Trackers <Badge num={trackerCount}/></td>

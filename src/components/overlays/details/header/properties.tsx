@@ -20,10 +20,12 @@ export function TorrentProperties() {
   const eta = useSelector(torrentSelector(t => t.eta))
 
   return (
-    <ul className="torrent-props">
-      <TransferMeasure icon={faLongArrowAltDown} className="download"
+    <ul>
+      <TransferMeasure icon={faLongArrowAltDown}
+                       className="torrent-details__bar-transfers--download"
                        rate={downloadRate} total={downloadedEver} />
-      <TransferMeasure icon={faLongArrowAltUp} className="upload"
+      <TransferMeasure icon={faLongArrowAltUp}
+                       className="torrent-details__bar-transfers--upload"
                        rate={uploadRate} total={uploadedEver} />
 
       <li>

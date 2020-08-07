@@ -75,7 +75,7 @@ export default function TorrentRow(props: { id: number, onRightClick: (e: React.
   }
 
   const cells = columns.map((column) => {
-    const cellClasses = ["table-cell", column.title].join(' ')
+    const cellClasses = ["cell", column.title].join(' ')
 
     return (
       <div className={cellClasses} key={column.title}

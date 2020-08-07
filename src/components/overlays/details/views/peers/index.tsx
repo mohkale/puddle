@@ -43,7 +43,7 @@ export function PeersView() {
 
   return (
     <Scrollbar>
-      <table className="torrent-peers-table">
+      <table className="torrent-details__peers">
         <thead>
           <tr>
             <td>Peer</td>

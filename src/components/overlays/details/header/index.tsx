@@ -20,7 +20,7 @@ export default function Header() {
     <header className={className}>
       <h1>{name}</h1>
 
-      <div className="control-bar">
+      <div className="torrent-details__bar">
         <TorrentProperties />
         <TorrentControls />
       </div>

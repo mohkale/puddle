@@ -1,0 +1,39 @@
+@import "@styles/config";
+@import "@styles/mixins/no-select";
+
+.dashboard__action-bar {
+    display: flex;
+    justify-content: flex-end;
+    background-color: var(--header-bg);
+    border: solid 1px var(--header-border-color);
+    height: 30px;
+    padding-right: 8px;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    .vl {
+        border-color: var(--header-border-color);
+    }
+
+    .icon {
+        outline: 0px;
+        height: 100%;
+        width: 12px !important;
+        padding: 0px 14px;
+        background: var(--header-button-bg);
+        color: var(--header-button-fg);
+        border-left:  solid 1px transparent;
+        border-right: solid 1px transparent;
+        transition: all $animation-duration;
+        transition-property: background, fill, border-color;
+    }
+
+    .tooltip:hover, .tooltip:focus {
+        .icon {
+            color: var(--header-button-hover-fg);
+            background: var(--header-button-hover-bg);
+            border-color: var(--header-border-color);
+        }
+    }
+}
+

@@ -8,7 +8,7 @@ import {
   faPlus, faMinus, faPlay, faStop
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function ActionButtons() {
+export default function ActionBar() {
   const { transmission } = useContext(ClientContext)
   const selectedTorrents = useSelector(selectSelectedTorrents)
       .map(torrent => torrent.id)
@@ -26,7 +26,7 @@ export default function ActionButtons() {
   }
 
   return (
-    <header>
+    <header className="dashboard__action-bar">
       <TooltipButton tooltip="Start Torrent" icon={faPlay} onClick={startTorrents} />
       <TooltipButton tooltip="Stop Torrent" icon={faStop} onClick={stopTorrents} />
       <span className="vl" />

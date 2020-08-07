@@ -18,7 +18,7 @@ export function FileTree(props: FileTreeProps) {
       )
     } else {
       return (
-        <li key={key} className="directory">
+        <li key={key} className="file-tree__directory">
           <DirectoryRow name={key} />
           <FileTree {...props} tree={val} />
         </li>
@@ -26,5 +26,5 @@ export function FileTree(props: FileTreeProps) {
     }
   })
 
-  return <ul className="file-tree">{entries}</ul>;
+  return <ul className="torrent-details__file-tree">{entries}</ul>;
 }

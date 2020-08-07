@@ -53,10 +53,10 @@ const NetworkIndicator =
     const altEnabled = useSelector((state: RootState) => state.stats.altEnabled)
 
     return (
-      <div className={props.kind}>
+      <div className={`network-indicator network-indicator--${props.kind}`}>
         <FontAwesomeIcon icon={props.icon} className="direction-icon" />
 
-        <div className="stats">
+        <div className="network-indicator__stats">
           <NetworkIndicatorStats className="rate" bytes={props.rate} perSecond={true} />
           <NetworkIndicatorStats className="total" bytes={props.total} />
           <NetworkIndicatorStats className="limit" bytes={altEnabled ? props.altLimit : props.limit} />

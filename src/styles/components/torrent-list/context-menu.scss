@@ -1,4 +1,4 @@
-@import "@styles/no-select";
+@import "@styles/mixins/no-select";
 @import "@styles/animations/fade-in-down";
 
 .context-menu {
@@ -11,11 +11,11 @@
     & > .menu {
         position: relative;
         list-style-type: none;
-        color: #53718a;
+        color: var(--context-menu-fg);
         font-weight: 400;
         font-size: 0.85rem;
         line-height: 1.25;
-        background: #fff;
+        background: var(--context-menu-bg);
         padding: 9px 0px;
         border-radius: 4px;
         display: inline-block;
@@ -25,7 +25,7 @@
         li { @include no-select; }
 
         li.seperator {
-            background: rgba(41,51,65,0.075);
+            background: var(--context-menu-border);
             height: 1px;
             margin: 5px 0px;
             padding: 0px;
@@ -36,8 +36,8 @@
             padding: 5px 16px;
 
             &:hover {
-                color: #3e4e61;
-                background: rgba(233,238,242,0.4);
+                color: var(--context-menu-hover-fg);
+                background: var(--context-menu-hover-bg);
             }
         }
     }

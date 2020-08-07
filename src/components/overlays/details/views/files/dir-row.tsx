@@ -9,7 +9,7 @@ export interface DirectoryRowProps {
 
 export function DirectoryRow(props: DirectoryRowProps) {
   return (
-    <div className="file">
+    <div className="file-tree__file">
       <FontAwesomeIcon icon={faFolderOpen} className="icon" />
       <span className="name">{props.name}</span>
     </div>

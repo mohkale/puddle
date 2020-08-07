@@ -29,7 +29,7 @@ export function TorrentControls() {
   }
 
   return (
-    <ul className="torrent-controls">
+    <ul>
       <li>
         <BandwidthPrioritySlider
           attachLabel={true}

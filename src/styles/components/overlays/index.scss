@@ -11,21 +11,48 @@
     // align-items: center;
     align-items: flex-start;
     justify-content: center;
+}
 
-    .modal {
-        @include fade-in-down();
-        margin-top: 80px;
+.modal {
+    @include fade-in-down();
+    margin-top: 80px;
 
-        color: var(--modal-fg);
-        background-color: var(--modal-bg);
-        border-radius: 3px;
+    color: var(--modal-fg);
+    background-color: var(--modal-bg);
+    border-radius: 3px;
 
-        h1 {
-            color: white;
-            text-align: left;
-            font-size: 1.25em;
-            word-break: break-all;
-            margin: 0px 0px 6px 0px;
+    header {
+        padding: 20px 25px 10px;
+    }
+
+    label {
+        font-size: .75rem;
+        line-height: 1rem;
+        white-space: nowrap;
+        color: color(--modal-fg);
+    }
+
+    h1, h2 {
+        color: white;
+        text-align: left;
+        font-size: 1.25em;
+        word-break: break-all;
+        margin: 0px 0px 6px 0px;
+        font-weight: 500;
+    }
+
+    .submission-controls {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        height: 34px;
+        padding: 14px 12px 0px 12px;
+        margin-top: 14px;
+        border-top: solid 1px var(--modal-border-color);
+
+        .btn:not(:last-child) {
+            margin-right: 15px;
         }
     }
 }

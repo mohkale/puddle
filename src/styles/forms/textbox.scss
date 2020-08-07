@@ -1,0 +1,33 @@
+.textbox {
+    color: var(--input-fg);
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+
+    font-size: 0.875rem;
+    border-radius: 4px;
+    height: 34px;
+    outline: none;
+    padding: 0 12px;
+
+    transition: all $animation-duration;
+    transition-property: opacity, color, background-color;
+
+    &[disabled] {
+        @include no-select;
+        opacity: 0.5;
+    }
+
+    &:not([disabled]) {
+        &:hover, &:focus {
+            color: var(--input-selected-fg);
+        }
+    }
+
+    &:focus {
+        background-color: var(--input-selected-bg);
+        border-color: var(--input-selected-border);
+    }
+
+    &::placeholder { color: var(--input-placeholder); }
+    &:focus::placeholder { color: var(--input-selected-placeholder); }
+}

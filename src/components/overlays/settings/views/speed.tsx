@@ -1,19 +1,16 @@
-import React, { Fragment, useState, useContext } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useContext } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { Checkbox, ClientContext } from '@puddle/components';
-import { Form, Section, Row, MessageType, MessageLevel, NumberInput } from '../controls';
-import { sessionSelector, useStateFromSelector  } from '../utils';
-import { syncSession } from '@puddle/stores';
-import { Select } from '@puddle/components';
 import { padString } from '@puddle/utils';
+import { syncSession } from '@puddle/stores';
+import { Checkbox, ClientContext, Select, NumberInput } from '@puddle/components';
+
+import { Form, Section, Row, MessageType, MessageLevel } from '../controls';
+import { sessionSelector, useStateFromSelector  } from '../utils';
 
 import {
-  TransmissionSessionEncryption as SessionEncryption,
   TransmissionScheduleDays as ScheduleDays
 } from '@puddle/transmission';
-
-// see [[https://github.com/transmission/transmission/blob/master/libtransmission/transmission.h#L550]]
 
 function minutesAfterMidnightToOption(minutes: number) {
   const minute = minutes % 60
@@ -26,7 +23,7 @@ const TIME_OPTIONS = Array(24 * 4).fill(0).map((_, i) =>
 
 // We're storing it like this before converting because this
 // approach gives exhaustive type completion for values in
-// ScheduleDays. There's no way to get the with a type like
+// ScheduleDays. There's no way to get that with a type like
 // { key: ScheduleDays, label: string } which is what we actually
 // want.
 const SCHEDULE_DAY_OPTION_ENTRIES: { [key in ScheduleDays]: string } = {
@@ -46,18 +43,16 @@ const SCHEDULE_DAY_OPTIONS = Object.entries(SCHEDULE_DAY_OPTION_ENTRIES)
   .map(([value, label]) => ({ value: Number(value), label }))
 
 export function SpeedView() {
-  const { transmission } = useContext(ClientContext)
   const dispatch = useDispatch()
+  const { transmission } = useContext(ClientContext)
   const [messages, setMessages] = useState<MessageType[]>([])
 
   const [uploadLimit, setUploadLimit] = useStateFromSelector(sessionSelector(s => s['speed-limit-up']))
   const [downloadLimit, setDownloadLimit] = useStateFromSelector(sessionSelector(s => s['speed-limit-down']))
   const [allowUploadLimit, setAllowUploadLimit] = useStateFromSelector(sessionSelector(s => s['speed-limit-up-enabled']))
   const [allowDownloadLimit, setAllowDownloadLimit] = useStateFromSelector(sessionSelector(s => s['speed-limit-down-enabled']))
-
   const [altUploadLimit, setAltUploadLimit] = useStateFromSelector(sessionSelector(s => s['alt-speed-up']))
   const [altDownloadLimit, setAltDownloadLimit] = useStateFromSelector(sessionSelector(s => s['alt-speed-down']))
-
   const [useScheduledTimes, setUseScheduledTimes] = useStateFromSelector(sessionSelector(s => s['alt-speed-time-enabled']))
   const [altSpeedDays, setAltSpeedDays] =  useStateFromSelector(sessionSelector(s => s['alt-speed-time-day']))
   const [altSpeedTimeBegin, setAltSpeedTimeBegin] =  useStateFromSelector(sessionSelector(s => s['alt-speed-time-begin']))

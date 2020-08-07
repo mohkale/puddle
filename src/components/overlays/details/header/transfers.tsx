@@ -7,8 +7,13 @@ import { BytesWithUnit } from '@puddle/components';
 export function TransferMeasure(props: {
   rate: number, total: number, icon: IconDefinition
 } & React.HTMLProps<HTMLLIElement>) {
+  const classNames = [
+    props.className,
+    props.rate > 0 && 'torrent-details__bar-transfers--active'
+  ].join(' ')
+
   return (
-    <li className={[props.rate !== 0 ? 'active' : '', props.className].join(' ')}>
+    <li className={classNames}>
       <FontAwesomeIcon icon={props.icon} className="icon" />
       <BytesWithUnit bytes={props.rate} perSecond={true} />
       {' — '}
