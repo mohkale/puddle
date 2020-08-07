@@ -1,4 +1,5 @@
 import { TorrentFields } from '@puddle/models';
+import { TransmissionSession as Session } from '@puddle/transmission';
 
 export const COLUMN_DEFAULT_WIDTH = 100;
 export const COLUMN_MINIMUM_WIDTH = 10;
@@ -32,4 +33,5 @@ export interface SettingsState {
   }
 
   intervals: IntervalsType
+  transmission: Session
 }

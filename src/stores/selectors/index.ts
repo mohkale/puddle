@@ -45,3 +45,6 @@ export const selectTorrentLabels =
     [(state: RootState) => state.torrents.byLabels],
     Object.keys
   )
+
+export const selectSettingsSession =
+  (state: RootState) => state.settings.transmission

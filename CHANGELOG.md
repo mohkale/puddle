@@ -1,7 +1,6 @@
 ## [Unreleased]
 ### TODO
 - set torrent location
-- settings controls (see transmission web view)
 - expanded notifications history
 - set download limits from sidebar button
 - use directories in the file tree view to select
@@ -17,6 +16,7 @@
 ### Added
 - Changelog and semantic versioning
 - Notification system
+- Settings controls
 - Show torrents from transmission
   - Includes percentage complete
 - Context menu for bulk processing on multiple torrents

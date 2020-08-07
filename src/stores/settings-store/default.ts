@@ -3,6 +3,7 @@ import {
   SettingsState, COLUMN_DEFAULT_WIDTH as DEFAULT_WIDTH,
   COLUMN_MINIMUM_WIDTH as MINIMUM_WIDTH,
 } from './state';
+import { TransmissionSession as Session } from '@puddle/transmission';
 
 const defaultState: SettingsState = {
   columns: {
@@ -83,7 +84,9 @@ const defaultState: SettingsState = {
     torrentsSync: 2000,
     speedSync: 1000,
     speedLimitsSync: 60000,
-  }
+  },
+
+  transmission: null as unknown as Session
 }
 
 export default defaultState;

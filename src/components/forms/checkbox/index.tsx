@@ -7,6 +7,7 @@ interface CheckboxProps {
   fallback?: () => React.ReactChild
   isChecked: boolean
   onCheck: (v: boolean) => void
+  label?: string
 }
 
 export function Checkbox(props: CheckboxProps) {
@@ -19,11 +20,15 @@ export function Checkbox(props: CheckboxProps) {
   }
 
   return (
-    <div className={`${classes}`} tabIndex={0}
-         onClick={onClick} onKeyPress={onKeyPress}>
-      <FontAwesomeIcon icon={faCheck} className="check icon" />
-      {props.fallback &&
-        props.fallback()}
+    <div className="checkbox-container" onClick={onClick}>
+      <div className={`${classes}`} tabIndex={0}
+          onKeyPress={onKeyPress}>
+        <FontAwesomeIcon icon={faCheck} className="check icon" />
+        {props.fallback &&
+          props.fallback()}
+      </div>
+      {props.label &&
+        <label>{props.label}</label>}
     </div>
   )
 }

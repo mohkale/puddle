@@ -5,7 +5,7 @@ import Transmission from '@puddle/transmission';
 import { AsyncButton } from '@puddle/components';
 
 import store, {
-  syncTorrents, syncStats, syncStatsLimits,
+  syncTorrents, syncStats, syncSession,
   viewChanged, ViewType
 } from '@puddle/stores';
 
@@ -29,7 +29,7 @@ function startLoading(t: Transmission) {
 
   store.dispatch(syncTorrents(t))
     .then(() => store.dispatch(syncStats(t)))
-    .then(() => store.dispatch(syncStatsLimits(t)))
+    .then(() => store.dispatch(syncSession(t)))
     .then(() => {
       store.dispatch(viewChanged({
         type: ViewType.CLIENT,

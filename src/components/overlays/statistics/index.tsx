@@ -7,6 +7,7 @@ import moment from 'moment';
 import { RootState } from '@puddle/stores';
 import OverlayContainer from '../container';
 import { BytesWithUnit } from '@puddle/components';
+import { safeDivide } from '@puddle/utils';
 
 export default function Statistics() {
   const stats = useSelector((state: RootState) => state.stats)
@@ -35,7 +36,7 @@ export default function Statistics() {
             </tr>
             <tr>
               <td>Ratio</td>
-              <td>{(stats.upload.total / stats.download.total).toFixed(2)}</td>
+              <td>{safeDivide(stats.upload.total, stats.download.total).toFixed(2)}</td>
             </tr>
             <tr>
               <td>Running Time</td>
@@ -64,7 +65,7 @@ export default function Statistics() {
             </tr>
             <tr>
               <td>Ratio</td>
-              <td>{(stats.upload.cumulativeTotal / stats.download.cumulativeTotal).toFixed(2)}</td>
+              <td>{safeDivide(stats.upload.cumulativeTotal, stats.download.cumulativeTotal).toFixed(2)}</td>
             </tr>
             <tr>
               <td>Running Time</td>

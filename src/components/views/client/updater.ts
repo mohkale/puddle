@@ -1,7 +1,7 @@
 import Transmission from '@puddle/transmission';
 
 import store, {
-  syncStats, syncStatsLimits,
+  syncStats, syncSession,
   updateRecentlyActiveTorrents as updateTorrents
 } from '@puddle/stores';
 import { Updater } from '@puddle/utils';
@@ -17,7 +17,7 @@ export default function updater(
   const updaters = [
     new Updater(() => store.dispatch(updateTorrents(t)), torrentSyncInterval),
     new Updater(() => store.dispatch(syncStats(t)), speedSyncInterval),
-    new Updater(() => store.dispatch(syncStatsLimits(t)), speedLimitsSyncInterval),
+    new Updater(() => store.dispatch(syncSession(t)), speedLimitsSyncInterval),
   ]
 
   updaters.forEach(u => u.start())

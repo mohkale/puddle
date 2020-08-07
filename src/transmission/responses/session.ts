@@ -1,3 +1,22 @@
+export enum TransmissionScheduleDays {
+  SUNDAY    = 0b0000001,
+  MONDAY    = 0b0000010,
+  TUESDAY   = 0b0000100,
+  WEDNESDAY = 0b0001000,
+  THURSDAY  = 0b0010000,
+  FRIDAY    = 0b0100000,
+  SATURDAY  = 0b1000000,
+  WEEKDAY   = 0b0111110,
+  WEEKEND   = 0b1000001,
+  ALL       = 0b1111111,
+}
+
+export enum TransmissionSessionEncryption {
+  REQUIRED = 'required',
+  PREFERRED = 'preferred',
+  TOLERATED = 'tolerated'
+}
+
 export interface TransmissionSessionUnits {
   "speed-units": string[]
   "speed-bytes": number[]
@@ -17,7 +36,7 @@ export interface TransmissionSession_Mutable {
   "alt-speed-time-begin": number
   "alt-speed-time-enabled": boolean
   "alt-speed-time-end": number
-  "alt-speed-time-day": number
+  "alt-speed-time-day": TransmissionScheduleDays
   "alt-speed-up": number
   "blocklist-url": string
   "blocklist-enabled": boolean
@@ -26,7 +45,7 @@ export interface TransmissionSession_Mutable {
   "download-queue-size": number
   "download-queue-enabled": boolean
   "dht-enabled": boolean
-  "encryption": string
+  "encryption": TransmissionSessionEncryption
   "idle-seeding-limit": number
   "idle-seeding-limit-enabled": boolean
   "incomplete-dir": string

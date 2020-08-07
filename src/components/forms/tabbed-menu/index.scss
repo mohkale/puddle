@@ -6,8 +6,6 @@ $border-width: 1px;
     display: flex;
 
     .tabs {
-        border-right: solid $border-width var(--modal-border-color);
-        padding: 20px 0px;
         margin: 0px;
         list-style-type: none;
 
@@ -22,16 +20,11 @@ $border-width: 1px;
             position: relative;
             cursor: pointer;
             box-sizing: border-box;
-            padding: 5px 35px;
             transition: color $animation-duration;
 
             &::after {
                 content: '';
                 position: absolute;
-                height: 100%;
-                width: $border-width;
-                right: -$border-width;
-                top: 0;
                 transition: background $animation-duration;
             }
 
@@ -40,6 +33,47 @@ $border-width: 1px;
 
                 &::after {
                     background: currentColor;
+                }
+            }
+        }
+    }
+
+
+    &.vertical {
+        flex-direction: column;
+
+        .tabs {
+            padding: 0px;
+            display: flex;
+            border-bottom: solid $border-width var(--modal-border-color);
+
+            li {
+                margin-right: 10px;
+                padding: 5px 5px 10px 5px;
+
+                &::after {
+                    bottom: 0;
+                    left: 0;
+                    height: $border-width;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    &.horizontal {
+        .tabs {
+            padding: 20px 0px;
+            border-right: solid $border-width var(--modal-border-color);
+
+            li {
+                padding: 5px 35px;
+
+                &::after {
+                    top: 0;
+                    height: 100%;
+                    width: $border-width;
+                    right: -$border-width;
                 }
             }
         }

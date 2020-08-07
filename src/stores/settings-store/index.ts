@@ -18,6 +18,9 @@ const settingsSlice = createSlice({
       .addCase(actions.intervalsUpdated, (state, action) => {
         state.intervals = {...state.intervals, ...action.payload}
       })
+      .addCase(actions.sessionUpdated, (state, action) => {
+        state.transmission = action.payload
+      })
 })
 
 export default settingsSlice.reducer

@@ -1,4 +1,5 @@
 @import "./config";
+@import "./no-select";
 
 @font-face {
     font-family: Roboto;
@@ -117,5 +118,30 @@ button {
     &:hover, &:focus {
         --fg: var(--hover-fg);
         --bg: var(--hover-bg);
+    }
+}
+
+input[type=text] {
+    background: #293341;
+    border: 1px solid #202D3C;
+    box-shadow: 0 1px 1px rgba(41,51,65,0.15), 0 1px 3px 1px rgba(41,51,65,0.2);
+    color: #8899A8;
+    font-size: 0.875rem;
+    border-radius: 4px;
+    height: 34px;
+    outline: none;
+    padding: 0 12px;
+
+    transition: opacity $animation-duration;
+    &[disabled] {
+        @include no-select;
+        opacity: 0.5;
+    }
+
+    &:focus {
+        background-color: rgba(52,156,244,0.15);
+        color: #f6fafe;
+        border-color: #349CF4;
+        box-shadow: 0 1px 1px rgba(52,156,244,0.15), 0 1px 3px 1px rgba(52,156,244,0.2), 0 0 0 1px #349cf4;
     }
 }

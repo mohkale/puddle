@@ -85,5 +85,12 @@ export default function TorrentRow(props: { id: number, onRightClick: (e: React.
     )
   })
 
-  return <li className={classes} onClick={onClick} onContextMenu={onContextMenu}>{cells}</li>
+  return (
+    <li
+      className={classes}
+      onClick={onClick}
+      onContextMenu={onContextMenu}>
+      {cells}
+    </li>
+  );
 }

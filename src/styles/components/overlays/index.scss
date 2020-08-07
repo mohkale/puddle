@@ -1,16 +1,5 @@
 @import "@styles/animations/fade-in-down";
 
-@keyframes anim-fade-in-down {
-    0% {
-        opacity: 0;
-        transform: translateY(-12px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .overlay-container {
     position: absolute;
     width:  100%;
@@ -19,19 +8,17 @@
     background: var(--overlay-background);
 
     display: flex;
+    // align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    align-items: center;
 
     .modal {
         @include fade-in-down();
+        margin-top: 80px;
 
         color: var(--modal-fg);
         background-color: var(--modal-bg);
         border-radius: 3px;
-
-        header {
-            padding: 20px 25px;
-        }
 
         h1 {
             color: white;

@@ -2,19 +2,30 @@
 @import "@styles/config";
 
 .checkbox:not(.with-fallback),
-*:hover > .checkbox.with-fallback,
+*:hover > .checkbox-container > .checkbox.with-fallback,
 .checkbox:focus,
 .checkbox.checked {
     background: #293341;
     border: 1px solid #202D3C;
 }
 
-*:hover > .checkbox.with-fallback,
+*:hover > .checkbox-container > .checkbox.with-fallback,
 .checkbox.with-fallback.checked,
 .checkbox.with-fallback:focus {
     & > .icon:not(.check) {
         opacity: 0;
         transition: opacity $animation-duration;
+    }
+}
+
+.checkbox-container {
+    display: flex;
+    @include no-select;
+    align-items: center;
+
+    & > label {
+        margin-left: 6px;
+        cursor: pointer;
     }
 }
 
@@ -25,9 +36,8 @@
     box-sizing: border-box;
     flex-grow: 0;
     flex-shrink: 0;
-    outline: none;
     cursor: pointer;
-    @include no-select;
+    outline: none;
 
     transition: all $animation-duration;
     transition-property: background-color, border;

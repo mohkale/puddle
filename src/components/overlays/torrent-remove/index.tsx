@@ -30,10 +30,7 @@ export default function TorrentRemove() {
           Are you sure you want to remove <span className="highlight">{ids.length}</span> torrents?
         </p>
 
-        <label>
-          <Checkbox isChecked={deleteData} onCheck={setDeleteData} />
-          <span>Delete Downloaded Files as Well.</span>
-        </label>
+        <Checkbox isChecked={deleteData} onCheck={setDeleteData} label="Delete Downloaded Files as Well." />
 
         <div className="submission-controls">
           <button onClick={removeOverlay}>Cancel</button>

@@ -1,0 +1,114 @@
+@import '@styles/config';
+
+.modal.settings {
+    width:  500px;
+    // height: 764px;
+
+    header {
+        padding: 20px 25px 0px 25px;
+    }
+
+    .tabs {
+        li:first-child {
+            margin-left: 25px;
+        }
+    }
+
+    .tab {
+        padding: 20px 25px 20px 25px;
+    }
+
+    h2 {
+        color: white;
+        font-size: .875rem;
+        font-weight: 500;
+    }
+
+    label {
+        font-size: .75rem;
+        line-height: 1rem;
+        white-space: nowrap;
+        color: #7d8d9f;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 12px;
+        align-items: center;
+
+        &:first-child {
+            margin-top: 0px;
+        }
+    }
+
+    .messages {
+        list-style-type: none;
+        padding: 0px;
+        margin: 0px;
+
+        .icon { margin-right: 8px; }
+
+        li {
+            border-radius: 4px;
+            padding: 5px 8px;
+            margin-bottom: 12px;
+
+            &.error {
+                color: var(--torrents-selected-error-row-fg);
+                background: var(--torrents-selected-error-row-bg);
+            }
+
+            &.info {
+                color: var(--torrents-selected-seeding-row-fg);
+                background: var(--torrents-selected-seeding-row-bg);
+            }
+        }
+    }
+
+    .submission-controls {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        padding-top: 15px;
+
+        border-top: solid 1px var(--modal-border-color);
+
+        button {
+            margin-right: 15px;
+        }
+    }
+}
+
+$file-picker-icon-offset: 10px;
+$file-picker-icon-size:   14px;
+$file-picker-padding:     12px;
+
+.file-input {
+    position: relative;
+
+    input {
+        width: stretch;
+        padding-left: $file-picker-padding;
+        padding-right: $file-picker-icon-size + (2 * $file-picker-icon-offset) + $file-picker-padding;
+    }
+
+    .icon {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width:  $file-picker-icon-size;
+        height: $file-picker-icon-size;
+        border-left: solid 1px #202D3C;
+        height: 100%;
+        padding: 0px $file-picker-icon-offset;
+        cursor: pointer;
+
+        transition: color $animation-duration;
+        &:hover {
+            color: var(--action-color);
+        }
+    }
+}

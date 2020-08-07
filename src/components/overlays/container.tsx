@@ -19,7 +19,7 @@ export default function OverlayContainer(props) {
   }
 
   return (
-    <div className="overlay-container" onClick={onClick}>
+    <div className="overlay-container" onMouseDown={onClick}>
       {props.children}
     </div>
   )

@@ -1,0 +1,118 @@
+import React, { Fragment, useState, useContext } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { Checkbox, ClientContext } from '@puddle/components';
+import { Form, Section, Row, MessageType, MessageLevel, NumberInput, FileInput } from '../controls';
+import { sessionSelector, useStateFromSelector  } from '../utils';
+import { syncSession } from '@puddle/stores';
+import { Select } from '@puddle/components';
+import { padString } from '@puddle/utils';
+
+import {
+  TransmissionSessionEncryption as SessionEncryption,
+  TransmissionScheduleDays as ScheduleDays
+} from '@puddle/transmission';
+
+export function TorrentsView() {
+  const { transmission } = useContext(ClientContext)
+  const dispatch = useDispatch()
+  const [messages, setMessages] = useState<MessageType[]>([])
+
+  const [downloadDir, setDownloadDir] = useStateFromSelector(sessionSelector(s => s['download-dir']))
+
+  const [startWhenAdded, setStartWhenAdded] = useStateFromSelector(sessionSelector(s => s['start-added-torrents']))
+  const [appendToIncomplete, setAppendToIncomplete] = useStateFromSelector(sessionSelector(s => s['rename-partial-files']))
+
+  const [stopSeedingRatio, setStopSeedingRatio] = useStateFromSelector(sessionSelector(s => s['seedRatioLimit']))
+  const [enableStopSeedingRatio, setEnableStopSeedingRatio] = useStateFromSelector(sessionSelector(s => s['seedRatioLimited']))
+
+  const [stopSeedingIdleDuration, setStopSeedingIdleDuration] = useStateFromSelector(sessionSelector(s => s['idle-seeding-limit']))
+  const [enableStopSeedingIdleDuration, setEnableStopSeedingIdleDuration] = useStateFromSelector(sessionSelector(s => s['idle-seeding-limit-enabled']))
+
+  const onSubmit = () => {
+    const newMessages: MessageType[] = []
+    let failed = false;
+    if (downloadDir.trim() === '') {
+      newMessages.push({ level: MessageLevel.ERROR, label: 'download directory cannot be an empty path' })
+      failed = true
+    }
+
+    if (isNaN(stopSeedingRatio)) {
+      newMessages.push({ level: MessageLevel.ERROR, label: 'stop seeding ratio must be a valid number' })
+      failed = true
+    }
+
+    if (isNaN(stopSeedingIdleDuration)) {
+      newMessages.push({ level: MessageLevel.ERROR, label: 'stop seeding idle duration must be a valid number' })
+      failed = true
+    }
+
+    setMessages(newMessages)
+    if (failed) return
+
+    transmission.setSession({
+      'download-dir': downloadDir,
+      'start-added-torrents': startWhenAdded,
+      'rename-partial-files': appendToIncomplete,
+      'seedRatioLimit': stopSeedingRatio,
+      'seedRatioLimited': enableStopSeedingRatio,
+      'idle-seeding-limit': stopSeedingIdleDuration,
+      'idle-seeding-limit-enabled': enableStopSeedingIdleDuration,
+    }).then(() => setMessages([{ level: MessageLevel.INFO, label: 'succesfully synced settings' }]))
+      .then(() => dispatch(syncSession(transmission)))
+  }
+
+  return (
+    <Form onSubmit={onSubmit} messages={messages}>
+      <Section title="Downloading">
+        <Row>
+          <label>Download to</label>
+          <input
+            type="text"
+            style={{ width: '100%', marginLeft: '25px' }}
+            value={downloadDir} onChange={(e) => setDownloadDir(e.target.value)} />
+        </Row>
+
+        <Row>
+          <Checkbox
+            isChecked={startWhenAdded}
+            onCheck={setStartWhenAdded}
+            label="Start when added" />
+        </Row>
+
+        <Row>
+          <Checkbox
+            isChecked={appendToIncomplete}
+            onCheck={setAppendToIncomplete}
+            label="Append '.part' to incomplete files' names" />
+        </Row>
+      </Section>
+
+      <Section title="Seeding">
+        <Row>
+          <Checkbox
+            isChecked={enableStopSeedingRatio}
+            onCheck={setEnableStopSeedingRatio}
+            label="Stop seeding at ratio" />
+
+          <NumberInput
+            disabled={!enableStopSeedingRatio}
+            value={stopSeedingRatio}
+            setValue={setStopSeedingRatio} />
+        </Row>
+
+        <Row>
+          <Checkbox
+            isChecked={enableStopSeedingIdleDuration}
+            onCheck={setEnableStopSeedingIdleDuration}
+            label="Stop seeding if idle for (min)" />
+
+          <NumberInput
+            disabled={!enableStopSeedingIdleDuration}
+            value={stopSeedingIdleDuration}
+            setValue={setStopSeedingIdleDuration} />
+        </Row>
+      </Section>
+    </Form>
+  );
+}
