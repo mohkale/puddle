@@ -7,7 +7,7 @@ import {
   StartTorrentsItem, StopTorrentsItem, RemoveTorrentsItem,
   CheckHashesItem, SetLabelsItem, SetTorrentLocationItem,
   DetailsItem, PriorityItem, MoveToTopItem, MoveToBottomItem,
-  MoveUpItem, MoveDownItem
+  MoveUpItem, MoveDownItem, CopyMagnetLinkItem
 } from './items';
 
 export interface ContextMenuProps {
@@ -40,6 +40,7 @@ export default function ContextMenu(props: ContextMenuProps) {
         <StartTorrentsItem torrents={selectedTorrents} />
         <StopTorrentsItem torrents={selectedTorrents} />
         <RemoveTorrentsItem torrents={selectedTorrents} />
+        <CopyMagnetLinkItem torrents={selectedTorrents} />
         <CheckHashesItem torrents={selectedTorrents} />
         <li className="seperator"></li>
         <SetLabelsItem torrents={selectedTorrents} />

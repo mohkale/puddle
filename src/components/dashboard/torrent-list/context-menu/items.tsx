@@ -1,8 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { showTorrentDetails, setLabelsOverlayAssigned, removeTorrentOverlayAssigned } from '@puddle/stores';
+import { copyStringToClipboard } from '@puddle/utils';
 import { TransmissionPriorityType as PriorityType } from '@puddle/transmission';
+
+import {
+  RootState, showTorrentDetails, setLabelsOverlayAssigned,
+  removeTorrentOverlayAssigned, selectTorrentById
+} from '@puddle/stores';
 
 import {
   ClientContext, BandwidthPrioritySlider, isPriorityType,
@@ -135,4 +140,15 @@ export function MoveDownItem(props: ContextItemProps) {
   }
 
   return <li onClick={onClick}>Move Down</li>;
+}
+
+export function CopyMagnetLinkItem(props: ContextItemProps) {
+  const links = useSelector((s: RootState) =>
+    props.torrents.map(id => selectTorrentById(id)(s).magnetLink))
+
+  const onClick = () => {
+    copyStringToClipboard(links.join('\n'))
+  }
+
+  return <li onClick={onClick}>Copy Magnet Link</li>;
 }
