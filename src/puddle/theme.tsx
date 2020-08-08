@@ -123,9 +123,9 @@ export function setTheme(theme: Theme) {
   root.setProperty('--title', theme.title)
   root.setProperty('--border-color', theme.borderColor)
 
-  root.setProperty('priority-low', theme.priorityLow)
-  root.setProperty('priority-norm', theme.priorityNorm)
-  root.setProperty('priority-high', theme.priorityHigh)
+  root.setProperty('--priority-low', theme.priorityLow)
+  root.setProperty('--priority-norm', theme.priorityNorm)
+  root.setProperty('--priority-high', theme.priorityHigh)
 
   function setButton(prefix: string, button: Button) {
     root.setProperty(`${prefix}-fg`, button.fg)

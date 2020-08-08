@@ -9,4 +9,5 @@ export enum OverlayType {
   SET_LABELS,
   STATISTICS,
   TORRENT_REMOVE,
+  TORRENT_ADD,
 }

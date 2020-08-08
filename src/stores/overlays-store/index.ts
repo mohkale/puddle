@@ -15,5 +15,5 @@ import torrentRemove from './torrent-remove';
 export default combineReducers({
   torrentDetails,
   setLabels,
-  torrentRemove
+  torrentRemove,
 })

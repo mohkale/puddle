@@ -1,5 +1,7 @@
 import interval from 'interval-promise'
 
+let updater = 0
+
 /**
  * Manages the propogation of some asynchronous action at
  * fixed intervals while offering a means to stop the action
@@ -9,10 +11,12 @@ export class Updater {
   constructor(func: () => Promise<void>, interval: number) {
     this.promiser = func
     this.interval = interval
+    this.updater = updater++
   }
+  private updater: number
 
   promiser: () => Promise<void>
-    private interval: number
+  private interval: number
   private stopped: boolean = false
 
   private runner = async (i, stop) => {

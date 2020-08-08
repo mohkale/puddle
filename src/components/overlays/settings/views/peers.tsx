@@ -2,11 +2,13 @@ import React, { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { syncSession } from '@puddle/stores';
-import { Select, Checkbox, ClientContext, NumberInput } from '@puddle/components';
+import {
+  Select, Checkbox, ClientContext, NumberInput, MessageType, MessageLevel
+} from '@puddle/components';
 import { TransmissionSessionEncryption as SessionEncryption } from '@puddle/transmission';
 
+import { Form, Section, Row } from '../controls';
 import { sessionSelector, useStateFromSelector } from '../utils';
-import { Form, Section, Row, MessageType, MessageLevel } from '../controls';
 
 const ENCRYPTION_OPTIONS = Object.values(SessionEncryption)
   .map(value => ({

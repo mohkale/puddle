@@ -2,10 +2,12 @@ import React, { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { sessionSelector, useStateFromSelector  } from '../utils';
-import { Form, Section, Row, MessageType, MessageLevel } from '../controls';
+import { Form, Section, Row } from '../controls';
 
 import { syncSession } from '@puddle/stores';
-import { NumberInput, Checkbox, ClientContext } from '@puddle/components';
+import {
+  NumberInput, Checkbox, ClientContext, MessageType, MessageLevel
+} from '@puddle/components';
 
 export function TorrentsView() {
   const dispatch = useDispatch()

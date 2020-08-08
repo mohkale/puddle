@@ -8,4 +8,6 @@ export * from './forms/checkbox';
 export * from './forms/select';
 export * from './forms/label-selector';
 export * from './forms/number-input';
+export * from './forms/messages';
+export * from './forms/drag-drop';
 export * from './misc/byte-unit';

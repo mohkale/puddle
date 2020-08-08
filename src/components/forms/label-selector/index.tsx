@@ -16,6 +16,7 @@ export function LabelSelector<T>(props: LabelSelectorProps<T>) {
   return (
     <SelectCreatable
       isMulti={true}
+      placeholder="Select Tags..."
       value={props.selectedLabels}
       onChange={props.onChange}
       options={options} />

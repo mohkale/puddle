@@ -18,34 +18,11 @@
         display: flex;
         justify-content: space-between;
         margin-top: 12px;
+        margin-bottom: 12px;
         align-items: center;
 
         &:first-child {
             margin-top: 0px;
-        }
-    }
-
-    .messages {
-        list-style-type: none;
-        padding: 0px;
-        margin: 0px;
-
-        .icon { margin-right: 8px; }
-
-        li {
-            border-radius: 4px;
-            padding: 5px 8px;
-            margin-bottom: 12px;
-
-            &.error {
-                color: var(--torrents-selected-error-row-fg);
-                background: var(--torrents-selected-error-row-bg);
-            }
-
-            &.info {
-                color: var(--torrents-selected-seeding-row-fg);
-                background: var(--torrents-selected-seeding-row-bg);
-            }
         }
     }
 }

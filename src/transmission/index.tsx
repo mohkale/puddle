@@ -27,6 +27,11 @@ export type TorrentId = number | string
 export type TorrentIds = TorrentId | TorrentId[] | undefined | null
 
 /**
+ * The required parameters needed to add a new torrent instance.
+*/
+export type TransmissionTorrentAddSource = { filename: string } | { metainfo: string }
+
+/**
  * Converts an {@code TorrentIds} argument to an object with
  * the associated fields for a request. This really only exists
  * to make stripping out the ids field when {@code ids} is undefined
@@ -239,14 +244,13 @@ export default class Transmission {
   }
 
   addTorrent = async (
-    filename:     string,
-    cookies?:     string,
+    source:       TransmissionTorrentAddSource,
     downloadDir?: string,
+    cookies?:     string,
     paused:       boolean = true,
 
     // other possible parameters which I doubt we'll be using.
-    /* metaInfo: string
-       filesWanted: string[],
+    /* filesWanted: string[],
        filesUnwanted: string[],
        priorityHigh: string[],
        priorityLow: string[],
@@ -254,7 +258,7 @@ export default class Transmission {
        bandwidthPriority?: number,
        peerLimit?: number, */
   ) => {
-    const props = { filename: filename }
+    const props = source
     if (undefined !== cookies)     props['cookies'] = cookies
     if (undefined !== downloadDir) props['download-dir'] = downloadDir
     if (undefined !== paused)      props['paused'] = paused

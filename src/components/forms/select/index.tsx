@@ -19,6 +19,10 @@ function generateStyles(height: number) {
       backgroundColor: 'var(--input-bg)',
       borderColor: state.isFocused ? 'var(--input-selected-border)' : 'var(--input-border)',
     }),
+    placeholder: (base) => ({
+      ...base,
+      color: 'var(--input-placeholder)'
+    }),
     option: (base, state) => ({
       ...base,
       color: state.isSelected ? 'var(--action-color)' : 'var(--context-menu-fg)',

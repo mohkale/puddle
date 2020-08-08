@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectSelectedTorrents } from '@puddle/stores';
 import TooltipButton from '@puddle/components/tooltip';
 
 import { ClientContext } from '@puddle/components';
@@ -8,7 +7,10 @@ import {
   faPlus, faMinus, faPlay, faStop
 } from '@fortawesome/free-solid-svg-icons';
 
-import { removeTorrentOverlayAssigned, addTorrentOverlayAssigned } from '@puddle/stores';
+import {
+  selectSelectedTorrents, removeTorrentOverlayAssigned,
+  addTorrentOverlayAssigned
+} from '@puddle/stores';
 
 export default function ActionBar() {
   const { transmission } = useContext(ClientContext)

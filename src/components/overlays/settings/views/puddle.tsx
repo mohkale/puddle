@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { NumberInput } from '@puddle/components';
+import {
+  NumberInput, MessageType, MessageLevel
+} from '@puddle/components';
 import { intervalsUpdated, selectIntervals } from '@puddle/stores'
 
-import { Form, Section, Row, MessageType, MessageLevel } from '../controls';
+import { Form, Section, Row } from '../controls';
 
 export function PuddleView() {
   const dispatch = useDispatch()

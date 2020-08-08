@@ -6,7 +6,6 @@ $cross-icon-indent: 8px;
 
 .searchbar {
     position: relative;
-    outline: none;
     margin-bottom: 3 * $search-spacing;
 
     color: var(--search-fg);
@@ -30,6 +29,8 @@ $cross-icon-indent: 8px;
             color: var(--search-fg);
             font-style: italic;
         }
+
+        &:focus { outline: none; }
     }
 }
 

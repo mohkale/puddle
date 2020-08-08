@@ -3,10 +3,13 @@ import { useDispatch } from 'react-redux';
 
 import { padString } from '@puddle/utils';
 import { syncSession } from '@puddle/stores';
-import { Checkbox, ClientContext, Select, NumberInput } from '@puddle/components';
 
-import { Form, Section, Row, MessageType, MessageLevel } from '../controls';
+import { Form, Section, Row } from '../controls';
 import { sessionSelector, useStateFromSelector  } from '../utils';
+import {
+  Checkbox, ClientContext, Select, NumberInput, MessageType,
+  MessageLevel
+} from '@puddle/components';
 
 import {
   TransmissionScheduleDays as ScheduleDays

@@ -1,10 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { Checkbox, ClientContext, NumberInput } from '@puddle/components';
-import { Form, Section, Row, MessageType, MessageLevel } from '../controls';
 import { sessionSelector, useStateFromSelector } from '../utils';
 import { syncSession } from '@puddle/stores';
+import { Form, Section, Row } from '../controls';
+
+import {
+  Checkbox, ClientContext, NumberInput, MessageType, MessageLevel
+} from '@puddle/components';
 
 export function NetworkView() {
   const dispatch = useDispatch()

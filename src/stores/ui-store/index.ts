@@ -15,7 +15,8 @@ import { arrayRemove, setUnionExcludingIntersection } from '@puddle/utils';
 import {
   OverlayType, overlayRemoved, torrentDetailsOverlayAssigned,
   settingsOverlayAssigned, setLabelsOverlayAssigned,
-  statisticsOverlayAssigned, removeTorrentOverlayAssigned
+  statisticsOverlayAssigned, removeTorrentOverlayAssigned,
+  addTorrentOverlayAssigned
 } from '../overlays-store';
 
 const uiSlice = createSlice({
@@ -86,6 +87,9 @@ const uiSlice = createSlice({
       })
       .addCase(removeTorrentOverlayAssigned, (state) => {
         state.overlay = OverlayType.TORRENT_REMOVE
+      })
+      .addCase(addTorrentOverlayAssigned, (state) => {
+        state.overlay = OverlayType.TORRENT_ADD
       })
 })
 
