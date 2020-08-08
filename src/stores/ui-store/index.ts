@@ -16,7 +16,7 @@ import {
   OverlayType, overlayRemoved, torrentDetailsOverlayAssigned,
   settingsOverlayAssigned, setLabelsOverlayAssigned,
   statisticsOverlayAssigned, removeTorrentOverlayAssigned,
-  addTorrentOverlayAssigned
+  addTorrentOverlayAssigned, setTorrentLocationOverlayAssigned
 } from '../overlays-store';
 
 const uiSlice = createSlice({
@@ -90,6 +90,9 @@ const uiSlice = createSlice({
       })
       .addCase(addTorrentOverlayAssigned, (state) => {
         state.overlay = OverlayType.TORRENT_ADD
+      })
+      .addCase(setTorrentLocationOverlayAssigned, state => {
+        state.overlay = OverlayType.TORRENT_SET_LOCATION
       })
 })
 

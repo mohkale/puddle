@@ -10,4 +10,5 @@ export enum OverlayType {
   STATISTICS,
   TORRENT_REMOVE,
   TORRENT_ADD,
+  TORRENT_SET_LOCATION,
 }

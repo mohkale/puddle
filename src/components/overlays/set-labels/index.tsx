@@ -7,9 +7,10 @@ import {
   overlayRemoved, updateTorrent
 } from '@puddle/stores'
 import { setsEqual } from '@puddle/utils'
-import { ClientContext, AsyncButton, LabelSelector } from '@puddle/components';
+import { ClientContext, LabelSelector } from '@puddle/components';
 
 import Modal from '../modal';
+import { Form } from '../settings/controls';
 
 export default function SetLabels() {
   const dispatch = useDispatch()
@@ -34,17 +35,11 @@ export default function SetLabels() {
 
   return (
     <Modal title="Set Tags" className="set-labels">
-      <LabelSelector
-        onChange={setSelectedLabels}
-        selectedLabels={selectedLabels} />
-
-      <div className="submission-controls">
-        <button onClick={removeOverlay} className="btn">Cancel</button>
-        <AsyncButton run={onSubmit} onSuccess={removeOverlay}
-                     className="btn btn--submit">
-          Submit
-        </AsyncButton>
-      </div>
+      <Form onSubmit={onSubmit} messages={[]} onSuccess={removeOverlay}>
+        <LabelSelector
+          onChange={setSelectedLabels}
+          selectedLabels={selectedLabels} />
+      </Form>
     </Modal>
   )
 }

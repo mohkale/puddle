@@ -8,6 +8,7 @@ import SetLabels from './set-labels';
 import Statistics from './statistics';
 import RemoveTorrent from './torrent-remove';
 import TorrentAdd from './torrent-add';
+import SetLocation from './set-location';
 
 interface RenderOverlayProps {
   type: OverlayType
@@ -27,6 +28,8 @@ export default function RenderOverlay(props: RenderOverlayProps) {
       return <RemoveTorrent />
     case OverlayType.TORRENT_ADD:
       return <TorrentAdd />
+    case OverlayType.TORRENT_SET_LOCATION:
+      return <SetLocation />
   }
 
   return null

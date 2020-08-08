@@ -1,0 +1,17 @@
+.modal.set-location {
+    width: 500px;
+    padding-bottom: 20px;
+
+    .row {
+        margin-left: 20px;
+        margin-right: 20px;
+
+        & > *{
+            margin-bottom: 15px;
+        }
+    }
+
+    .textbox {
+        width: -webkit-fill-available;
+    }
+}

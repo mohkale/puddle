@@ -7,6 +7,7 @@ export * from './filter-lists';
 export * from './labels-by-id';
 export * from './selected-torrents';
 export * from './filtered-torrents';
+export * from './location-by-id';
 
 import { TorrentId } from '@puddle/transmission';
 
@@ -48,3 +49,6 @@ export const selectTorrentLabels =
 
 export const selectSettingsSession =
   (state: RootState) => state.settings.transmission
+
+export const selectDefaultDownloadDir =
+  (state: RootState) => state.settings.transmission['download-dir']

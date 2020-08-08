@@ -30,6 +30,7 @@ export const TORRENT_FIELDS: (keyof TorrentResponse)[] = [
   "doneDate",
   "bandwidthPriority",
   "magnetLink",
+  "downloadDir",
 ]
 
 /**
@@ -40,7 +41,7 @@ type TorrentDefaultFields =
        "downloadedEver" | "rateDownload" | "uploadedEver" | "rateUpload" |
        "eta" | "uploadRatio" | "sizeWhenDone" | "addedDate" | "error" |
        "trackers" | "queuePosition" | "labels" | "recheckProgress" | "doneDate" |
-       "bandwidthPriority" | 'magnetLink' >
+       "bandwidthPriority" | 'magnetLink' | 'downloadDir' >
 
 /**
  * The model for a single torrent.

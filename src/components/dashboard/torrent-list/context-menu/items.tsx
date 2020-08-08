@@ -6,7 +6,8 @@ import { TransmissionPriorityType as PriorityType } from '@puddle/transmission';
 
 import {
   RootState, showTorrentDetails, setLabelsOverlayAssigned,
-  removeTorrentOverlayAssigned, selectTorrentById
+  removeTorrentOverlayAssigned, selectTorrentById,
+  setTorrentLocationOverlayAssigned
 } from '@puddle/stores';
 
 import {
@@ -65,9 +66,13 @@ export function SetLabelsItem(props: ContextItemProps) {
   return <li onClick={onClick}>Set Tags</li>;
 }
 
-/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 export function SetTorrentLocationItem(props: ContextItemProps) {
-  return <li>Set Torrent Location</li>;
+  const dispatch = useDispatch()
+  const onClick = () => {
+    dispatch(setTorrentLocationOverlayAssigned(props.torrents))
+  }
+
+  return <li onClick={onClick}>Set Location</li>;
 }
 
 export function DetailsItem(props: ContextItemProps) {
