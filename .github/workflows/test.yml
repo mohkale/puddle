@@ -24,6 +24,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
+    - run: cp config.template.ts config.ts
     - run: npm run check-types
     - run: npm run lint
     - run: npm run test

@@ -28,13 +28,19 @@
     "forceConsistentCasingInFileNames": true,   /* Disallow inconsistently-cased references to the same file. */
     "isolatedModules": true,
     "paths": {
-      "@puddle/*": ["src/*"],
-      "@styles/*": ["src/styles/*"],
-      "@cstyles/*":  ["src/styles/components/*"],
+      "@client/*": ["client/*"],
+      "@styles/*": ["client/styles/*"],
+      "@cstyles/*":  ["client/styles/components/*"],
+      // for some reason... globs break this :/
+      "@transmission": ["transmission"],
+      "@shared/*": ["shared/*"],
+      "@server/*": ["server/*"],
     }
   },
   "include": [
-    "./src/**/*.ts", "./src/**/*.tsx",
+    "./client/**/*.ts", "./client/**/*.tsx",
+    "./server/**/*.ts",
+    "./shared/**/*.ts",
   ],
   "exclude": [
     "node_modules", "**/*.spec.ts",

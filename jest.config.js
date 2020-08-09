@@ -80,9 +80,13 @@ module.exports = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-      '^@puddle/(.*)': '<rootDir>/src/$1',
+      '^@client/(.*)': '<rootDir>/client/$1',
       "\\.(css|s[ac]ss)$": "identity-obj-proxy",
       "^@(c?styles)/*": "identity-obj-proxy",
+      '^@server/(.*)': '<rootDir>/server/$1',
+      '^@shared/(.*)': '<rootDir>/shared/$1',
+      '^@transmission/(.*)': '<rootDir>/transmission/$1',
+      '^@transmission$': '<rootDir>/transmission',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

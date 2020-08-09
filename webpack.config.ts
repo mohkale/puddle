@@ -21,27 +21,40 @@ const excludes: string[] = [
 ]
 
 const sharedConfig: Configuration = {
-  mode: 'development'
 }
 
 type EnvironmentType = { [key: string]: boolean }
 type ConfigurationFunction = (env: String) => webpack.Configuration;
 
+export const statsConfig = {
+  all: false,
+  modules: true,
+  maxModules: 0,
+  errors: true,
+  warnings: true,
+  logging: "warn",
+  colors: true,
+}
+
 let mainConfig: ConfigurationFunction = env => Object.assign({}, sharedConfig, {
-  entry: './src/index',
+  entry: './client/index',
   output: {
     path: pathResolve('build'),
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
   },
+  mode: env || 'development',
   devtool: (env === "production") ? false : "inline-source-map",
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss'],
     alias: {
       // use this to access from root of src hirearchy.
-      '@puddle': pathResolve('src'),
-      '@styles': pathResolve('src/styles'),
-      '@cstyles': pathResolve('src/styles/components'),
+      '@client': pathResolve('client'),
+      '@styles': pathResolve('client/styles'),
+      '@cstyles': pathResolve('client/styles/components'),
+      '@server': pathResolve('server'),
+      '@shared': pathResolve('shared'),
+      '@transmission': pathResolve('transmission'),
     }
   },
   optimization: {
@@ -83,35 +96,12 @@ let mainConfig: ConfigurationFunction = env => Object.assign({}, sharedConfig, {
   plugins: [
     new ForkTsCheckerWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './client/index.html',
       minify: {
         collapseWhitespace: env === "production",
       }
     }),
   ],
-  devServer: {
-    port: 8000,
-    compress: true,
-    inline: true,
-    stats: {
-      all: false,
-      modules: true,
-      maxModules: 0,
-      errors: true,
-      warnings: true,
-      logging: "warn",
-      colors: true,
-    },
-    proxy: {
-      "/transmission": {
-        changeOrigin: true,
-        cookieDomainRewrite: "localhost",
-        // my hardcoded transmission route, TODO
-        // move into and retrieve from puddle config.
-        target: "http://localhost:7867/transmission/rpc",
-      }
-    }
-  }
 });
 
 

@@ -20,6 +20,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+config.ts
+!shared/config.ts
 
 # swap/temp files used by editors, see [[https://simpleit.rocks/git/make-git-ignore-temporary-files-produced-by-emacs-and-vim-in-all-directories-globally/][here]].
 *~
