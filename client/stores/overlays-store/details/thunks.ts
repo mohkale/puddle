@@ -2,7 +2,7 @@ import { RootThunk } from '../../state';
 
 import Transmission, {
   TransmissionPriorityType as PriorityType
-} from '@transmission';
+} from '@transmission/client';
 
 import {
   torrentDetailsOverlayAssigned,
@@ -24,7 +24,8 @@ export const showTorrentDetails =
 
       client.torrent(id, ...TORRENT_DETAILED_FIELDS)
         .then(torrent => {
-          dispatch(torrentDetailsOverlayTorrentUpdated(torrent))
+          const torrentDetailed = fromResponse(torrent)
+          dispatch(torrentDetailsOverlayTorrentUpdated(torrentDetailed))
         })
     }
   }

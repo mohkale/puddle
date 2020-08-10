@@ -1,4 +1,4 @@
-import Transmission from '@transmission';
+import Transmission from '@transmission/client';
 
 import { RootThunk } from '../state';
 import { statsUpdated, limitsUpdated } from './actions';

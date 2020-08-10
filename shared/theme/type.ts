@@ -40,7 +40,6 @@ export interface Theme {
   fg: string
   bg: string
   title: string
-  borderColor: string
 
   priorityLow: string
   priorityNorm: string

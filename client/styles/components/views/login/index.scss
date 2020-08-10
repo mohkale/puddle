@@ -2,82 +2,50 @@
 @import '@styles/animations/fade-in-down';
 
 div.login-container {
-    color: var(--fg);
-    background-color: var(--bg);
+    color: var(--modal-fg);
+    background-color: var(--modal-bg);
 
     width:  100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
 
     main {
-        @include with-banner(var(--title));
         @include fade-in-down(2s);
+        @include with-banner(var(--modal-bg));
 
         width: 25em;
         padding: 2em 2.5em;
 
         background-color: white;
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--modal-border-color);
         border-radius: 4px;
-        box-shadow: 0 1px 1px rgba(210,216,222,0.15), 0 1px 3px 1px rgba(210,216,222,0.2);
 
         h1 {
+            color: var(--input-bg);
             text-align: left;
             margin: 0px;
             margin-bottom: 24px;
         }
 
         hr {
-            border-color: var(--border-color);
-            opacity: 0.15;
+            opacity: 0.6;
         }
 
         label {
             font-size: 0.75rem;
         }
 
+        .input-container {
+            border-radius: 8px;
+            background: var(--modal-bg);
+        }
+
         input {
             display: block;
-            font-size: 0.875rem;
-            padding: 0px 12px;
-            height: 34px;
-            box-sizing: border-box;
-            color: var(--fg);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            width: 100%;
-            transition: all 0.2s;
-            margin-top: 2px;
-
-            &::placeholder {
-                color: var(--border-color);
-            }
-
-            &:focus {
-                color: var(--input-selected-fg);
-                background-color: var(--input-selected-bg);
-                outline: none;
-                border-color: var(--input-selected-border);
-
-                &::placeholder {
-                    color: var(--input-selected-placeholder);
-                }
-            }
+            background: var(--modal-bg);
+            width: -webkit-fill-available;
         }
-    }
-}
-
-.banner {
-    font-size: 0.8em;
-    margin-bottom: 12px;
-    padding: 8px 12px;
-    border-radius: 4px;
-
-    &.error {
-        color: white;
-        background-color: var(--error-color);
     }
 }

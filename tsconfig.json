@@ -33,6 +33,7 @@
       "@cstyles/*":  ["client/styles/components/*"],
       // for some reason... globs break this :/
       "@transmission": ["transmission"],
+      "@transmission/*": ["transmission/*"],
       "@shared/*": ["shared/*"],
       "@server/*": ["server/*"],
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import Transmission from '@transmission';
+import Transmission from '@transmission/client';
 
 /**
  * Shared context which will be inherited by every

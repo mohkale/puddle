@@ -1,5 +1,5 @@
 import { cyclePriority, ExtendedPriorityType } from '../index';
-import { TransmissionPriorityType as PriorityType } from '@transmission';
+import { TransmissionPriorityType as PriorityType } from '@transmission/client';
 
 const cycleOrder: PriorityType[] = [
   PriorityType.NORM,

@@ -7,7 +7,7 @@ import Sidebar from '@client/components/sidebar';
 import Dashboard from '@client/components/dashboard';
 import Overlay from '@client/components/overlays';
 
-import Transmission from '@transmission';
+import Transmission from '@transmission/client';
 import ClientViewContext from './context';
 
 import rootKeyHandler from './key-handler';

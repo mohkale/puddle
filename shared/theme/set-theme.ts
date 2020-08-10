@@ -8,7 +8,6 @@ export function setTheme(theme: Theme) {
   root.setProperty('--fg', theme.fg)
   root.setProperty('--bg', theme.bg)
   root.setProperty('--title', theme.title)
-  root.setProperty('--border-color', theme.borderColor)
 
   root.setProperty('--priority-low', theme.priorityLow)
   root.setProperty('--priority-norm', theme.priorityNorm)

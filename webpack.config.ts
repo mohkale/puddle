@@ -37,7 +37,7 @@ export const statsConfig = {
 }
 
 let mainConfig: ConfigurationFunction = env => Object.assign({}, sharedConfig, {
-  entry: './client/index',
+  entry: ['./client/index', 'webpack-hot-middleware/client?reload=true&quiet=true'],
   output: {
     path: pathResolve('build'),
     filename: '[name].bundle.js',
@@ -95,6 +95,7 @@ let mainConfig: ConfigurationFunction = env => Object.assign({}, sharedConfig, {
   },
   plugins: [
     new ForkTsCheckerWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: './client/index.html',
       minify: {

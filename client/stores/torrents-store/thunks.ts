@@ -7,7 +7,7 @@ import { notifyTorrentAdded, notifyTorrentRemoved } from '../notifications-store
 import { Torrent, torrentFromResponse, TORRENT_FIELDS } from '@client/models';
 import Transmission, {
   TorrentId, TransmissionTorrent as TorrentResponse
-} from '@transmission';
+} from '@transmission/client';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 

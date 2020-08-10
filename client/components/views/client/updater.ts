@@ -1,4 +1,4 @@
-import Transmission from '@transmission';
+import Transmission from '@transmission/client';
 
 import store, {
   syncStats, syncSession,

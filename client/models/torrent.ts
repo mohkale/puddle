@@ -2,7 +2,7 @@ import { torrentClass, TorrentClasses } from './classes';
 import {
   TransmissionTorrent as TorrentResponse,
   TransmissionTorrentStatus as TorrentStatus
-} from '@transmission';
+} from '@transmission/client';
 
 // WARN typescript doesn't have a way to declare the types of
 // an interface at compile time and then reference those same

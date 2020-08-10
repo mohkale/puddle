@@ -8,7 +8,6 @@ export const defaultTheme: Theme = {
   fg: '#53718a',
   bg: '#e9eef2',
   title: '#34516C',
-  borderColor: '#d2d8de',
 
   priorityLow: '#258de5',
   priorityNorm: '#39ce83',

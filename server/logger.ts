@@ -20,6 +20,8 @@ const ansiStripFormat = winston.format(info => {
  */
 const puddleShrinkLevelFormat = winston.format(info => {
   switch (info.level) {
+    case 'log':
+      info.level = chalk.yellow('l'); break;
     case 'info':
       info.level = chalk.blue('i'); break;
     case 'debug':
@@ -36,6 +38,7 @@ const puddleShrinkLevelFormat = winston.format(info => {
 
 const logger = winston.createLogger({
   level: isProduction ? 'info' : 'debug',
+  defaultMeta: { },
   format: winston.format.combine(
     winston.format.json()
   ),

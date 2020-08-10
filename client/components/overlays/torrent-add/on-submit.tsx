@@ -1,6 +1,6 @@
 import Transmission, {
   TransmissionTorrentAddSource as TorrentAddSource
-} from '@transmission';
+} from '@transmission/client';
 
 import { MessageType, MessageLevel } from '@client/components';
 

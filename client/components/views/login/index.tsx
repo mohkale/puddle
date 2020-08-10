@@ -1,30 +1,19 @@
 import '@cstyles/views/login';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
-import Transmission from '@transmission';
-import { AsyncButton } from '@client/components';
+import {
+  MessageList, MessageType, MessageLevel, AsyncButton
+} from '@client/components';
+
+import Transmission from '@transmission/client';
+import { authenticate, authenticated, defaultTransmissionUrl } from '@client/api';
 
 import store, {
-  syncTorrents, syncStats, syncSession,
-  viewChanged, ViewType
+  syncTorrents, syncStats, syncSession, viewChanged, ViewType
 } from '@client/stores';
 
-const DEFAULT_TRANSMISSION_ROUTE = `http://${window.location.host}${window.location.pathname}transmission`
-
-async function checkConnection(domain: string) {
-  if (!domain) {
-    throw `You must supply a value for Transmission Host.`
-  }
-
-  const transmission = new Transmission(domain)
-  try { await transmission.session() } catch {
-    throw `failed to exchange handshake, is transmission really there?.`
-  }
-
-  return transmission;
-}
-
-function startLoading(t: Transmission) {
+function startLoading() {
+  const t = new Transmission()
   store.dispatch(viewChanged({ type: ViewType.LOADING }))
 
   store.dispatch(syncTorrents(t))
@@ -38,43 +27,48 @@ function startLoading(t: Transmission) {
     })
 }
 
-// automatically connect to the default, TODO remove.
-startLoading(new Transmission(DEFAULT_TRANSMISSION_ROUTE));
-
 export default function LoginView() {
-  const [banner, setBanner] = useState<string>()
-  const valueRef = useRef<HTMLInputElement>(null)
+  const [message, setMessage] = useState<MessageType|undefined>()
+  const inputRef = useRef<HTMLInputElement>(null)
+  const [url, setUrl] = useState('')
 
-  const onSubmit = async () => {
-    if (!valueRef.current) {
-      console.warn('reference to value input box is undefined')
-      return
-    }
-    return await checkConnection(valueRef.current!.value)
-  }
+  // skip forward to transmission when the the users already been authed.
+  useEffect(() => { authenticated().then(ok => ok && startLoading()) }, [])
 
-  const onFailure = (err) => setBanner(err.toString())
+  useEffect(() => {
+    defaultTransmissionUrl().then(url => {
+      if (!inputRef.current?.value) {
+        setUrl(url)
+      }
+    })
+  }, [])
+
+  const onSubmit = () => authenticate(url)
+  const onFailure = err => setMessage({
+    level: MessageLevel.ERROR, label: err.toString()
+  })
 
   return (
     <div className="login-container">
       <main>
         <h1>Connect to Transmission</h1>
 
-        {banner &&
-          <div className="banner error">{banner}</div>}
+        {message && <MessageList messages={[message]} />}
 
-        <form>
-          <label>
-            Transmission Host:
-            <input name="host" type="text" className="textbox"
-                   defaultValue={DEFAULT_TRANSMISSION_ROUTE}
-                   ref={valueRef} placeholder="Host Path" />
-          </label>
-        </form>
+        <label>
+          Transmission Host:
+          <div className="input-container">
+            <input type="text" className="textbox"
+                   value={url} ref={inputRef}
+                   onChange={e => setUrl(e.target.value)}
+                   placeholder="Host Path" />
+          </div>
+        </label>
 
         <hr/>
 
         <AsyncButton style={{float: 'right'}} run={onSubmit}
+                     className="btn btn--submit"
                      onFailure={onFailure} onSuccess={startLoading}>
           Submit
         </AsyncButton>

@@ -6,7 +6,7 @@ import LoginView from './views/login';
 import LoadingView from './views/loading';
 
 import { selectCurrentView, ViewType } from '@client/stores';
-import Transmission, { TransmissionSerialised } from '@transmission';
+import Transmission, { TransmissionSerialised } from '@transmission/client';
 
 setTheme(defaultTheme);
 
