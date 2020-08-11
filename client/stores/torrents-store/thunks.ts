@@ -42,12 +42,9 @@ const handleTorrentsRemoved =
 
      if (removed.length > 0) {
        dispatch(torrentsRemoved({ ids: removed }))
-       dispatch(notifyTorrentRemoved(removed.map(id => {
-         return {
-           id,
-           name: state.torrents.entries[id].name
-         }
-       })))
+       dispatch(notifyTorrentRemoved(removed.map(id => ({
+         torrent: state.torrents.entries[id]
+       }))))
      }
    }
 
@@ -68,7 +65,7 @@ const handleTorrentUpdated =
 
      if (newTorrents.length > 0) {
        dispatch(torrentsAdded({ torrents: newTorrents }))
-       dispatch(notifyTorrentAdded({ ids: newTorrents.map(t => t.id) }))
+       dispatch(notifyTorrentAdded(newTorrents))
      }
 
      if (updatedTorrents.length > 0)

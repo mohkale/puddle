@@ -8,6 +8,7 @@ const config: Config = {
   // cat /dev/random | tr -C -d '[:alnum:]' | head -c 256 | clip
   secret: 'CyU6zlgmQIXDzr6n11lcwgnT7mxH7mI65WFZbXtWZtDVU3GejBFEnH9It7MNHDUirF4WTN1uBRowB0sjC0gcD4wMlwsEGdHvWLvOqePtTQbIrkhsg1HPAfgU6PsqSKTvKlLpTGvOQcXrt2Yf1WYgIKu6pYwKnQyEuSTWHoGmXBNy3lDUxIyC7wjvDKvf0Ia2POyKPGHoKfL52KaQoCZYSrV7OdlDt0PX2tdbEIWUJZS4DBTR7FOQsnAvWtpLDnJz',
   sessionPath: './var/sessions',
+  databaseDir: './var/db',
 }
 
 export default config

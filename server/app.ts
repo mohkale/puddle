@@ -36,6 +36,6 @@ app.use(session({
   store: new FileStore({
     path: config.sessionPath,
     retries: 0,
-    logFn: logger.log,
+    // logFn: logger.log.bind(logger),
   })
 }))

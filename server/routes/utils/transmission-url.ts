@@ -30,8 +30,8 @@ function findConfigFile(): string|undefined {
 }
 
 /*
- * Find the default URL for the transmission daemon.
- * from the associated configuration file.
+ * Find the default URL for the transmission daemon. from the
+ * associated configuration file if it exists.
  */
 app.get('/transmission-url', async (req, res) => {
   const sendDefault = () => res.json({ status: 'OK', body: { url: DEFAULT_URL } })

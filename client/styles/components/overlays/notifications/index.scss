@@ -1,0 +1,58 @@
+.notifications-modal {
+    width: 700px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+
+    .modal--modal-body {
+        height: 100%;
+        padding: 0px 25px;
+    }
+}
+
+.notifications-list {
+    padding: 0px;
+    list-style-type: none;
+
+    .notification__delete-icon,
+    .notification__expand-icon {
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        padding: 2px 4px;
+        box-sizing: border-box;
+    }
+
+    .notification__icon {
+        opacity: 0.5;
+        transition: opacity 0.2s, color 0.2s;
+
+        &:hover {
+            opacity: 1;
+            color: var(--action-color);
+        }
+    }
+}
+
+.notification__expanded-content {
+    margin-top: 12px;
+
+    border: solid 1px currentColor;
+    border-radius: 8px;
+
+    padding: 10px 20px;
+    height: 120px;
+
+    table {
+        white-space: nowrap;
+        margin: 15px 0px;
+
+        td:first-child {
+            padding: 0pc 12px;
+        }
+    }
+
+    .notification__date {
+        text-align: right;
+    }
+}

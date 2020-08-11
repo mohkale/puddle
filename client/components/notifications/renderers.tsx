@@ -7,41 +7,35 @@ import {
   TorrentRemovedNotificationProps
 } from '@client/stores';
 
-type NotificationProps<T> =
-  { title: string } & T
+import { NotificationProps, Highlight } from './shared';
 
-function Highlight(props) {
-  return <span className="highlight">{props.children}</span>
-}
-
-function TorrentAddedNotification(
-  props: NotificationProps<TorrentAddedNotificationProps>
-) {
+function TorrentAddedNotification(props: NotificationProps<TorrentAddedNotificationProps>) {
+  const count = props.torrents.length
   return (
     <span>
-      Added <Highlight>{props.count}</Highlight> Torrent{props.count === 1 ? '' : 's'}
+      Added <Highlight>{count}</Highlight> Torrent{count === 1 ? '' : 's'}
     </span>
   );
 }
 
-function TorrentRemovedNotification(
-  props: NotificationProps<TorrentRemovedNotificationProps>
-) {
+function TorrentRemovedNotification(props: NotificationProps<TorrentRemovedNotificationProps>) {
   return (
-    <span title={props.name}>
-      Removed Torrent <Highlight>{props.name}</Highlight>
+    <span title={props.torrent.name}>
+      Removed Torrent <Highlight>{props.torrent.name}</Highlight>
     </span>
   );
+}
+
+// const DefaultNotification = (props: NotificationProps<any>) => <span>{props.title}</span>;
+
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+const NOTIFICATION_CONTENT_RENDERERS: { [key in NotificationTypes]: (props: NotificationProps<any>) => JSX.Element } = {
+  [NotificationTypes.TORRENT_ADDED]: TorrentAddedNotification,
+  [NotificationTypes.TORRENT_REMOVED]: TorrentRemovedNotification,
 }
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 export function NotificationContent(props: Notification<any>) {
-  switch (props.type) {
-    case NotificationTypes.TORRENT_ADDED:
-      return <TorrentAddedNotification title={props.title} {...props.props} />
-    case NotificationTypes.TORRENT_REMOVED:
-      return <TorrentRemovedNotification title={props.title} {...props.props} />
-  }
-
-  return <span>{props.title}</span>
+  const Renderer = NOTIFICATION_CONTENT_RENDERERS[props.type];
+  return <Renderer {...props.props} />
 }

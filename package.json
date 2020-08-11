@@ -49,6 +49,7 @@
     "chalk": "^4.1.0",
     "compression-webpack-plugin": "^4.0.0",
     "css-loader": "^3.6.0",
+    "diskdb": "^0.1.17",
     "eslint": "^7.4.0",
     "eslint-plugin-react": "^7.20.5",
     "express": "^4.17.1",

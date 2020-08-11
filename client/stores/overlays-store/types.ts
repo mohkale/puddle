@@ -11,4 +11,5 @@ export enum OverlayType {
   TORRENT_REMOVE,
   TORRENT_ADD,
   TORRENT_SET_LOCATION,
+  NOTIFICATIONS,
 }

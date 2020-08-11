@@ -6,4 +6,5 @@ export default interface Config {
   serverHost: string
   secret: string
   sessionPath: string
+  databaseDir: string
 }

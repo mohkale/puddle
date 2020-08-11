@@ -1,13 +1,12 @@
-import { Notification } from './notifications'
-
-let notificationsCounter = 0;
+import { notificationIdGen as id, Notification } from './notifications'
 
 export function generateNotification<T>(
   props: Omit<Notification<T>, 'id'|'date'>
 ): Notification<T> {
+  const date = Date.now()
   return {
-    id: notificationsCounter++,
-    date: Date.now(),
+    id: id(props.type, date, props.title),
+    date: date,
     ...props
   }
 }

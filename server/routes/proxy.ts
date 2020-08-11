@@ -5,9 +5,9 @@ import { sessionAssigned } from '../session';
 
 const NO_TRANSMISSION_URL = 'No Transmission URL'
 
-/*
- * Proxy requests through to the transmission URL
- * associated with this users session.
+/**
+ * Proxy requests through to the transmission URL associated with this
+ * users session.
  */
 app.use('/transmission', proxy(req => {
   if (sessionAssigned(req.session)) {

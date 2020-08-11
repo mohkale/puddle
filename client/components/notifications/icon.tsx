@@ -20,7 +20,5 @@ export const NotificationIcon = React.memo((props: { level: NotificationLevel })
       break
   }
 
-  return <FontAwesomeIcon icon={icon} className="icon" />;
+  return <FontAwesomeIcon icon={icon} className="notification__status-icon" />;
 })
-
-

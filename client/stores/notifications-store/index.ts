@@ -1,17 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export * from './state';
+export * from './thunks';
 export * from './actions';
 export * from './notifications';
 
 import defaultState from './default';
 import * as actions from './actions';
 
-import { NotificationLevel, NotificationTypes } from './notifications'
+import { Notification } from './notifications'
 
-import * as props from './notifications/types'
-
-import { generateNotification } from './utils';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 const notificationsSlice = createSlice({
   name: 'notifications',
@@ -20,29 +19,32 @@ const notificationsSlice = createSlice({
   extraReducers: builder =>
     builder
       .addCase(actions.notificationRemoved, (state, action) => {
-        state.active = state.active.filter((entry) => {
-          return entry.id !== action.payload
-        })
+        const index = state.active.findIndex(o => o.id === action.payload)
+        state.inactive.push(state.active[index])
+        state.active = [...state.active.slice(0, index),
+                        ...state.active.slice(index+1)]
       })
-      .addCase(actions.notifyTorrentAdded, (state, action) => {
-        state.active.push(generateNotification<props.TorrentAddedNotificationProps>({
-          title: `Added ${action.payload.ids.length} torrents`,
-          kind: NotificationLevel.INFO,
-          type: NotificationTypes.TORRENT_ADDED,
-          props: {
-            count: action.payload.ids.length
-          }
-        }))
+      .addCase(actions.notificationAdded, (state, action) => {
+        const items = action.payload
+        if (items[Symbol.iterator]) {
+          (items as Notification<any>[])
+            .forEach(item => state.active.push(item))
+        } else {
+          state.active.push(action.payload as Notification<any>);
+        }
       })
-      .addCase(actions.notifyTorrentRemoved, (state, action) => {
-        action.payload.forEach(props => {
-          state.active.push(generateNotification<props.TorrentRemovedNotificationProps>({
-            title: `Removed torrents ${props.name}.`,
-            kind: NotificationLevel.INFO,
-            type: NotificationTypes.TORRENT_REMOVED,
-            props,
-          }))
-        })
+      .addCase(actions.notificationsFetched, (state, action) => {
+        state.inactive = [...action.payload, ...state.inactive]
+      })
+      .addCase(actions.notificationDeleted, (state, action) => {
+        const index = state.inactive.findIndex(o => o.id === action.payload)
+        if (index !== -1) {
+          state.inactive = [...state.inactive.slice(0, index),
+                            ...state.inactive.slice(index+1)]
+        }
+      })
+      .addCase(actions.notificationsArchiveExhausted, state => {
+        state.archiveHasMore = false
       })
 })
 

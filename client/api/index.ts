@@ -1,3 +1,5 @@
+import { Notification } from '@client/stores';
+
 /**
  * check whether the given transmission URL is a valid transmission
  * instance.
@@ -47,4 +49,38 @@ export async function defaultTransmissionUrl(): Promise<string> {
   }
 
   return json.body.url
+}
+
+export async function notificationsFrom(fromNotification?: string) {
+  const query = fromNotification ? `marker=${fromNotification}` : ''
+  const resp = await fetch(`/notifications/from?${query}`)
+  const json = await resp.json()
+
+  if (!resp.ok) {
+    throw json.body.message
+  }
+
+  return json.body as {
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    notifications: Notification<any>[],
+    moreExists: boolean,
+  }
+}
+
+export async function deleteNotification(id: string) {
+  const resp = await fetch(`/notifications/${id}`, {method: 'DELETE'})
+  if (!resp.ok) throw resp
+}
+
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+export async function saveNotifications(notifications: Notification<any>[]) {
+  const resp = await fetch('/notifications', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(notifications)
+  })
+
+  if (!resp.ok) throw resp
 }

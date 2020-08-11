@@ -5,7 +5,7 @@
         background: transparent !important;
     }
 
-    .ScrollbarsCustom-Thumb {
+    & > .ScrollbarsCustom-Track > .ScrollbarsCustom-Thumb {
         background: var(--scrollbar-color) !important;
         transition: all $animation-duration;
         transition-property: opacity, background;
@@ -17,7 +17,7 @@
         }
     }
 
-    &:hover .ScrollbarsCustom-Thumb {
+    &:hover > .ScrollbarsCustom-Track .ScrollbarsCustom-Thumb {
         opacity: 1;
     }
 

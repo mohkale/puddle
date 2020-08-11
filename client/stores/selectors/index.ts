@@ -8,6 +8,7 @@ export * from './labels-by-id';
 export * from './selected-torrents';
 export * from './filtered-torrents';
 export * from './location-by-id';
+export * from './notifications';
 
 import { TorrentId } from '@transmission';
 
@@ -32,7 +33,7 @@ export const selectFilterQuery =
 export const selectCurrentView =
   (state: RootState) => state.ui.view
 
-export const selectNotifications =
+export const selectActiveNotifications =
   (state: RootState) => state.notifications.active
 
 export const selectOverlay =

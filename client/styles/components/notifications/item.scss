@@ -1,9 +1,8 @@
 @import "@styles/config";
-@import "@styles/mixins/no-select";
 @import "@styles/animations/fade-in-down";
 
 @mixin notification-color-scheme($selector, $fg, $bg, $hover-bg, $icon-fg, $icon-bg) {
-    .notifications li#{$selector} {
+    .notification--#{$selector} {
         --bg: #{$bg};
         --fg: #{$fg};
         --hover-bg: #{$hover-bg};
@@ -14,7 +13,7 @@
 
 // TODO create dedicated vars in theme.
 @include notification-color-scheme(
-    ".info",
+    "info",
     var(--side-bar-hover-fg),
     var(--side-bar-bg),
     #3d4c61,
@@ -22,7 +21,7 @@
     var(--torrents-downloading-row-progress-bg));
 
 @include notification-color-scheme(
-    ".warning",
+    "warning",
     var(--side-bar-hover-fg),
     var(--side-bar-bg),
     #3d4c61,
@@ -30,27 +29,19 @@
     var(--torrents-checking-row-progress-bg));
 
 @include notification-color-scheme(
-    ".error",
+    "error",
     var(--side-bar-hover-fg),
     var(--side-bar-bg),
     #3d4c61,
     var(--torrents-error-row-progress-fg),
     var(--torrents-error-row-progress-bg));
 
-.notifications li {
+.notification {
     @include fade-in-down;
-    @include no-select;
-    &:hover {
-        --bg: var(--hover-bg)
-    }
 
     color: var(--fg);
     background: var(--bg);
     transition: background $animation-duration, width $animation-duration;
-
-    cursor: pointer;
-    display: flex;
-    align-items: center;
 
     padding: 8px 12px;
     border-radius: 4px;
@@ -61,7 +52,7 @@
         color: var(--icon-fg);
     }
 
-    .icon {
+    .notification__status-icon {
         box-sizing: border-box;
         border: solid 1px var(--icon-fg);
         color: var(--icon-fg);
@@ -73,14 +64,30 @@
         margin-right: 8px;
     }
 
-    span.content {
-        min-width: 260px;
-        max-width: 320px;
+    .notification__content {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
 
         overflow: hidden;
         white-space: nowrap;
-        text-overflow: ellipsis;
         height: fit-content;
         font-size: 0.85rem;
     }
+
+    .notification__body {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .notification__with-icon {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+.notification--clickable .notification__with-icon {
+    cursor: pointer;
 }

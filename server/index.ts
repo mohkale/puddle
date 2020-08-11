@@ -8,10 +8,11 @@ logger.info(`starting puddle at ${moment().format('YYYY-MM-DD HH:mm:s')}`)
 
 import config from '../config';
 
+import './webpack';
 import './routes/auth';
 import './routes/proxy';
-import './routes/webpack';
 import './routes/utils';
+import './routes/notifications';
 
 serverPromise.then(() =>
   app.listen(

@@ -1,37 +1,35 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-
-import { Notification, notificationRemoved } from '@client/stores';
+import React from 'react';
+import { Notification } from '@client/stores';
 
 import { NotificationIcon } from './icon';
 import { NotificationContent } from './renderers';
 
-const REMOVE_NOTIFICATION_TIMEOUT = 5000;
+export interface NotificationItemProps<T>
+  extends React.HTMLProps<HTMLElement> {
+    notification: Notification<T>
+    contentChildren?: React.ReactNode
+  }
 
-export function NotificationItem<T>(props: Notification<T>) {
-  const dispatch = useDispatch()
-
-  // once a notification is rendered on the dashboard, wait
-  // REMOVE_NOTIFICATION_TIMEOUT and then remove it from the
-  // active notifications array.
-  //
-  // We're hiding notifications based on their render history
-  // because this is the easiest way to guarantee backlogged
-  // notifications don't get erased before you have a chance
-  // to inspect them.
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch(notificationRemoved(props.id))
-    }, REMOVE_NOTIFICATION_TIMEOUT)
-  }, [])
-
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+export function NotificationItem<T>({ notification, onClick, contentChildren, children }: NotificationItemProps<T>) {
   return (
-    <li className={props.kind}>
-      <NotificationIcon level={props.kind} />
+    <li className={`notification ${onClick && 'notification--clickable'} notification--${notification.kind}`}>
+      <div className="notification__with-icon" onClick={onClick}>
+        <NotificationIcon level={notification.kind} />
 
-      <span className="content">
-        <NotificationContent {...props} />
-      </span>
+        <span className="notification__content">
+          <span className="notification__body">
+          {/* we wrap the actual content into this span so
+              props.contentChildren doesn't get cut off alongside
+              this when the notification width is too small. */}
+            <NotificationContent {...notification} />
+          </span>
+
+          {contentChildren}
+        </span>
+      </div>
+
+      {children}
     </li>
   );
 }

@@ -1,4 +1,6 @@
-.notifications {
+@import "@styles/mixins/no-select";
+
+.notifications-frontend {
     right: 0;
     bottom: 0;
     position: absolute;
@@ -8,4 +10,18 @@
     margin: 0px;
     margin-bottom: 12px;
     margin-right: 4px;
+
+    .notification {
+        @include no-select;
+        cursor: pointer;
+
+        &:hover {
+            --bg: var(--hover-bg)
+        }
+    }
+
+    .notification__content {
+        min-width: 260px;
+        max-width: 320px;
+    }
 }
