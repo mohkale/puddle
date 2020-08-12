@@ -42,7 +42,7 @@ export function NetworkView() {
       <Section title="Listening Port">
         <Row>
           <label>Peer listening port</label>
-          <NumberInput value={peerPort} setValue={setPeerPort} />
+          <NumberInput className="textbox" value={peerPort} setValue={setPeerPort} />
         </Row>
 
         <Row>

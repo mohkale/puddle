@@ -4,9 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ESSENTIAL_FIELDS } from '@client/models';
 import { MessageType, MessageLevel, Scrollbar } from '@client/components';
 import {
-  intervalsUpdated, selectIntervals, selectColumnSettings,
-  SettingsState, COLUMN_MINIMUM_WIDTH, columnsUpdated,
-  ColumnType
+  selectIntervals, selectColumnSettings, SettingsState,
+  COLUMN_MINIMUM_WIDTH, ColumnType, updateSettings
 } from '@client/stores'
 
 import { Form, Section, Row } from '../../controls';
@@ -131,8 +130,12 @@ export function PuddleView() {
     setMessages(newMessages)
     if (!valid) return
 
-    dispatch(intervalsUpdated(intervals))
-    dispatch(columnsUpdated({ widths: columnWidths, order: columnOrders, visibility: visibleColumns }))
+    dispatch(updateSettings({
+      intervals,
+      columnWidths: columnWidths,
+      columnOrder: columnOrders
+        .filter(column => visibleColumns.includes(column))
+    }, true))
 
     setMessages([{ level: MessageLevel.INFO, label: 'succesfully saved changes' }])
   }

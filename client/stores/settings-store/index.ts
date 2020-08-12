@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export * from './actions';
 export * from './state';
+export * from './thunks';
 
 import defaultState from './default';
 import * as actions from './actions';
@@ -15,20 +16,24 @@ const settingsSlice = createSlice({
       .addCase(actions.columnResized, (state, action) => {
         state.columns.entries[action.payload.field].width += action.payload.delta
       })
-      .addCase(actions.intervalsUpdated, (state, action) => {
-        state.intervals = {...state.intervals, ...action.payload}
-      })
       .addCase(actions.sessionUpdated, (state, action) => {
         state.transmission = action.payload
       })
-      .addCase(actions.columnsUpdated, (state, action) => {
-        Object.entries(action.payload.widths)
-          .forEach(([column, width]) => {
-            state.columns.entries[column].width = width
-          })
+      .addCase(actions.settingsUpdated, (state, action) => {
+        if (action.payload.columnWidths) {
+          Object.entries(action.payload.columnWidths)
+            .forEach(([column, value]) => {
+              state.columns.entries[column].width = value
+            })
+        }
 
-        state.columns.order = action.payload.order
-          .filter(column => action.payload.visibility.includes(column))
+        if (action.payload.columnOrder) {
+          state.columns.order = action.payload.columnOrder
+        }
+
+        if (action.payload.intervals) {
+          state.intervals = {...state.intervals, ...action.payload.intervals}
+        }
       })
 })
 

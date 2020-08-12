@@ -1,4 +1,4 @@
-import { Notification } from '@client/stores';
+import { Notification, SettingsUpdatedProps } from '@client/stores';
 
 /**
  * check whether the given transmission URL is a valid transmission
@@ -80,6 +80,26 @@ export async function saveNotifications(notifications: Notification<any>[]) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(notifications)
+  })
+
+  if (!resp.ok) throw resp
+}
+
+export async function settings() {
+  const resp = await fetch('/settings')
+  if (!resp.ok) throw resp
+
+  const json = await resp.json()
+  return json.body as SettingsUpdatedProps
+}
+
+export async function syncSettings(settings: SettingsUpdatedProps) {
+  const resp = await fetch('/settings', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(settings)
   })
 
   if (!resp.ok) throw resp

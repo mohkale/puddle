@@ -1,6 +1,5 @@
 import { RootState } from '../state';
 import { createSelector } from '@reduxjs/toolkit';
-import { ColumnType } from '@client/stores';
 
 export const selectColumnSettings =
   (state: RootState) => state.settings.columns

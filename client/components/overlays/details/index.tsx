@@ -3,7 +3,8 @@ import React, { useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import store, {
-  intervalsUpdated, selectIntervals,
+  updateSettings,
+  selectIntervals,
   selectTorrentDetailsTorrentAssigned,
   updateTorrentDetails
 } from '@client/stores'
@@ -54,13 +55,15 @@ export default function TorrentDetails() {
   // reduce the time durations of the background requests, so that
   // we can request information about the current torrent easily.
   useEffect(() => {
-    dispatch(intervalsUpdated({
-      torrentsSync: 40_000,
-      speedSync: 100_000,
-      speedLimitsSync: 100_000
-    }))
+    dispatch(updateSettings({
+      intervals: {
+        torrentsSync: 40_000,
+        speedSync: 100_000,
+        speedLimitsSync: 100_000
+      }
+    }, false))
 
-    return () => { dispatch(intervalsUpdated(originalIntervals)) }
+    return () => { dispatch(updateSettings({ intervals: originalIntervals }, false)) }
   }, [])
 
   useEffect(() => {

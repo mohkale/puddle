@@ -13,5 +13,5 @@ try {
   }
 }
 
-const db = diskdb.connect(config.databaseDir, ['notifications'])
+const db = diskdb.connect(config.databaseDir, ['notifications', 'settings'])
 export default db

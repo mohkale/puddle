@@ -13,6 +13,7 @@ import './webpack';
 import './routes/auth';
 import './routes/proxy';
 import './routes/utils';
+import './routes/settings';
 import './routes/notifications';
 
 serverPromise.then(() =>
