@@ -12,3 +12,11 @@ export const sessionUpdated = createAction<Session>('settings/update-session')
 export const columnRemoved = createAction<{ field: TorrentFields }>('settings/column-removed');
 
 export const intervalsUpdated = createAction<Partial<IntervalsType>>('settings/intervals-changed');
+
+interface ColumnUpdatedProps {
+  widths: { [key in TorrentFields]: number }
+  order: TorrentFields[]
+  visibility: TorrentFields[]
+}
+
+export const columnsUpdated = createAction<ColumnUpdatedProps>('settings/column-updated')

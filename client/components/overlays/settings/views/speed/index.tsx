@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { padString } from '@client/utils';
 import { syncSession } from '@client/stores';
 
-import { Form, Section, Row } from '../controls';
-import { sessionSelector, useStateFromSelector  } from '../utils';
+import { Form, Section, Row } from '../../controls';
+import { sessionSelector, useStateFromSelector  } from '../../utils';
 import {
   Checkbox, ClientContext, Select, NumberInput, MessageType,
   MessageLevel
@@ -114,7 +114,7 @@ export function SpeedView() {
             onCheck={setAllowUploadLimit}
             label="Upload (kB/s)" />
 
-          <NumberInput disabled={!allowUploadLimit} value={uploadLimit} setValue={setUploadLimit} />
+          <NumberInput className="textbox" disabled={!allowUploadLimit} value={uploadLimit} setValue={setUploadLimit} />
         </Row>
 
         <Row>
@@ -123,19 +123,19 @@ export function SpeedView() {
             onCheck={setAllowDownloadLimit}
             label="Download (kB/s)" />
 
-          <NumberInput disabled={!allowDownloadLimit} value={downloadLimit} setValue={setDownloadLimit} />
+          <NumberInput className="textbox" disabled={!allowDownloadLimit} value={downloadLimit} setValue={setDownloadLimit} />
         </Row>
       </Section>
 
       <Section title="Alternative Speed Limits">
         <Row>
           <label>Upload (kB/s)</label>
-          <NumberInput value={altUploadLimit} setValue={setAltUploadLimit} />
+          <NumberInput className="textbox" value={altUploadLimit} setValue={setAltUploadLimit} />
         </Row>
 
         <Row>
           <label>Download (kB/s)</label>
-          <NumberInput value={altDownloadLimit} setValue={setAltDownloadLimit} />
+          <NumberInput className="textbox" value={altDownloadLimit} setValue={setAltDownloadLimit} />
         </Row>
       </Section>
 

@@ -18,6 +18,7 @@ function generateStyles(height: number) {
       color: 'var(--input-fg)',
       backgroundColor: 'var(--input-bg)',
       borderColor: state.isFocused ? 'var(--input-selected-border)' : 'var(--input-border)',
+      opacity: state.isDisabled ? 0.5 : 1
     }),
     placeholder: (base) => ({
       ...base,

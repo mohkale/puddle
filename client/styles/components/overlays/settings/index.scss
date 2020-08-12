@@ -1,4 +1,5 @@
 @import '@styles/config';
+@import '@styles/mixins/no-select';
 
 .modal.settings {
     width:  500px;
@@ -24,5 +25,46 @@
         &:first-child {
             margin-top: 0px;
         }
+    }
+}
+
+.settings__dashboard-columns {
+    width: 100%;
+    padding: 0px;
+    list-style-type: none;
+
+    input[type=text] {
+        height: auto;
+        // width: -webkit-fill-available;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin-left: auto;
+        box-sizing: border-box;
+        background: none;
+        color: var(--input-fg);
+        border: none;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        background: var(--input-bg);
+        border-radius: 4px;
+        margin-bottom: 4px;
+        padding: 2px 6px;
+    }
+}
+
+.settings__dashboard-columns__button {
+    cursor: pointer;
+    outline: none;
+    margin: 0px 4px;
+    transition: all $animation-duration;
+    opacity: 0.6;
+    @include no-select();
+
+    &:hover, &:focus {
+        color: var(--action-color);
+        opacity: 1;
     }
 }

@@ -7,8 +7,8 @@ import {
 } from '@client/components';
 import { TransmissionSessionEncryption as SessionEncryption } from '@transmission';
 
-import { Form, Section, Row } from '../controls';
-import { sessionSelector, useStateFromSelector } from '../utils';
+import { Form, Section, Row } from '../../controls';
+import { sessionSelector, useStateFromSelector } from '../../utils';
 
 const ENCRYPTION_OPTIONS = Object.values(SessionEncryption)
   .map(value => ({
@@ -66,12 +66,12 @@ export function PeersView() {
       <Section title="Connections">
         <Row>
           <label>Max peers per torrent</label>
-          <NumberInput value={peerLimit} setValue={setPeerLimit} />
+          <NumberInput className="textbox" value={peerLimit} setValue={setPeerLimit} />
         </Row>
 
         <Row>
           <label>Max peers overall</label>
-          <NumberInput value={peerLimitGlobal} setValue={setPeerLimitGlobal} />
+          <NumberInput className="textbox" value={peerLimitGlobal} setValue={setPeerLimitGlobal} />
         </Row>
       </Section>
 

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { sessionSelector, useStateFromSelector  } from '../utils';
-import { Form, Section, Row } from '../controls';
+import { sessionSelector, useStateFromSelector  } from '../../utils';
+import { Form, Section, Row } from '../../controls';
 
 import { syncSession } from '@client/stores';
 import {
@@ -90,6 +90,7 @@ export function TorrentsView() {
             label="Stop seeding at ratio" />
 
           <NumberInput
+            className="textbox"
             disabled={!enableStopSeedingRatio}
             value={stopSeedingRatio}
             setValue={setStopSeedingRatio} />

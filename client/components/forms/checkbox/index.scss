@@ -22,6 +22,7 @@
 
 .checkbox-container {
     outline: none;
+    cursor: pointer;
 
     transition: all $animation-duration;
     transition-property: color, background-color, border;
@@ -32,7 +33,6 @@
 
     & > label {
         padding-left: 6px;
-        cursor: pointer;
     }
 
     .check {
@@ -75,7 +75,6 @@
     box-sizing: border-box;
     flex-grow: 0;
     flex-shrink: 0;
-    cursor: pointer;
     position: relative;
 
     .icon {
@@ -86,4 +85,9 @@
         padding: 2px;
         box-sizing: border-box;
     }
+}
+
+.checkbox-container--disabled {
+    opacity: 0.5;
+    cursor: default;
 }

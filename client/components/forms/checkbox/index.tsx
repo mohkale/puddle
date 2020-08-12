@@ -8,14 +8,16 @@ interface CheckboxProps {
   isChecked: boolean
   onCheck: (v: boolean) => void
   label?: string
+  disabled?: boolean
 }
 
 export function Checkbox(props: CheckboxProps) {
   const classes = ['checkbox-container',
+                   props.disabled ? 'checkbox-container--disabled' : '',
                    props.isChecked ? 'checked' : '',
                    props.fallback && 'with-fallback'].join(' ')
 
-  const onClick = () => props.onCheck(!props.isChecked)
+  const onClick = () => props.disabled || props.onCheck(!props.isChecked)
   const onKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') onClick()
   }

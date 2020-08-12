@@ -21,6 +21,15 @@ const settingsSlice = createSlice({
       .addCase(actions.sessionUpdated, (state, action) => {
         state.transmission = action.payload
       })
+      .addCase(actions.columnsUpdated, (state, action) => {
+        Object.entries(action.payload.widths)
+          .forEach(([column, width]) => {
+            state.columns.entries[column].width = width
+          })
+
+        state.columns.order = action.payload.order
+          .filter(column => action.payload.visibility.includes(column))
+      })
 })
 
 export default settingsSlice.reducer
