@@ -1,9 +1,6 @@
 import React, { Fragment } from 'react';
 import moment from 'moment';
 
-import '@cstyles/scrollbar';
-import { Scrollbar } from 'react-scrollbars-custom';
-
 import {
   Notification, NotificationTypes,
 
@@ -12,6 +9,7 @@ import {
 } from '@client/stores';
 
 import { Torrent } from '@client/models';
+import { Scrollbar } from '@client/components';
 import { NotificationProps } from './shared';
 
 function TorrentDetails({ torrent }: { torrent: Torrent }) {

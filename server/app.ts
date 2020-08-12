@@ -9,7 +9,6 @@ import logger from './logger';
 import config from '../config';
 
 export const nodeEnv = process.env.NODE_ENV || 'development'
-logger.debug(`environment is ${nodeEnv}`)
 
 /**
  * Used to block the binding of the server until after this

@@ -2,10 +2,7 @@ import '@cstyles/overlays/notifications';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import '@cstyles/scrollbar';
-import { Scrollbar } from 'react-scrollbars-custom';
-
-import { AsyncButton } from '@client/components';
+import { Scrollbar, AsyncButton } from '@client/components';
 
 import {
   selectNotifications,

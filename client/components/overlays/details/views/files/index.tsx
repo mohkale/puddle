@@ -1,13 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import '@cstyles/scrollbar';
-import { Scrollbar } from 'react-scrollbars-custom';
-
 import { constructFileTree } from '@client/utils';
 
 import {
-  Select, ExtendedPriorityType, PRIORITY_LABELS, ClientContext
+  Select, ExtendedPriorityType, PRIORITY_LABELS, ClientContext,
+  Scrollbar
 } from '@client/components';
 
 import {

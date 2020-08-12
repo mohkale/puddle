@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-import { TorrentFields } from '@client/models';
+import { ColumnType } from '@client/stores';
 
 /**
  * metadata associated with a column resize event.
  */
 export interface ColumnResizeContext {
   /** the column that is being resized. */
-  field: TorrentFields
+  field: ColumnType
 
   /** where the mouse was first pressed */
   startPos: number
@@ -21,7 +21,7 @@ export interface ColumnResizeContext {
 
 interface ColumnResizerProps {
   ctx: ColumnResizeContext
-  finish: (w: TorrentFields, delta: number) => void
+  finish: (w: ColumnType, delta: number) => void
 }
 
 /**

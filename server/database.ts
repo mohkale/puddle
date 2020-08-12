@@ -9,6 +9,7 @@ try {
 } catch (err) {
   if (err.code !== 'EEXIST') {
     logger.error(`failed to create database directory ${config.databaseDir} : ${err}`)
+    process.exit(1)
   }
 }
 

@@ -1,16 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import '@cstyles/scrollbar';
-import { Scrollbar } from 'react-scrollbars-custom';
-
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import FallbackMessage from '../../fallback';
 import { torrentSelector } from '../../utils';
 
-import { BytesWithUnit } from '@client/components';
+import { Scrollbar, BytesWithUnit } from '@client/components';
 import { TransmissionTorrentPeers as TorrentPeers } from '@transmission'
 
 function PeerRow(peer: TorrentPeers) {

@@ -1,0 +1,56 @@
+@import "@styles/mixins/no-select";
+
+$url-input-button-size: 14px;
+$url-input-button-padding: 10px;
+
+.torrent-add__url-input {
+    position: relative;
+    &:not(:last-child) {
+        margin-bottom: 12px;
+    }
+
+    .textbox {
+        width: -webkit-fill-available;
+    }
+}
+
+.url-input__button-list {
+    top: 0;
+    right: 0;
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @include no-select;
+
+    height: 100%;
+
+    .icon {
+        outline: none;
+        cursor: pointer;
+        width:  $url-input-button-size;
+        height: $url-input-button-size;
+        padding: $url-input-button-padding;
+
+        border-left: solid 1px var(--input-border);
+
+        &:focus, &:hover {
+            color: var(--action-color);
+        }
+    }
+}
+
+.textbox:focus + .url-input__button-list .icon {
+    border-color: var(--input-selected-border);
+}
+
+$button-size: $url-input-button-size + 2 * $url-input-button-padding;
+.torrent-add__url-input > .textbox {
+    padding-right: 12px + 2 * $button-size;
+}
+
+.torrent-add__url-input:first-child > .textbox {
+    padding-right: 12px + $button-size;
+}
+

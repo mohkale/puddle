@@ -1,6 +1,9 @@
 import { TorrentFields } from '@client/models';
 import { TransmissionSession as Session } from '@transmission';
 
+export { TorrentFields as ColumnType }
+type ColumnType = TorrentFields
+
 export const COLUMN_DEFAULT_WIDTH = 100;
 export const COLUMN_MINIMUM_WIDTH = 10;
 
@@ -20,7 +23,7 @@ export interface SettingsState {
   /** Settings related to the columns shown on the dashboard. */
   columns: {
     /** Metadata associated with a column. */
-    entries: { [key in TorrentFields]: Column }
+    entries: { [key in ColumnType]: Column }
 
     /**
      * The order in which columns are presented.
@@ -29,7 +32,7 @@ export interface SettingsState {
      * the user. WARN you should never remove a torrent in
      * {@code ESSENTIAL_FIELDS}.
      */
-    order: TorrentFields[]
+    order: ColumnType[]
   }
 
   intervals: IntervalsType

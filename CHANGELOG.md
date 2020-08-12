@@ -1,8 +1,5 @@
 ## [Unreleased]
 ### TODO
-- set torrent location
-- expanded notifications history
-- set download limits from sidebar button
 - use directories in the file tree view to select
   all files within that directory
 - offer "expanded" view for torrents (see flood)
@@ -29,3 +26,6 @@
 - Options for moving torrents up and down in the queue
 - set torrent tags/labels
   - auto completion depending on already existing tags
+- set torrent location
+- expanded notifications history
+- set download limits from sidebar button

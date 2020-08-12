@@ -6,8 +6,7 @@ import ClassFilters from './class';
 import LabelFilters from './labels';
 import TrackerFilters from './trackers';
 
-import '@cstyles/scrollbar';
-import { Scrollbar } from 'react-scrollbars-custom';
+import { Scrollbar } from '@client/components';
 
 export interface FiltersProps {
   searchRef: React.MutableRefObject<HTMLInputElement|undefined>

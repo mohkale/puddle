@@ -13,6 +13,9 @@
     <a href="https://opensource.org/licenses/MIT">
       <img alt="License-MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
     </a>
+    <a href="#">
+      <img alt="Version" src="https://img.shields.io/github/package-json/v/mohkale/puddle" />
+    </a>
   </div>
 </div>
 

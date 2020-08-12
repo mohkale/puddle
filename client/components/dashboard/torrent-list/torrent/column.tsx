@@ -4,8 +4,9 @@ import ProgressBar from './progress-bar';
 import {
   TransmissionTorrentStatus as TorrentStatus
 } from '@transmission';
-import { Torrent, TorrentFields } from '@client/models';
+import { Torrent } from '@client/models';
 
+import { ColumnType } from '@client/stores';
 import { BytesWithUnit } from '@client/components';
 import { formatDuration, padString } from '@client/utils';
 
@@ -20,37 +21,37 @@ function formatDate(timestamp: number) {
 }
 
 /*eslint no-case-declarations: "off"*/
-export default function renderColumn(field: TorrentFields, torrent: Torrent) {
+export default function renderColumn(field: ColumnType, torrent: Torrent) {
   switch (field) {
-    case TorrentFields.QUEUE_POSITION:
+    case ColumnType.QUEUE_POSITION:
       return torrent.queuePosition + 1
-    case TorrentFields.NAME:
+    case ColumnType.NAME:
       return torrent.name
-    case TorrentFields.PROGRESS:
+    case ColumnType.PROGRESS:
       return <ProgressBar progress={torrent.progress * 100} classes={torrent.classes} />;
-    case TorrentFields.DOWNLOADED:
+    case ColumnType.DOWNLOADED:
       return <BytesWithUnit bytes={torrent.downloadedEver} />;
-    case TorrentFields.DOWNLOAD_SPEED:
+    case ColumnType.DOWNLOAD_SPEED:
       return <BytesWithUnit bytes={torrent.rateDownload} perSecond={true} />;
-    case TorrentFields.UPLOADED:
+    case ColumnType.UPLOADED:
       return <BytesWithUnit bytes={torrent.uploadedEver} />;
-    case TorrentFields.UPLOAD_SPEED:
+    case ColumnType.UPLOAD_SPEED:
       return <BytesWithUnit bytes={torrent.rateUpload} perSecond={true} />;
-    case TorrentFields.ETA:
+    case ColumnType.ETA:
       if (torrent.eta <= -1 || torrent.status !== TorrentStatus.DOWNLOAD) {
         return ""
       }
 
       return formatDuration(torrent.eta * 1000)
-    case TorrentFields.RATIO:
+    case ColumnType.RATIO:
        return (torrent.uploadRatio >= 0) ? torrent.uploadRatio.toFixed(2) : ''
-    case TorrentFields.FILE_SIZE:
+    case ColumnType.FILE_SIZE:
       return <BytesWithUnit bytes={torrent.sizeWhenDone} />;
-    case TorrentFields.ADDED:
+    case ColumnType.ADDED:
       return formatDate(torrent.addedDate)
-    case TorrentFields.TAGS:
+    case ColumnType.TAGS:
       return torrent.labels.join(', ')
-    case TorrentFields.COMPLETED_DATE:
+    case ColumnType.COMPLETED_DATE:
       if (torrent.doneDate === 0)
         return ''
       return formatDate(torrent.doneDate)

@@ -1,10 +1,11 @@
 import chalk from 'chalk';
 import moment from 'moment';
 
-import app, { serverPromise } from './app';
+import app, { serverPromise, nodeEnv } from './app';
 
 import logger from './logger';
 logger.info(`starting puddle at ${moment().format('YYYY-MM-DD HH:mm:s')}`)
+logger.debug(`environment is ${nodeEnv}`)
 
 import config from '../config';
 

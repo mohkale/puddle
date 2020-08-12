@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { ESSENTIAL_FIELDS, TorrentFields } from '@client/models';
-import { MessageType, MessageLevel } from '@client/components';
+import { ESSENTIAL_FIELDS } from '@client/models';
+import { MessageType, MessageLevel, Scrollbar } from '@client/components';
 import {
   intervalsUpdated, selectIntervals, selectColumnSettings,
-  SettingsState, COLUMN_MINIMUM_WIDTH, columnsUpdated
+  SettingsState, COLUMN_MINIMUM_WIDTH, columnsUpdated,
+  ColumnType
 } from '@client/stores'
 
 import { Form, Section, Row } from '../../controls';
@@ -13,10 +14,7 @@ import { Form, Section, Row } from '../../controls';
 import { IntervalsSection } from './intervals';
 import { DashboardColumn, COLUMN_TYPES } from './columns';
 
-import '@cstyles/scrollbar';
-import { Scrollbar } from 'react-scrollbars-custom';
-
-type ValidateSettingsProps = SettingsState['intervals'] & { columnWidths: { [key in TorrentFields]: number } }
+type ValidateSettingsProps = SettingsState['intervals'] & { columnWidths: { [key in ColumnType]: number } }
 
 /** Assert whether form data is all valid. */
 const validateForm =
@@ -49,13 +47,13 @@ const validateForm =
 function generateColumnWidths(entries: SettingsState['columns']['entries']) {
   return Object.fromEntries(
     Object.entries(entries)
-      .map(([type, value]) => [type, value.width])) as { [key in TorrentFields]: number }
+      .map(([type, value]) => [type, value.width])) as { [key in ColumnType]: number }
 }
 
-function findLastVisibleColumn(columns: TorrentFields[], visibleColumns: TorrentFields[]): number {
+function findLastVisibleColumn(columns: ColumnType[], visibleColumns: ColumnType[]): number {
   const visibleColumnsSet = new Set(visibleColumns)
   const lastVisibleColumn = columns
-    .map((column, i) => [column, i] as [TorrentFields, number])
+    .map((column, i) => [column, i] as [ColumnType, number])
     .reverse()
     .find(o => visibleColumnsSet.has(o[0]))
 
@@ -81,7 +79,7 @@ export function PuddleView() {
   })
   const [columnWidths, setColumnWidths] = useState(() => generateColumnWidths(columnSettings.entries))
 
-  const setColumnVisibility = (orderPosition: number, field: TorrentFields, visibility: boolean) => {
+  const setColumnVisibility = (orderPosition: number, field: ColumnType, visibility: boolean) => {
     const position = visibleColumns.indexOf(field)
     if (visibility && position === -1) {
       setVisibleColumns([...visibleColumns, field])
@@ -101,8 +99,8 @@ export function PuddleView() {
     }
   }
 
-  const columnWidth = (field: TorrentFields) => columnWidths[field]
-  const setColumnWidth = (field: TorrentFields, value: number) =>
+  const columnWidth = (field: ColumnType) => columnWidths[field]
+  const setColumnWidth = (field: ColumnType, value: number) =>
     setColumnWidths({...columnWidths, [field]: Math.max(value, COLUMN_MINIMUM_WIDTH)})
 
   const moveColumnUp = (position: number) => {
@@ -125,7 +123,7 @@ export function PuddleView() {
     }
   }
 
-  const columnLabel = (field: TorrentFields) =>
+  const columnLabel = (field: ColumnType) =>
     columnSettings.entries[field].tooltip || columnSettings.entries[field].title
 
   const onSubmit = () => {

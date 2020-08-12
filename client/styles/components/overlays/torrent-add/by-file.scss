@@ -1,0 +1,75 @@
+@import "@styles/config";
+@import "@styles/mixins/no-select";
+
+.modal.torrent-add .drag-drop-region {
+    border-radius: 4px;
+
+    color: var(--input-fg);
+    background-color: var(--input-bg);
+    border: solid 1px var(--input-border);
+
+    outline: none;
+    transition: border $animation-duration;
+    &:focus {
+        border-color: var(--input-selected-border);
+    }
+}
+
+$horizontal-margin: 12px;
+$vertical-margin:   8px;
+.torrent-add__file-list {
+    padding: 0px;
+    margin:  0px;
+    color: var(--input-fg);
+    background: var(--input-bg);
+    border: solid 1px var(--input-border);
+    border-top-left-radius:  4px;
+    border-top-right-radius: 4px;
+    border-bottom: 0px;
+
+    li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-color: var(--input-border);
+
+        padding: $vertical-margin 0px $vertical-margin $horizontal-margin;
+
+        & > :last-child {
+            margin-right: $horizontal-margin;
+        }
+
+        &:not(:last-child) {
+            border-bottom: solid 1px var(--input-border);
+        }
+    }
+}
+
+.torrent-add__file-list__file-name {
+    flex: 1 1 auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0px 6px;
+}
+
+.torrent-add .torrent-add__file-list + .drag-drop-region {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.torrent-add__file-list__exit-icon {
+    @include no-select;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    width:  14px;
+    height: 14px;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.torrent-add__file-list li:hover .torrent-add__file-list__exit-icon {
+    color: white;
+    background-color: var(--torrents-selected-error-row-bg);
+}
