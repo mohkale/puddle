@@ -17,6 +17,10 @@ $resizer-width: 9px;
     height: 100%;
     border-collapse: collapse;
 
+    .ScrollbarsCustom-Content {
+        position: relative;
+    }
+
     .cell {
         @include no-select;
         font-weight: normal;

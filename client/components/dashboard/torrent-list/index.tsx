@@ -88,12 +88,10 @@ export default function TorrentList() {
       <Scrollbar onScroll={onScroll}>
         <ul ref={bodyRef} className="torrents-list__entries">
           {entries}
-
-          <li>
-            {contextMenu &&
-              <ContextMenu {...contextMenu} cancel={() => setContextMenu(undefined)} />}
-          </li>
         </ul>
+
+        {contextMenu &&
+          <ContextMenu {...contextMenu} rootRef={rootRef} bodyRef={bodyRef} cancel={() => setContextMenu(undefined)} />}
       </Scrollbar>
 
       <NotificationList />
