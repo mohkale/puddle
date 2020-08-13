@@ -1,3 +1,11 @@
+/**
+ * Return the set of all elements in `a` that are not
+ * in `b`.
+ */
+export function setDifference<T>(a: T[], b: Set<T>): T[] {
+  return a.filter(x => !b.has(x))
+}
+
 export function setUnionExcludingIntersection<T>(a: T[], b: T[]) {
   const aSet = new Set(a), bSet = new Set(b)
   return [...a, ...b].filter(o => {

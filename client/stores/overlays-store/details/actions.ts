@@ -11,8 +11,12 @@ export const torrentDetailsOverlayTorrentUpdated = createAction<TorrentDetailed>
 
 export const torrentDetailsOverlayTorrentAssigned = createAction<Partial<TorrentDetailed>>('ui/set-overlay/torrent-details/torrent-priority')
 
-export const torrentDetailsOverlaySelectFiles = createAction<number[]>('ui/set-overlay/torrent-details/select-files')
+export const torrentDetailsOverlaySelectDirectory = createAction<string>('ui/set-overlay/torrent-details/select-directory')
 
-export const torrentDetailsOverlayDeselectFiles = createAction<number[]>('ui/set-overlay/torrent-details/deselect-files')
+export const torrentDetailsOverlayDeselectDirectory = createAction<string>('ui/set-overlay/torrent-details/deselect-directory')
+
+export const torrentDetailsOverlaySelectFiles = createAction<{ id: number, path: string }>('ui/set-overlay/torrent-details/select-files')
+
+export const torrentDetailsOverlayDeselectFiles = createAction<{ id: number, path: string }>('ui/set-overlay/torrent-details/deselect-files')
 
 export const torrentDetailsOverlayClearFileSelection = createAction('ui/set-overlay/torrent-details/clear-files')

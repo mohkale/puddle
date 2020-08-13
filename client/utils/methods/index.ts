@@ -10,3 +10,4 @@ export * from './format-torrent-state';
 export * from './read-file-async';
 export * from './clipboard-paste';
 export * from './string-hash';
+export * from './dirnames';

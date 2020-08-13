@@ -37,3 +37,18 @@ export function constructFileTree(files: FileNameArray) {
 
   return collection
 }
+
+/**
+ * expand a full path in a file-tree, returning the entry associated
+ * with the path.
+ *
+ * @param tree the tree to be traversed
+ * @param path the path of an entry at aribtrary depth in `tree`.
+ */
+export function treeTraverse(tree: FileTreeEntry, path: string): number|FileTreeEntry|undefined {
+  // TODO add test coverage
+  return path
+    .split('/')
+    .reduce((root, path) => root && root[path] as FileTreeEntry,
+            tree)
+}

@@ -31,6 +31,13 @@ const selectTorrentDetailsOverlayIsFileSelected = (id: number) =>
 export const selectTorrentDetailsOverlayFiles =
   (state: RootState) => state.overlays.torrentDetails.torrent!.files
 
+// TODO optimize
+export const selectTorrentDetailsOverlayIsDirectorySelected = (dir: string) =>
+  (state: RootState) => state.overlays.torrentDetails.selectedDirectories.includes(dir)
+
+export const selectTorrentDetailsOverlayFileTree = (state: RootState) =>
+  state.overlays.torrentDetails.fileTree
+
 export const selectTorrentDetailsOverlayFileProps = (id: number) =>
   createSelector(
     [(state: RootState) => state.overlays.torrentDetails.torrent!.files[id],

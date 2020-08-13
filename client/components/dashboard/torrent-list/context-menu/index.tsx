@@ -37,7 +37,7 @@ export default function ContextMenu(props: ContextMenuProps) {
     }
 
     const { x: menuX, y: menuY, width: menuWidth, height: menuHeight } = contextMenuRef.current!.getBoundingClientRect()
-    const { x: rootX, y: rootY, width: rootWidth, height: rootHeight } = props.rootRef.current!.getBoundingClientRect()
+    const {                                       height: rootHeight } = props.rootRef.current!.getBoundingClientRect()
     const { x: bodyX, y: bodyY, width: bodyWidth, height: bodyHeight } = props.bodyRef.current!.getBoundingClientRect()
 
     // NOTE 25 is the height of the table torrent-list header/column-indicators

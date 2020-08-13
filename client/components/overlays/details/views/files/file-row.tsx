@@ -16,10 +16,9 @@ import {
   Checkbox, ClientContext, BytesWithUnit
 } from '@client/components';
 
-import { DirectoryRowProps } from './dir-row';
-
-
-interface FileRowProps extends DirectoryRowProps {
+interface FileRowProps {
+  path: string
+  name: string
   fileId: number
 }
 
@@ -31,7 +30,7 @@ export function FileRow(props: FileRowProps) {
   const toggleFile = () => {
     const toggleDispatcher = file.isSelected ?
       torrentDetailsOverlayDeselectFiles : torrentDetailsOverlaySelectFiles
-    dispatch(toggleDispatcher([props.fileId]))
+    dispatch(toggleDispatcher({ id: props.fileId, path: props.path }))
   }
 
   const setPriority = (p: ExtendedPriorityType) => {
