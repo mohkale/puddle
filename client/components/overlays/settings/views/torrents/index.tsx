@@ -103,6 +103,7 @@ export function TorrentsView() {
             label="Stop seeding if idle for (min)" />
 
           <NumberInput
+            className="textbox"
             disabled={!enableStopSeedingIdleDuration}
             value={stopSeedingIdleDuration}
             setValue={setStopSeedingIdleDuration} />

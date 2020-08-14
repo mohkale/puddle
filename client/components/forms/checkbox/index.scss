@@ -33,6 +33,7 @@
 
     & > label {
         padding-left: 6px;
+        cursor: pointer;
     }
 
     .check {
@@ -90,4 +91,8 @@
 .checkbox-container--disabled {
     opacity: 0.5;
     cursor: default;
+
+    & > label {
+        cursor: default;
+    }
 }

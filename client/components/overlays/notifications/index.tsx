@@ -29,7 +29,7 @@ export default function NotificationsOverlay() {
         </ul>
 
         <AsyncButton className="btn btn--submit" disabled={!moreExists}
-                     run={loadMore} style={{ width: '100%' }}>
+                     run={loadMore} style={{ width: '100%', marginBottom: 15 }}>
           {moreExists ? 'Load More'
                       : notifications.length > 0
                       ? 'No More Notifications to Load'
