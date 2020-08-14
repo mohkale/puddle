@@ -6,7 +6,7 @@ import {
 } from '@client/components';
 
 import Transmission from '@transmission/client';
-import { authenticate, authenticated, defaultTransmissionUrl } from '@client/api';
+import { authenticate, authenticated, defaultTransmissionUrl } from '@server/api';
 
 import store, {
   syncTorrents, syncStats, syncSession, viewChanged, ViewType

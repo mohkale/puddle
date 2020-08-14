@@ -37,10 +37,16 @@ const notificationsSlice = createSlice({
         state.inactive = [...action.payload, ...state.inactive]
       })
       .addCase(actions.notificationDeleted, (state, action) => {
-        const index = state.inactive.findIndex(o => o.id === action.payload)
-        if (index !== -1) {
-          state.inactive = [...state.inactive.slice(0, index),
-                            ...state.inactive.slice(index+1)]
+        const inactiveIndex = state.inactive.findIndex(o => o.id === action.payload)
+        if (inactiveIndex !== -1) {
+          state.inactive = [...state.inactive.slice(0, inactiveIndex),
+                            ...state.inactive.slice(inactiveIndex+1)]
+        } else {
+          const activeIndex = state.active.findIndex(o => o.id === action.payload)
+          if (activeIndex !== -1) {
+            state.active = [...state.inactive.slice(0, activeIndex),
+                            ...state.inactive.slice(activeIndex+1)]
+          }
         }
       })
       .addCase(actions.notificationsArchiveExhausted, state => {

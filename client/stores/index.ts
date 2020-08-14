@@ -17,7 +17,7 @@ import torrentReducer from './torrents-store';
 import notificationsReducer from './notifications-store';
 import overlaysReducer from './overlays-store';
 
-import { settings } from '@client/api';
+import { settings } from '@server/api';
 
 // WARN for some reason, if you use configureStore<RootState>
 // then you can't pass a middleware callback :/.

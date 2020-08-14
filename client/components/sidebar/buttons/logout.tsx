@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { TooltipButton } from '@client/components';
-import { forget } from '@client/api';
+import { forget } from '@server/api';
 
 import { viewChanged, ViewType } from '@client/stores';
 

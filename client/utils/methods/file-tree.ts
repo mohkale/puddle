@@ -21,6 +21,13 @@ export type FileTreeEntry =
   { [key: string]: number } |
   { [key: string]: FileTreeEntry }
 
+/**
+ * Convert a list of file paths with an associated identifier
+ * into a tree like structure (centered around javascript objects).
+ *
+ *
+ *
+ */
 export function constructFileTree(files: FileNameArray) {
   const collection: FileTreeEntry = {}
 
@@ -46,7 +53,6 @@ export function constructFileTree(files: FileNameArray) {
  * @param path the path of an entry at aribtrary depth in `tree`.
  */
 export function treeTraverse(tree: FileTreeEntry, path: string): number|FileTreeEntry|undefined {
-  // TODO add test coverage
   return path
     .split('/')
     .reduce((root, path) => root && root[path] as FileTreeEntry,

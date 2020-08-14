@@ -36,12 +36,14 @@
       "@transmission/*": ["transmission/*"],
       "@shared/*": ["shared/*"],
       "@server/*": ["server/*"],
+      "@tests/*": ["tests/*"],
     }
   },
   "include": [
     "./client/**/*.ts", "./client/**/*.tsx",
     "./server/**/*.ts",
     "./shared/**/*.ts",
+    "./tests/**/*.ts",
   ],
   "exclude": [
     "node_modules", "**/*.spec.ts",

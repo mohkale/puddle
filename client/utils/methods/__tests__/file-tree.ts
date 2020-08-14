@@ -1,4 +1,4 @@
-import { constructFileTree as fileTree } from '../file-tree';
+import { constructFileTree as fileTree, treeTraverse } from '../file-tree';
 
 test('empty file list gives an empty object', () => {
   expect(fileTree([])).toEqual({})
@@ -32,4 +32,21 @@ test('order of original file list is maintained even in subdirectories', () => {
 test('multiple files in the same directory are grouped in the file-tree', () => {
   const fileNames = [{ name: 'foo/bar' }, { name: 'foo/baz' }, { name: 'foo/bag' }]
   expect(fileTree(fileNames)).toEqual({ foo: { bar: 0, baz: 1, bag: 2 } })
+})
+
+describe('treeTraverse', () => {
+  it('can traverse to a file', () => {
+    const tree = { foo: { bar: { baz: 0 } } }
+    expect(treeTraverse(tree, 'foo/bar/baz')).toBe(0)
+  })
+
+  it('can traverse to a directory', () => {
+    const file = { baz: 0 }
+    const tree = { foo: { bar: file } }
+    expect(treeTraverse(tree, 'foo/bar')).toEqual(file)
+  })
+
+  it("doesn't throw type error when traversing undefined paths", () => {
+    expect(() => treeTraverse({}, 'foo/bar/baz/bag')).not.toThrow(TypeError)
+  })
 })

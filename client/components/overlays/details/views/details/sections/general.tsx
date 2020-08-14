@@ -2,8 +2,25 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { torrentSelector } from '../../../utils';
-import { formatTorrentState as formatState } from '@client/utils';
 import { TableSection, Missing, formatDate } from '../section';
+import { TransmissionTorrentStatus as TorrentState } from '@transmission';
+
+export function formatTorrentState(state: TorrentState) {
+  switch (state) {
+    case TorrentState.STOPPED:
+      return 'Stopped'
+    case TorrentState.CHECK_WAIT:
+    case TorrentState.DOWNLOAD_WAIT:
+    case TorrentState.SEED_WAIT:
+      return 'Queued'
+    case TorrentState.CHECK:
+      return 'Checking'
+    case TorrentState.DOWNLOAD:
+      return 'Downloading'
+    case TorrentState.SEED:
+      return 'Seeding'
+  }
+}
 
 export function GeneralSection() {
   const addedDate = useSelector(torrentSelector(t => t.addedDate));
@@ -34,7 +51,7 @@ export function GeneralSection() {
       },
       {
         key: 'State',
-        val: formatState(state)
+        val: formatTorrentState(state)
       },
     ]
   })

@@ -3,7 +3,7 @@ import { settingsUpdated } from './actions';
 import { RootThunk } from '../state';
 import { ColumnType, IntervalsType } from './state';
 
-import { syncSettings } from '@client/api';
+import { syncSettings } from '@server/api';
 
 interface _SettingsUpdatedProps {
   columnWidths: { [key in ColumnType]: number }

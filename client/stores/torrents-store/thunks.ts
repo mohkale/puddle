@@ -1,5 +1,3 @@
-import { Action, ThunkDispatch } from '@reduxjs/toolkit';
-
 import { RootState, RootThunk } from '../state';
 import { torrentsAdded, torrentsRemoved, torrentsUpdated } from './actions';
 import { notifyTorrentAdded, notifyTorrentRemoved } from '../notifications-store'
@@ -29,48 +27,48 @@ export const syncTorrents =
     }
   }
 
-const handleTorrentsRemoved =
-  (dispatch: ThunkDispatch<RootState, unknown, Action<any>>,
-   getState: () => RootState, removed: number[]) => {
-     // NOTE we may be able to avoid these sorts of checks by keeping
-     // a list of recently removed torrents and comparing against them
-     // instead of all torrents.
+export const _handleTorrentsRemoved = (removed: number[]): RootThunk => {
+  return async (dispatch, getState) => {
+    // NOTE we may be able to avoid these sorts of checks by keeping
+    // a list of recently removed torrents and comparing against them
+    // instead of all torrents.
 
-     const state = getState()
-     const existingIds = new Set<TorrentId>(state.torrents.ids)
-     removed = removed.filter((id) => existingIds.has(id))
+    const state = getState()
+    const existingIds = new Set<TorrentId>(state.torrents.ids)
+    removed = removed.filter((id) => existingIds.has(id))
 
-     if (removed.length > 0) {
-       dispatch(torrentsRemoved({ ids: removed }))
-       dispatch(notifyTorrentRemoved(removed.map(id => ({
-         torrent: state.torrents.entries[id]
-       }))))
-     }
-   }
+    if (removed.length > 0) {
+      dispatch(torrentsRemoved({ ids: removed }))
+      dispatch(notifyTorrentRemoved(removed.map(id => ({
+        torrent: state.torrents.entries[id]
+      }))))
+    }
+  }
+}
 
-const handleTorrentUpdated =
-  (dispatch: ThunkDispatch<RootState, unknown, Action<any>>,
-   getState: () => RootState, torrents: Partial<TorrentResponse>[]) => {
-     const state = getState()
-     const existingIds = new Set<TorrentId>(state.torrents.ids)
-     const newTorrents: Torrent[] = [], updatedTorrents: Torrent[] = [];
+export const _handleTorrentUpdated = (torrents: Partial<TorrentResponse>[]): RootThunk => {
+  return async (dispatch, getState) => {
+    const state = getState()
+    const existingIds = new Set<TorrentId>(state.torrents.ids)
+    const newTorrents: Torrent[] = [], updatedTorrents: Torrent[] = [];
 
-     torrents.forEach(torrent => {
-       if (existingIds.has(torrent.id!)) {
-         updatedTorrents.push(torrentFromResponse(torrent, state.torrents.entries[torrent.id!]))
-       } else {
-         newTorrents.push(torrentFromResponse(torrent))
-       }
-     })
+    torrents.forEach(torrent => {
+      if (existingIds.has(torrent.id!)) {
+        updatedTorrents.push(torrentFromResponse(torrent, state.torrents.entries[torrent.id!]))
+      } else {
+        newTorrents.push(torrentFromResponse(torrent))
+      }
+    })
 
-     if (newTorrents.length > 0) {
-       dispatch(torrentsAdded({ torrents: newTorrents }))
-       dispatch(notifyTorrentAdded(newTorrents))
-     }
+    if (newTorrents.length > 0) {
+      dispatch(torrentsAdded({ torrents: newTorrents }))
+      dispatch(notifyTorrentAdded(newTorrents))
+    }
 
-     if (updatedTorrents.length > 0)
-       dispatch(torrentsUpdated({ torrents: updatedTorrents }))
-   }
+    if (updatedTorrents.length > 0)
+      dispatch(torrentsUpdated({ torrents: updatedTorrents }))
+  }
+}
 
 /**
  * Asynchronously fetch the current torrent list from the transmission
@@ -78,16 +76,16 @@ const handleTorrentUpdated =
  */
 export const updateRecentlyActiveTorrents =
   (client: Transmission): RootThunk<Promise<void>> => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
       const active = await client.recentlyActiveTorrents(...TORRENT_FIELDS);
       const torrents = active.torrents, removedTorrents = active.removed
 
       if (removedTorrents.length > 0) {
-        handleTorrentsRemoved(dispatch, getState, removedTorrents);
+        await dispatch(_handleTorrentsRemoved(removedTorrents));
       }
 
       if (torrents.length > 0) {
-        handleTorrentUpdated(dispatch, getState, torrents);
+        await dispatch(_handleTorrentUpdated(torrents));
       }
     }
   }
@@ -96,6 +94,6 @@ export const updateTorrent =
   (ids: number[], client: Transmission): RootThunk<Promise<void>> => {
     return async (dispatch) => {
       const torrents = await client.torrents(ids, ...TORRENT_FIELDS);
-      dispatch(torrentsUpdated({ torrents }))
+      await dispatch(torrentsUpdated({ torrents }))
     }
   }

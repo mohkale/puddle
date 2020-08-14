@@ -55,6 +55,7 @@ let mainConfig: ConfigurationFunction = env => Object.assign({}, sharedConfig, {
       '@server': pathResolve('server'),
       '@shared': pathResolve('shared'),
       '@transmission': pathResolve('transmission'),
+      '@tests': pathResolve('tests'),
     }
   },
   optimization: {

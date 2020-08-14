@@ -6,7 +6,6 @@ export * from './time-format';
 export * from './file-tree';
 export * from './safe-divide';
 export * from './set-equal';
-export * from './format-torrent-state';
 export * from './read-file-async';
 export * from './clipboard-paste';
 export * from './string-hash';

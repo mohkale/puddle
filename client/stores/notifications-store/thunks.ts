@@ -16,20 +16,20 @@ import {
   notificationsFrom,
   saveNotifications,
   deleteNotification as deleteNotificationFromSerever
-} from '@client/api';
+} from '@server/api';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-const addNotification = (notifications: Notification<any>[]) => {
+export const addNotification = (notifications: Notification<any>[]) => {
   return async dispatch => {
-    dispatch(actions.notificationAdded(notifications))
+    await dispatch(actions.notificationAdded(notifications))
 
     const persistentNotifications = notifications
       .filter(n => PERSISTENT_NOTIFICATION_TYPES.has(n.type))
     if (persistentNotifications.length === 0) return
 
     try {
-      saveNotifications(notifications)
+      await saveNotifications(persistentNotifications)
     } catch (err) {
       // TODO notify error
       console.error(err)
@@ -40,7 +40,7 @@ const addNotification = (notifications: Notification<any>[]) => {
 export const deleteNotification = (id: string): RootThunk => {
   return async dispatch => {
     try {
-      deleteNotificationFromSerever(id)
+      await deleteNotificationFromSerever(id)
       dispatch(actions.notificationDeleted(id))
     } catch (err) {
       // TODO notify error
