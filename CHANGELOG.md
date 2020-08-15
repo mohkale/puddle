@@ -1,7 +1,5 @@
 ## [Unreleased]
 ### TODO
-- use directories in the file tree view to select
-  all files within that directory
 - offer "expanded" view for torrents (see flood)
 - arrow keys to move up and down torrents
 - shift arrow keys to select torrents (above and below)
@@ -10,6 +8,7 @@
 - minimise/clear options for filter lists
 - drag and drop torrent layer
 
+## [1.0.0] - 2020-08-15
 ### Added
 - Changelog and semantic versioning
 - Notification system
@@ -29,3 +28,5 @@
 - set torrent location
 - expanded notifications history
 - set download limits from sidebar button
+- use directories in the file tree view to select
+  all files within that directory

@@ -62,8 +62,8 @@ function generateStyles(height: number) {
       paddingRight: 2,
 
       '&:hover': {
-        color: 'var(--error-color)',
-        borderLeftColor: 'var(--error-color)',
+        color: 'var(--torrents-error-row-border-color)',
+        borderLeftColor: 'var(--torrents-error-row-border-color)',
       }
     }),
 

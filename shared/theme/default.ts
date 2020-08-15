@@ -3,7 +3,6 @@ import { Theme } from './type';
 // reverse engineered from [[https://github.com/Flood-UI/flood][flood]].
 export const defaultTheme: Theme = {
   actionColor: '#258de5',
-  errorColor: '#f34570',
 
   fg: '#53718a',
   bg: '#e9eef2',

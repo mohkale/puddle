@@ -45,6 +45,9 @@ let mainConfig: ConfigurationFunction = env => Object.assign({}, sharedConfig, {
   },
   mode: env || 'development',
   devtool: (env === "production") ? false : "inline-source-map",
+  performance: {
+    hints: false
+  },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss'],
     alias: {

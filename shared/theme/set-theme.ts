@@ -3,7 +3,6 @@ import { Theme, Button, TorrentListRow, ScrollBar } from './type';
 export function setTheme(theme: Theme) {
   const root = document.documentElement.style;
   root.setProperty('--action-color', theme.actionColor)
-  root.setProperty('--error-color', theme.errorColor)
 
   root.setProperty('--fg', theme.fg)
   root.setProperty('--bg', theme.bg)

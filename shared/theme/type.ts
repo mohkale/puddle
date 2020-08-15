@@ -35,7 +35,6 @@ export interface ScrollBar {
 
 export interface Theme {
   actionColor: string,
-  errorColor: string
 
   fg: string
   bg: string

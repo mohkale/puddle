@@ -16,7 +16,7 @@ extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
     this.state = { }
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error) {
     this.setState({ error: error.stack || error.toString() })
   }
 
