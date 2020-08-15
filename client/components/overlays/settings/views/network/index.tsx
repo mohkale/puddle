@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { syncSession } from '@client/stores';
+import { syncSession, notifyRequestError } from '@client/stores';
 
 import { sessionSelector, useStateFromSelector } from '../../utils';
 import { Form, Section, Row } from '../../controls';
@@ -20,21 +20,29 @@ export function NetworkView() {
   const [enableUTP, setEnableUTP] = useStateFromSelector(sessionSelector(s => s['utp-enabled']));
   const [peerPort, setPeerPort] = useStateFromSelector(sessionSelector(s => s['peer-port']));
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     setMessages([])
     if (isNaN(peerPort) || peerPort === 0) {
       setMessages([{ level: MessageLevel.ERROR, label: 'port number must be a valid non-zero number' }])
       return
     }
 
-    // TODO handle error
-    return transmission.setSession({
-      'peer-port-random-on-start': randomizePortOnLaunch,
-      'port-forwarding-enabled': usePortForwarding,
-      'utp-enabled': enableUTP,
-      'peer-port': peerPort,
-    }).then(() => setMessages([{ level: MessageLevel.INFO, label: 'succesfully synced settings' }]))
-      .then(() => dispatch(syncSession(transmission)))
+    try {
+      await transmission.setSession({
+        'peer-port-random-on-start': randomizePortOnLaunch,
+        'port-forwarding-enabled': usePortForwarding,
+        'utp-enabled': enableUTP,
+        'peer-port': peerPort,
+      })
+
+      setMessages([{ level: MessageLevel.INFO, label: 'succesfully synced settings' }])
+      await dispatch(syncSession(transmission))
+    } catch (err) {
+      setMessages([{ level: MessageLevel.ERROR, label: 'failed to sync settings with transmission' }])
+      await dispatch(notifyRequestError({
+        to: 'transmission', errorMessage: err.toString(), description: 'syncing transmission network settings'
+      }))
+    }
   }
 
   return (

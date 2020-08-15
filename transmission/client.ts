@@ -2,8 +2,7 @@ export * from './shared';
 import TransmissionBase from './base';
 
 // client transmission interface, this just redirects
-// all transmission requests to the puddle server and
-// TODO finish thought.
+// all transmission requests to the puddle server.
 
 export interface TransmissionSerialised {
   sessionId: string

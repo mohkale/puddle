@@ -12,7 +12,6 @@ import { DelayInput } from 'react-delay-input';
  * searching. The shorter it is, the more bogus searches will take
  * place. The longer it is, the less intuitive the search feels.
  *
- * TODO calibrate to feel just right.
  */
 const QUERY_SET_TIMEOUT = 100
 

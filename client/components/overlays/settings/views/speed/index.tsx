@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { padString } from '@client/utils';
-import { syncSession } from '@client/stores';
+import { syncSession, notifyRequestError } from '@client/stores';
 
 import { Form, Section, Row } from '../../controls';
 import { sessionSelector, useStateFromSelector  } from '../../utils';
@@ -63,7 +63,7 @@ export function SpeedView() {
 
   const selectedAltSpeedDaysOption = SCHEDULE_DAY_OPTIONS.find(o => o.value === altSpeedDays)
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const newMessages: MessageType[] = []
     let failed = false
     if (isNaN(uploadLimit)) {
@@ -89,20 +89,28 @@ export function SpeedView() {
     setMessages(newMessages)
     if (failed) return false
 
-    // TODO handle error
-    return transmission.setSession({
-      'speed-limit-up': uploadLimit,
-      'speed-limit-down': downloadLimit,
-      'speed-limit-up-enabled': allowUploadLimit,
-      'speed-limit-down-enabled': allowDownloadLimit,
-      'alt-speed-up': altUploadLimit,
-      'alt-speed-down': altDownloadLimit,
-      'alt-speed-time-enabled': useScheduledTimes,
-      'alt-speed-time-day': altSpeedDays,
-      'alt-speed-time-begin': altSpeedTimeBegin,
-      'alt-speed-time-end': altSpeedTimeEnd,
-    }).then(() => setMessages([{ level: MessageLevel.INFO, label: 'succesfully synced settings' }]))
-      .then(() => dispatch(syncSession(transmission)))
+    try {
+      await transmission.setSession({
+        'speed-limit-up': uploadLimit,
+        'speed-limit-down': downloadLimit,
+        'speed-limit-up-enabled': allowUploadLimit,
+        'speed-limit-down-enabled': allowDownloadLimit,
+        'alt-speed-up': altUploadLimit,
+        'alt-speed-down': altDownloadLimit,
+        'alt-speed-time-enabled': useScheduledTimes,
+        'alt-speed-time-day': altSpeedDays,
+        'alt-speed-time-begin': altSpeedTimeBegin,
+        'alt-speed-time-end': altSpeedTimeEnd,
+      })
+
+      setMessages([{ level: MessageLevel.INFO, label: 'succesfully synced settings' }])
+      dispatch(syncSession(transmission))
+    } catch (err) {
+      setMessages([{ level: MessageLevel.ERROR, label: 'failed to sync settings with transmission' }])
+      await dispatch(notifyRequestError({
+        to: 'transmission', errorMessage: err.toString(), description: 'syncing transmission speed settings'
+      }))
+    }
   }
 
   return (

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { faTurtle } from '@client/utils/fontawesome';
+import { faFeather } from '@fortawesome/free-solid-svg-icons';
 
 import {
-    altSpeedToggled, selectAltSpeedEnabled
+  altSpeedToggled, selectAltSpeedEnabled, notifyRequestError
 } from '@client/stores';
 import { ClientContext, TooltipButton } from '@client/components';
 
@@ -13,18 +13,22 @@ export function ToggleAltSpeedButton() {
     const { transmission } = useContext(ClientContext)
     const isActive = useSelector(selectAltSpeedEnabled);
 
-    const onClick = () => {
-        if (transmission)
-            // TODO show notification when this fails
-            transmission.setSession({'alt-speed-enabled': !isActive})
-                .then(() => dispatch(altSpeedToggled({ value: !isActive })))
+    const onClick = async () => {
+      try {
+        await transmission.setSession({'alt-speed-enabled': !isActive})
+        dispatch(altSpeedToggled({ value: !isActive }))
+      } catch (err) {
+        await dispatch(notifyRequestError({
+          to: 'transmission', errorMessage: err.toString(), description: 'toggling alt-speed'
+        }))
+      }
     }
 
     return (
         <TooltipButton
           className={isActive ? 'selected' : ''}
           onClick={onClick}
-          icon={faTurtle}
+          icon={faFeather}
           tooltip={`${isActive ? 'Disable' : 'Enable'} Alt Speed`} />
     );
 }

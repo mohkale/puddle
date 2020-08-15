@@ -59,7 +59,7 @@ export function TorrentsView() {
     } catch (err) {
       setMessages([{ level: MessageLevel.ERROR, label: 'failed to sync settings with transmission' }])
       await dispatch(notifyRequestError({
-        to: 'transmission', errorMessage: err.toString(), description: 'syncing transmission session settings'
+        to: 'transmission', errorMessage: err.toString(), description: 'syncing transmission torrent settings'
       }))
     }
   }

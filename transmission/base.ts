@@ -63,8 +63,7 @@ export default abstract class Transmission {
    */
   private requestInit = (params: any): RequestInit => {
     if (this.requestTag) {
-      // WARN mutates params in place, TODO check
-      // whether there's any benefit to cloning it.
+      // WARN mutates params in place
       params.tag = this.requestTag
     }
 

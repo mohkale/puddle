@@ -7,7 +7,7 @@ import { TransmissionPriorityType as PriorityType } from '@transmission';
 import {
   RootState, showTorrentDetails, setLabelsOverlayAssigned,
   removeTorrentOverlayAssigned, selectTorrentById,
-  setTorrentLocationOverlayAssigned
+  setTorrentLocationOverlayAssigned, notifyRequestError
 } from '@client/stores';
 
 import {
@@ -20,19 +20,32 @@ export interface ContextItemProps {
 }
 
 export function StartTorrentsItem(props: ContextItemProps) {
+  const dispatch = useDispatch()
   const { transmission } = useContext(ClientContext)
-  const onClick = () => {
-    transmission.startTorrent(props.torrents)
-    // TODO notify on error.
+  const onClick = async () => {
+    try {
+      await transmission.startTorrent(props.torrents)
+    } catch (err) {
+      await dispatch(notifyRequestError({
+        to: 'transmission', errorMessage: err, description: `starting torrents: ${props.torrents}`
+      }))
+    }
   }
 
   return <li onClick={onClick}>Start</li>;
 }
 
 export function StopTorrentsItem(props: ContextItemProps) {
+  const dispatch = useDispatch()
   const { transmission } = useContext(ClientContext)
-  const onClick = () => {
-    transmission.stopTorrent(props.torrents)
+  const onClick = async () => {
+    try {
+      await transmission.stopTorrent(props.torrents)
+    } catch (err) {
+      await dispatch(notifyRequestError({
+        to: 'transmission', errorMessage: err, description: `stopping torrents: ${props.torrents}`
+      }))
+    }
   }
 
   return <li onClick={onClick}>Stop</li>;
@@ -49,9 +62,16 @@ export function RemoveTorrentsItem(props: ContextItemProps) {
 }
 
 export function CheckHashesItem(props: ContextItemProps) {
+  const dispatch = useDispatch()
   const { transmission } = useContext(ClientContext)
-  const onClick = () => {
-    transmission.verifyTorrent(props.torrents)
+  const onClick = async () => {
+    try {
+      await transmission.verifyTorrent(props.torrents)
+    } catch (err) {
+      await dispatch(notifyRequestError({
+        to: 'transmission', errorMessage: err, description: `recheck torrents: ${props.torrents}`
+      }))
+    }
   }
 
   return <li onClick={onClick}>Check Hash</li>;
@@ -89,11 +109,18 @@ export function PriorityItem(props: ContextItemProps) {
   const { transmission } = useContext(ClientContext)
   // TODO if all torrents share same priority, use that as default
   // instead of NORM.
+  const dispatch = useDispatch()
   const [priority, setPriority] = useState(PriorityType.NORM)
-  const updatePriority = (p: ExtendedPriorityType) => {
+  const updatePriority = async (p: ExtendedPriorityType) => {
     if (isPriorityType(p)) {
-      transmission.setTorrent(props.torrents, { bandwidthPriority: p })
-        .then(() => setPriority(p))
+      try {
+        await transmission.setTorrent(props.torrents, { bandwidthPriority: p })
+        setPriority(p)
+      } catch (err) {
+        await dispatch(notifyRequestError({
+          to: 'transmission', errorMessage: err, description: `setting torrent priority: ${props.torrents}`
+        }))
+      }
     }
   }
   const onRootClick = (e: React.MouseEvent) => {
@@ -112,36 +139,68 @@ export function PriorityItem(props: ContextItemProps) {
 }
 
 export function MoveToTopItem(props: ContextItemProps) {
+  const dispatch = useDispatch()
   const { transmission } = useContext(ClientContext)
-  const onClick = () => {
-    transmission.moveTorrentsToTop(props.torrents)
+  const onClick = async () => {
+    try {
+      await transmission.moveTorrentsToTop(props.torrents)
+    } catch (err) {
+      await dispatch(notifyRequestError({
+        to: 'transmission', errorMessage: err,
+        description: `moving torrents to top of queue: ${props.torrents}`
+      }))
+    }
   }
 
   return <li onClick={onClick}>Move to Top</li>;
 }
 
 export function MoveToBottomItem(props: ContextItemProps) {
+  const dispatch = useDispatch()
   const { transmission } = useContext(ClientContext)
-  const onClick = () => {
-    transmission.moveTorrentsToBottom(props.torrents)
+  const onClick = async () => {
+    try {
+      await transmission.moveTorrentsToBottom(props.torrents)
+    } catch (err) {
+      await dispatch(notifyRequestError({
+        to: 'transmission', errorMessage: err,
+        description: `moving torrents to bottom of queue: ${props.torrents}`
+      }))
+    }
   }
 
   return <li onClick={onClick}>Move to Bottom</li>;
 }
 
 export function MoveUpItem(props: ContextItemProps) {
+  const dispatch = useDispatch()
   const { transmission } = useContext(ClientContext)
-  const onClick = () => {
-    transmission.moveTorrentsUp(props.torrents)
+  const onClick = async () => {
+    try {
+      await transmission.moveTorrentsUp(props.torrents)
+    } catch (err) {
+      await dispatch(notifyRequestError({
+        to: 'transmission', errorMessage: err,
+        description: `moving torrents up in queue: ${props.torrents}`
+      }))
+    }
   }
 
   return <li onClick={onClick}>Move Up</li>;
 }
 
 export function MoveDownItem(props: ContextItemProps) {
+  const dispatch = useDispatch()
   const { transmission } = useContext(ClientContext)
-  const onClick = () => {
-    transmission.moveTorrentsDown(props.torrents)
+  const onClick = async () => {
+    try {
+      transmission.moveTorrentsDown(props.torrents)
+    } catch (err) {
+      await dispatch(notifyRequestError({
+        to: 'transmission', errorMessage: err,
+        description: `moving torrents down queue: ${props.torrents}`
+      }))
+    }
   }
 
   return <li onClick={onClick}>Move Down</li>;
