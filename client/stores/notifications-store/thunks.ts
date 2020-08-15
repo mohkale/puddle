@@ -31,8 +31,9 @@ export const addNotification = (notifications: Notification<any>[]) => {
     try {
       await saveNotifications(persistentNotifications)
     } catch (err) {
-      // TODO notify error
-      console.error(err)
+      dispatch(notifyRequestError({
+        to: 'puddle', errorMessage: err, description: 'syncing notifications with puddle'
+      }))
     }
   }
 }
@@ -43,8 +44,9 @@ export const deleteNotification = (id: string): RootThunk => {
       await deleteNotificationFromSerever(id)
       dispatch(actions.notificationDeleted(id))
     } catch (err) {
-      // TODO notify error
-      console.error(err);
+      dispatch(notifyRequestError({
+        to: 'puddle', errorMessage: err, description: 'deleting notification from archive'
+      }))
     }
   }
 }
@@ -89,5 +91,19 @@ export const notifyTorrentRemoved =
           }))
 
       dispatch(addNotification(notifications))
+    }
+  }
+
+export const notifyRequestError =
+  (props: props.RequestErrorNotificationProps): RootThunk => {
+    return dispatch => {
+      const notification = generateNotification<props.RequestErrorNotificationProps>({
+        title: `failed to make request to ${props.to}`,
+        kind: NotificationLevel.ERROR,
+        type: NotificationTypes.REQUEST_ERROR,
+        props
+      })
+
+      dispatch(addNotification([notification]))
     }
   }

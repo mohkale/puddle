@@ -5,6 +5,7 @@
 export enum NotificationTypes {
   TORRENT_ADDED,
   TORRENT_REMOVED,
+  REQUEST_ERROR,
 }
 
 import { Torrent } from '@client/models';
@@ -25,4 +26,21 @@ export interface TorrentAddedNotificationProps {
 
 export interface TorrentRemovedNotificationProps {
   torrent: Torrent
+}
+
+export interface RequestErrorNotificationProps {
+  /**
+   * Where was the request going?
+   */
+  to: 'puddle' | 'transmission'
+
+  /**
+   * What were you trying to do when the error happened.
+   */
+  description: string
+
+  /**
+   * Any messages associated with the error.
+   */
+  errorMessage?: string
 }

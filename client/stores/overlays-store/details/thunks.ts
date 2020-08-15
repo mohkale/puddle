@@ -9,13 +9,18 @@ import {
   torrentDetailsOverlayTorrentUpdated,
   torrentDetailsOverlayTorrentAssigned
 } from './actions';
+
 import {
   selectTorrentDetailsOverlayTorrentId,
   selectTorrentDetailsOverlayTorrent
 } from '../../selectors';
 
-import { TORRENT_DETAILED_FIELDS, torrentDetailedFromResponse as fromResponse } from '@client/models';
 import { isPriorityType, ExtendedPriorityType } from '@client/components';
+import {
+  TORRENT_DETAILED_FIELDS, torrentDetailedFromResponse as fromResponse
+} from '@client/models';
+
+import { notifyRequestError } from '@client/stores/notifications-store';
 
 export const showTorrentDetails =
   (client: Transmission, id: number): RootThunk<Promise<void>> => {
@@ -34,12 +39,19 @@ export const updateTorrentDetails =
   (client: Transmission): RootThunk<Promise<void>> => {
     return async (dispatch, getState) => {
       const id = selectTorrentDetailsOverlayTorrentId(getState())
-      client.torrent(id, ...TORRENT_DETAILED_FIELDS)
-        .then(torrent => {
-          const base = selectTorrentDetailsOverlayTorrent(getState())
-          const torrentDetailed = fromResponse(torrent, base)
-          dispatch(torrentDetailsOverlayTorrentUpdated(torrentDetailed))
-        })
+
+      try {
+        client.torrent(id, ...TORRENT_DETAILED_FIELDS)
+          .then(torrent => {
+            const base = selectTorrentDetailsOverlayTorrent(getState())
+            const torrentDetailed = fromResponse(torrent, base)
+            dispatch(torrentDetailsOverlayTorrentUpdated(torrentDetailed))
+          })
+      } catch (err) {
+        dispatch(notifyRequestError({
+          to: 'transmission', errorMessage: err, description: `fetching torrent details for ${id}`
+        }))
+      }
     }
   }
 

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { syncSession } from '@client/stores';
+import { syncSession, notifyRequestError } from '@client/stores';
 import {
   Select, Checkbox, ClientContext, NumberInput, MessageType, MessageLevel
 } from '@client/components';
@@ -31,7 +31,7 @@ export function PeersView() {
 
   const selectedEncryptionOption = ENCRYPTION_OPTIONS.find(o => o.value === encryption)
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const newMessages: MessageType[] = []
     let failed = false
     if (isNaN(peerLimit)) {
@@ -47,18 +47,26 @@ export function PeersView() {
     setMessages(newMessages)
     if (failed) return false
 
-    // TODO handle error
-    return transmission.setSession({
-      'pex-enabled': usePex,
-      'dht-enabled': useDht,
-      'lpd-enabled': useLpd,
-      'blocklist-enabled': enableBlocklist,
-      'blocklist-url': blocklistUrl,
-      'peer-limit-global': peerLimitGlobal,
-      'peer-limit-per-torrent': peerLimit,
-      'encryption': encryption,
-    }).then(() => setMessages([{ level: MessageLevel.INFO, label: 'succesfully synced settings' }]))
-      .then(() => dispatch(syncSession(transmission)))
+    try {
+      await transmission.setSession({
+        'pex-enabled': usePex,
+        'dht-enabled': useDht,
+        'lpd-enabled': useLpd,
+        'blocklist-enabled': enableBlocklist,
+        'blocklist-url': blocklistUrl,
+        'peer-limit-global': peerLimitGlobal,
+        'peer-limit-per-torrent': peerLimit,
+        'encryption': encryption,
+      })
+
+      setMessages([{ level: MessageLevel.INFO, label: 'succesfully synced settings' }])
+      await dispatch(syncSession(transmission))
+    } catch (err) {
+      setMessages([{ level: MessageLevel.ERROR, label: 'failed to sync settings with transmission' }])
+      await dispatch(notifyRequestError({
+        to: 'transmission', errorMessage: err, description: 'syncing transmission session settings'
+      }))
+    }
   }
 
   return (

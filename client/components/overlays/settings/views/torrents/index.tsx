@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { sessionSelector, useStateFromSelector  } from '../../utils';
 import { Form, Section, Row } from '../../controls';
 
-import { syncSession } from '@client/stores';
+import { syncSession, notifyRequestError } from '@client/stores';
 import {
   NumberInput, Checkbox, ClientContext, MessageType, MessageLevel
 } from '@client/components';
@@ -22,7 +22,7 @@ export function TorrentsView() {
   const [stopSeedingIdleDuration, setStopSeedingIdleDuration] = useStateFromSelector(sessionSelector(s => s['idle-seeding-limit']))
   const [enableStopSeedingIdleDuration, setEnableStopSeedingIdleDuration] = useStateFromSelector(sessionSelector(s => s['idle-seeding-limit-enabled']))
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const newMessages: MessageType[] = []
     let failed = false;
     if (downloadDir.trim() === '') {
@@ -43,17 +43,25 @@ export function TorrentsView() {
     setMessages(newMessages)
     if (failed) return
 
-    // TODO show error message on failure
-    transmission.setSession({
-      'download-dir': downloadDir,
-      'start-added-torrents': startWhenAdded,
-      'rename-partial-files': appendToIncomplete,
-      'seedRatioLimit': stopSeedingRatio,
-      'seedRatioLimited': enableStopSeedingRatio,
-      'idle-seeding-limit': stopSeedingIdleDuration,
-      'idle-seeding-limit-enabled': enableStopSeedingIdleDuration,
-    }).then(() => setMessages([{ level: MessageLevel.INFO, label: 'succesfully synced settings' }]))
-      .then(() => dispatch(syncSession(transmission)))
+    try {
+      await transmission.setSession({
+        'download-dir': downloadDir,
+        'start-added-torrents': startWhenAdded,
+        'rename-partial-files': appendToIncomplete,
+        'seedRatioLimit': stopSeedingRatio,
+        'seedRatioLimited': enableStopSeedingRatio,
+        'idle-seeding-limit': stopSeedingIdleDuration,
+        'idle-seeding-limit-enabled': enableStopSeedingIdleDuration,
+      })
+
+      setMessages([{ level: MessageLevel.INFO, label: 'succesfully synced settings' }])
+      await dispatch(syncSession(transmission))
+    } catch (err) {
+      setMessages([{ level: MessageLevel.ERROR, label: 'failed to sync settings with transmission' }])
+      await dispatch(notifyRequestError({
+        to: 'transmission', errorMessage: err.toString(), description: 'syncing transmission session settings'
+      }))
+    }
   }
 
   return (

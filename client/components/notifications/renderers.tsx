@@ -4,7 +4,8 @@ import {
   Notification, NotificationTypes,
 
   TorrentAddedNotificationProps,
-  TorrentRemovedNotificationProps
+  TorrentRemovedNotificationProps,
+  RequestErrorNotificationProps
 } from '@client/stores';
 
 import { NotificationProps, Highlight } from './shared';
@@ -26,12 +27,21 @@ function TorrentRemovedNotification(props: NotificationProps<TorrentRemovedNotif
   );
 }
 
+function RequestErrorNotification(props: NotificationProps<RequestErrorNotificationProps>) {
+  return (
+    <span>
+      Failed to make request to <Highlight>{props.to}</Highlight>
+    </span>
+  )
+}
+
 // const DefaultNotification = (props: NotificationProps<any>) => <span>{props.title}</span>;
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 const NOTIFICATION_CONTENT_RENDERERS: { [key in NotificationTypes]: (props: NotificationProps<any>) => JSX.Element } = {
   [NotificationTypes.TORRENT_ADDED]: TorrentAddedNotification,
   [NotificationTypes.TORRENT_REMOVED]: TorrentRemovedNotification,
+  [NotificationTypes.REQUEST_ERROR]: RequestErrorNotification,
 }
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */

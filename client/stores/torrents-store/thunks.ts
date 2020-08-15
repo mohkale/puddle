@@ -7,6 +7,8 @@ import Transmission, {
   TorrentId, TransmissionTorrent as TorrentResponse
 } from '@transmission/client';
 
+import { notifyRequestError } from '@client/stores/notifications-store';
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 /**
@@ -22,8 +24,14 @@ export const syncTorrents =
       dispatch(torrentsRemoved({ ids: state.torrents.ids }))
 
       // add the current torrent list as specified by transmission.
-      const torrents = await client.torrents(undefined, ...TORRENT_FIELDS)
-      dispatch(torrentsAdded({ torrents: torrents.map(torrentFromResponse) }))
+      try {
+        const torrents = await client.torrents(undefined, ...TORRENT_FIELDS)
+        dispatch(torrentsAdded({ torrents: torrents.map(torrentFromResponse) }))
+      } catch (err) {
+        dispatch(notifyRequestError({
+          to: 'transmission', errorMessage: err.toString(), description: 'fetching torrents list afresh'
+        }))
+      }
     }
   }
 
@@ -77,7 +85,16 @@ export const _handleTorrentUpdated = (torrents: Partial<TorrentResponse>[]): Roo
 export const updateRecentlyActiveTorrents =
   (client: Transmission): RootThunk<Promise<void>> => {
     return async (dispatch) => {
-      const active = await client.recentlyActiveTorrents(...TORRENT_FIELDS);
+      let active;
+      try {
+        active = await client.recentlyActiveTorrents(...TORRENT_FIELDS);
+      } catch (err) {
+        dispatch(notifyRequestError({
+          to: 'transmission', errorMessage: err.toString(), description: 'fetching recently active torrents'
+        }))
+        return
+      }
+
       const torrents = active.torrents, removedTorrents = active.removed
 
       if (removedTorrents.length > 0) {
@@ -93,7 +110,13 @@ export const updateRecentlyActiveTorrents =
 export const updateTorrent =
   (ids: number[], client: Transmission): RootThunk<Promise<void>> => {
     return async (dispatch) => {
-      const torrents = await client.torrents(ids, ...TORRENT_FIELDS);
-      await dispatch(torrentsUpdated({ torrents }))
+      try {
+        const torrents = await client.torrents(ids, ...TORRENT_FIELDS);
+        await dispatch(torrentsUpdated({ torrents }))
+      } catch (err) {
+        dispatch(notifyRequestError({
+          to: 'transmission', errorMessage: err.toString(), description: 'updating a torrent'
+        }))
+      }
     }
   }
