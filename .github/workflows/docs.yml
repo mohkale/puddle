@@ -1,0 +1,24 @@
+name: docs
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: npm ci
+    - name: Build
+      run: npm run doc -- -d ./docs/
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.PUDDLE_PAGES_KEY }}
+        publish_dir: ./docs
+        publish_branch: gh-pages
+        destination_dir: docs
+        commit_message: "deploy: ${{ github.event.head_commit.message }}"
+

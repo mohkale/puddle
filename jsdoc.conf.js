@@ -1,5 +1,4 @@
 module.exports = {
-    "plugins": [],
     "recurseDepth": 10,
     "source": {
         "includePattern": ".+\\.[jt]s(doc|x)?$",
@@ -21,7 +20,8 @@ module.exports = {
         "template": "node_modules/better-docs",
     },
     "plugins": [
-        "node_modules/better-docs/typescript"
+        "node_modules/better-docs/typescript",
+        "plugins/markdown"
     ],
     "typescript": {
         "moduleRoot": "src"

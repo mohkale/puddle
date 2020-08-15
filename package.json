@@ -1,6 +1,6 @@
 {
   "name": "puddle",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A modern react based frontend for transmission",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "check-types": "tsc",
     "lint": "eslint --max-warnings 0 --ext .js --ext .jsx --ext .ts --ext .tsx client server shared transmission --color",
     "test": "jest",
-    "doc": "jsdoc src -c jsdoc.conf.js"
+    "doc": "jsdoc server client shared transmission -c jsdoc.conf.js -t node_modules/minami"
   },
   "dependencies": {},
   "devDependencies": {
@@ -65,6 +65,7 @@
     "jest": "^26.2.2",
     "jest-fetch-mock": "^3.0.3",
     "jsdoc": "^3.6.4",
+    "minami": "^1.2.3",
     "moment": "^2.27.0",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.0",
