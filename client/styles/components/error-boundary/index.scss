@@ -1,0 +1,15 @@
+.error-boundary {
+    background: var(--bg);
+    color: var(--fg);
+    width: 100%;
+    padding: 20px;
+
+    h1 {
+        text-align: left;
+    }
+
+    textarea {
+        background: var(--input-bg);
+        color: var(--input-fg);
+    }
+}
