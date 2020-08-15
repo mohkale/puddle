@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> transmission/responses/torrent.ts</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="module.html#.exports">exports</a></li><li><a href="Updater.html">Updater</a></li></ul><h3>Interfaces</h3><ul><li><a href="ColumnResizeContext.html">ColumnResizeContext</a></li><li><a href="ContextType.html">ContextType</a></li><li><a href="DashboardTableColumnsProps.html">DashboardTableColumnsProps</a></li><li><a href="SessionType.html">SessionType</a></li><li><a href="Torrent.html">Torrent</a></li><li><a href="TransmissionTorrent_Mutable.html">TransmissionTorrent_Mutable</a></li><li><a href="TransmissionTorrent_WriteOnly.html">TransmissionTorrent_WriteOnly</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ansiStripFormat">ansiStripFormat</a></li><li><a href="global.html#authenticate">authenticate</a></li><li><a href="global.html#authenticated">authenticated</a></li><li><a href="global.html#constructFileTree">constructFileTree</a></li><li><a href="global.html#CORNER_OFFSET">CORNER_OFFSET</a></li><li><a href="global.html#cyclePriority">cyclePriority</a></li><li><a href="global.html#dirNames">dirNames</a></li><li><a href="global.html#ESSENTIAL_FIELDS">ESSENTIAL_FIELDS</a></li><li><a href="global.html#fromSerialised">fromSerialised</a></li><li><a href="global.html#isPriorityType">isPriorityType</a></li><li><a href="global.html#NetworkIndicatorStats">NetworkIndicatorStats</a></li><li><a href="global.html#notificationIdGen">notificationIdGen</a></li><li><a href="global.html#NotificationTypes">NotificationTypes</a></li><li><a href="global.html#onSubmitGeneral">onSubmitGeneral</a></li><li><a href="global.html#OverlayType">OverlayType</a></li><li><a href="global.html#prepareFiles">prepareFiles</a></li><li><a href="global.html#PRIORITY_CLASSES">PRIORITY_CLASSES</a></li><li><a href="global.html#PRIORITY_LABELS">PRIORITY_LABELS</a></li><li><a href="global.html#puddleShrinkLevelFormat">puddleShrinkLevelFormat</a></li><li><a href="global.html#QUERY_SET_TIMEOUT">QUERY_SET_TIMEOUT</a></li><li><a href="global.html#reduceMapping">reduceMapping</a></li><li><a href="global.html#selectFilteredTorrents">selectFilteredTorrents</a></li><li><a href="global.html#selectTorrentsMatchingClassPredicate">selectTorrentsMatchingClassPredicate</a></li><li><a href="global.html#selectTorrentsMatchingLabelsPredicate">selectTorrentsMatchingLabelsPredicate</a></li><li><a href="global.html#selectTorrentsMatchingQueryPredicate">selectTorrentsMatchingQueryPredicate</a></li><li><a href="global.html#selectTorrentsMatchingTrackersPredicate">selectTorrentsMatchingTrackersPredicate</a></li><li><a href="global.html#selectTorrentsSearchIndex">selectTorrentsSearchIndex</a></li><li><a href="global.html#serverPromise">serverPromise</a></li><li><a href="global.html#setDifference">setDifference</a></li><li><a href="global.html#setPartition">setPartition</a></li><li><a href="global.html#StartStopButtons">StartStopButtons</a></li><li><a href="global.html#syncTorrents">syncTorrents</a></li><li><a href="global.html#TORRENT_BASE">TORRENT_BASE</a></li><li><a href="global.html#torrentClass">torrentClass</a></li><li><a href="global.html#torrentClasses">torrentClasses</a></li><li><a href="global.html#torrentComparators">torrentComparators</a></li><li><a href="global.html#TorrentFields">TorrentFields</a></li><li><a href="global.html#torrentFromResponse">torrentFromResponse</a></li><li><a href="global.html#torrentIdsToParam">torrentIdsToParam</a></li><li><a href="global.html#torrentRangeSelected">torrentRangeSelected</a></li><li><a href="global.html#torrentsAdded">torrentsAdded</a></li><li><a href="global.html#torrentSelected">torrentSelected</a></li><li><a href="global.html#torrentSelector">torrentSelector</a></li><li><a href="global.html#torrentsRemoved">torrentsRemoved</a></li><li><a href="global.html#torrentsUpdated">torrentsUpdated</a></li><li><a href="global.html#treeTraverse">treeTraverse</a></li><li><a href="global.html#updateRecentlyActiveTorrents">updateRecentlyActiveTorrents</a></li><li><a href="global.html#URLInput">URLInput</a></li><li><a href="global.html#validateForm">validateForm</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>transmission/responses/torrent.ts</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// see [[https://github.com/transmission/transmission/blob/master/libtransmission/transmission.h#L1649][transmission.h]].
+export enum TransmissionTorrentStatus {
+  STOPPED       = 0,
+  CHECK_WAIT    = 1,
+  CHECK         = 2,
+  DOWNLOAD_WAIT = 3,
+  DOWNLOAD      = 4,
+  SEED_WAIT     = 5,
+  SEED          = 6
+}
+
+export interface TransmissionTorrentFiles {
+  bytesCompleted: number
+  length: number
+  name: string
+}
+
+export interface TransmissionTorrentFileStats {
+  bytesCompleted: number
+  wanted: boolean
+  priority: number
+}
+
+export interface TransmissionTorrentPeers {
+  address: string
+  clientName: string
+  clientIsChoked: boolean
+  clientIsInterested: boolean
+  flagStr: string
+  isDownloadingFrom: boolean
+  isEncrypted: boolean
+  isIncoming: boolean
+  isUploadingTo: boolean
+  isUTP: boolean
+  peerIsChoked: boolean
+  peerIsInterested: boolean
+  port: number
+  progress: number
+  rateToClient: number
+  rateToPeer: number
+}
+
+export interface TransmissionTorrentPeersFrom {
+  fromCache: number
+  fromDht: number
+  fromIncoming: number
+  fromLpd: number
+  fromLtep: number
+  fromPex: number
+  fromTracker: number
+}
+
+export type TransmissionTorrentPieces = string
+
+export interface TransmissionTorrentTrackers {
+  announce: string
+  id: number
+  scrape: string
+  tier: number
+}
+
+export interface TransmissionTorrentTrackerStats {
+  announce: string
+  announceState: number
+  downloadCount: number
+  hasAnnounced: boolean
+  hasScraped: boolean
+  host: string
+  id: number
+  isBackup: boolean
+  lastAnnouncePeerCount: number
+  lastAnnounceResult: string
+  lastAnnounceStartTime: number
+  lastAnnounceSucceeded: boolean
+  lastAnnounceTime: number
+  lastAnnounceTimedOut: boolean
+  lastScrapeResult: string
+  lastScrapeStartTime: number
+  lastScrapeSucceeded: boolean
+  lastScrapeTime: number
+  lastScrapeTimedOut: boolean
+  leecherCount: number
+  nextAnnounceTime: number
+  nextScrapeTime: number
+  scrape: string
+  scrapeState: number
+  seederCount: number
+  tier: number
+}
+
+/**
+ * Fields that you can assign using the torrent-set method
+ * but you can't retrieve using the torrent-get method.
+ *
+ * You can access the relevent information using the other
+ * fields of the torrent-get method, attempting to access
+ * any of these will just return 0 for them.
+ */
+export interface TransmissionTorrent_WriteOnly {
+  "files-wanted": number[]
+  "files-unwanted": number[]
+  "location": string
+  "priority-high": number[]
+  "priority-low": number[]
+  "priority-normal": number[]
+  "trackerAdd": string[]
+  "trackerRemove": number[]
+  "trackerReplace": { [id: number]: string }
+}
+
+export enum TransmissionPriorityType {
+  HIGH = +1,
+  NORM = 0,
+  LOW  = -1
+}
+
+/**
+ * Fields of {@code TransmissionTorrentType} that can be modified
+ * using the torrent-set method. Write only fields can also be found
+ * in {@code TransmissionTorrent_WriteOnly}. Any other fields are
+ * read only.
+ */
+export interface TransmissionTorrent_Mutable {
+  "bandwidthPriority": TransmissionPriorityType
+  "downloadLimit": number
+  "downloadLimited": boolean
+  "honorsSessionLimits": boolean
+  "ids": number[]
+  "labels": string[]
+  "peer-limit": number
+  "queuePosition": number
+  "seedIdleLimit": number
+  "seedIdleMode": number
+  "seedRatioLimit": number
+  "seedRatioMode": number
+  "uploadLimit": number
+  "uploadLimited": boolean
+}
+
+// see [[https://github.com/transmission/transmission/blob/master/libtransmission/transmission.h#L1674][tr_stat_errtype]].
+export enum TransmissionError {
+  OK,
+  TRACKER_WARNING,
+  TRACKER_ERROR,
+  LOCAL_ERROR,
+}
+
+export interface TransmissionTorrent
+       extends TransmissionTorrent_Mutable, TransmissionTorrent_WriteOnly {
+  "activityDate": number
+  "addedDate": number
+  "comment": string
+  "corruptEver": number
+  "creator": string
+  "dateCreated": number
+  "desiredAvailable": number
+  "doneDate": number
+  "downloadDir": string
+  "downloadedEver": number
+  "editDate": number
+  "error": TransmissionError
+  "errorString": string
+  "eta": number
+  "etaIdle": number
+  "files": TransmissionTorrentFiles[]
+  "fileStats": TransmissionTorrentFileStats[]
+  "hashString": string
+  "haveUnchecked": number
+  "haveValid": number
+  "id": number
+  "isFinished": boolean
+  "isPrivate": boolean
+  "isStalled": boolean
+  "leftUntilDone": number
+  "magnetLink": string
+  "manualAnnounceTime": number
+  "maxConnectedPeers": number
+  "metadataPercentComplete": number
+  "name": string
+  "peers": TransmissionTorrentPeers[]
+  "peersFrom": TransmissionTorrentPeersFrom
+  "peersConnected": number
+  "peersGettingFromUs": number
+  "peersSendingToUs": number
+  "percentDone": number
+  "pieces": TransmissionTorrentPieces
+  "pieceCount": number
+  "pieceSize": number
+  "priorities": TransmissionPriorityType[]
+  "rateDownload": number
+  "rateUpload": number
+  "recheckProgress": number
+  "secondsDownloading": number
+  "secondsSeeding": number
+  "sizeWhenDone": number
+  "startDate": number
+  "status": TransmissionTorrentStatus
+  "totalSize": number
+  "torrentFile": string
+  "trackers": TransmissionTorrentTrackers[]
+  "trackerStats": TransmissionTorrentTrackerStats[]
+  "uploadedEver": number
+  "uploadRatio": number
+  "wanted": (0 | 1)[] // actually a number, 0 or 1.
+  "webseedsSendingToUs": number
+  "webseeds": string[]
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

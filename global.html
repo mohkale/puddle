@@ -1,0 +1,4710 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Global</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="module.html#.exports">exports</a></li><li><a href="Updater.html">Updater</a></li></ul><h3>Interfaces</h3><ul><li><a href="ColumnResizeContext.html">ColumnResizeContext</a></li><li><a href="ContextType.html">ContextType</a></li><li><a href="DashboardTableColumnsProps.html">DashboardTableColumnsProps</a></li><li><a href="SessionType.html">SessionType</a></li><li><a href="Torrent.html">Torrent</a></li><li><a href="TransmissionTorrent_Mutable.html">TransmissionTorrent_Mutable</a></li><li><a href="TransmissionTorrent_WriteOnly.html">TransmissionTorrent_WriteOnly</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ansiStripFormat">ansiStripFormat</a></li><li><a href="global.html#authenticate">authenticate</a></li><li><a href="global.html#authenticated">authenticated</a></li><li><a href="global.html#constructFileTree">constructFileTree</a></li><li><a href="global.html#CORNER_OFFSET">CORNER_OFFSET</a></li><li><a href="global.html#cyclePriority">cyclePriority</a></li><li><a href="global.html#dirNames">dirNames</a></li><li><a href="global.html#ESSENTIAL_FIELDS">ESSENTIAL_FIELDS</a></li><li><a href="global.html#fromSerialised">fromSerialised</a></li><li><a href="global.html#isPriorityType">isPriorityType</a></li><li><a href="global.html#NetworkIndicatorStats">NetworkIndicatorStats</a></li><li><a href="global.html#notificationIdGen">notificationIdGen</a></li><li><a href="global.html#NotificationTypes">NotificationTypes</a></li><li><a href="global.html#onSubmitGeneral">onSubmitGeneral</a></li><li><a href="global.html#OverlayType">OverlayType</a></li><li><a href="global.html#prepareFiles">prepareFiles</a></li><li><a href="global.html#PRIORITY_CLASSES">PRIORITY_CLASSES</a></li><li><a href="global.html#PRIORITY_LABELS">PRIORITY_LABELS</a></li><li><a href="global.html#puddleShrinkLevelFormat">puddleShrinkLevelFormat</a></li><li><a href="global.html#QUERY_SET_TIMEOUT">QUERY_SET_TIMEOUT</a></li><li><a href="global.html#reduceMapping">reduceMapping</a></li><li><a href="global.html#selectFilteredTorrents">selectFilteredTorrents</a></li><li><a href="global.html#selectTorrentsMatchingClassPredicate">selectTorrentsMatchingClassPredicate</a></li><li><a href="global.html#selectTorrentsMatchingLabelsPredicate">selectTorrentsMatchingLabelsPredicate</a></li><li><a href="global.html#selectTorrentsMatchingQueryPredicate">selectTorrentsMatchingQueryPredicate</a></li><li><a href="global.html#selectTorrentsMatchingTrackersPredicate">selectTorrentsMatchingTrackersPredicate</a></li><li><a href="global.html#selectTorrentsSearchIndex">selectTorrentsSearchIndex</a></li><li><a href="global.html#serverPromise">serverPromise</a></li><li><a href="global.html#setDifference">setDifference</a></li><li><a href="global.html#setPartition">setPartition</a></li><li><a href="global.html#StartStopButtons">StartStopButtons</a></li><li><a href="global.html#syncTorrents">syncTorrents</a></li><li><a href="global.html#TORRENT_BASE">TORRENT_BASE</a></li><li><a href="global.html#torrentClass">torrentClass</a></li><li><a href="global.html#torrentClasses">torrentClasses</a></li><li><a href="global.html#torrentComparators">torrentComparators</a></li><li><a href="global.html#TorrentFields">TorrentFields</a></li><li><a href="global.html#torrentFromResponse">torrentFromResponse</a></li><li><a href="global.html#torrentIdsToParam">torrentIdsToParam</a></li><li><a href="global.html#torrentRangeSelected">torrentRangeSelected</a></li><li><a href="global.html#torrentsAdded">torrentsAdded</a></li><li><a href="global.html#torrentSelected">torrentSelected</a></li><li><a href="global.html#torrentSelector">torrentSelector</a></li><li><a href="global.html#torrentsRemoved">torrentsRemoved</a></li><li><a href="global.html#torrentsUpdated">torrentsUpdated</a></li><li><a href="global.html#treeTraverse">treeTraverse</a></li><li><a href="global.html#updateRecentlyActiveTorrents">updateRecentlyActiveTorrents</a></li><li><a href="global.html#URLInput">URLInput</a></li><li><a href="global.html#validateForm">validateForm</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Title</p>
+                    <h1>Global</h1>
+                </header>
+                
+
+
+
+
+<section>
+
+<header>
+    
+        <h2></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+<h4 class="name" id="ansiStripFormat">
+    <a class="href-link" href="#ansiStripFormat">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        ansiStripFormat
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Formatter for winston which strips out any ansi formatting
+from the message. Logs should NEVER have ANSI colors when
+not being run interactively.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="server_logger.ts.html" class="button">View Source</a>
+            <span>
+                <a href="server_logger.ts.html">server/logger.ts</a>, <a href="server_logger.ts.html#line11">line 11</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="CORNER_OFFSET">
+    <a class="href-link" href="#CORNER_OFFSET">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        CORNER_OFFSET
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    How many pixels a label MUST be off the edge of the screen.
+this class guarantees it never goes beyond this limit.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_components_tooltip_index.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="client_components_tooltip_index.tsx.html">client/components/tooltip/index.tsx</a>, <a href="client_components_tooltip_index.tsx.html#line9">line 9</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="ESSENTIAL_FIELDS">
+    <a class="href-link" href="#ESSENTIAL_FIELDS">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        ESSENTIAL_FIELDS
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    The fields that can NEVER be disabled.
+
+If you could remove every field from the dashboard, then
+what is the dashboard even showing?
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_models_fields.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_models_fields.ts.html">client/models/fields.ts</a>, <a href="client_models_fields.ts.html#line28">line 28</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="NetworkIndicatorStats">
+    <a class="href-link" href="#NetworkIndicatorStats">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        NetworkIndicatorStats
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Represents a single displayable metric for transmissions
+network communications.
+
+This couldb be the transfer rate, download limit, total
+downloaded bytes, etc. A negative value implies there is
+no limit (or the value is so high its overflowed), in which
+case an infinity symbol is shown.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_components_sidebar_graph_network-indicator.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="client_components_sidebar_graph_network-indicator.tsx.html">client/components/sidebar/graph/network-indicator.tsx</a>, <a href="client_components_sidebar_graph_network-indicator.tsx.html#line16">line 16</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="NotificationTypes">
+    <a class="href-link" href="#NotificationTypes">#</a>
+    
+    <span class="code-name">
+        NotificationTypes
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    The kinds of notifications that puddle can share with the
+user.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_notifications-store_notifications_types.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_notifications-store_notifications_types.ts.html">client/stores/notifications-store/notifications/types.ts</a>, <a href="client_stores_notifications-store_notifications_types.ts.html#line6">line 6</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="OverlayType">
+    <a class="href-link" href="#OverlayType">#</a>
+    
+    <span class="code-name">
+        OverlayType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    The kinds of overlays that can be shown.
+each of these should have an associated
+store, but they don't HAVE to have one.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_overlays-store_types.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_overlays-store_types.ts.html">client/stores/overlays-store/types.ts</a>, <a href="client_stores_overlays-store_types.ts.html#line7">line 7</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="PRIORITY_CLASSES">
+    <a class="href-link" href="#PRIORITY_CLASSES">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        PRIORITY_CLASSES
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    class names for each priority type in the known types. Theses
+are used to influence the styling of the element.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_components_forms_priority-selector_index.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="client_components_forms_priority-selector_index.tsx.html">client/components/forms/priority-selector/index.tsx</a>, <a href="client_components_forms_priority-selector_index.tsx.html#line9">line 9</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="PRIORITY_LABELS">
+    <a class="href-link" href="#PRIORITY_LABELS">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        PRIORITY_LABELS
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    The labels shown alongside each priority level when allowed.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_components_forms_priority-selector_index.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="client_components_forms_priority-selector_index.tsx.html">client/components/forms/priority-selector/index.tsx</a>, <a href="client_components_forms_priority-selector_index.tsx.html#line18">line 18</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="puddleShrinkLevelFormat">
+    <a class="href-link" href="#puddleShrinkLevelFormat">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        puddleShrinkLevelFormat
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Formatter for winston which trims and colorizes common levels
+to a single character.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="server_logger.ts.html" class="button">View Source</a>
+            <span>
+                <a href="server_logger.ts.html">server/logger.ts</a>, <a href="server_logger.ts.html#line19">line 19</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="QUERY_SET_TIMEOUT">
+    <a class="href-link" href="#QUERY_SET_TIMEOUT">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        QUERY_SET_TIMEOUT
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    How long a search should be idle before we automatically start
+searching. The shorter it is, the more bogus searches will take
+place. The longer it is, the less intuitive the search feels.
+
+TODO calibrate to feel just right.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_components_sidebar_filters_search.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="client_components_sidebar_filters_search.tsx.html">client/components/sidebar/filters/search.tsx</a>, <a href="client_components_sidebar_filters_search.tsx.html#line15">line 15</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="selectFilteredTorrents">
+    <a class="href-link" href="#selectFilteredTorrents">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        selectFilteredTorrents
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Returns the ids of the subset of torrents in the torrent list
+which the filters will accept IN LINEAR TIME.
+
+This is a heavily optomised selector for filtering through the
+active torrents list. It works based on caching the list of
+torrents matching each individual filter (each of which is only
+rebuilt when their associated filter properties are modified)
+and then simply for membership in all of the possible filter
+predicated.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_selectors_filtered-torrents.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_selectors_filtered-torrents.ts.html">client/stores/selectors/filtered-torrents.ts</a>, <a href="client_stores_selectors_filtered-torrents.ts.html#line113">line 113</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="selectTorrentsMatchingClassPredicate">
+    <a class="href-link" href="#selectTorrentsMatchingClassPredicate">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        selectTorrentsMatchingClassPredicate
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Construct and return a predicate which given some torrent id
+will return whether the class of the associated torrent matches
+the active torrent class in puddles filter.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_selectors_filtered-torrents.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_selectors_filtered-torrents.ts.html">client/stores/selectors/filtered-torrents.ts</a>, <a href="client_stores_selectors_filtered-torrents.ts.html#line10">line 10</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="selectTorrentsMatchingLabelsPredicate">
+    <a class="href-link" href="#selectTorrentsMatchingLabelsPredicate">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        selectTorrentsMatchingLabelsPredicate
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Like {@code selectTorrentsMatchingTrackersPredicate} but targets
+torrent labels instead of torrent trackers.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_selectors_filtered-torrents.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_selectors_filtered-torrents.ts.html">client/stores/selectors/filtered-torrents.ts</a>, <a href="client_stores_selectors_filtered-torrents.ts.html#line58">line 58</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="selectTorrentsMatchingQueryPredicate">
+    <a class="href-link" href="#selectTorrentsMatchingQueryPredicate">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        selectTorrentsMatchingQueryPredicate
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Construct and return a predicate which will, given some torrent id,
+will return whether that torrents name matches the query.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_selectors_filtered-torrents.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_selectors_filtered-torrents.ts.html">client/stores/selectors/filtered-torrents.ts</a>, <a href="client_stores_selectors_filtered-torrents.ts.html#line92">line 92</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="selectTorrentsMatchingTrackersPredicate">
+    <a class="href-link" href="#selectTorrentsMatchingTrackersPredicate">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        selectTorrentsMatchingTrackersPredicate
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Construct and return a predicate which, given some torrent id
+returns whether the associated torrent has a tracker in the
+active trackers filter. If the filter is empty then every torrent
+passes the filter.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_selectors_filtered-torrents.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_selectors_filtered-torrents.ts.html">client/stores/selectors/filtered-torrents.ts</a>, <a href="client_stores_selectors_filtered-torrents.ts.html#line46">line 46</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="selectTorrentsSearchIndex">
+    <a class="href-link" href="#selectTorrentsSearchIndex">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        selectTorrentsSearchIndex
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Construct and return a flexsearch search index for the current
+list of torrent names. Using {@code createSelector} here means
+that this index will only be reconstructed when a torrents name
+changes... which is very unlikely, so for the vast majority of
+puddles runtime, it'll be cached.
+
+tldr; MAJOR MEMORY AND RUNTIME BENEFITS.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_selectors_filtered-torrents.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_selectors_filtered-torrents.ts.html">client/stores/selectors/filtered-torrents.ts</a>, <a href="client_stores_selectors_filtered-torrents.ts.html#line75">line 75</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="serverPromise">
+    <a class="href-link" href="#serverPromise">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        serverPromise
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Used to block the binding of the server until after this
+promise is resolved. Until top level await is ubiquotous
+this'll have to do.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="server_app.ts.html" class="button">View Source</a>
+            <span>
+                <a href="server_app.ts.html">server/app.ts</a>, <a href="server_app.ts.html#line15">line 15</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="StartStopButtons">
+    <a class="href-link" href="#StartStopButtons">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        StartStopButtons
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Component hoisting two buttons to indicate whether the current torrent
+is paused or running and lets you click on it to toggle these possible
+states.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_components_overlays_details_header_buttons.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="client_components_overlays_details_header_buttons.tsx.html">client/components/overlays/details/header/buttons.tsx</a>, <a href="client_components_overlays_details_header_buttons.tsx.html#line15">line 15</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="syncTorrents">
+    <a class="href-link" href="#syncTorrents">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        syncTorrents
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Remove all elements from the store and then fetch the current
+torrent-list from transmission and assign it.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_torrents-store_thunks.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_torrents-store_thunks.ts.html">client/stores/torrents-store/thunks.ts</a>, <a href="client_stores_torrents-store_thunks.ts.html#line11">line 11</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="TORRENT_BASE">
+    <a class="href-link" href="#TORRENT_BASE">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        TORRENT_BASE
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    A base type to supply defaults for the fields in {@code Torrent}
+that aren't in {@code TorrentDefaultFields}.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_models_torrent.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_models_torrent.ts.html">client/models/torrent.ts</a>, <a href="client_models_torrent.ts.html#line36">line 36</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="torrentComparators">
+    <a class="href-link" href="#torrentComparators">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        torrentComparators
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Used for sorting torrents on the dashboard.
+
+Each of these should be a function that compares two torrent instances
+and returns either +ve, -ve or 0 to indicate precedence based on the
+given field. For more information see [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort][Array.prototype.sort]].
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_models_fields.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_models_fields.ts.html">client/models/fields.ts</a>, <a href="client_models_fields.ts.html#line36">line 36</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="TorrentFields">
+    <a class="href-link" href="#TorrentFields">#</a>
+    
+    <span class="code-name">
+        TorrentFields
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    The complete set of fields the user can be shown on the dashboard.
+A subset of these will commonly be presented and the user retains.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_models_fields.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_models_fields.ts.html">client/models/fields.ts</a>, <a href="client_models_fields.ts.html#line6">line 6</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="torrentRangeSelected">
+    <a class="href-link" href="#torrentRangeSelected">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        torrentRangeSelected
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Select torrents in a range, using {@code anchor} to determine
+where the selection should stop. The behaviour here is similair
+to shift clicking a range of files in a conventional file manager.
+
+The selection algorithm has the following rules.
+  - With only one existing selection all torrents in the range
+    including the anchor and the selection will be selected.
+    NOTE if there's no selection, an invisible selection will
+    be placed on the first torrent.
+      --------------------------------
+      |          |        |          |
+      | Selected |        | Selected |
+      |          |  ===>  | Selected |
+      | Anchor   |        | Selected |
+      |          |        |          |
+      --------------------------------
+
+ - When multiple selections already exist and the anchor lies
+   outside of the range between the highest selection and lowest
+   selection, all torrents in the range between the existing
+   selection and the anchor will be selected.
+      --------------------------------
+      |          |        |          |
+      | Selected |        | Selected |
+      |          |        | Selected |
+      | Selected |  ===>  | Selected |
+      |          |        | Selected |
+      | Anchor   |        | Selected |
+      |          |        |          |
+      --------------------------------
+
+      --------------------------------
+      |          |        |          |
+      | Anchor   |        | Selected |
+      |          |        | Selected |
+      |          |  ===>  | Selected |
+      | Selected |        | Selected |
+      | Selected |        | Selected |
+      |          |        |          |
+      --------------------------------
+
+ - When multiple selections exist and the anchor lies between
+   the range of the highest and lowest selection. All files in
+   the range between the highest and lowest selection will be
+   selected.
+
+      --------------------------------
+      |          |        |          |
+      | Selected |        | Selected |
+      |          |        | Selected |
+      | Anchor   |  ===>  | Selected |
+      |          |        | Selected |
+      | Selected |        | Selected |
+      |          |        |          |
+      --------------------------------
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_ui-store_thunks.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_ui-store_thunks.ts.html">client/stores/ui-store/thunks.ts</a>, <a href="client_stores_ui-store_thunks.ts.html#line66">line 66</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="torrentsAdded">
+    <a class="href-link" href="#torrentsAdded">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        torrentsAdded
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    action for when one or more new torrents have been added.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_torrents-store_actions.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_torrents-store_actions.ts.html">client/stores/torrents-store/actions.ts</a>, <a href="client_stores_torrents-store_actions.ts.html#line6">line 6</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="torrentSelected">
+    <a class="href-link" href="#torrentSelected">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        torrentSelected
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    action for selecting one or more torrents from the torrent list.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_ui-store_actions.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_ui-store_actions.ts.html">client/stores/ui-store/actions.ts</a>, <a href="client_stores_ui-store_actions.ts.html#line9">line 9</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="torrentsRemoved">
+    <a class="href-link" href="#torrentsRemoved">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        torrentsRemoved
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    action for when one or more torrents have been removed.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_torrents-store_actions.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_torrents-store_actions.ts.html">client/stores/torrents-store/actions.ts</a>, <a href="client_stores_torrents-store_actions.ts.html#line8">line 8</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="torrentsUpdated">
+    <a class="href-link" href="#torrentsUpdated">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        torrentsUpdated
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    action for when we're updating one or more torrents.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_torrents-store_actions.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_torrents-store_actions.ts.html">client/stores/torrents-store/actions.ts</a>, <a href="client_stores_torrents-store_actions.ts.html#line4">line 4</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="updateRecentlyActiveTorrents">
+    <a class="href-link" href="#updateRecentlyActiveTorrents">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        updateRecentlyActiveTorrents
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Asynchronously fetch the current torrent list from the transmission
+daemon and then update the local store.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_torrents-store_thunks.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_torrents-store_thunks.ts.html">client/stores/torrents-store/thunks.ts</a>, <a href="client_stores_torrents-store_thunks.ts.html#line69">line 69</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Methods</h1>
+            <div class="members">
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="authenticate">
+        <a class="href-link" href="#authenticate">#</a>
+        
+        <span class="code-name">
+            
+                authenticate<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        check whether the given transmission URL is a valid transmission
+instance.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="server_api_index.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="server_api_index.tsx.html">server/api/index.tsx</a>, <a href="server_api_index.tsx.html#line6">line 6</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="authenticated">
+        <a class="href-link" href="#authenticated">#</a>
+        
+        <span class="code-name">
+            
+                authenticated<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Check whether the current user has an associated
+transmission connection.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="server_api_index.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="server_api_index.tsx.html">server/api/index.tsx</a>, <a href="server_api_index.tsx.html#line26">line 26</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="constructFileTree">
+        <a class="href-link" href="#constructFileTree">#</a>
+        
+        <span class="code-name">
+            
+                constructFileTree<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Convert a list of file paths with an associated identifier
+into a tree like structure (centered around javascript objects).
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_utils_methods_file-tree.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_utils_methods_file-tree.ts.html">client/utils/methods/file-tree.ts</a>, <a href="client_utils_methods_file-tree.ts.html#line25">line 25</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="cyclePriority">
+        <a class="href-link" href="#cyclePriority">#</a>
+        
+        <span class="code-name">
+            
+                cyclePriority<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Cycle a priority type to the next priority type.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_components_forms_priority-selector_index.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="client_components_forms_priority-selector_index.tsx.html">client/components/forms/priority-selector/index.tsx</a>, <a href="client_components_forms_priority-selector_index.tsx.html#line34">line 34</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="dirNames">
+        <a class="href-link" href="#dirNames">#</a>
+        
+        <span class="code-name">
+            
+                dirNames<span class="signature">(path, seperator)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Return a string consisting of all parent directories of `path`.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>path</code></td>
+  
+
+  <td class="type">
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">the path for which we're extracting dirnames.</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>seperator</code></td>
+  
+
+  <td class="type">
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">= "/", the path seperator.</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_utils_methods_dirnames.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_utils_methods_dirnames.ts.html">client/utils/methods/dirnames.ts</a>, <a href="client_utils_methods_dirnames.ts.html#line11">line 11</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>dirNames('foo/bar/baz/bag/bar') // => ['foo/bar/baz/bag', 'foo/bar/baz', 'foo/bar', 'foo']</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="fromSerialised">
+        <a class="href-link" href="#fromSerialised">#</a>
+        
+        <span class="code-name">
+            
+                fromSerialised<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Construct a new transmission instance from a serialised
+property struct.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="transmission_client.ts.html" class="button">View Source</a>
+            <span>
+                <a href="transmission_client.ts.html">transmission/client.ts</a>, <a href="transmission_client.ts.html#line27">line 27</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="isPriorityType">
+        <a class="href-link" href="#isPriorityType">#</a>
+        
+        <span class="code-name">
+            
+                isPriorityType<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Assert whether {@code p} is an extended priority type, or a regular
+one.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_components_forms_priority-selector_index.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="client_components_forms_priority-selector_index.tsx.html">client/components/forms/priority-selector/index.tsx</a>, <a href="client_components_forms_priority-selector_index.tsx.html#line28">line 28</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="notificationIdGen">
+        <a class="href-link" href="#notificationIdGen">#</a>
+        
+        <span class="code-name">
+            
+                notificationIdGen<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Generate a psuedo unique identifier for a new notification.
+
+Psuedo unique because there's no guarantee it will be unique,
+but the chance of it being a duplicate should be extremely
+low.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_notifications-store_notifications_id-gen.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_notifications-store_notifications_id-gen.ts.html">client/stores/notifications-store/notifications/id-gen.ts</a>, <a href="client_stores_notifications-store_notifications_id-gen.ts.html#line11">line 11</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="onSubmitGeneral">
+        <a class="href-link" href="#onSubmitGeneral">#</a>
+        
+        <span class="code-name">
+            
+                onSubmitGeneral<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Generic on-submit handler for adding a torrent to transmission
+through the torrent-add modal.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_components_overlays_torrent-add_on-submit.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="client_components_overlays_torrent-add_on-submit.tsx.html">client/components/overlays/torrent-add/on-submit.tsx</a>, <a href="client_components_overlays_torrent-add_on-submit.tsx.html#line7">line 7</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="prepareFiles">
+        <a class="href-link" href="#prepareFiles">#</a>
+        
+        <span class="code-name">
+            
+                prepareFiles<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Prepare a file collection to be converted to a file tree.
+This just sorts the files and then merges them with their
+indexes in the original file array.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_utils_methods_file-tree.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_utils_methods_file-tree.ts.html">client/utils/methods/file-tree.ts</a>, <a href="client_utils_methods_file-tree.ts.html#line7">line 7</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="reduceMapping">
+        <a class="href-link" href="#reduceMapping">#</a>
+        
+        <span class="code-name">
+            
+                reduceMapping<span class="signature">(collection, active,)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Convert a mapping from some index type to torrent ids, into
+a set of unique ids filtered by membership in {@code active}.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>collection</code></td>
+  
+
+  <td class="type">
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">of some arbitrary identifier to torrent ids</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>active,</code></td>
+  
+
+  <td class="type">
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">subset of keys in collection</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_stores_selectors_filtered-torrents.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_stores_selectors_filtered-torrents.ts.html">client/stores/selectors/filtered-torrents.ts</a>, <a href="client_stores_selectors_filtered-torrents.ts.html#line31">line 31</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>the flattened unique set of torrent ids retrieved by
+         mapping each key in {@code active} through
+         {@code collection}.</div>
+    
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="setDifference">
+        <a class="href-link" href="#setDifference">#</a>
+        
+        <span class="code-name">
+            
+                setDifference<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Return the set of all elements in `a` that are not
+in `b`.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_utils_methods_collections.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_utils_methods_collections.ts.html">client/utils/methods/collections.ts</a>, <a href="client_utils_methods_collections.ts.html#line6">line 6</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="setPartition">
+        <a class="href-link" href="#setPartition">#</a>
+        
+        <span class="code-name">
+            
+                setPartition<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Find the set partition of two collections of the same type.
+
+A set partition is the list of elements that have been removed
+from the first collection and the list of elements added to the
+first collection.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_utils_methods_collections.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_utils_methods_collections.ts.html">client/utils/methods/collections.ts</a>, <a href="client_utils_methods_collections.ts.html#line24">line 24</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>[removed, added] a tuple of the change in state.</div>
+    
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="torrentClass">
+        <a class="href-link" href="#torrentClass">#</a>
+        
+        <span class="code-name">
+            
+                torrentClass<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Given a torrent, return a number indicating the subset
+of supported torrent classes the torrent has.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_models_classes.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_models_classes.ts.html">client/models/classes.ts</a>, <a href="client_models_classes.ts.html#line44">line 44</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="torrentClasses">
+        <a class="href-link" href="#torrentClasses">#</a>
+        
+        <span class="code-name">
+            
+                torrentClasses<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        assign the classes for a torrent row.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_components_dashboard_torrent-list_torrent_index.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="client_components_dashboard_torrent-list_torrent_index.tsx.html">client/components/dashboard/torrent-list/torrent/index.tsx</a>, <a href="client_components_dashboard_torrent-list_torrent_index.tsx.html#line9">line 9</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="torrentFromResponse">
+        <a class="href-link" href="#torrentFromResponse">#</a>
+        
+        <span class="code-name">
+            
+                torrentFromResponse<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Convert an API response that's guaranteed to have the fields in
+{@code TORRENT_FIELDS} to a Torrent instance.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_models_torrent.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_models_torrent.ts.html">client/models/torrent.ts</a>, <a href="client_models_torrent.ts.html#line43">line 43</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="torrentIdsToParam">
+        <a class="href-link" href="#torrentIdsToParam">#</a>
+        
+        <span class="code-name">
+            
+                torrentIdsToParam<span class="signature">(ids)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Converts an {@code TorrentIds} argument to an object with
+the associated fields for a request. This really only exists
+to make stripping out the ids field when {@code ids} is undefined
+more straightforward.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>ids</code></td>
+  
+
+  <td class="type">
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">that are going to be passed in the request.</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="transmission_base.ts.html" class="button">View Source</a>
+            <span>
+                <a href="transmission_base.ts.html">transmission/base.ts</a>, <a href="transmission_base.ts.html#line14">line 14</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>an empty params object containing just the intended
+         recipients for the current request.</div>
+    
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="torrentSelector">
+        <a class="href-link" href="#torrentSelector">#</a>
+        
+        <span class="code-name">
+            
+                torrentSelector<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Utility selector for extracting the torrent instance associated with
+this overlay and then passing through {@code selector} to extract a
+torrent field.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_components_overlays_details_utils.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="client_components_overlays_details_utils.tsx.html">client/components/overlays/details/utils.tsx</a>, <a href="client_components_overlays_details_utils.tsx.html#line8">line 8</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="treeTraverse">
+        <a class="href-link" href="#treeTraverse">#</a>
+        
+        <span class="code-name">
+            
+                treeTraverse<span class="signature">(tree, path)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        expand a full path in a file-tree, returning the entry associated
+with the path.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>tree</code></td>
+  
+
+  <td class="type">
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">the tree to be traversed</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>path</code></td>
+  
+
+  <td class="type">
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">the path of an entry at aribtrary depth in `tree`.</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_utils_methods_file-tree.ts.html" class="button">View Source</a>
+            <span>
+                <a href="client_utils_methods_file-tree.ts.html">client/utils/methods/file-tree.ts</a>, <a href="client_utils_methods_file-tree.ts.html#line46">line 46</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="URLInput">
+        <a class="href-link" href="#URLInput">#</a>
+        
+        <span class="code-name">
+            
+                URLInput<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Form component to show a list of input fields, with the
+ability to add or remove new fields.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_components_overlays_torrent-add_controls_url-input.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="client_components_overlays_torrent-add_controls_url-input.tsx.html">client/components/overlays/torrent-add/controls/url-input.tsx</a>, <a href="client_components_overlays_torrent-add_controls_url-input.tsx.html#line10">line 10</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="validateForm">
+        <a class="href-link" href="#validateForm">#</a>
+        
+        <span class="code-name">
+            
+                validateForm<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Assert whether form data is all valid.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client_components_overlays_settings_views_puddle_index.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="client_components_overlays_settings_views_puddle_index.tsx.html">client/components/overlays/settings/views/puddle/index.tsx</a>, <a href="client_components_overlays_settings_views_puddle_index.tsx.html#line10">line 10</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>
