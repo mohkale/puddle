@@ -1,6 +1,6 @@
 {
   "name": "puddle",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A modern react based frontend for transmission",
   "main": "index.js",
   "scripts": {
