@@ -63,7 +63,6 @@ export const setFilePriorities =
       const torrentId = state.overlays.torrentDetails.torrentId
       const fileStats = state.overlays.torrentDetails.torrent!.fileStats
 
-      // TODO cleanup, too much repitition
       if (isPriorityType(priority)) {
         switch (priority) {
           case PriorityType.HIGH:
@@ -88,7 +87,7 @@ export const setFilePriorities =
 
           return {
             ...stat,
-            wanted: isPriorityType(priority) ? stat.wanted : false,
+            wanted: isPriorityType(priority),
             priority: isPriorityType(priority) ? priority : stat.priority,
           }
         })

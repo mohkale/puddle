@@ -20,8 +20,8 @@ export const serverPromise = new Promise(resolve => resolve())
 const app = express()
 export default app
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json({ limit: '50mb' }))
+app.use(express.urlencoded({ limit: '50mb', extended: true }))
 
 app.use(morgan('dev', {
   stream: { write: (msg: string) => logger.debug(msg.replace(/\n$/, '')) }

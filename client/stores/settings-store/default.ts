@@ -81,8 +81,8 @@ const defaultState: SettingsState = {
   },
 
   intervals: {
-    torrentsSync: 20000,
-    speedSync: 10000,
+    torrentsSync: 1000,
+    speedSync: 2000,
     speedLimitsSync: 60000,
   },
 

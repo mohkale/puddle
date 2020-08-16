@@ -44,7 +44,7 @@ const TORRENT_DETAILED_BASE: Partial<TorrentDetailed> = {
 
 export function torrentDetailedFromResponse(resp: Partial<TorrentResponse>, prev?: TorrentDetailed): TorrentDetailed {
   const base = prev ? prev! : TORRENT_DETAILED_BASE
-  const torrent = Object.assign({}, torrentFromResponse(resp), base) as TorrentDetailed
+  const torrent = Object.assign({}, base, torrentFromResponse(resp)) as TorrentDetailed
 
   return torrent
 }
