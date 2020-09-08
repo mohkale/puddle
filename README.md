@@ -1,8 +1,13 @@
-# Puddle
+<p>
+  <a href="https://github.com/mohkale/puddle">
+    <img alt="header" src="./.github/header.jpg"/>
+  </a>
+</p>
+
 <div>
   <!-- TODO add puddle logo here -->
 
-  <div>
+  <div align="right">
     <a href="https://github.com/mohkale/puddle/actions?query=workflow%3Abuild">
       <img src="https://github.com/mohkale/puddle/workflows/build/badge.svg" />
     </a>
@@ -21,7 +26,9 @@
   </div>
 </div>
 
-a [flood][flood] like [react][react] based frontend for the [transmission][trans]
+<p></p>
+
+A [flood][flood] like [react][react] based frontend for the [transmission][trans]
 bittorrent daemon.
 
 <div style="display: flex; justify-content: center;">
