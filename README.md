@@ -31,6 +31,8 @@
 A [flood][flood] like [react][react] based frontend for the [transmission][trans]
 bittorrent daemon.
 
+See the video guide on [youtube](https://www.youtube.com/watch?v=YqhVyvgAQNc).
+
 <div style="display: flex; justify-content: center;">
   <a href="./.github/images/dashboard2.png" target="_blank">
     <img alt="screenshot" src="./.github/images/dashboard2.png" style="max-width: 800px;" />
