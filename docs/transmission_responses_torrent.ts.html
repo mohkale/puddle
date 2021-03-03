@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>transmission/responses/torrent.ts - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module.html#.exports">exports</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#recentlyActiveTorrents">recentlyActiveTorrents</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#request">request</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#requestInit">requestInit</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#serialise">serialise</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#setSession">setSession</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#torrent">torrent</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Updater.html">Updater</a></span></li><li class="nav-heading">Interfaces</li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="ColumnResizeContext.html">ColumnResizeContext</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="Config.html">Config</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="ContextType.html">ContextType</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="DashboardTableColumnsProps.html">DashboardTableColumnsProps</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="SessionType.html">SessionType</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="Torrent.html">Torrent</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="TransmissionTorrent_Mutable.html">TransmissionTorrent_Mutable</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="TransmissionTorrent_WriteOnly.html">TransmissionTorrent_WriteOnly</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#ansiStripFormat">ansiStripFormat</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#authenticate">authenticate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#authenticated">authenticated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#constructFileTree">constructFileTree</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#CORNER_OFFSET">CORNER_OFFSET</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#cyclePriority">cyclePriority</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#dirNames">dirNames</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#ESSENTIAL_FIELDS">ESSENTIAL_FIELDS</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#fromSerialised">fromSerialised</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isPriorityType">isPriorityType</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#NetworkIndicatorStats">NetworkIndicatorStats</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#notificationIdGen">notificationIdGen</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#NotificationTypes">NotificationTypes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#onSubmitGeneral">onSubmitGeneral</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#OverlayType">OverlayType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#prepareFiles">prepareFiles</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#PRIORITY_CLASSES">PRIORITY_CLASSES</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#PRIORITY_LABELS">PRIORITY_LABELS</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#puddleShrinkLevelFormat">puddleShrinkLevelFormat</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#QUERY_SET_TIMEOUT">QUERY_SET_TIMEOUT</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#reduceMapping">reduceMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectFilteredTorrents">selectFilteredTorrents</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectTorrentsMatchingClassPredicate">selectTorrentsMatchingClassPredicate</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectTorrentsMatchingLabelsPredicate">selectTorrentsMatchingLabelsPredicate</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectTorrentsMatchingQueryPredicate">selectTorrentsMatchingQueryPredicate</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectTorrentsMatchingTrackersPredicate">selectTorrentsMatchingTrackersPredicate</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectTorrentsSearchIndex">selectTorrentsSearchIndex</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#serverPromise">serverPromise</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#setDifference">setDifference</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#setPartition">setPartition</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#StartStopButtons">StartStopButtons</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#syncTorrents">syncTorrents</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#TORRENT_BASE">TORRENT_BASE</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#torrentClass">torrentClass</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#torrentClasses">torrentClasses</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentComparators">torrentComparators</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#TorrentFields">TorrentFields</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#torrentFromResponse">torrentFromResponse</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#torrentIdsToParam">torrentIdsToParam</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentRangeSelected">torrentRangeSelected</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentsAdded">torrentsAdded</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentSelected">torrentSelected</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#torrentSelector">torrentSelector</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentsRemoved">torrentsRemoved</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentsUpdated">torrentsUpdated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#treeTraverse">treeTraverse</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#updateRecentlyActiveTorrents">updateRecentlyActiveTorrents</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#URLInput">URLInput</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#validateForm">validateForm</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">transmission/responses/torrent.ts</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// see [[https://github.com/transmission/transmission/blob/master/libtransmission/transmission.h#L1649][transmission.h]].
+export enum TransmissionTorrentStatus {
+  STOPPED       = 0,
+  CHECK_WAIT    = 1,
+  CHECK         = 2,
+  DOWNLOAD_WAIT = 3,
+  DOWNLOAD      = 4,
+  SEED_WAIT     = 5,
+  SEED          = 6
+}
+
+export interface TransmissionTorrentFiles {
+  bytesCompleted: number
+  length: number
+  name: string
+}
+
+export interface TransmissionTorrentFileStats {
+  bytesCompleted: number
+  wanted: boolean
+  priority: number
+}
+
+export interface TransmissionTorrentPeers {
+  address: string
+  clientName: string
+  clientIsChoked: boolean
+  clientIsInterested: boolean
+  flagStr: string
+  isDownloadingFrom: boolean
+  isEncrypted: boolean
+  isIncoming: boolean
+  isUploadingTo: boolean
+  isUTP: boolean
+  peerIsChoked: boolean
+  peerIsInterested: boolean
+  port: number
+  progress: number
+  rateToClient: number
+  rateToPeer: number
+}
+
+export interface TransmissionTorrentPeersFrom {
+  fromCache: number
+  fromDht: number
+  fromIncoming: number
+  fromLpd: number
+  fromLtep: number
+  fromPex: number
+  fromTracker: number
+}
+
+export type TransmissionTorrentPieces = string
+
+export interface TransmissionTorrentTrackers {
+  announce: string
+  id: number
+  scrape: string
+  tier: number
+}
+
+export interface TransmissionTorrentTrackerStats {
+  announce: string
+  announceState: number
+  downloadCount: number
+  hasAnnounced: boolean
+  hasScraped: boolean
+  host: string
+  id: number
+  isBackup: boolean
+  lastAnnouncePeerCount: number
+  lastAnnounceResult: string
+  lastAnnounceStartTime: number
+  lastAnnounceSucceeded: boolean
+  lastAnnounceTime: number
+  lastAnnounceTimedOut: boolean
+  lastScrapeResult: string
+  lastScrapeStartTime: number
+  lastScrapeSucceeded: boolean
+  lastScrapeTime: number
+  lastScrapeTimedOut: boolean
+  leecherCount: number
+  nextAnnounceTime: number
+  nextScrapeTime: number
+  scrape: string
+  scrapeState: number
+  seederCount: number
+  tier: number
+}
+
+/**
+ * Fields that you can assign using the torrent-set method
+ * but you can't retrieve using the torrent-get method.
+ *
+ * You can access the relevent information using the other
+ * fields of the torrent-get method, attempting to access
+ * any of these will just return 0 for them.
+ */
+export interface TransmissionTorrent_WriteOnly {
+  "files-wanted": number[]
+  "files-unwanted": number[]
+  "location": string
+  "priority-high": number[]
+  "priority-low": number[]
+  "priority-normal": number[]
+  "trackerAdd": string[]
+  "trackerRemove": number[]
+  "trackerReplace": { [id: number]: string }
+}
+
+export enum TransmissionPriorityType {
+  HIGH = +1,
+  NORM = 0,
+  LOW  = -1
+}
+
+/**
+ * Fields of {@code TransmissionTorrentType} that can be modified
+ * using the torrent-set method. Write only fields can also be found
+ * in {@code TransmissionTorrent_WriteOnly}. Any other fields are
+ * read only.
+ */
+export interface TransmissionTorrent_Mutable {
+  "bandwidthPriority": TransmissionPriorityType
+  "downloadLimit": number
+  "downloadLimited": boolean
+  "honorsSessionLimits": boolean
+  "ids": number[]
+  "labels": string[]
+  "peer-limit": number
+  "queuePosition": number
+  "seedIdleLimit": number
+  "seedIdleMode": number
+  "seedRatioLimit": number
+  "seedRatioMode": number
+  "uploadLimit": number
+  "uploadLimited": boolean
+}
+
+// see [[https://github.com/transmission/transmission/blob/master/libtransmission/transmission.h#L1674][tr_stat_errtype]].
+export enum TransmissionError {
+  OK,
+  TRACKER_WARNING,
+  TRACKER_ERROR,
+  LOCAL_ERROR,
+}
+
+export interface TransmissionTorrent
+       extends TransmissionTorrent_Mutable, TransmissionTorrent_WriteOnly {
+  "activityDate": number
+  "addedDate": number
+  "comment": string
+  "corruptEver": number
+  "creator": string
+  "dateCreated": number
+  "desiredAvailable": number
+  "doneDate": number
+  "downloadDir": string
+  "downloadedEver": number
+  "editDate": number
+  "error": TransmissionError
+  "errorString": string
+  "eta": number
+  "etaIdle": number
+  "files": TransmissionTorrentFiles[]
+  "fileStats": TransmissionTorrentFileStats[]
+  "hashString": string
+  "haveUnchecked": number
+  "haveValid": number
+  "id": number
+  "isFinished": boolean
+  "isPrivate": boolean
+  "isStalled": boolean
+  "leftUntilDone": number
+  "magnetLink": string
+  "manualAnnounceTime": number
+  "maxConnectedPeers": number
+  "metadataPercentComplete": number
+  "name": string
+  "peers": TransmissionTorrentPeers[]
+  "peersFrom": TransmissionTorrentPeersFrom
+  "peersConnected": number
+  "peersGettingFromUs": number
+  "peersSendingToUs": number
+  "percentDone": number
+  "pieces": TransmissionTorrentPieces
+  "pieceCount": number
+  "pieceSize": number
+  "priorities": TransmissionPriorityType[]
+  "rateDownload": number
+  "rateUpload": number
+  "recheckProgress": number
+  "secondsDownloading": number
+  "secondsSeeding": number
+  "sizeWhenDone": number
+  "startDate": number
+  "status": TransmissionTorrentStatus
+  "totalSize": number
+  "torrentFile": string
+  "trackers": TransmissionTorrentTrackers[]
+  "trackerStats": TransmissionTorrentTrackerStats[]
+  "uploadedEver": number
+  "uploadRatio": number
+  "wanted": (0 | 1)[] // actually a number, 0 or 1.
+  "webseedsSendingToUs": number
+  "webseeds": string[]
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Wed Mar 03 2021 16:17:56 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

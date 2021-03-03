@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>client/components/sidebar/filters/search.tsx - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module.html#.exports">exports</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#recentlyActiveTorrents">recentlyActiveTorrents</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#request">request</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#requestInit">requestInit</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#serialise">serialise</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#setSession">setSession</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#torrent">torrent</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Updater.html">Updater</a></span></li><li class="nav-heading">Interfaces</li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="ColumnResizeContext.html">ColumnResizeContext</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="Config.html">Config</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="ContextType.html">ContextType</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="DashboardTableColumnsProps.html">DashboardTableColumnsProps</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="SessionType.html">SessionType</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="Torrent.html">Torrent</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="TransmissionTorrent_Mutable.html">TransmissionTorrent_Mutable</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="TransmissionTorrent_WriteOnly.html">TransmissionTorrent_WriteOnly</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#ansiStripFormat">ansiStripFormat</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#authenticate">authenticate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#authenticated">authenticated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#constructFileTree">constructFileTree</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#CORNER_OFFSET">CORNER_OFFSET</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#cyclePriority">cyclePriority</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#dirNames">dirNames</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#ESSENTIAL_FIELDS">ESSENTIAL_FIELDS</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#fromSerialised">fromSerialised</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isPriorityType">isPriorityType</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#NetworkIndicatorStats">NetworkIndicatorStats</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#notificationIdGen">notificationIdGen</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#NotificationTypes">NotificationTypes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#onSubmitGeneral">onSubmitGeneral</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#OverlayType">OverlayType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#prepareFiles">prepareFiles</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#PRIORITY_CLASSES">PRIORITY_CLASSES</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#PRIORITY_LABELS">PRIORITY_LABELS</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#puddleShrinkLevelFormat">puddleShrinkLevelFormat</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#QUERY_SET_TIMEOUT">QUERY_SET_TIMEOUT</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#reduceMapping">reduceMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectFilteredTorrents">selectFilteredTorrents</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectTorrentsMatchingClassPredicate">selectTorrentsMatchingClassPredicate</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectTorrentsMatchingLabelsPredicate">selectTorrentsMatchingLabelsPredicate</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectTorrentsMatchingQueryPredicate">selectTorrentsMatchingQueryPredicate</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectTorrentsMatchingTrackersPredicate">selectTorrentsMatchingTrackersPredicate</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectTorrentsSearchIndex">selectTorrentsSearchIndex</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#serverPromise">serverPromise</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#setDifference">setDifference</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#setPartition">setPartition</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#StartStopButtons">StartStopButtons</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#syncTorrents">syncTorrents</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#TORRENT_BASE">TORRENT_BASE</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#torrentClass">torrentClass</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#torrentClasses">torrentClasses</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentComparators">torrentComparators</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#TorrentFields">TorrentFields</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#torrentFromResponse">torrentFromResponse</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#torrentIdsToParam">torrentIdsToParam</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentRangeSelected">torrentRangeSelected</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentsAdded">torrentsAdded</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentSelected">torrentSelected</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#torrentSelector">torrentSelector</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentsRemoved">torrentsRemoved</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentsUpdated">torrentsUpdated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#treeTraverse">treeTraverse</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#updateRecentlyActiveTorrents">updateRecentlyActiveTorrents</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#URLInput">URLInput</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#validateForm">validateForm</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">client/components/sidebar/filters/search.tsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import { useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
+
+import store, { filterQueryUpdated, selectFilterQuery } from '@client/stores';
+
+import { DelayInput } from 'react-delay-input';
+
+/**
+ * How long a search should be idle before we automatically start
+ * searching. The shorter it is, the more bogus searches will take
+ * place. The longer it is, the less intuitive the search feels.
+ *
+ */
+const QUERY_SET_TIMEOUT = 100
+
+const removeSearchQuery = () => store.dispatch(filterQueryUpdated(''))
+const updateSearchQuery = (query: string) => store.dispatch(filterQueryUpdated(query))
+
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+function unfocusSearchBar(ref: any) {
+  if (!ref.current) {
+    console.warn('search bar reference is unassigned');
+    return
+  }
+
+  ref.current!.blur()
+}
+
+/**
+ * parent key handler for the search bar. This suppresses all of the
+ * root key bindings of the client view and introduces new bindings
+ * over the defaults for an Input Element.
+ */
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+function searchBarKeyHandler(e: React.KeyboardEvent, searchRef: any) {
+  // isolate key requests to within the search input.
+  // prevents the root key handler being invoked from here.
+  e.stopPropagation()
+
+  if (e.ctrlKey &amp;&amp; e.key === 'k') {
+    e.preventDefault()
+    removeSearchQuery()
+    unfocusSearchBar(searchRef)
+  } else if (e.key === 'Escape') {
+    unfocusSearchBar(searchRef)
+  }
+}
+
+/* eslint-disable-next-line react/display-name */
+const SearchBar = React.forwardRef&lt;HTMLInputElement|undefined>((_, ref) => {
+  const query = useSelector(selectFilterQuery)
+  const isActive = query !== ''
+
+  const onChange = (e) => updateSearchQuery((e.target.value || '') as string)
+
+  const classNames = [
+    'searchbar', isActive &amp;&amp; 'searchbar--selected'
+  ]
+
+  return (
+    &lt;div className={classNames.join(' ')}
+         onKeyDown={(e) => searchBarKeyHandler(e, ref)}>
+      &lt;FontAwesomeIcon icon={faSearch} className="searchbar__search-icon searchbar__icon" />
+      &lt;DelayInput name="query" type="text" placeholder="Search Torrents"
+                  autoComplete="false" onChange={onChange} inputRef={ref}
+                  delayTimeout={QUERY_SET_TIMEOUT} value={query} />
+      {isActive &amp;&amp;
+        &lt;FontAwesomeIcon icon={faTimes} className="searchbar__cancel-icon searchbar__icon" onClick={removeSearchQuery} />}
+    &lt;/div>
+  );
+})
+
+export default SearchBar
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Wed Mar 03 2021 16:17:56 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

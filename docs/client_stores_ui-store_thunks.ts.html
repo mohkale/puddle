@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>client/stores/ui-store/thunks.ts - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module.html#.exports">exports</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#recentlyActiveTorrents">recentlyActiveTorrents</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#request">request</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#requestInit">requestInit</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#serialise">serialise</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#setSession">setSession</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module.html#.exports#torrent">torrent</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Updater.html">Updater</a></span></li><li class="nav-heading">Interfaces</li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="ColumnResizeContext.html">ColumnResizeContext</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="Config.html">Config</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="ContextType.html">ContextType</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="DashboardTableColumnsProps.html">DashboardTableColumnsProps</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="SessionType.html">SessionType</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="Torrent.html">Torrent</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="TransmissionTorrent_Mutable.html">TransmissionTorrent_Mutable</a></span></li><li class="nav-heading"><span class="nav-item-type type-interface">I</span><span class="nav-item-name"><a href="TransmissionTorrent_WriteOnly.html">TransmissionTorrent_WriteOnly</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#ansiStripFormat">ansiStripFormat</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#authenticate">authenticate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#authenticated">authenticated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#constructFileTree">constructFileTree</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#CORNER_OFFSET">CORNER_OFFSET</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#cyclePriority">cyclePriority</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#dirNames">dirNames</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#ESSENTIAL_FIELDS">ESSENTIAL_FIELDS</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#fromSerialised">fromSerialised</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isPriorityType">isPriorityType</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#NetworkIndicatorStats">NetworkIndicatorStats</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#notificationIdGen">notificationIdGen</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#NotificationTypes">NotificationTypes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#onSubmitGeneral">onSubmitGeneral</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#OverlayType">OverlayType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#prepareFiles">prepareFiles</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#PRIORITY_CLASSES">PRIORITY_CLASSES</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#PRIORITY_LABELS">PRIORITY_LABELS</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#puddleShrinkLevelFormat">puddleShrinkLevelFormat</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#QUERY_SET_TIMEOUT">QUERY_SET_TIMEOUT</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#reduceMapping">reduceMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectFilteredTorrents">selectFilteredTorrents</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectTorrentsMatchingClassPredicate">selectTorrentsMatchingClassPredicate</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectTorrentsMatchingLabelsPredicate">selectTorrentsMatchingLabelsPredicate</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectTorrentsMatchingQueryPredicate">selectTorrentsMatchingQueryPredicate</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectTorrentsMatchingTrackersPredicate">selectTorrentsMatchingTrackersPredicate</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#selectTorrentsSearchIndex">selectTorrentsSearchIndex</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#serverPromise">serverPromise</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#setDifference">setDifference</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#setPartition">setPartition</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#StartStopButtons">StartStopButtons</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#syncTorrents">syncTorrents</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#TORRENT_BASE">TORRENT_BASE</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#torrentClass">torrentClass</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#torrentClasses">torrentClasses</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentComparators">torrentComparators</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#TorrentFields">TorrentFields</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#torrentFromResponse">torrentFromResponse</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#torrentIdsToParam">torrentIdsToParam</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentRangeSelected">torrentRangeSelected</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentsAdded">torrentsAdded</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentSelected">torrentSelected</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#torrentSelector">torrentSelector</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentsRemoved">torrentsRemoved</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#torrentsUpdated">torrentsUpdated</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#treeTraverse">treeTraverse</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#updateRecentlyActiveTorrents">updateRecentlyActiveTorrents</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#URLInput">URLInput</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#validateForm">validateForm</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">client/stores/ui-store/thunks.ts</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { RootThunk } from '../state';
+import { torrentSelected } from './actions';
+import { selectFilteredTorrents, selectSelectedTorrentIds } from '../selectors';
+
+export const allTorrentsSelected: RootThunk =
+  (dispatch, getState) => {
+    const ids = selectFilteredTorrents(getState())
+    dispatch(torrentSelected({ ids }))
+  }
+
+/**
+ * Select torrents in a range, using {@code anchor} to determine
+ * where the selection should stop. The behaviour here is similair
+ * to shift clicking a range of files in a conventional file manager.
+ *
+ * The selection algorithm has the following rules.
+ *   - With only one existing selection all torrents in the range
+ *     including the anchor and the selection will be selected.
+ *     NOTE if there's no selection, an invisible selection will
+ *     be placed on the first torrent.
+ *       --------------------------------
+ *       |          |        |          |
+ *       | Selected |        | Selected |
+ *       |          |  ===>  | Selected |
+ *       | Anchor   |        | Selected |
+ *       |          |        |          |
+ *       --------------------------------
+ *
+ *  - When multiple selections already exist and the anchor lies
+ *    outside of the range between the highest selection and lowest
+ *    selection, all torrents in the range between the existing
+ *    selection and the anchor will be selected.
+ *       --------------------------------
+ *       |          |        |          |
+ *       | Selected |        | Selected |
+ *       |          |        | Selected |
+ *       | Selected |  ===>  | Selected |
+ *       |          |        | Selected |
+ *       | Anchor   |        | Selected |
+ *       |          |        |          |
+ *       --------------------------------
+ *
+ *       --------------------------------
+ *       |          |        |          |
+ *       | Anchor   |        | Selected |
+ *       |          |        | Selected |
+ *       |          |  ===>  | Selected |
+ *       | Selected |        | Selected |
+ *       | Selected |        | Selected |
+ *       |          |        |          |
+ *       --------------------------------
+ *
+ *  - When multiple selections exist and the anchor lies between
+ *    the range of the highest and lowest selection. All files in
+ *    the range between the highest and lowest selection will be
+ *    selected.
+ *
+ *       --------------------------------
+ *       |          |        |          |
+ *       | Selected |        | Selected |
+ *       |          |        | Selected |
+ *       | Anchor   |  ===>  | Selected |
+ *       |          |        | Selected |
+ *       | Selected |        | Selected |
+ *       |          |        |          |
+ *       --------------------------------
+ *
+ */
+export const torrentRangeSelected =
+  (anchor: number): RootThunk => {
+    return (dispatch, getState) => {
+      const state = getState()
+      const ids = selectFilteredTorrents(state)
+      let selected = selectSelectedTorrentIds(state)
+
+      // when no selection exists, select from first torrent.
+      if (selected.length === 0)
+        selected = [ids[0]]
+
+      const anchorIndex = ids.indexOf(anchor)
+
+      if (anchorIndex === -1) {
+        console.warn('unable to find anchor', anchor, 'for shift-click in', ids)
+        return
+      }
+
+      const selectedByOrder = selected.slice()
+        .sort((a, b) => ids.indexOf(a) - ids.indexOf(b))
+      const minIndex = ids.indexOf(selectedByOrder[0])
+      const maxIndex = ids.indexOf(selectedByOrder[selectedByOrder.length-1])
+
+      let [min, max] = [minIndex, maxIndex]
+      if (anchorIndex > maxIndex) {
+        max = anchorIndex
+      } else if (anchorIndex &lt; minIndex) {
+        min = anchorIndex;
+      }
+
+      dispatch(torrentSelected({ ids: ids.slice(min, max+1) }))
+    }
+  }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Wed Mar 03 2021 16:17:56 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
