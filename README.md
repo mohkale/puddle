@@ -28,6 +28,10 @@
 
 <p></p>
 
+**Notice**: This project is being deprecated on 2023-02-04 because flood now has
+support for Transmission as a frontend. This was a fun project but it's currently
+unecessary.
+
 A [flood][flood] like [react][react] based frontend for the [transmission][trans]
 bittorrent daemon.
 
